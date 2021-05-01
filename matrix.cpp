@@ -1,11 +1,21 @@
 #include "matrix.hpp"
 #include <exception> 
-AbstractMatrix::AbstractMatrix(unsigned int r, unsigned int c, const std::string &filenamedata):rows(r),col(c),m(r,c),rhs(r,0),data(filenamedata){}
+AbstractMatrix::AbstractMatrix(const std::string &filenamedata):data(filenamedata){}
 
 AbstractMatrix::AbstractMatrix(const & AbstractMatrix p):rows(p.rows),col(p.col),m(p.rows,p.col),rhs(p.rows,0),data(p.data){}
 
-Matrix_A::Matrix_A(unsigned int r, unsigned int c, const std::string &filenamedata):AbstractMatrix(data.Nx+1,data.Nx+1,){}
-Matrix_B::Matrix_B():AbstractMatrix(data.Nx,data.Nx+1){}
+Matrix_A::Matrix_A(const std::string &filenamedata):AbstractMatrix(filenamedata){
+rows(data.Nx+1);
+col(data.Nx+1);
+m(data.Nx+1,data.Nx+1);
+rhs(data.Nx+1);
+}
+Matrix_B::Matrix_B(const std::string &filenamedata):AbstractMatrix(filenamedata){
+rows(data.Nx);
+col(data.Nx);
+m(data.Nx,data.Nx+1);
+rhs(data.Nx);
+}
 
 void Matrix_A::get_matrix()
 {

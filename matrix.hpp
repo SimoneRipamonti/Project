@@ -8,7 +8,7 @@ class AbstractMatrix
 {
 public:
 
-AbstractMatrix(unsigned int r,unsigned int c,const  std::string & filenamedata);
+AbstractMatrix(const  std::string & filenamedata);
 
 AbstractMatrix(const AbstractMatrix &p);
 
