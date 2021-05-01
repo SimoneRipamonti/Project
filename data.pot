@@ -1,0 +1,53 @@
+[domain]
+  #Domain is [0,domain_length]
+  domain_length=1
+  
+  [../]
+
+[physical_parameters]  
+  #Permeability
+  K_distr=1.0e-10+0*x
+  
+  #Water Viscosity
+  mu=1.0e-3
+  
+  #Porosity
+  phi0=0.2+0*x
+
+  [../]
+
+[BC]
+
+   #In-flow
+   Q_in=0.
+   
+   #Out-flow
+   Q_out=1.0e-1
+
+   #Pression on the left
+   p_in=1.0e6
+   
+   #Pression on the right
+   p_out=0.
+
+   #Inflow cond
+   in=Pressure #or Flow
+   
+   #Outflow cond
+   out=Flow #or Pressure 
+   
+  [../]
+
+[Source]
+    #External Source
+    f=1.0e-1*(x<0.6).*(x>0.4) #da cambiare
+    
+   [../]
+
+[Discretization]
+    #Cell number
+    Nx=100
+    
+    
+    
+    
