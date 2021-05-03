@@ -10,15 +10,15 @@ public:
 
 AbstractMatrix(const  std::string & filenamedata);
 
-AbstractMatrix(const AbstractMatrix &p);
+//AbstractMatrix(const AbstractMatrix &p);
 
 //AbstractMatrix(const string &filename);
 
-virtual void get_matrix()==0;
+virtual void get_matrix()=0;
 
-virtual void set_BC()==0;
+virtual void set_BC()=0;
 
-virtual void set_rhs==0;
+virtual void set_rhs()=0;
 
 virtual ~AbstractMatrix()=default;
 
@@ -34,9 +34,10 @@ Eigen::VectorXd rhs;
 class Matrix_A: public AbstractMatrix
 {
 public:
-Matrix_A();
+Matrix_A(const std::string &);
 void get_matrix() override;
 void set_BC() override; 
+void set_rhs() override;
 ~Matrix_A(){};
 
 };
@@ -44,16 +45,11 @@ void set_BC() override;
 class Matrix_B:public AbstractMatrix
 {
 public:
-Matrix_B();
+Matrix_B(const std::string &);
 void get_matrix();
 void set_BC() override;
+void set_rhs() override;
 ~Matrix_B(){};
-
 };
+#endif
 
-class Matrix_C:public AbstractMatrix
-{
-public:
-void get_matrix();
-~Matrix_C(){}
-};

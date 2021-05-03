@@ -9,7 +9,7 @@
 class muparser_fun
 {
 public:
-      muparser_fun(const std::string &);
+      explicit muparser_fun(const std::string &);
       double operator() (const double &);
     
 private:
@@ -43,4 +43,4 @@ private:
 
 
 
-}
+

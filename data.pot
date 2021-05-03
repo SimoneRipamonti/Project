@@ -40,7 +40,7 @@
 
 [Source]
     #External Source
-    f=1.0e-1*(x<0.6).*(x>0.4) #da cambiare
+    f=1.0e-1*x #da cambiare
     
    [../]
 

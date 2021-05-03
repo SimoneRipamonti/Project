@@ -2,12 +2,12 @@
 #define PARAMETERS_HPP
 
 #include <string>
-#include "muparser_fun"
+#include "muparser_fun.hpp"
 class Data
 {
 public:
-      Data(const std::string &filename);
-      Data(const Data &data);//da implementare
+      explicit Data(const std::string &filename);
+      //Data(const Data &data);//da implementare
 
       double domain_length;
       muparser_fun K;
