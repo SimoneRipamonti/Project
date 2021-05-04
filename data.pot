@@ -16,7 +16,7 @@
 
   [../]
 
-[BC]
+[BC_vel]
 
    #In-flow
    Q_in=0.
@@ -38,15 +38,37 @@
    
   [../]
 
+[BC_trac]
+    #Boundary cond for C
+    
+    #In-flow cond
+    C_in=1.0
+
+    #Out-flow cond
+    C_out=1.0
+
+   #Type of cond
+    bc_trac=In
+
+    [../]
+
 [Source]
     #External Source
-    f=1.0e-1*x #da cambiare
+    f=1.0e-1*(x<0.6).*(x>0.4) #da cambiare
     
    [../]
 
 [Discretization]
     #Cell number
     Nx=100
+
+    [../]
+
+[Time]
+    #Final T
+    T=2
+    #Time step
+    dt=0.01
     
     
     

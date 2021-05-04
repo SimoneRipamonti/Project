@@ -21,6 +21,11 @@ public:
       unsigned int Nx;
       std::string BC_in;
       std::string BC_out;
+      double dt;
+      double final_time;
+      double C_in;
+      double C_out;
+      std::string bc_cond;
 };
 #endif
 
