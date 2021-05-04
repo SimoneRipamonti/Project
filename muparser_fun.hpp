@@ -9,9 +9,11 @@
 class muparser_fun
 {
 public:
-      explicit muparser_fun(const std::string &);
+      muparser_fun()=default;
+      muparser_fun(const muparser_fun &m);
+      void set_value(const std::string &);
       double operator() (const double &);
-    
+      muparser_fun& operator= (const muparser_fun &p);
 private:
     double var;
     mu::Parser parser;

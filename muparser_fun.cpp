@@ -1,6 +1,13 @@
 #include "muparser_fun.hpp"
 
-muparser_fun::muparser_fun(const std::string &s)
+muparser_fun::muparser_fun(const muparser_fun &m)
+    : parser(m.parser)
+  {
+    parser.DefineVar("x", &var);
+  }
+
+
+void muparser_fun::set_value(const std::string &s)
       {
         try
           { 
@@ -26,7 +33,17 @@ double muparser_fun::operator()(const double &x)
         }
       return y;
 }
-     
+
+muparser_fun& muparser_fun::operator= (const muparser_fun &p)
+{
+   if(&p!=this)
+     {
+
+       parser=p.parser;
+       parser.DefineVar("x",&var);
+     }
+    return *this;
+}
 
 
 

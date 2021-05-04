@@ -1,5 +1,5 @@
 main.o: main.cpp
-matrix.o: matrix.cpp matrix.hpp parameters.hpp muparser_fun.hpp \
+matrix.o: matrix.cpp matrix.hpp muparser_fun.hpp \
  /home/simoripa96/Scrivania/pacs-examples/Examples/include/muParser.h \
  /home/simoripa96/Scrivania/pacs-examples/Examples/include/muParserBase.h \
  /home/simoripa96/Scrivania/pacs-examples/Examples/include/muParserDef.h \
