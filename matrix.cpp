@@ -3,7 +3,7 @@
 #include <cmath>
 AbstractMatrix::AbstractMatrix(unsigned int row_,unsigned int col_):row(row_),col(col_){
 m=Eigen::MatrixXd::Zero(row_,col_);
-rhs=Eigen::VectorXd::Zero(row_); 
+rhs=Eigen::VectorXd::Zero(col_); 
 }
 
 Eigen::MatrixXd& AbstractMatrix::get_matrix(){
@@ -47,16 +47,16 @@ if(inflow=="Flow")
 
 void Matrix_A::set_matrix()
 {
- m(0,0)=1./3.*h*std::pow(K(h),-1)/mu;
- m(1,0)=1./6.*h*std::pow(K(h),-1)/mu;
+ m(0,0)=1./3.*h*std::pow(K(h)/mu,-1);
+ m(0,1)=1./6.*h*std::pow(K(h)/mu,-1);
  for(unsigned int i=1;i<row-1;++i)
  {
-   m(i,i-1)=1./6.*h*std::pow(K(i*h),-1)/mu;
-   m(i,i)=1./3.*h*std::pow(K(i*h),-1)/mu+1./3.*h*std::pow(K((i+1)*h),-1)/mu;
-   m(i,i+1)=1./6.*h*std::pow(K((i+1)*h),-1)/mu;
+   m(i,i-1)=1./6.*h*std::pow(K(i*h)/mu,-1);
+   m(i,i)=1./3.*h*std::pow(K(i*h)/mu,-1)+1./3.*h*std::pow(K((i+1)*h)/mu,-1);
+   m(i,i+1)=1./6.*h*std::pow(K((i+1)*h)/mu,-1);
  }
- m(row-1,col-2)=1./6.*h*std::pow(K((row-1)*h),-1)/mu;
- m(row-1,col-1)=1./3.*h*std::pow(K((row-1)*h),-1)/mu;
+ m(row-1,col-2)=1./6.*h*std::pow(K((row-1)*h)/mu,-1);
+ m(row-1,col-1)=1./3.*h*std::pow(K((row-1)*h)/mu,-1);
 }
 
 void Matrix_A::set_BC()
@@ -89,20 +89,18 @@ void Matrix_A::set_BC()
 }
 
 void Matrix_A::set_rhs()
-{
-   for(unsigned int i=0;i<rhs.size();++i)
-         rhs(i)=0.;
-}
+{}
 
 
 Matrix_B::Matrix_B(unsigned int row, unsigned int col,const std::string inf_,const std::string out_,const muparser_fun &f,double h_):AbstractMatrix(row,col),inflow(inf_),outflow(out_),source(f),h(h_){}
 
 void Matrix_B::set_matrix()
 {
-  for(unsigned int i=0;i<row-1;++i)
+  m(0,0)=1;
+  for(unsigned int i=1;i<col;++i)
     {
-      m(i,i)=-1;
-      m(i,i+1)=1;
+      m(i,i)=1;
+      m(i,i-1)=-1;
     }
   m(row-1,col-1)=-1;
 }
@@ -110,10 +108,10 @@ void Matrix_B::set_matrix()
 
 void Matrix_B::set_BC()
 { 
-  if(inflow=="Flow")
-      {for(unsigned int i=0;i<col;++i)
+if(inflow=="Flow")
+     {for(unsigned int i=0;i<col;++i)
             m(0,i)=0.;}
-  if(outflow=="Flow")
+if(outflow=="Flow")
      {for(unsigned int i=0;i<col;++i)
            m(row-1,i)=0.;}
 }
@@ -121,8 +119,8 @@ void Matrix_B::set_BC()
 void Matrix_B::set_rhs()
 {
   //double h=static_cast<double>(data.domain_length)/(data.Nx);
-  for(unsigned int i=0;i<row;++i)
-    rhs(i)=source(i*h);
+  for(float i=0.5;i<col;++i)
+    rhs(i)=source(i*h)*h;
 }
 
 
@@ -165,6 +163,7 @@ void Matrix_F_piu::set_matrix()
          if(velocity(i+1)>0)
              m(i,i)=velocity(i+1);
           else
+
              m(i,i+1)=velocity(i+1);   
       }
 }
@@ -194,7 +193,6 @@ Matrix_F_meno::Matrix_F_meno(unsigned int row, unsigned int col,const std::strin
    c_in=cond;
  else 
    c_out=cond;
-
 }
 
 void Matrix_F_meno::set_matrix()
