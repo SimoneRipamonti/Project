@@ -28,22 +28,6 @@ if(inflow=="Flow")
     P_out=out_;
 }
 
-/*void Matrix_A::set_data(const muparser_fun &per,double h_, double mu_,const std::string &inf,const std::string &out, double in,double out)
-{
-  K=per;
-  h=h_;
-  mu=mu_;
-  inflow=inf;
-  outflow=out;
-  if(inflow.c_str=="Flow")
-     Q_in=in;
-  else
-     P_in=in;
-  if(outflow.cstr=="Flow")
-    Q_out=out;
-  else
-    P_out=out;
-}*/
 
 void Matrix_A::set_matrix()
 {
@@ -118,7 +102,6 @@ if(outflow=="Flow")
 
 void Matrix_B::set_rhs()
 {
-  //double h=static_cast<double>(data.domain_length)/(data.Nx);
   for(float i=0.5;i<col;++i)
     rhs(i)=source(i*h)*h;
 }
@@ -130,7 +113,7 @@ Matrix_C::Matrix_C(unsigned int row, unsigned int col,const std::string &bc,cons
 
 void Matrix_C::set_matrix()
 {
- //double h=static_cast<double>(data.domain_length)/(data.Nx);
+
  m=h*Eigen::MatrixXd::Ones(row,col); 
  
 }

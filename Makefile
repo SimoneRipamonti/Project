@@ -1,12 +1,11 @@
 CXX      ?= g++
 CXXFLAGS ?= -std=c++17
-CPPFLAGS ?= -O3 -Wall -pedantic -I. -I${mkEigenInc} -I/home/simoripa96/Scrivania/pacs-examples/Examples/include -isystem$(mkBoostInc)
-LDFLAGS  ?= -L/home/simoripa96/Scrivania/pacs-examples/Examples/lib -Wl,-rpath=/home/simoripa96/Scrivania/pacs-examples/Examples/lib -L$(mkBoostLib)
+CPPFLAGS ?= -O3 -Wall -pedantic -I. -I${mkEigenInc} -I/home/simoripa96/Scrivania/pacs-examples/Examples/include -isystem$(mkBoostInc) #Cambiare i percorsi
+LDFLAGS  ?= -L/home/simoripa96/Scrivania/pacs-examples/Examples/lib -Wl,-rpath=/home/simoripa96/Scrivania/pacs-examples/Examples/lib -L$(mkBoostLib) #Cambiare i percorsi
 
 LDLIBS   ?= -lmuparser -lboost_iostreams -lboost_system -lboost_filesystem
 LINK.o := $(LINK.cc) # Use C++ linker.
 
-DEPEND = make.dep
 
 EXEC = main
 SRCS = $(wildcard *.cpp)
@@ -31,11 +30,4 @@ distclean: clean
 	$(RM) $(EXEC)
 	$(RM) *.csv *.out *.bak *~
 
-$(DEPEND): $(SRCS)
-	@$(RM) $(DEPEND)
-	@for file in $(SRCS); \
-	do \
-	  $(CXX) $(CPPFLAGS) $(CXXFLAGS) -MM $${file} >> $(DEPEND); \
-	done
 
--include $(DEPEND)

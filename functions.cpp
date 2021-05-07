@@ -10,7 +10,7 @@ auto &[domain_length, K, phi, mu, Q_in, Q_out, p_in, p_out, f, Nx, BC_in, BC_out
 
 double h =static_cast<double>(domain_length)/Nx;
 
-
+//Assemblo la matrice complessiva M e il rhs del sistema di Darcy
 Matrix_A A(Nx+1,Nx+1,K,h,mu,BC_in,BC_out,p_in,Q_out);
 A.set_matrix();
 A.set_BC();
@@ -47,7 +47,7 @@ Matrix=M;
 
 void output_results(Eigen::VectorXd &sol,unsigned int Nx,double L) 
 {
-  // Output results to CSV file.
+  // Velocity results to CSV file.
   std::ofstream file1("velocity.csv", std::ofstream::out);
   file1 << "space, velocity" << std::endl;
   Eigen::VectorXd x1=Eigen::VectorXd::LinSpaced(Nx+1,0,L);
@@ -59,6 +59,7 @@ void output_results(Eigen::VectorXd &sol,unsigned int Nx,double L)
     }
   file1.close();
   
+  // Pressure results to CSV file.
   std::ofstream file2("pressure.csv", std::ofstream::out);
   file2 << "space, pressure" << std::endl;
   Eigen::VectorXd x2=Eigen::VectorXd::LinSpaced(Nx,0.5,L);
@@ -69,14 +70,6 @@ void output_results(Eigen::VectorXd &sol,unsigned int Nx,double L)
       file2 << x2[i] << ", " << pressure[i] << std::endl;
     }
   file2.close();
-
- 
-  // Plot results.
-  /*Gnuplot gp;
-  gp << "set xlabel 'Space'; set ylabel 'value' ; set key center "
-        "right; plot "
-     << gp.file1d(std::tie(space, value))
-     << "with line linewidth 2 title 'Value'" << std::endl;*/
 }
 
 

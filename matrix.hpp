@@ -40,8 +40,6 @@ class Matrix_A: public AbstractMatrix
 public:
 Matrix_A(unsigned int row,unsigned int col,const muparser_fun &per,double h, double mu,const std::string &inf,const std::string &out, double in_,double out_);
 
-//void set_data(const muparser_fun &per,double h, double mu,const std::string &inf,const std::string &out, double in,double out);
-
 void set_matrix() override;
 
 void set_BC() override; 
@@ -66,8 +64,6 @@ class Matrix_B:public AbstractMatrix
 {
 public:
 Matrix_B(unsigned int row, unsigned int col,const std::string inf_,const std::string out_,const muparser_fun &f,double h_);
-
-//void set_data(const std::string in_,const std::string out_);
 
 void set_matrix() override;
 
