@@ -7,7 +7,7 @@
 
 void set_Darcy_system(Data &data, Eigen::MatrixXd &Matrix,Eigen::VectorXd &rhs);
 
-void output_results(Eigen::VectorXd &value, Eigen::VectorXd &space, std::string &name);
+void output_results(Eigen::VectorXd &value,unsigned int Nx,double L);
 
 #endif
 

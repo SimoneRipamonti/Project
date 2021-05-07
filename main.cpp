@@ -11,16 +11,13 @@ Data data("data.pot");
 Eigen::MatrixXd M;
 Eigen::VectorXd rhs;
 set_Darcy_system(data,M,rhs);
-Eigen::MatrixXd sol=M.fullPivLu().solve(rhs);
-std::cout<<sol<<std::endl;
+Eigen::VectorXd sol=M.fullPivLu().solve(rhs);
+//std::cout<<sol<<std::endl;
 
-/*Eigen::VectorXd v(3);
-v<<1,2,3;
-Eigen::VectorXd a(3);
-a<<1,2,3;
-std::string ciao="ciao";
-output_results(v,a,ciao);
-*/
+output_results(sol,data.Nx,data.domain_length);
+
+
+
 
 
 

@@ -45,18 +45,32 @@ rhs=v3;
 Matrix=M;
 }
 
-void output_results(Eigen::VectorXd &value,Eigen::VectorXd &space, std::string &name) 
+void output_results(Eigen::VectorXd &sol,unsigned int Nx,double L) 
 {
   // Output results to CSV file.
-  std::ofstream file("output.csv", std::ofstream::out);
-  file << "space, value" << std::endl;
-
-  for (unsigned int i = 0;i<space.size(); ++i)
+  std::ofstream file1("velocity.csv", std::ofstream::out);
+  file1 << "space, velocity" << std::endl;
+  Eigen::VectorXd x1=Eigen::VectorXd::LinSpaced(Nx+1,0,L);
+  Eigen::VectorXd vel=sol.head(Nx+1);
+  
+  for (unsigned int i = 0;i<vel.size(); ++i)
     {
-      file << space[i] << ", " << value[i] << std::endl;
+      file1<< x1[i] << ", " << vel[i] << std::endl;
     }
-  file.close();
-   
+  file1.close();
+  
+  std::ofstream file2("pressure.csv", std::ofstream::out);
+  file2 << "space, pressure" << std::endl;
+  Eigen::VectorXd x2=Eigen::VectorXd::LinSpaced(Nx,0.5,L);
+  Eigen::VectorXd pressure=sol.tail(Nx);
+  
+  for (unsigned int i = 0;i<pressure.size(); ++i)
+    {
+      file2 << x2[i] << ", " << pressure[i] << std::endl;
+    }
+  file2.close();
+
+ 
   // Plot results.
   /*Gnuplot gp;
   gp << "set xlabel 'Space'; set ylabel 'value' ; set key center "

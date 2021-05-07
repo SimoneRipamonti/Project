@@ -60,7 +60,7 @@
 
 [Discretization]
     #Cell number
-    Nx=10
+    Nx=100
 
     [../]
 
