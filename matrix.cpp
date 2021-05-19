@@ -14,6 +14,9 @@ Eigen::VectorXd& AbstractMatrix::get_rhs(){
      return rhs;
 }
 
+void AbstractMatrix::print_m(){
+std::cout<<m<<std::endl;
+}
 
 
 Matrix_A::Matrix_A(unsigned int row,unsigned int col,const muparser_fun &per,double h_, double mu_,const std::string &inf,const std::string &out, double in_,double out_):AbstractMatrix(row,col),K(per),h(h_),mu(mu_),inflow(inf),outflow(out){
@@ -107,23 +110,30 @@ void Matrix_B::set_rhs()
 }
 
 
-Matrix_C::Matrix_C(unsigned int row, unsigned int col,const std::string &bc,const muparser_fun &por_,double h_):AbstractMatrix(row,col),bc_cond(bc),por(por_),h(h_)
-{}
-
+Matrix_C::Matrix_C(unsigned int row, unsigned int col,const std::string &bc,const muparser_fun &por_,double h_,double cond_):AbstractMatrix(row,col),bc_cond(bc),por(por_),h(h_)
+{ 
+ if(bc=="In")
+   c_in=cond_;//è il flusso entrante c*vel
+ else 
+   c_out=cond_;//è il flusso uscente c*vel}
+}
 
 void Matrix_C::set_matrix()
-{
-
- m=h*Eigen::MatrixXd::Ones(row,col); 
- 
+{ 
+ for(unsigned int i=0;i<row;++i)
+      m(i,i)=por(0.5*h+i*h)*h;
 }
 
 void Matrix_C::set_BC()
 {
   if(bc_cond=="In")
-      m(0,0)=0.;
+      {//m(0,0)=1.;
+       rhs(0)+=c_in*por(0.5*h);
+      }
   else if(bc_cond=="Out")
-      m(row-1,row-1)=0.;
+      {//m(row-1,row-1)=1.;
+       rhs(row-1)-=c_out*(por((row-1)*h+0.5));
+      }
   else 
     throw std::invalid_argument("Invalid argument: wrong boundary cond type");
 }
@@ -131,56 +141,41 @@ void Matrix_C::set_BC()
 void Matrix_C::set_rhs()
 {}
 
-Matrix_F_piu::Matrix_F_piu(unsigned int row, unsigned int col,const std::string &bc,const Eigen::VectorXd &vel,double cond):AbstractMatrix(row,col),bc_cond(bc),velocity(vel)
-{
- if(bc=="In")
-   c_in=cond;//è il flusso entrante c*vel
- else 
-   c_out=cond;//è il flusso uscente c*vel
-}
+Matrix_F_piu::Matrix_F_piu(unsigned int row, unsigned int col,const std::string &bc,const Eigen::VectorXd &vel):AbstractMatrix(row,col),bc_cond(bc),velocity(vel)
+{}
 
 void Matrix_F_piu::set_matrix()
 {
-  for(unsigned int i=0;i<row;++i)
+  for(unsigned int i=0;i<row-1;++i)
       { 
          if(velocity(i+1)>0)
              m(i,i)=velocity(i+1);
           else
-
              m(i,i+1)=velocity(i+1);   
       }
+      m(row-1,col-1)=velocity(row);
 }
 
 void Matrix_F_piu::set_BC()
 {
    if(bc_cond=="In")
-        {}
-   else if(bc_cond=="Out")
-      { for(unsigned int i=0;i<col-1;++i)
-              m(row-1,i)=0.;
-        m(row-1,col-1)=1.0;
-        if(velocity(row)>0)
-             rhs(row-1)+=c_out/velocity(row);
-        else
-             rhs(row-1)-=c_out/velocity(row);
+       {//{m(0,0)=0.;
+        //m(0,1)=0.;
        }
-    else
-      throw std::invalid_argument("Invalid argument: wrong boundary cond type");
+   else
+        {//m(row-1,col-1)=0.;
+ }
 }
 
 void Matrix_F_piu::set_rhs(){}
 
-Matrix_F_meno::Matrix_F_meno(unsigned int row, unsigned int col,const std::string &bc,const Eigen::VectorXd &vel,double cond):AbstractMatrix(row,col),bc_cond(bc),velocity(vel)
-{
- if(bc=="In")
-   c_in=cond;
- else 
-   c_out=cond;
-}
+Matrix_F_meno::Matrix_F_meno(unsigned int row, unsigned int col,const std::string &bc,const Eigen::VectorXd &vel):AbstractMatrix(row,col),bc_cond(bc),velocity(vel)
+{}
 
 void Matrix_F_meno::set_matrix()
 {
- for(unsigned int i=0;i<row;++i)
+ //m(0,0)=velocity(0);
+ for(unsigned int i=1;i<row;++i)
     {
       if(velocity(i)>0)
           m(i,i-1)=velocity(i);
@@ -191,19 +186,14 @@ void Matrix_F_meno::set_matrix()
 
 void Matrix_F_meno::set_BC(){
  
- if(bc_cond=="In")
-      {
-       for(unsigned int i=0;i<col-1;++i)
-              m(0,i)=0.;
-        m(0,0)=1.0;
-        if(velocity(0)>0)
-             rhs(row-1)+=c_in/velocity(0);
-        else
-             rhs(row-1)-=c_in/velocity(0);}
-   else if(bc_cond=="Out")
-      {}
-    else
-      throw std::invalid_argument("Invalid argument: wrong boundary cond type");
+   if(bc_cond=="In")
+       {//m(0,0)=0.;
+       }
+   else
+       {
+        //m(row-1,col-1)=0.; 
+        //m(row-1,col-2)=0.;
+       }
 }
 
 void Matrix_F_meno::set_rhs(){}

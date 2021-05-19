@@ -19,8 +19,8 @@ std::cout<<Nt<<std::endl;
 std::cout<<Nx<<std::endl;
 Eigen::VectorXd C0=Eigen::VectorXd::Zero(Nx);
 Eigen::MatrixXd solution(Nx,Nt);
-//for (unsigned int i=0;i<Nx/2;++i)
-               C0(1)=1.;
+for (unsigned int i=0;i<Nx/2;++i)
+               C0(i)=1.;
 solution.col(0)=C0;
   
 Eigen::MatrixXd M(Nx,Nx);
@@ -44,22 +44,22 @@ M=1/dt*C.get_matrix();
 std::cout<<-F_p.get_matrix()+F_m.get_matrix()<<std::endl;
 
 //std::cout<<M<<std::endl;
-//std::cout<<C0<<std::endl;
-//std::cout<<" "<<std::endl;
+std::cout<<C0<<std::endl;
+std::cout<<" "<<std::endl;
 
 
 
 for(unsigned int i=1;i<Nt;i++)
 { 
 //rhs=1/dt*C.get_matrix()*C0+C.get_rhs()+F_m.get_rhs()+F_p.get_rhs();
-rhs=(1/dt*C.get_matrix()-F_p.get_matrix()+F_m.get_matrix())*C0+C.get_rhs();
+rhs=(1/dt*C.get_matrix()-F_p.get_matrix()+F_m.get_matrix())*C0;
 solution.col(i)=M.fullPivLu().solve(rhs);
 C0=solution.col(i);
 }
 
 std::ofstream file2("output.csv", std::ofstream::out);
 file2 << "space, t" << std::endl;
-Eigen::VectorXd x2=Eigen::VectorXd::LinSpaced(Nx,0,L);
+Eigen::VectorXd x2=Eigen::VectorXd::LinSpaced(Nx,0.5,L);
 for (unsigned int i = 0;i<C0.size(); ++i)
     {file2 << x2[i] <<", ";
      for (unsigned int j=0;j<Nt;++j)
@@ -67,4 +67,5 @@ for (unsigned int i = 0;i<C0.size(); ++i)
      file2<<std::endl;
     }
 file2.close();
+
 }

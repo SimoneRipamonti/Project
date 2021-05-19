@@ -12,8 +12,8 @@
   mu=1.0e-3
   
   #Porosity
-  phi0=0.2+0*x
-
+  #phi0=0.2+0*x
+  phi0=1.0+0*x
   [../]
 
 [BC_vel]
@@ -45,7 +45,7 @@
     C_in=1.0
 
     #Out-flow cond
-    C_out=1.0
+    C_out=0.0
 
    #Type of cond
     bc_trac=In
@@ -60,15 +60,15 @@
 
 [Discretization]
     #Cell number
-    Nx=100
+    Nx=10
 
     [../]
 
 [Time]
     #Final T
-    T=2
+    T=1
     #Time step
-    dt=0.01
+    dt=0.1
     
     
     
