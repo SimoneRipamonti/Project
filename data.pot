@@ -13,7 +13,7 @@
   
   #Porosity
   #phi0=0.2+0*x
-  phi0=1.0+0*x
+  phi0=1.0+0.0*(x<0.6)
   [../]
 
 [BC_vel]
@@ -68,7 +68,13 @@
     #Final T
     T=1
     #Time step
-    dt=0.1
+    Nt=10
+    
+    [../]
+
+[Initial_Condition]
+    #concentration initial condition
+    IC=0.0*(x<0.5)
     
     
     

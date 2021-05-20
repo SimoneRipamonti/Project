@@ -2,7 +2,8 @@
 #include <Eigen/Dense>
 #include "parameters.hpp"
 #include "matrix.hpp"
-#include "functions.hpp"
+#include "output.hpp"
+#include "systems.hpp"
 
 
 int main(int argc, char **argv)

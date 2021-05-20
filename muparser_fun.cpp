@@ -28,7 +28,8 @@ double muparser_fun::operator()(const double &x)
           y=parser.Eval();
         }    
       catch(mu::Parser::exception_type &e)
-        {
+        { 
+          y=0;
           std::cerr<<e.GetMsg()<<std::endl;
         }
       return y;

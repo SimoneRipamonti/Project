@@ -14,7 +14,7 @@ AbstractMatrix(unsigned int row, unsigned int col);
 
 //AbstractMatrix(const string &filename);
 
-virtual void set_matrix()=0;
+virtual void define_matrix()=0;
 
 virtual void set_BC()=0;
 
@@ -39,13 +39,19 @@ Eigen::VectorXd rhs;
 class Matrix_A: public AbstractMatrix
 {
 public:
-Matrix_A(unsigned int row,unsigned int col,const muparser_fun &per,double h, double mu,const std::string &inf,const std::string &out, double in_,double out_);
+//Matrix_A(unsigned int row,unsigned int col,const muparser_fun &per,double h, double mu,const std::string &inf,const std::string &out, double in_,double out_);
 
-void set_matrix() override;
+Matrix_A(unsigned int row,unsigned int col);
+
+void set_data(const muparser_fun &per,double h, double mu,const std::string &inf,const std::string &outf, double in,double out);
+
+void define_matrix() override;
 
 void set_BC() override; 
 
 void set_rhs() override;
+
+void assemble_matrix(const muparser_fun &per,double h, double mu,const std::string &inf,const std::string &outf, double in,double out);
 
 ~Matrix_A(){};
 
@@ -64,13 +70,17 @@ double P_out=0;
 class Matrix_B:public AbstractMatrix
 {
 public:
-Matrix_B(unsigned int row, unsigned int col,const std::string inf_,const std::string out_,const muparser_fun &f,double h_);
+Matrix_B(unsigned int row, unsigned int col);
 
-void set_matrix() override;
+void set_data(const std::string inf,const std::string out,const muparser_fun &f,double h);
+
+void define_matrix() override;
 
 void set_BC() override;
 
 void set_rhs() override;
+
+void assemble_matrix(const std::string inf,const std::string out,const muparser_fun &f,double h);
 
 ~Matrix_B(){};
 
@@ -84,14 +94,18 @@ double h;
 class Matrix_C:public AbstractMatrix
 {
 public:
-Matrix_C(unsigned int row, unsigned int col,const std::string &bc,const muparser_fun &por_,double h_,double cond);
+Matrix_C(unsigned int row, unsigned int col);
+
+void set_data(const std::string &bc,const muparser_fun &por,double h,double cond);
   
-void set_matrix() override;
+void define_matrix() override;
   
 void set_BC() override;
   
 void set_rhs() override;
-  
+
+void assemble_matrix(const std::string &bc,const muparser_fun &por,double h,double cond);
+
 ~Matrix_C(){};
   
 private:
@@ -105,13 +119,17 @@ double c_out=0;
 class Matrix_F_piu:public AbstractMatrix
 {
 public:
-Matrix_F_piu(unsigned int row, unsigned int col,const std::string &bc,const Eigen::VectorXd &vel);
+Matrix_F_piu(unsigned int row, unsigned int col);
 
-void set_matrix() override;
+void set_data(const std::string &bc,const Eigen::VectorXd &vel);
+
+void define_matrix() override;
    
 void set_BC() override;
    
 void set_rhs() override;
+
+void assemble_matrix(const std::string &bc,const Eigen::VectorXd &vel);
    
 ~Matrix_F_piu(){};
 
@@ -123,13 +141,17 @@ Eigen::VectorXd velocity;
 class Matrix_F_meno:public AbstractMatrix
 {
 public:
-Matrix_F_meno(unsigned int row, unsigned col,const std::string &bc,const Eigen::VectorXd &vel);
+Matrix_F_meno(unsigned int row, unsigned col);
+
+void set_data(const std::string &bc,const Eigen::VectorXd &vel);
    
-void set_matrix() override;
+void define_matrix() override;
    
 void set_BC() override;
    
 void set_rhs() override;
+
+void assemble_matrix(const std::string &bc,const Eigen::VectorXd &vel);
    
 ~Matrix_F_meno(){};
    

@@ -19,20 +19,32 @@ std::cout<<m<<std::endl;
 }
 
 
-Matrix_A::Matrix_A(unsigned int row,unsigned int col,const muparser_fun &per,double h_, double mu_,const std::string &inf,const std::string &out, double in_,double out_):AbstractMatrix(row,col),K(per),h(h_),mu(mu_),inflow(inf),outflow(out){
+Matrix_A::Matrix_A(unsigned int row_,unsigned int col_):AbstractMatrix(row_,col_){}
 
-if(inflow=="Flow")
+void Matrix_A::set_data(const muparser_fun &per_,double h_, double mu_,const std::string &inf_,const std::string &outf_, double in_,double out_)
+{
+ K=per_;
+ h=h_;
+ mu=mu_;
+ inflow=inf_;
+ outflow=outf_;
+ 
+ if(inflow=="Flow")
      Q_in=in_;
-  else
-     P_in=in_;
-  if(outflow=="Flow")
+ else if(inflow=="Pressure")
+         P_in=in_;
+      else
+         throw std::invalid_argument("Invalid argument: wrong inflow boundary cond ");
+ 
+ if(outflow=="Flow")
     Q_out=out_;
-  else
-    P_out=out_;
+ else if(outflow=="Pressure")
+        P_out=out_;
+      else
+        throw std::invalid_argument("Invalid argument: wrong inflow boundary cond ");
 }
 
-
-void Matrix_A::set_matrix()
+void Matrix_A::define_matrix()
 {
  m(0,0)=1./3.*h*std::pow(K(h)/mu,-1);
  m(0,1)=1./6.*h*std::pow(K(h)/mu,-1);
@@ -55,11 +67,8 @@ void Matrix_A::set_BC()
       m(0,0)=1.;
       rhs(0)+=Q_in;
      }
-  else if(inflow=="Pressure")
+  else 
      rhs(0)+=P_in;
-  else
-    throw std::invalid_argument("Invalid argument: wrong inflow boundary cond ");
-      
   
   if(outflow=="Flow")
     {
@@ -68,20 +77,32 @@ void Matrix_A::set_BC()
       m(row-1,col-1)=1.;
       rhs(row-1)+=Q_out;
     }
-  else if(outflow=="Pressure")
-       rhs(row-1)-=P_out;
   else
-    throw std::invalid_argument("Invalid argument: wrong outflow boundary cond");
-      
+    rhs(row-1)-=P_out;
 }
 
 void Matrix_A::set_rhs()
 {}
 
+void Matrix_A::assemble_matrix(const muparser_fun &per_,double h_, double mu_,const std::string &inf_,const std::string &outf_, double in_,double out_){
+set_data(per_,h_,mu_,inf_,outf_,in_,out_);
+define_matrix();
+set_BC();
+set_rhs();
+}
 
-Matrix_B::Matrix_B(unsigned int row, unsigned int col,const std::string inf_,const std::string out_,const muparser_fun &f,double h_):AbstractMatrix(row,col),inflow(inf_),outflow(out_),source(f),h(h_){}
 
-void Matrix_B::set_matrix()
+Matrix_B::Matrix_B(unsigned int row_,unsigned int col_):AbstractMatrix(row_,col_){}
+
+void Matrix_B::set_data(const std::string inf_,const std::string out_,const muparser_fun &f_,double h_)
+{
+inflow=inf_;
+outflow=out_;
+source=f_;
+h=h_;
+}
+
+void Matrix_B::define_matrix()
 {
   m(0,0)=1;
   for(unsigned int i=1;i<col;++i)
@@ -109,16 +130,28 @@ void Matrix_B::set_rhs()
     rhs(i)=source(i*h)*h;
 }
 
-
-Matrix_C::Matrix_C(unsigned int row, unsigned int col,const std::string &bc,const muparser_fun &por_,double h_,double cond_):AbstractMatrix(row,col),bc_cond(bc),por(por_),h(h_)
-{ 
- if(bc=="In")
-   c_in=cond_;//è il flusso entrante c*vel
- else 
-   c_out=cond_;//è il flusso uscente c*vel}
+void Matrix_B::assemble_matrix(const std::string inf_,const std::string out_,const muparser_fun &f_,double h_){
+set_data(inf_,out_,f_,h_);
+define_matrix();
+set_BC();
+set_rhs();
 }
 
-void Matrix_C::set_matrix()
+Matrix_C::Matrix_C(unsigned int row_,unsigned int col_):AbstractMatrix(row_,col_){}
+
+void Matrix_C::set_data(const std::string &bc_,const muparser_fun &por_,double h_,double cond_){
+ bc_cond=bc_;
+ por=por_;
+ h=h_;
+  if(bc_cond=="In")
+    c_in=cond_;
+  else if(bc_cond=="Out")
+          c_out=cond_;
+       else 
+          throw std::invalid_argument("Invalid argument: wrong boundary cond type");
+}
+
+void Matrix_C::define_matrix()
 { 
  for(unsigned int i=0;i<row;++i)
       m(i,i)=por(0.5*h+i*h)*h;
@@ -127,24 +160,31 @@ void Matrix_C::set_matrix()
 void Matrix_C::set_BC()
 {
   if(bc_cond=="In")
-      {//m(0,0)=1.;
-       rhs(0)+=c_in*por(0.5*h);
-      }
-  else if(bc_cond=="Out")
-      {//m(row-1,row-1)=1.;
-       rhs(row-1)-=c_out*(por((row-1)*h+0.5));
-      }
+     rhs(0)+=c_in*por(0.5*h);
   else 
-    throw std::invalid_argument("Invalid argument: wrong boundary cond type");
+     rhs(row-1)-=c_out*(por((row-1)*h+0.5));
+      
 }
 
 void Matrix_C::set_rhs()
 {}
 
-Matrix_F_piu::Matrix_F_piu(unsigned int row, unsigned int col,const std::string &bc,const Eigen::VectorXd &vel):AbstractMatrix(row,col),bc_cond(bc),velocity(vel)
-{}
+void Matrix_C::assemble_matrix(const std::string &bc_,const muparser_fun &por_,double h_,double cond_){
+set_data(bc_,por_,h_,cond_);
+define_matrix();
+set_BC();
+set_rhs();
+}
 
-void Matrix_F_piu::set_matrix()
+Matrix_F_piu::Matrix_F_piu(unsigned int row_,unsigned int col_):AbstractMatrix(row_,col_){}
+
+void Matrix_F_piu::set_data(const std::string &bc_,const Eigen::VectorXd &vel_)
+{
+bc_cond=bc_;
+velocity=vel_;
+}
+
+void Matrix_F_piu::define_matrix()
 {
   for(unsigned int i=0;i<row-1;++i)
       { 
@@ -156,23 +196,27 @@ void Matrix_F_piu::set_matrix()
       m(row-1,col-1)=velocity(row);
 }
 
-void Matrix_F_piu::set_BC()
-{
-   if(bc_cond=="In")
-       {//{m(0,0)=0.;
-        //m(0,1)=0.;
-       }
-   else
-        {//m(row-1,col-1)=0.;
- }
-}
+void Matrix_F_piu::set_BC(){}
 
 void Matrix_F_piu::set_rhs(){}
 
-Matrix_F_meno::Matrix_F_meno(unsigned int row, unsigned int col,const std::string &bc,const Eigen::VectorXd &vel):AbstractMatrix(row,col),bc_cond(bc),velocity(vel)
-{}
+void Matrix_F_piu::assemble_matrix(const std::string &bc_,const Eigen::VectorXd &vel_){
+set_data(bc_,vel_);
+define_matrix();
+set_BC();
+set_rhs();
+}
 
-void Matrix_F_meno::set_matrix()
+
+Matrix_F_meno::Matrix_F_meno(unsigned int row_,unsigned int col_):AbstractMatrix(row_,col_){}
+
+void Matrix_F_meno::set_data(const std::string &bc_,const Eigen::VectorXd &vel_)
+{
+bc_cond=bc_;
+velocity=vel_;
+}
+
+void Matrix_F_meno::define_matrix()
 {
  //m(0,0)=velocity(0);
  for(unsigned int i=1;i<row;++i)
@@ -184,17 +228,14 @@ void Matrix_F_meno::set_matrix()
     }
 }
 
-void Matrix_F_meno::set_BC(){
- 
-   if(bc_cond=="In")
-       {//m(0,0)=0.;
-       }
-   else
-       {
-        //m(row-1,col-1)=0.; 
-        //m(row-1,col-2)=0.;
-       }
+void Matrix_F_meno::assemble_matrix(const std::string &bc_,const Eigen::VectorXd &vel_){
+set_data(bc_,vel_);
+define_matrix();
+set_BC();
+set_rhs();
 }
+
+void Matrix_F_meno::set_BC(){}
 
 void Matrix_F_meno::set_rhs(){}
 
