@@ -3,11 +3,12 @@
 
 #include <string>
 #include "muparser_fun.hpp"
+
+//Data for the Darcy System
 class Data_Darcy
 {
 public:
       explicit Data_Darcy(const std::string &filename);
-      //Data(const Data &data);//da implementare
 
       double L;
       muparser_fun K;
@@ -24,7 +25,7 @@ public:
 };
 
 
-
+//Data for the transport equation
 class Data_Transport
 {
 public:

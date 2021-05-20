@@ -1,26 +1,31 @@
 #include "matrix.hpp"
 #include <exception> 
 #include <cmath>
+
+//AbstractMatrix constructor
 AbstractMatrix::AbstractMatrix(unsigned int row_,unsigned int col_):row(row_),col(col_){
 m=Eigen::MatrixXd::Zero(row_,col_);
 rhs=Eigen::VectorXd::Zero(col_); 
 }
 
-Eigen::MatrixXd& AbstractMatrix::get_matrix(){
+//Getters
+Eigen::MatrixXd& AbstractMatrix::get_matrix() const{
      return m;
 }
 
-Eigen::VectorXd& AbstractMatrix::get_rhs(){
+Eigen::VectorXd& AbstractMatrix::get_rhs() const{
      return rhs;
 }
 
-void AbstractMatrix::print_m(){
+//Print the matrix
+void AbstractMatrix::print_m() const{
 std::cout<<m<<std::endl;
 }
 
-
+//Matrix_A constructor
 Matrix_A::Matrix_A(unsigned int row_,unsigned int col_):AbstractMatrix(row_,col_){}
 
+//set_data gives to the matrix object the physical and geometrical parameters which it needs to assemble the matrix
 void Matrix_A::set_data(const muparser_fun &per_,double h_, double mu_,const std::string &inf_,const std::string &outf_, double in_,double out_)
 {
  K=per_;
@@ -29,6 +34,7 @@ void Matrix_A::set_data(const muparser_fun &per_,double h_, double mu_,const std
  inflow=inf_;
  outflow=outf_;
  
+ //We have two possible inflow/outflow condition: or the one related to the velocity or the one related to the pressure 
  if(inflow=="Flow")
      Q_in=in_;
  else if(inflow=="Pressure")
@@ -44,6 +50,7 @@ void Matrix_A::set_data(const muparser_fun &per_,double h_, double mu_,const std
         throw std::invalid_argument("Invalid argument: wrong inflow boundary cond ");
 }
 
+//Definition of the mass matrix A considering P1 Finite element for the Velocity and P0 for the pressure (They are stable for the 1D case)
 void Matrix_A::define_matrix()
 {
  m(0,0)=1./3.*h*std::pow(K(h)/mu,-1);
@@ -58,16 +65,17 @@ void Matrix_A::define_matrix()
  m(row-1,col-1)=1./3.*h*std::pow(K((row-1)*h)/mu,-1);
 }
 
+//set_BC() function change the first/last row of the matrix A considering what kind of BC are set
 void Matrix_A::set_BC()
 {  
-  if(inflow=="Flow")
+  if(inflow=="Flow")//if we have Dirichlet condition for the velocity we have to impose it in a strong way
      {
       for(unsigned int i=0;i<col;++i)
             m(0,i)=0.;
       m(0,0)=1.;
       rhs(0)+=Q_in;
      }
-  else 
+  else //if we have Dirichlet condition for the pressure we impose it in a weak way since we have the weak term in the equation
      rhs(0)+=P_in;
   
   if(outflow=="Flow")
@@ -81,8 +89,10 @@ void Matrix_A::set_BC()
     rhs(row-1)-=P_out;
 }
 
+//There is not any source term in the first equation of the Darcy system for the assumptions made
 void Matrix_A::set_rhs()
 {}
+
 
 void Matrix_A::assemble_matrix(const muparser_fun &per_,double h_, double mu_,const std::string &inf_,const std::string &outf_, double in_,double out_){
 set_data(per_,h_,mu_,inf_,outf_,in_,out_);
@@ -91,9 +101,10 @@ set_BC();
 set_rhs();
 }
 
-
+//Matrix_B constructor
 Matrix_B::Matrix_B(unsigned int row_,unsigned int col_):AbstractMatrix(row_,col_){}
 
+//set_data gives to the matrix object the physical and geometrical parameters which it needs to assemble the matrix
 void Matrix_B::set_data(const std::string inf_,const std::string out_,const muparser_fun &f_,double h_)
 {
 inflow=inf_;
@@ -102,6 +113,7 @@ source=f_;
 h=h_;
 }
 
+//Definition of the B matrix with P1-P0 element
 void Matrix_B::define_matrix()
 {
   m(0,0)=1;
@@ -113,7 +125,7 @@ void Matrix_B::define_matrix()
   m(row-1,col-1)=-1;
 }
 
-
+//set_BC() function change the first/last row of the matrix B considering what kind of BC we have
 void Matrix_B::set_BC()
 { 
 if(inflow=="Flow")
@@ -122,8 +134,10 @@ if(inflow=="Flow")
 if(outflow=="Flow")
      {for(unsigned int i=0;i<col;++i)
            m(row-1,i)=0.;}
+//If we have in Inflow/outflow pressure condition there is nothing to be made
 }
 
+//Here the source term that carachterize the second equation of the Darcy System is introduced (the one that is equal to the divergence of the velocity)
 void Matrix_B::set_rhs()
 {
   for(float i=0.5;i<col;++i)
@@ -137,8 +151,10 @@ set_BC();
 set_rhs();
 }
 
+//Matrix_C constructor
 Matrix_C::Matrix_C(unsigned int row_,unsigned int col_):AbstractMatrix(row_,col_){}
 
+//set_data gives to the matrix object the physical and geometrical parameters which it needs to assemble the matrix
 void Matrix_C::set_data(const std::string &bc_,const muparser_fun &por_,double h_,double cond_){
  bc_cond=bc_;
  por=por_;
@@ -151,12 +167,15 @@ void Matrix_C::set_data(const std::string &bc_,const muparser_fun &por_,double h
           throw std::invalid_argument("Invalid argument: wrong boundary cond type");
 }
 
+
+//Definition of Matrix_C considering that we use P1 element
 void Matrix_C::define_matrix()
 { 
  for(unsigned int i=0;i<row;++i)
-      m(i,i)=por(0.5*h+i*h)*h;
+      m(i,i)=por(0.5*h+i*h)*h;//we include in the mass matrix of the transport equation (Matrix_C) already the product with the spatial step h and the porosity
 }
 
+//Set_B() add/subtract to the right-side the term related to the Boundary Condition for the concentration of the passive scalar
 void Matrix_C::set_BC()
 {
   if(bc_cond=="In")
@@ -166,6 +185,7 @@ void Matrix_C::set_BC()
       
 }
 
+//There is not no source term of the Transport Equation
 void Matrix_C::set_rhs()
 {}
 
@@ -176,14 +196,17 @@ set_BC();
 set_rhs();
 }
 
+//Matrix_F_piu constructor
 Matrix_F_piu::Matrix_F_piu(unsigned int row_,unsigned int col_):AbstractMatrix(row_,col_){}
 
+//set_data gives to the matrix object the physical and geometrical parameters which it needs to assemble the matrix
 void Matrix_F_piu::set_data(const std::string &bc_,const Eigen::VectorXd &vel_)
 {
 bc_cond=bc_;
 velocity=vel_;
 }
 
+//Defintion of matrix F_piu as the left part of the upwind scheme with P1 element
 void Matrix_F_piu::define_matrix()
 {
   for(unsigned int i=0;i<row-1;++i)
@@ -208,17 +231,19 @@ set_rhs();
 }
 
 
+//Matrix_F_meno constructor
 Matrix_F_meno::Matrix_F_meno(unsigned int row_,unsigned int col_):AbstractMatrix(row_,col_){}
 
+//set_data gives to the matrix object the physical and geometrical parameters which it needs to assemble the matrix
 void Matrix_F_meno::set_data(const std::string &bc_,const Eigen::VectorXd &vel_)
 {
 bc_cond=bc_;
 velocity=vel_;
 }
 
+//Defintion of matrix F_piu as the right part of the upwind scheme with P1 elemen
 void Matrix_F_meno::define_matrix()
 {
- //m(0,0)=velocity(0);
  for(unsigned int i=1;i<row;++i)
     {
       if(velocity(i)>0)
