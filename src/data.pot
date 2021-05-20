@@ -42,7 +42,7 @@
     #Boundary cond for C
     
     #In-flow cond
-    C_in=1.0
+    C_in=0.0
 
     #Out-flow cond
     C_out=0.0
@@ -60,7 +60,7 @@
 
 [Discretization]
     #Cell number
-    Nx=10
+    Nx=100
 
     [../]
 
@@ -68,13 +68,13 @@
     #Final T
     T=1
     #Time step
-    Nt=10
+    Nt=100
     
     [../]
 
 [Initial_Condition]
     #concentration initial condition
-    IC=0.0*(x<0.5)
+    IC=1.0*(x<0.5)
     
     
     

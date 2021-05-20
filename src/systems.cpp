@@ -75,3 +75,41 @@ for(unsigned int i=1;i<Nt;i++)
    IC=solution.col(i);
   }
 }
+
+
+
+
+void Transport_system_implicit(Eigen::MatrixXd &solution,Eigen::VectorXd &vel,Data_Transport &data)
+{
+auto &[L,phi,Nx,Nt,T,C_in,C_out,bc_cond,C0]=data;
+double h =static_cast<double>(L)/Nx;
+double dt=static_cast<double>(T)/Nt;
+
+Eigen::VectorXd IC=Eigen::VectorXd::Zero(Nx);
+for (unsigned int i=0;i<Nx/2;++i)
+               IC(i)=C0(0.05+i*0.1);
+  
+Eigen::MatrixXd M(Nx,Nx);
+Eigen::VectorXd rhs(Nx);
+Eigen::VectorXd sol(Nx);
+ 
+Matrix_F_piu F_p(Nx,Nx);
+F_p.assemble_matrix(bc_cond,vel);
+
+Matrix_F_meno F_m(Nx,Nx);
+F_m.assemble_matrix(bc_cond,vel);
+
+Matrix_C C(Nx,Nx);
+C.assemble_matrix(bc_cond,phi,h,C_in);
+
+M=1/dt*C.get_matrix()+F_p.get_matrix()-F_m.get_matrix();
+
+solution.col(0)=IC;
+
+for(unsigned int i=1;i<Nt;i++)
+  { 
+   rhs=1/dt*C.get_matrix()*IC+C.get_rhs();
+   solution.col(i)=M.fullPivLu().solve(rhs);
+   IC=solution.col(i);
+  }
+}

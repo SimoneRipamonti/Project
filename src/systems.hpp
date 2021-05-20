@@ -9,5 +9,7 @@ void set_Darcy_system(Data_Darcy &data, Eigen::MatrixXd &Matrix,Eigen::VectorXd 
 
 void Transport_system_esplicit(Eigen::MatrixXd &solution,Eigen::VectorXd &velocity,Data_Transport &data);
 
+void Transport_system_implicit(Eigen::MatrixXd &solution,Eigen::VectorXd &velocity,Data_Transport &data);
+
 #endif
 
