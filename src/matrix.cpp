@@ -9,11 +9,11 @@ rhs=Eigen::VectorXd::Zero(col_);
 }
 
 //Getters
-Eigen::MatrixXd& AbstractMatrix::get_matrix() const{
+Eigen::MatrixXd& AbstractMatrix::get_matrix(){
      return m;
 }
 
-Eigen::VectorXd& AbstractMatrix::get_rhs() const{
+Eigen::VectorXd& AbstractMatrix::get_rhs(){
      return rhs;
 }
 

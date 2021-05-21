@@ -17,9 +17,9 @@ virtual void set_BC()=0;
 
 virtual void set_rhs()=0;
 
-Eigen::MatrixXd& get_matrix() const;
+Eigen::MatrixXd& get_matrix();
 
-Eigen::VectorXd& get_rhs() const;
+Eigen::VectorXd& get_rhs();
 
 void print_m() const;
 virtual ~AbstractMatrix()=default;

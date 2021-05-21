@@ -1,13 +1,13 @@
 #include "muparser_fun.hpp"
 
-muparser_fun::muparser_fun(const muparser_fun &m)
+muparser_fun::muparser_fun(const muparser_fun &m)//Copy-constructor definition
     : parser(m.parser)
   {
     parser.DefineVar("x", &var);
   }
 
 
-void muparser_fun::set_value(const std::string &s)
+void muparser_fun::set_value(const std::string &s)//Definition of the set_value() function
       {
         try
           { 
@@ -19,7 +19,8 @@ void muparser_fun::set_value(const std::string &s)
             std::cerr<<e.GetMsg()<<std::endl;
           }
        }
-double muparser_fun::operator()(const double &x)
+
+double muparser_fun::operator()(const double &x)//Definition of the () operator
 {
       double y;
       var = x;
@@ -35,7 +36,7 @@ double muparser_fun::operator()(const double &x)
       return y;
 }
 
-muparser_fun& muparser_fun::operator= (const muparser_fun &p)
+muparser_fun& muparser_fun::operator= (const muparser_fun &p)//Defintion of the = operator
 {
    if(&p!=this)
      {

@@ -51,44 +51,52 @@ rhs=v3;
 Matrix=M;
 }
 
-void Transport_system_esplicit(Eigen::MatrixXd &solution,Eigen::VectorXd &vel,Data_Transport &data)
+void Transport_system_esplicit(Eigen::MatrixXd &solution,Eigen::VectorXd &vel,Data_Transport &data)//As input there is the matrix solution where we store our solution at each istant, 
+                                                                                                   //each row represent a spatial position, each column represent a time istant. 
+                                                                                                   //In the vector vel there is the velocity evaluated at each node cell.
 {
+//All the data that are needed to define the Darcy System are extracted from the data structure
 auto &[L,phi,Nx,Nt,T,C_in,C_out,bc_cond,C0]=data;
+
+//Computation of the spatial and temporal step from the data
 double h =static_cast<double>(L)/Nx;
 double dt=static_cast<double>(T)/Nt;
 
+//The Initial Condition are saved in an Eigen Vector. We recall that the value of the chemical species is saved in the middle of the cell (as the pressure in the Darcy System)
 Eigen::VectorXd IC=Eigen::VectorXd::Zero(Nx);
 for (unsigned int i=0;i<Nx/2;++i)
                IC(i)=C0(0.05+i*0.1);
-  
-Eigen::MatrixXd M(Nx,Nx);
-Eigen::VectorXd rhs(Nx);
-Eigen::VectorXd sol(Nx);
+
+
+Eigen::MatrixXd M(Nx,Nx);//Matrix of the linear system that has to be solved
+Eigen::VectorXd rhs(Nx);//rhs of the lineay system that has to be solved
+
  
-Matrix_F_piu F_p(Nx,Nx);
-F_p.assemble_matrix(bc_cond,vel);
-
-Matrix_F_meno F_m(Nx,Nx);
-F_m.assemble_matrix(bc_cond,vel);
-
-Matrix_C C(Nx,Nx);
+Matrix_C C(Nx,Nx);//Mass matrix of the transport system
 C.assemble_matrix(bc_cond,phi,h,C_in);
 
-M=1/dt*C.get_matrix();
+Matrix_F_piu F_p(Nx,Nx);//Left part of the upwind matrix of the system
+F_p.assemble_matrix(bc_cond,vel);
 
-solution.col(0)=IC;
+Matrix_F_meno F_m(Nx,Nx);//Right part of the upwind matrix of the system 
+F_m.assemble_matrix(bc_cond,vel);
 
-for(unsigned int i=1;i<Nt;i++)
+
+M=1/dt*C.get_matrix();//Definition of M
+
+solution.col(0)=IC;//First column of the solution matrix is filled
+
+for(unsigned int i=1;i<Nt;i++)//Time loop
   { 
-   rhs=(M-F_p.get_matrix()+F_m.get_matrix())*IC+C.get_rhs();
-   solution.col(i)=M.fullPivLu().solve(rhs);
-   IC=solution.col(i);
+   rhs=(M-F_p.get_matrix()+F_m.get_matrix())*IC+C.get_rhs();//Computation of the rhs
+   solution.col(i)=M.fullPivLu().solve(rhs);//Solution of the linear system 
+   IC=solution.col(i);//Update of the previous time step
   }
 }
 
 
 
-
+//Same as before 
 void Transport_system_implicit(Eigen::MatrixXd &solution,Eigen::VectorXd &vel,Data_Transport &data)
 {
 auto &[L,phi,Nx,Nt,T,C_in,C_out,bc_cond,C0]=data;
@@ -112,6 +120,7 @@ F_m.assemble_matrix(bc_cond,vel);
 Matrix_C C(Nx,Nx);
 C.assemble_matrix(bc_cond,phi,h,C_in);
 
+//Here there is a different definition of the linear matrix of the system (and also of the rhs in the time loop)
 M=1/dt*C.get_matrix()+F_p.get_matrix()-F_m.get_matrix();
 
 solution.col(0)=IC;
