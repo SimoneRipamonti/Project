@@ -13,7 +13,8 @@
   
   #Porosity
   #phi0=0.2+0*x
-  phi0=1.0+0.0*(x<0.6)
+  phi0=0.2+0.0*x
+  #phi0=1+0.0*x
   [../]
 
 [BC_vel]
@@ -28,7 +29,7 @@
    p_in=1.0e6
    
    #Pression on the right
-   p_out=0.
+   p_out=0.0
 
    #Inflow cond
    in=Pressure #or Flow
@@ -54,7 +55,7 @@
 
 [Source]
     #External Source
-    f=1.0e-1*x #da cambiare
+    f=1.0e-1*(x>0.4)*(x<0.6) #da cambiare
     
    [../]
 
