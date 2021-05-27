@@ -98,7 +98,7 @@ class Matrix_C:public AbstractMatrix
 public:
     Matrix_C(unsigned int row, unsigned int col);
 
-    void set_data(const std::string &bc,const muparser_fun &por,double h,double cond);
+    void set_data(const std::string &bc,const muparser_fun por,double h,double cond);
 
     void define_matrix() override;
 
@@ -106,7 +106,7 @@ public:
 
     void set_rhs() override;
 
-    void assemble_matrix(const std::string &bc,const muparser_fun &por,double h,double cond);
+    void assemble_matrix(const std::string &bc,const muparser_fun por,double h,double cond);
 
     ~Matrix_C() {};
 

@@ -165,7 +165,7 @@ void Matrix_B::assemble_matrix(const std::string inf_,const std::string out_,con
 Matrix_C::Matrix_C(unsigned int row_,unsigned int col_):AbstractMatrix(row_,col_) {}
 
 //set_data gives to the matrix object the physical and geometrical parameters which it needs to assemble the matrix
-void Matrix_C::set_data(const std::string &bc_,const muparser_fun &por_,double h_,double cond_)
+void Matrix_C::set_data(const std::string &bc_,const muparser_fun por_,double h_,double cond_)
 {
     bc_cond=bc_;
     por=por_;
@@ -184,6 +184,7 @@ void Matrix_C::define_matrix()
 {
     for(unsigned int i=0; i<row; ++i)
         m(i,i)=por(0.5*h+i*h)*h;//we include in the mass matrix of the transport equation (Matrix_C) already the product with the spatial step h and the porosity
+          //m(i,i)=h;
 }
 
 //Set_BC() add/subtract to the right-side the term related to the Boundary Condition for the concentration of the passive scalar
@@ -191,8 +192,10 @@ void Matrix_C::set_BC()
 {
     if(bc_cond=="In")
         rhs(0)+=c_in*por(0.5*h);
+          //rhs(0)+=c_in*h;
     else
         rhs(row-1)-=c_out*(por((row-1)*h+0.5));
+          //rhs(row-1)-=c_out*h;
 
 }
 
@@ -200,7 +203,7 @@ void Matrix_C::set_BC()
 void Matrix_C::set_rhs()
 {}
 
-void Matrix_C::assemble_matrix(const std::string &bc_,const muparser_fun &por_,double h_,double cond_)
+void Matrix_C::assemble_matrix(const std::string &bc_,const muparser_fun por_,double h_,double cond_)
 {
     set_data(bc_,por_,h_,cond_);
     define_matrix();

@@ -7,14 +7,14 @@
 [physical_parameters]  
   #Permeability
   K_distr=1.0e-10+0*x
-  
+  #K_distr=1.0e-9*(x<0.5)+1.0e-10*(x>=0.5)
   #Water Viscosity
   mu=1.0e-3
   
   #Porosity
   #phi0=0.2+0*x
-  phi0=0.2+0.0*x
-  #phi0=1+0.0*x
+
+  phi0=1+0.0*x
   [../]
 
 [BC_vel]
@@ -28,7 +28,7 @@
    #Pression on the left
    p_in=1.0e6
    
-   #Pression on the right
+   #Pression on the righ
    p_out=0.0
 
    #Inflow cond
@@ -56,12 +56,12 @@
 [Source]
     #External Source
     f=1.0e-1*(x>0.4)*(x<0.6) #da cambiare
-    
+    #f=1.0e-1
    [../]
 
 [Discretization]
     #Cell number
-    Nx=10
+    Nx=100
 
     [../]
 
@@ -69,7 +69,7 @@
     #Final T
     T=1
     #Time step
-    Nt=10
+    Nt=100
     
     [../]
 
