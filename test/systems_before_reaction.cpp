@@ -57,7 +57,7 @@ void Transport_system_esplicit(Eigen::MatrixXd &solution,Eigen::VectorXd &vel,Da
 //In the vector vel there is the velocity evaluated at each node cell.
 {
 //All the data that are needed to define the Transport System are extracted from the data structure
-    auto &[L,phi,Nx,Nt,T,C_in,C_out,bc_cond,C0,lambda]=data;
+    auto &[L,phi,Nx,Nt,T,C_in,C_out,bc_cond,C0]=data;
     
     //Porosità posta uguale a 1
     //muparser_fun phi;
@@ -82,8 +82,6 @@ void Transport_system_esplicit(Eigen::MatrixXd &solution,Eigen::VectorXd &vel,Da
 
     Matrix_F_meno F_m(Nx,Nx);//Right part of the upwind matrix of the system
     F_m.assemble_matrix(bc_cond,vel);
-
-    const Eigen::MatrixXd Reaction(Eigen::MatrixXd::Identity(Nx,Nx)); 
      
     const Eigen::MatrixXd M(1/dt*C.get_matrix());//Matrix of the linear system that has to be solved
     
@@ -95,7 +93,7 @@ void Transport_system_esplicit(Eigen::MatrixXd &solution,Eigen::VectorXd &vel,Da
    
     for(unsigned int i=1; i<Nt; i++) //Time loop
     {
-        rhs=(M-F_p.get_matrix()+F_m.get_matrix()-lambda*Reaction)*solution.col(i-1)+C.get_rhs();//Computation of the rhs
+        rhs=(M-F_p.get_matrix()+F_m.get_matrix())*solution.col(i-1)+C.get_rhs();//Computation of the rhs
         solution.col(i)=M_lu.solve(rhs);//Solution of the linear system
     }
    
@@ -109,7 +107,7 @@ void Transport_system_implicit(Eigen::MatrixXd &solution,Eigen::VectorXd &vel,Da
 //In the vector vel there is the velocity evaluated at each node cell.
 { 
     //All the data that are needed to define the Transport System are extracted from the data structure
-    auto &[L,phi,Nx,Nt,T,C_in,C_out,bc_cond,C0,lambda]=data;
+    auto &[L,phi,Nx,Nt,T,C_in,C_out,bc_cond,C0]=data;
 
     //Computation of the spatial and temporal step from the data
     double h =static_cast<double>(L)/Nx;
@@ -134,14 +132,11 @@ void Transport_system_implicit(Eigen::MatrixXd &solution,Eigen::VectorXd &vel,Da
     Matrix_C C(Nx,Nx);
     C.assemble_matrix(bc_cond,phi,h,C_in);
 
-    const Eigen::MatrixXd Reaction(Eigen::MatrixXd::Identity(Nx,Nx)); //Reaction matrix
-
     //Eigen::MatrixXd M(Nx,Nx);//Matrix of the linear system that has to be solved
     //Eigen::VectorXd rhs(Nx);//rhs of the lineay system that has to be solved
 
 //Here there is a different definition of the linear matrix of the system (and also of the rhs in the time loop)
-    const Eigen::MatrixXd M(1/dt*C.get_matrix()+F_p.get_matrix()-F_m.get_matrix()+lambda*Reaction);
-   
+    const Eigen::MatrixXd M(1/dt*C.get_matrix()+F_p.get_matrix()-F_m.get_matrix());
     Eigen::VectorXd rhs(Nx);
     auto M_lu=M.fullPivLu();
     solution.col(0)=IC;

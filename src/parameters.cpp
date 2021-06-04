@@ -35,10 +35,11 @@ Data_Transport::Data_Transport(const std::string &filename)
     phi.set_value(stringa4);
     Nx=file("Discretization/Nx",100);
     Nt=file("Time/Nt",100);
-    final_time=file("Time/T",2.0);
+    T=file("Time/T",2.0);
     C_in=file("BC_trac/C_in",1.0);
     C_out=file("BC_trac/C_out",1.0);
     bc_cond=file("BC_trac/bc_trac","In");
     const std::string stringa5=file("Initial_Condition/IC","2.0*x");
     C0.set_value(stringa5);
+    lambda=file("Reaction/lambda",1.0);
 }

@@ -36,11 +36,12 @@ public:
     muparser_fun phi;
     unsigned int Nx;
     unsigned int Nt;
-    double final_time;
+    double T;
     double C_in;
     double C_out;
     std::string bc_cond;
     muparser_fun C0;
+    double lambda;
 };
 #endif
 

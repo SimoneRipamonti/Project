@@ -22,10 +22,14 @@ Darcy_output_results(sol_darcy,data_d.Nx,data_d.L);
 
 Data_Transport data_t("data.pot");
 
-Eigen::VectorXd vel=1*Eigen::VectorXd::Ones(data_t.Nx+1);
+//Eigen::VectorXd vel=0.0*Eigen::VectorXd::Ones(data_t.Nx+1);//Per osservare il decadimento lineare
+Eigen::VectorXd vel=1.0*Eigen::VectorXd::Ones(data_t.Nx+1);
 Eigen::MatrixXd solution(data_t.Nx,data_t.Nt);
 
 Transport_system_implicit(solution,vel,data_t);
 
-Transport_output_results(solution,data_t.Nx,data_t.L,data_t.Nt);
+Transport_output_results_fixed_time(solution,data_t.Nx,data_t.L,data_t.Nt);
+
+Transport_output_results_fixed_space(solution,data_t.Nx,data_t.T,data_t.Nt);
+
 }
