@@ -69,20 +69,45 @@
 [Time]
     #Final T
     T=1
+    
     #Time step
     Nt=100
     
     [../]
 
 [Initial_Condition]
-    #concentration initial condition
-    IC=1.0*(x<0.5)
+    #Ca0 initial condition
+    Ca0=1.0*(x<0.5)
+
+    #caSiO3 initial condition
+    CaSiO30=1.0*(x<0.5)
     
     [../]
 
 [Reaction]
-     lambda=0.1
+     #Temperature
+     Temperature=1.0
+     
+     #Reaction Area
+     Area_react=1.0
+
+     #Constant_reaction
+     rate_const=1.0
+
+     #Energy_activation
+     E=1.0
+
+     #R constant
+     R=1.0 
+     
+     #Ph
+     ph=1.0
     
-    
-    
-    
+    [../]
+
+
+
+     #Equilibrium constant
+     K_eq=1.0
+
+  

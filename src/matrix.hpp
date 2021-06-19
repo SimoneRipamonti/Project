@@ -165,6 +165,31 @@ private:
     Eigen::VectorXd velocity;
 };
 
+class Matrix_R:public AbstractMatrix
+{
+public:
+    Matrix_R(unsigned int row, unsigned int col);
+
+    void set_data(double area, double rate_const, double temperature, double R, double E, double ph,double const_eq);
+
+    void define_matrix() override;
+
+    void set_BC() override;
+
+    void set_rhs() override;
+   
+    void assemble_matrix(double area, double rate_const, double temperature, double R, double E, double ph,double const_eq);
+
+    void update(const Eigen::VectorXd &past_sol);
+
+    ~Matrix_R() {};
+
+private:
+    double react_const;
+    double ph;
+    double const_eq;
+};
+
 
 
 

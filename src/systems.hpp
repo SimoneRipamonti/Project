@@ -12,7 +12,7 @@ void set_Darcy_system(Data_Darcy &data, Eigen::MatrixXd &Matrix,Eigen::VectorXd 
 void Transport_system_esplicit(Eigen::MatrixXd &solution,Eigen::VectorXd &velocity,Data_Transport &data);
 
 //Definition of the Tranport system solved with an implicit scheme
-void Transport_system_implicit(Eigen::MatrixXd &solution,Eigen::VectorXd &velocity,Data_Transport &data);
+void Transport_system_implicit(Eigen::MatrixXd &Ca,Eigen::MatrixXd &CaSiO3,Eigen::VectorXd &velocity,Data_Transport &data_transport, Data_Reaction &data_reaction);
 
 #endif
 

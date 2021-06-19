@@ -40,8 +40,23 @@ public:
     double C_in;
     double C_out;
     std::string bc_cond;
-    muparser_fun C0;
+    muparser_fun Ca0;
+    muparser_fun CaSiO30;
     double lambda;
+};
+
+class Data_Reaction
+{
+public:
+    explicit Data_Reaction(const std::string &filename);
+    
+    double Temperature;
+    double Area_react;
+    double rate_const;
+    double Energy_act;
+    double R;
+    double ph;
+    double K_eq;
 };
 #endif
 

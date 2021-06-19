@@ -283,3 +283,40 @@ void Matrix_F_meno::set_rhs() {}
 
 
 
+//Matrix_R
+Matrix_R::Matrix_R(unsigned int row_,unsigned int col_):AbstractMatrix(row_,col_) {}
+
+//set_data gives to the matrix object the physical and geometrical parameters which it needs to assemble the matrix
+void Matrix_R::set_data(double area, double rate_const, double temperature, double R, double E, double ph_, double const_eq_)
+{
+    react_const=area*rate_const*(std::exp(-E/(R*temperature)))*std::pow(10,-ph);
+    ph=ph_;
+    const_eq=const_eq_;
+}
+
+//Defintion of matrix F_piu as the right part of the upwind scheme with P1 elemen
+void Matrix_R::define_matrix(){}
+
+void Matrix_R::set_BC() {}
+
+void Matrix_R::set_rhs() {}
+
+void Matrix_R::assemble_matrix(double area, double rate_const, double temperature, double R, double E, double ph,double const_eq)
+{
+    set_data(area,rate_const,temperature,R,E,ph,const_eq);
+    define_matrix();
+    set_BC();
+    set_rhs();
+}
+
+void Matrix_R::update(const Eigen::VectorXd &past_sol) {
+
+     const Eigen::VectorXd p=past_sol.array().pow(2)/(const_eq*std::pow(10,-ph));  
+     rhs=react_const*(Eigen::VectorXd::Ones(row)-p);
+}
+
+
+
+
+
+

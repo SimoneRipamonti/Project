@@ -39,7 +39,23 @@ Data_Transport::Data_Transport(const std::string &filename)
     C_in=file("BC_trac/C_in",1.0);
     C_out=file("BC_trac/C_out",1.0);
     bc_cond=file("BC_trac/bc_trac","In");
-    const std::string stringa5=file("Initial_Condition/IC","2.0*x");
-    C0.set_value(stringa5);
+    const std::string stringa5=file("Initial_Condition/Ca0","0.0*x");
+    Ca0.set_value(stringa5);
+    const std::string stringa6=file("Initial_Condition/CaSiO30","0.0*x");
+    CaSiO30.set_value(stringa6);
     lambda=file("Reaction/lambda",1.0);
+}
+
+Data_Reaction::Data_Reaction(const std::string &filename)
+{
+    GetPot file(filename.c_str());
+
+    Temperature=file("Reaction/Temperature",1.);
+    Area_react=file("Reaction/Area_react",1.);
+    rate_const=file("Reaction/rate_const",1.);
+    Energy_act=file("Reaction/Energy_act",1.);
+    R=file("Reaction/R",1.);
+    ph=file("Reaction/ph",1.);
+    K_eq=file("Reaction/K_eq",1.);
+    
 }
