@@ -43,7 +43,7 @@ Data_Transport::Data_Transport(const std::string &filename)
     Ca0.set_value(stringa5);
     const std::string stringa6=file("Initial_Condition/CaSiO30","0.0*x");
     CaSiO30.set_value(stringa6);
-    lambda=file("Reaction/lambda",1.0);
+    //lambda=file("Reaction/lambda",1.0);
 }
 
 Data_Reaction::Data_Reaction(const std::string &filename)
@@ -53,9 +53,14 @@ Data_Reaction::Data_Reaction(const std::string &filename)
     Temperature=file("Reaction/Temperature",1.);
     Area_react=file("Reaction/Area_react",1.);
     rate_const=file("Reaction/rate_const",1.);
-    Energy_act=file("Reaction/Energy_act",1.);
+    Energy_act=file("Reaction/E",1.);
     R=file("Reaction/R",1.);
     ph=file("Reaction/ph",1.);
     K_eq=file("Reaction/K_eq",1.);
     
 }
+
+
+
+
+

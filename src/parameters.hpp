@@ -42,7 +42,7 @@ public:
     std::string bc_cond;
     muparser_fun Ca0;
     muparser_fun CaSiO30;
-    double lambda;
+    //double lambda;
 };
 
 class Data_Reaction

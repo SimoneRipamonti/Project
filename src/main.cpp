@@ -24,7 +24,7 @@ Data_Transport data_t("data.pot");
 Data_Reaction  data_r("data.pot");
 
 //Eigen::VectorXd vel=0.0*Eigen::VectorXd::Ones(data_t.Nx+1);//Per osservare il decadimento lineare
-Eigen::VectorXd vel=1.0*Eigen::VectorXd::Ones(data_t.Nx+1);
+Eigen::VectorXd vel=0.0*Eigen::VectorXd::Ones(data_t.Nx+1);
 Eigen::MatrixXd Ca(data_t.Nx,data_t.Nt);
 Eigen::MatrixXd CaSiO3(data_t.Nx,data_t.Nt);
 

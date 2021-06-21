@@ -110,7 +110,7 @@ void Transport_system_implicit(Eigen::MatrixXd &Ca,Eigen::MatrixXd &CaSiO3, Eige
 //In the vector vel there is the velocity evaluated at each node cell.
 { 
     //All the data that are needed to define the Transport System are extracted from the data structure
-    auto &[L,phi,Nx,Nt,T,C_in,C_out,bc_cond,Ca0,CaSiO30]=data_transport;
+    auto &[L,phi,Nx,Nt,T,C_in,C_out,bc_cond,Ca0,CaSiO30,lambda]=data_transport;
     auto &[Temperature,Area,rate_const,E,R,ph,K_eq]=data_reaction;
 
     //Computation of the spatial and temporal step from the data
@@ -123,12 +123,12 @@ void Transport_system_implicit(Eigen::MatrixXd &Ca,Eigen::MatrixXd &CaSiO3, Eige
     //phi.set_value(s);
 
     //The Initial Condition are saved in an Eigen Vector. We recall that the value of the chemical species is saved in the middle of the cell (as the pressure in the Darcy System)
-   
-    for (unsigned int i=0; i<Nx; ++i)
+    std::cout<<Ca0(0.4)<<std::endl;
+    for (unsigned int i=0; i<Nx/2; ++i)
         Ca(i,0)=Ca0(h/2+i*h);
  
-    for (unsigned int i=0; i<Nx; ++i)
-        CaSiO3(i,0)=CaSiO30(h/2+i*h);
+    //for (unsigned int i=0; i<Nx/2; ++i)
+        //CaSiO3(i,0)=CaSiO30(h/2+i*h);
     
     Matrix_F_piu F_p(Nx,Nx);
     F_p.assemble_matrix(bc_cond,vel);
@@ -139,9 +139,9 @@ void Transport_system_implicit(Eigen::MatrixXd &Ca,Eigen::MatrixXd &CaSiO3, Eige
     Matrix_C C(Nx,Nx);
     C.assemble_matrix(bc_cond,phi,h,C_in);
 
-    //const Eigen::MatrixXd Reaction(Eigen::MatrixXd::Identity(Nx,Nx)); //Reaction matrix
-    Matrix_R React(Nx,Nx);
-    React.assemble_matrix(Area,rate_const,Temperature,R,E,ph,K_eq);
+    const Eigen::MatrixXd Reaction(Eigen::MatrixXd::Identity(Nx,Nx)); //Reaction matrix
+    //Matrix_R React(Nx,Nx);
+    //React.assemble_matrix(Area,rate_const,Temperature,R,E,ph,K_eq);
     
     //Eigen::MatrixXd M(Nx,Nx);//Matrix of the linear system that has to be solved
     //Eigen::VectorXd rhs(Nx);//rhs of the lineay system that has to be solved
@@ -154,12 +154,11 @@ void Transport_system_implicit(Eigen::MatrixXd &Ca,Eigen::MatrixXd &CaSiO3, Eige
 
     for(unsigned int i=1; i<Nt; i++)
     {
-        //rhs=(1/dt*C.get_matrix()+lambda*Reaction)*solution.col(i-1)+C.get_rhs();
-        React.update(Ca.col(i-1));
-        //std::cout<<React.get_rhs()<<std::endl;
-	rhs=(1/dt*C.get_matrix())*Ca.col(i-1)+C.get_rhs()+React.get_rhs();
+        rhs=(1/dt*C.get_matrix()-0.01*Reaction)*Ca.col(i-1)+C.get_rhs();
+        //React.update(Ca.col(i-1));
+	//rhs=(1/dt*C.get_matrix())*Ca.col(i-1)+C.get_rhs()+React.get_rhs();
         Ca.col(i)=M_lu.solve(rhs);
-        CaSiO3.col(i)=CaSiO3.col(i-1)-dt*React.get_rhs();
+        //CaSiO3.col(i)=CaSiO3.col(i-1)-dt*React.get_rhs();
     }
 }
 

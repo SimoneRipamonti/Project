@@ -77,10 +77,10 @@
 
 [Initial_Condition]
     #Ca0 initial condition
-    Ca0=1.0*(x<0.5)
-
+    #Ca0=1.0*(x<0.5)
+    Ca0=0.0+0.0*x
     #caSiO3 initial condition
-    CaSiO30=1.0*(x<0.5)
+    CaSiO30=1.0+0.0*x
     
     [../]
 
@@ -95,13 +95,13 @@
      rate_const=1.0
 
      #Energy_activation
-     E=1.0
+     E=0.0
 
      #R constant
      R=1.0 
      
      #Ph
-     ph=1.0
+     ph=-2.0
     
     [../]
 

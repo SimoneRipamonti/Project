@@ -289,7 +289,8 @@ Matrix_R::Matrix_R(unsigned int row_,unsigned int col_):AbstractMatrix(row_,col_
 //set_data gives to the matrix object the physical and geometrical parameters which it needs to assemble the matrix
 void Matrix_R::set_data(double area, double rate_const, double temperature, double R, double E, double ph_, double const_eq_)
 {
-    react_const=area*rate_const*(std::exp(-E/(R*temperature)))*std::pow(10,-ph);
+    //react_const=area*rate_const*(std::exp(-E/(R*temperature)))*std::pow(10,-ph);
+    react_const=area*rate_const*(std::exp(-E/(R*temperature)));
     ph=ph_;
     const_eq=const_eq_;
 }
