@@ -126,7 +126,7 @@ void Transport_system_implicit(Eigen::MatrixXd &Ca,Eigen::MatrixXd &CaSiO3, Eige
    
     for (unsigned int i=0; i<Nx; ++i)
         Ca(i,0)=Ca0(h/2+i*h);
-
+    Ca(0,0)=1.0;
     for (unsigned int i=0; i<Nx; ++i)
         CaSiO3(i,0)=CaSiO30(h/2+i*h);
     
@@ -157,9 +157,9 @@ void Transport_system_implicit(Eigen::MatrixXd &Ca,Eigen::MatrixXd &CaSiO3, Eige
         //rhs=(1/dt*C.get_matrix()+lambda*Reaction)*solution.col(i-1)+C.get_rhs();
         React.update(Ca.col(i-1));
         //std::cout<<React.get_rhs()<<std::endl;
-	rhs=(1/dt*C.get_matrix())*Ca.col(i-1)+F_p.get_rhs()-F_m.get_rhs()+React.get_rhs();
+	rhs=(1/dt*C.get_matrix())*Ca.col(i-1)+F_p.get_rhs()-F_m.get_rhs()+0*React.get_rhs();
         Ca.col(i)=M_lu.solve(rhs);
-        CaSiO3.col(i)=CaSiO3.col(i-1)-dt*React.get_rhs();
+        //CaSiO3.col(i)=CaSiO3.col(i-1)-dt*React.get_rhs();
     }
 }
 

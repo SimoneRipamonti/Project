@@ -151,10 +151,11 @@ void Transport_system_implicit(Eigen::MatrixXd &Ca,Eigen::MatrixXd &CaSiO3, Eige
    
     Eigen::VectorXd rhs(Nx);
     auto M_lu=M.fullPivLu();
+    double lambda=1.0;
 
     for(unsigned int i=1; i<Nt; i++)
     {
-        rhs=(1/dt*C.get_matrix()-0.01*Reaction)*Ca.col(i-1)+C.get_rhs();
+        rhs=(1/dt*C.get_matrix()-lambda*Reaction*h)*Ca.col(i-1)+C.get_rhs();
         //React.update(Ca.col(i-1));
 	//rhs=(1/dt*C.get_matrix())*Ca.col(i-1)+C.get_rhs()+React.get_rhs();
         Ca.col(i)=M_lu.solve(rhs);
