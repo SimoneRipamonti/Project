@@ -1,0 +1,3 @@
+/home/simoripa96/Scrivania/my_project/build/CMakeFiles/rebuild_cache.dir
+/home/simoripa96/Scrivania/my_project/build/CMakeFiles/my_exec.dir
+/home/simoripa96/Scrivania/my_project/build/CMakeFiles/edit_cache.dir
