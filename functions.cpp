@@ -1,21 +1,21 @@
 #include "functions.hpp"
 
-void set_initial_cond(Eigen::VectorXd& Ca, Eigen::VectorXd& H_piu, Eigen::VectorXd& HCO3_meno, Eigen::VectorXd& CO2, Eigen::VectorXd& CaSiO3, Eigen::VectorXd& SiO2, muparser_fun Ca0, muparser_fun H_piu0,
-                      muparser_fun HCO3_meno0, muparser_fun CO20, muparser_fun CaSiO30, muparser_fun SiO20, double h)
+void set_initial_cond(Eigen::MatrixXd& Ca, Eigen::MatrixXd& H_piu, Eigen::MatrixXd& HCO3_meno, Eigen::MatrixXd& CO2, Eigen::MatrixXd& CaSiO3, Eigen::MatrixXd& SiO2, muparser_fun Ca0, muparser_fun H_piu0,
+                      muparser_fun HCO3_meno0, muparser_fun CO20, muparser_fun CaSiO30, double h);
 {
  for (unsigned int i=0; Ca.size();++i)
   {
-   Ca(i)=Ca0(h+h*i);
-   H_piu(i)=H_piu0(h+h*i);
-   HCO3_meno(i)=HCO3_meno0(h+h*i);
-   CO2(i)=CO20(h+h*i);
-   CaSiO3(i)=CaSiO30(h+h*i);
-   SiO20(i)=SiO20(h+h*i);
+   Ca(i,0)=Ca0(h+h*i);
+   H_piu(i,0)=H_piu0(h+h*i);
+   HCO3_meno(i,0)=HCO3_meno0(h+h*i);
+   CO2(i,0)=CO20(h+h*i);
+   CaSiO3(i,0)=CaSiO30(h+h*i);
+   SiO20(i,0)=SiO20(h+h*i);
   }
 }
 
 
-void assemble_transport(Eigen::MatrixXd& M, Eigen::VectorXd& rhs, Eigen::VectorXd vel, muparser_fun phi, double h)
+void assemble_transport(Eigen::MatrixXd& M, Eigen::VectorXd& rhs, Eigen::VectorXd vel, muparser_fun phi, double h, unsigned int Nx)
 {
    Matrix_F_piu F_p(Nx,Nx);	
    F_p.assemble_matrix("In",0.0,vel);
@@ -32,7 +32,7 @@ void assemble_transport(Eigen::MatrixXd& M, Eigen::VectorXd& rhs, Eigen::VectorX
 }
 
 //calcolo phi
-void compute_phi(Eigen::VectorXd& phi1,Eigen::VectorXd& phi2,Eigen::VectorXd& phi3,Eigen::VectorXd& phi4,Eigen::VectorXd& phi5,Eigen::VectorXd Ca,Eigen::VectorXd H_piu,Eigen::VectorXd HCO3_meno, Eigen::VectorXd CO2,Eigen::VectorXd CaSiO3,Eigen::VectorXd SiO2)
+void compute_phi(Eigen::VectorXd& phi1,Eigen::VectorXd& phi2,Eigen::VectorXd& phi3,Eigen::VectorXd& phi4,Eigen::VectorXd& phi5, const Eigen::VectorXd Ca, const Eigen::VectorXd H_piu, const Eigen::VectorXd HCO3_meno, const Eigen::VectorXd CO2, const Eigen::VectorXd CaSiO3, const Eigen::VectorXd SiO2)
 {
   phi1=Ca;
   phi2=H_piu-HCO3_meno;
@@ -42,21 +42,32 @@ void compute_phi(Eigen::VectorXd& phi1,Eigen::VectorXd& phi2,Eigen::VectorXd& ph
 }
 
 //calcolo rd
-void compute_rd(Eigen::VectorXd& rd, const Eigen::VectorXd Ca, const Eigen::VectorXd H_piu, const Eigen::VectorXd SiO2,const double const_r, double K_eq, double n) 
+void compute_rd(Eigen::VectorXd& rd, const Eigen::VectorXd Ca, const Eigen::VectorXd H_piu, const Eigen::VectorXd SiO2, double const_r, double K_sol, double n) 
 {
-  const Eigen::VectorXd temp=const_r*H_piu.array().pow(n);
+  /*const Eigen::VectorXd temp=const_r*H_piu.array().pow(n);
   const Eigen::VectorXd omega=(Ca.cwiseProduct(SiO2)).cwiseQuotient(H_piu)/K_eq;
-  rd=temp.cwiseProduct(Eigen::VectorXd::Ones(Ca.size())-omega); 
+  rd=temp.cwiseProduct(Eigen::VectorXd::Ones(Ca.size())-omega);*/ 
+  ///
+  double temp;
+  double omega;
+  for (unsigned int i=0; i<Ca.size(); ++i)
+   {   
+       temp=const_r*std::pow(H_piu(i),n);
+       omega=Ca(i)*SiO2(i)/H_piu(i);
+       omega/=K_sol;
+       rd(i)=temp*(1-omega);
+    }
+
 }
 
 //one_step_reaction
-void one_step_transport_reaction(Eigen::VectorXd& phi1, Eigen::VectorXd& phi2, Eigen::VectorXd& phi3, Eigen::VectorXd& phi4, Eigen::VectorXd& phi5, const Eigen::VectorXd rd, const auto M_lu, Eigen::MatrixXd rhs)
+void one_step_transport_reaction(Eigen::VectorXd& phi1, Eigen::VectorXd& phi2, Eigen::VectorXd& phi3, Eigen::VectorXd& phi4, Eigen::VectorXd& phi5, const Eigen::VectorXd rd, const auto M_lu, const Eigen::MatrixXd rhs)
 {
-  transport_and_reaction(&phi1,M_lu,rhs,rd);
-  transport_and_reaction(&phi2,M_lu,rhs,Eigen::Vector::Zeros(phi2.size());//no reaction
-  transport_and_reaction(&phi3,M_lu,rhs,Eigen::Vector::Zeros(phi3.size());//no reaction
-  transport_and_reaction(&phi4,M_lu,rhs,-rd);
-  transport_and_reaction(&phi5,M_lu,rhs,rd);
+  transport_and_reaction(phi1,M_lu,rhs,rd);
+  transport_and_reaction(phi2,M_lu,rhs,Eigen::Vector::Zeros(phi2.size());//no reaction
+  transport_and_reaction(phi3,M_lu,rhs,Eigen::Vector::Zeros(phi3.size());//no reaction
+  transport_and_reaction(phi4,M_lu,rhs,-rd);
+  transport_and_reaction(phi5,M_lu,rhs,rd);
 }
 
 //Trasporto e reazione

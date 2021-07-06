@@ -8,6 +8,15 @@
 #include <string>
 #include "functions.hpp"
 
+//Dati
+Data_Reaction data_reaction("data.pot");
+auto [Ca_0, H_piu_0, HCO3_meno_0, CO2_0, CaSiO3_0, SiO2_0, A, Rate_const, E, R, Temperature, K_eq, K_sol, n, L, Nx, T, Nt, phi]=data_reaction;
+std::string bc("In");
+double C_in,C_out=0.0;
+std::Eigen::VectorXd::Ones(Nx) vel;
+double h=static_cast<double>(1/Nx);
+
+//Definizione variabili
 Eigen::MatrixXd::Zeros(Nx,Nt) Ca;
 Eigen::MatrixXd::Zeros(Nx,Nt) H_piu;
 Eigen::MatrixXd::Zeros(Nx,Nt) HCO3_meno;
@@ -22,25 +31,18 @@ Eigen::VectorXd::Zeros(Nx) phi4;
 Eigen::VectorXd::Zeros(Nx) phi5;
 
 
-//Dati
-Dati_trans_react dati_transport_reaction("data.pot");
-auto [Ca_0, H_piu_0, HCO3_meno_0, CO2_0, CaSiO3_0, SiO2_0, Nx, area, rate_const, E, R, temperature, const_r, K_eq, n, phi]=dati_transport_reaction;
-std::string bc("In");
-double C_in,C_out=0.0;
-std::Eigen::VectorXd::Ones(Nx) vel;
-double h=static_cast<double>(1/Nx);
 
 //Set the initial condition
-set_initial_cond(&Ca.col(0),&H_piu.col(0),&HCO3_meno.col(0),&CO2.col(0),&CaSiO3.col(0),&SiO2.col(0),Ca_0,H_piu_0,HCO3_meno_0.,CO2_0,CaSiO3_0,SiO2_0,h);
+set_initial_cond(Ca,H_piu,HCO3_meno,CO2,CaSiO3,SiO2,Ca_0,H_piu_0,HCO3_meno_0.,CO2_0,CaSiO3_0,SiO2_0,h);
 
 //Setting for Transport and Reaction Equation
 Eigen::MatrixXd M(Nx,Nx);
 Eigen::VectorXd rhs(Nx);
-assemble_transport(&M,&rhs,vel,phi,h);
+assemble_transport(M,rhs,vel,phi,h,Nx);
 const auto M_lu=M.fullPivLu();
 
 //Constante per reazione
-const double const_r= area*rate_const*(std::exp(-E/(R*temperature)));
+const double const_r= A*Rate_const*(std::exp(-E/(R*Temperature)));
 
 //Termine di reazione
 Eigen::VectorXd::Zeros(Nx) rd;
@@ -48,15 +50,15 @@ Eigen::VectorXd::Zeros(Nx) rd;
 
 //Loop Temporale
 
-for(unsigned int step=1; step<Nt; ++step)
+for(unsigned int step=1; step<T; ++step)
 { 
-  compute_phi(&phi1,&phi2,&phi3,&phi4,&phi5,Ca.col(step-1),H_piu.col(step-1),HCO3_meno.col(step-1),CO2.col(step-1),CaSiO3.col(step-1),SiO2.col(step-1)); //Calcolo le phi
+  compute_phi(phi1,phi2,phi3,phi4,phi5,Ca.col(step-1),H_piu.col(step-1),HCO3_meno.col(step-1),CO2.col(step-1),CaSiO3.col(step-1),SiO2.col(step-1)); //Calcolo le phi
   
-  compute_rd(&rd,Ca.col(step-1),H_piu.col(step-1),SiO2.col(step-1),const_r,K_eq,n);//Calcolo i termini di reazione
+  compute_rd(rd,Ca.col(step-1),H_piu.col(step-1),SiO2.col(step-1),const_r,K_sol,n);//Calcolo i termini di reazione
   
-  one_step_transport_reaction(&phi1,&phi2,&phi3,&phi4,&phi5,rd,M_lu,rhs); //Calcolo un passo della Reazione
+  one_step_transport_reaction(phi1,phi2,phi3,phi4,phi5,rd,M_lu,rhs); //Calcolo un passo della Reazione
   
-  compute_concentration(&Ca,&H_piu,&HCO3,&CO2,&CaSiO3,&SiO2,phi1,phi2,phi3,phi4,phi5,step,K_eq); //Calcolo le Concentrazioni effettive
+  compute_concentration(Ca,H_piu,HCO3,CO2,CaSiO3,SiO2,phi1,phi2,phi3,phi4,phi5,step,K_eq); //Calcolo le Concentrazioni effettive
 }
 
 

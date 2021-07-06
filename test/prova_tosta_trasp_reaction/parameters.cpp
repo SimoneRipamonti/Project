@@ -51,17 +51,17 @@ Data_Reaction::Data_Reaction(const std::string &filename)
     GetPot file(filename.c_str());
 
     const std::string stringa1=file("Reaction/Ca_0","1.0+0.0*x");
-    Ca0.set_value(stringa1);
+    Ca_0.set_value(stringa1);
     const std::string stringa2=file("Reaction/H_piu_0","1.0+0.0*x");
-    H_piu.set_value(stringa2);
+    H_piu_0.set_value(stringa2);
     const std::string stringa3=file("Reaction/HCO3_meno_0","1.0+0.0*x");
-    Ca0.set_value(stringa3);
+    HCO3_meno_0.set_value(stringa3);
     const std::string stringa4=file("Reaction/CO2_0","1.0+0.0*x");
-    Ca0.set_value(stringa4);
+    CO2_0.set_value(stringa4);
     const std::string stringa5=file("Reaction/CaSiO3_0","1.0+0.0*x");
-    Ca0.set_value(stringa5);
-    const std::string stringa6=file("Reaction/SiO2_0","1.0+0.0*x");
-    Ca0.set_value(stringa6);
+    CaSiO3_0.set_value(stringa5);
+    //const std::string stringa6=file("Reaction/SiO2_0","1.0+0.0*x");
+    //Ca0.set_value(stringa6);
 
     A=file("Reaction/A",1.);
     Rate_const=file("Reaction/Rate_const",1.);

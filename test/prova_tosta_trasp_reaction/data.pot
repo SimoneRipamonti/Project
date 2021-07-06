@@ -62,7 +62,7 @@
 
 [Discretization]
     #Cell number
-    Nx=100
+    Nx=10
 
     [../]
 
@@ -71,7 +71,7 @@
     T=1
     
     #Time step
-    Nt=100
+    Nt=10
     
     [../]
 

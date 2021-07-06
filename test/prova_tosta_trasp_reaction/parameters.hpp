@@ -53,9 +53,9 @@ public:
     muparser_fun Ca_0;
     muparser_fun H_piu_0;
     muparser_fun HCO3_meno_0;
-    muparser_fun CO2_0
+    muparser_fun CO2_0;
     muparser_fun CaSiO3_0;
-    muparser_fun SiO2_0;
+    //muparser_fun SiO2_0;
     double A;
     double Rate_const;
     double E;
