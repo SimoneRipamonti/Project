@@ -101,7 +101,7 @@ void Transport_system_esplicit(Eigen::MatrixXd &solution,Eigen::VectorXd &vel,Da
     }
    
 }
-
+*/
 
 
 //Implicit transport upwind and esplicit reaction
@@ -162,6 +162,6 @@ void Transport_system_implicit(Eigen::MatrixXd &Ca,Eigen::MatrixXd &CaSiO3, Eige
         CaSiO3.col(i)=CaSiO3.col(i-1)-dt*React.get_rhs();
     }
 }
-*/
+
 
 
