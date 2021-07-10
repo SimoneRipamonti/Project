@@ -24,6 +24,7 @@ void assemble_transport(Eigen::MatrixXd& M, Eigen::MatrixXd& rhs, Eigen::VectorX
 {
    Matrix_C C(Nx,Nx);
    C.assemble_matrix(phi,h);
+
    
    Matrix_F_piu F_p(Nx,Nx);
    

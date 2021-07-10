@@ -23,10 +23,22 @@ auto [Ca_0, H_piu_0, HCO3_meno_0, CO2_0, CaSiO3_0, A, Rate_const, E, R, Temperat
 //double C_in,C_out=0.0;
 Eigen::VectorXd vel{Eigen::VectorXd::Zero(Nx+1)};
 double h=static_cast<double>(L/Nx);
-double dt=static_cast<double>(T/dt);
+double dt=static_cast<double>(T/Nt);
 
 
 
+/*std::cout<<"kD1="<<Rate_const<<std::endl;
+std::cout<<"Ea="<<E<<std::endl;
+std::cout<<"R="<<R<<std::endl;
+std::cout<<"Temperature="<<Temperature<<std::endl;
+std::cout<<"K1="<<K_eq<<std::endl;
+std::cout<<"Ksp1="<<K_sol<<std::endl;
+std::cout<<"n="<<n<<std::endl;
+std::cout<<"Nx="<<Nx<<std::endl;
+std::cout<<"Nt="<<Nt<<std::endl;
+std::cout<<"L="<<L<<std::endl;
+std::cout<<"T="<<T<<std::endl;
+*/
 //Definizione variabili
 Eigen::MatrixXd Ca{Eigen::MatrixXd::Zero(Nx,Nt)};
 Eigen::MatrixXd H_piu{Eigen::MatrixXd::Zero(Nx,Nt)};
@@ -54,7 +66,7 @@ Eigen::MatrixXd M(Nx,Nx);
 Eigen::MatrixXd rhs(Nx,Nx);
 assemble_transport(M,rhs,vel,phi,h,Nx,dt);
 //const Eigen::MatrixXd M_lu{M.fullPivLu()};
-/*
+
 //Constante per reazione
 const double const_r= A*Rate_const*(std::exp(-E/(R*Temperature)));
 
@@ -63,6 +75,9 @@ Eigen::VectorXd rd{Eigen::VectorXd::Zero(Nx)};
 ////////
 
 //Loop Temporale
+
+
+
 
 for(unsigned int i=1; i<Nt; i++)
 { 
@@ -78,6 +93,14 @@ for(unsigned int i=1; i<Nt; i++)
 
 Transport_output_results_fixed_time(Ca,Nx,L,Nt);
 
-Transport_output_results_fixed_space(Ca,Nx,T,Nt);*/
+Transport_output_results_fixed_space(Ca,Nx,T,Nt);
+
+Transport_output_results_fixed_space2(CaSiO3,Nx,T,Nt);
+
+Transport_output_results_fixed_space3(HCO3_meno,Nx,T,Nt);
+
+Transport_output_results_fixed_space4(CO2,Nx,T,Nt);
+
+Transport_output_results_fixed_space5(H_piu,Nx,T,Nt);
 
 }
