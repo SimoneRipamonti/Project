@@ -106,16 +106,20 @@ for(unsigned int i=1; i<Nt; i++)
 }
 
 
-Transport_output_results_fixed_time(Ca,Nx,L,Nt);
+output_results_fixed_time(Ca,Nx,L,Nt);
 
-Transport_output_results_fixed_space(Ca,Nx,T,Nt);
+output_results_fixed_space("Ca_fixed_space.csv",Ca,Nx,T,Nt);
 
-Transport_output_results_fixed_space2(CaSiO3,Nx,T,Nt);
+output_results_fixed_space("CaSiO3_fixed_space.csv",CaSiO3,Nx,T,Nt);
 
-Transport_output_results_fixed_space3(HCO3_meno,Nx,T,Nt);
+output_results_fixed_space("HCO3_meno_fixed_space.csv",HCO3_meno,Nx,T,Nt);
 
-Transport_output_results_fixed_space4(CO2,Nx,T,Nt);
+output_results_fixed_space("CO2_fixed_space.csv",CO2,Nx,T,Nt);
 
-Transport_output_results_fixed_space5(H_piu,Nx,T,Nt);
+output_results_fixed_space("H_piu_fixed_space.csv",H_piu,Nx,T,Nt);
+
+output_results_fixed_space("SiO2_fixed_space.csv",H_piu,Nx,T,Nt);
+
+output_all_reagents(Ca,H_piu,HCO3_meno,CO2,CaSiO3,SiO2,0,T,Nt);
 
 }

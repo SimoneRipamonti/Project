@@ -1,5 +1,7 @@
 #!/bin/bash
 
+#!/usr/bin/gnuplot -persist
+set title "Walt pedometer" font ",14" textcolor rgbcolor "royalblue"
 
 gnuplot -p -e 'plot "/home/simoripa96/Scrivania/my_project/src/Ca_fixed_space.csv" using 1:2 with linespoints,
                     "/home/simoripa96/Scrivania/my_project/src/Ca_fixed_space.csv" using 1:11 with linespoints,
