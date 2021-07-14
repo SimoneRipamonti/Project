@@ -20,8 +20,8 @@ int main(){
 //Parte su Darcy
 /*Data_Darcy data_d("data.pot");
 
-Eigen::MatrixXd M;
-Eigen::VectorXd rhs;
+Eigen::MatrixXd M(data.Nx+data.Nx+1,data.Nx+data.Nx+1);
+Eigen::VectorXd rhs(data.Nx+data.Nx+1);
 set_Darcy_system(data_d,M,rhs);
 Eigen::VectorXd sol_darcy=M.fullPivLu().solve(rhs);
 
