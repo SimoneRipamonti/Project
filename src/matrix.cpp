@@ -217,7 +217,7 @@ void Matrix_C::assemble_matrix(const muparser_fun por_,double h_)
 Matrix_F_piu::Matrix_F_piu(unsigned int row_,unsigned int col_):AbstractMatrix(row_,col_) {}
 
 //set_data gives to the matrix object the physical and geometrical parameters which it needs to assemble the matrix
-void Matrix_F_piu::set_data(const std::string &bc_, double c_bc_, Eigen::VectorXd vel_)
+void Matrix_F_piu::set_data(const std::string &bc_, double c_bc_, const Eigen::VectorXd& vel_)
 {
     bc_cond=bc_;
     velocity=vel_;
@@ -248,7 +248,7 @@ void Matrix_F_piu::set_rhs() {
  
 }
 
-void Matrix_F_piu::assemble_matrix(const std::string &bc_, double c_bc_, Eigen::VectorXd vel_)
+void Matrix_F_piu::assemble_matrix(const std::string &bc_, double c_bc_, const Eigen::VectorXd& vel_)
 {
     set_data(bc_,c_bc_,vel_);
     define_matrix();

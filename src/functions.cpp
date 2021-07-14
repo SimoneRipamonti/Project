@@ -20,7 +20,7 @@ void set_initial_cond(Eigen::MatrixXd& Ca, Eigen::MatrixXd& H_piu, Eigen::Matrix
 }
 
 
-void assemble_transport(Eigen::MatrixXd& M, Eigen::MatrixXd& rhs, Eigen::VectorXd vel, muparser_fun phi, double h, unsigned int Nx, double dt)
+void assemble_transport(Eigen::MatrixXd& M, Eigen::MatrixXd& rhs, const Eigen::VectorXd& vel, muparser_fun phi, double h, unsigned int Nx, double dt)
 {
    Matrix_C C(Nx,Nx);
    C.assemble_matrix(phi,h);
@@ -39,7 +39,7 @@ void assemble_transport(Eigen::MatrixXd& M, Eigen::MatrixXd& rhs, Eigen::VectorX
 }
 
 //calcolo phi
-void compute_phi(Eigen::VectorXd& phi1, Eigen::VectorXd& phi2, Eigen::VectorXd& phi3, Eigen::VectorXd& phi4, Eigen::VectorXd& phi5, Eigen::VectorXd Ca, Eigen::VectorXd H_piu, Eigen::VectorXd HCO3_meno,  Eigen::VectorXd CO2, Eigen::VectorXd CaSiO3, Eigen::VectorXd SiO2)
+void compute_phi(Eigen::VectorXd& phi1, Eigen::VectorXd& phi2, Eigen::VectorXd& phi3, Eigen::VectorXd& phi4, Eigen::VectorXd& phi5, const Eigen::VectorXd& Ca, const Eigen::VectorXd& H_piu, const Eigen::VectorXd& HCO3_meno, const Eigen::VectorXd& CO2, const Eigen::VectorXd& CaSiO3, const Eigen::VectorXd& SiO2)
 {
   phi1=Ca;
   phi2=H_piu-HCO3_meno;
@@ -49,7 +49,7 @@ void compute_phi(Eigen::VectorXd& phi1, Eigen::VectorXd& phi2, Eigen::VectorXd& 
 }
 
 //calcolo rd
-void compute_rd(Eigen::VectorXd& rd, const Eigen::VectorXd Ca, const Eigen::VectorXd H_piu, const Eigen::VectorXd SiO2, double const_r, double K_sol, double n)
+void compute_rd(Eigen::VectorXd& rd, const Eigen::VectorXd& Ca, const Eigen::VectorXd& H_piu, const Eigen::VectorXd& SiO2, double const_r, double K_sol, double n)
 {
   /*const Eigen::VectorXd temp=const_r*H_piu.array().pow(n);
   const Eigen::VectorXd omega=(Ca.cwiseProduct(SiO2)).cwiseQuotient(H_piu)/K_eq;
@@ -68,7 +68,7 @@ void compute_rd(Eigen::VectorXd& rd, const Eigen::VectorXd Ca, const Eigen::Vect
 }
 
 //one_step_reaction
-void one_step_transport_reaction(Eigen::VectorXd& phi1, Eigen::VectorXd& phi2, Eigen::VectorXd& phi3, Eigen::VectorXd& phi4, Eigen::VectorXd& phi5, const Eigen::VectorXd rd, Eigen::MatrixXd& M, Eigen::MatrixXd rhs)
+void one_step_transport_reaction(Eigen::VectorXd& phi1, Eigen::VectorXd& phi2, Eigen::VectorXd& phi3, Eigen::VectorXd& phi4, Eigen::VectorXd& phi5, const Eigen::VectorXd& rd, const Eigen::MatrixXd& M, const Eigen::MatrixXd& rhs)
 {
   transport_and_reaction(phi1,M,rhs,rd);
   transport_and_reaction(phi2,M,rhs,Eigen::VectorXd::Zero(phi2.size()));//no reaction
@@ -78,7 +78,7 @@ void one_step_transport_reaction(Eigen::VectorXd& phi1, Eigen::VectorXd& phi2, E
 }
 
 //Trasporto e reazione
-void transport_and_reaction(Eigen::VectorXd& phi, Eigen::MatrixXd& M, const Eigen::MatrixXd rhs, const Eigen::VectorXd rd)
+void transport_and_reaction(Eigen::VectorXd& phi, const Eigen::MatrixXd& M, const Eigen::MatrixXd& rhs, const Eigen::VectorXd& rd)
 { 
   const auto M_lu=M.fullPivLu();
   const Eigen::VectorXd temp=rhs*phi+rd;
@@ -87,7 +87,7 @@ void transport_and_reaction(Eigen::VectorXd& phi, Eigen::MatrixXd& M, const Eige
 
 
 //Risoluzione sistema non lineare
-void compute_concentration(Eigen::MatrixXd& Ca, Eigen::MatrixXd& H_piu, Eigen::MatrixXd& HCO3_meno, Eigen::MatrixXd& CO2, Eigen::MatrixXd& CaSiO3, Eigen::MatrixXd& SiO2, const Eigen::VectorXd phi1, const Eigen::VectorXd phi2, const Eigen::VectorXd phi3, const Eigen::VectorXd phi4, const Eigen::VectorXd phi5, unsigned int step,double K_eq)
+void compute_concentration(Eigen::MatrixXd& Ca, Eigen::MatrixXd& H_piu, Eigen::MatrixXd& HCO3_meno, Eigen::MatrixXd& CO2, Eigen::MatrixXd& CaSiO3, Eigen::MatrixXd& SiO2, const Eigen::VectorXd& phi1, const Eigen::VectorXd& phi2, const Eigen::VectorXd& phi3, const Eigen::VectorXd& phi4, const Eigen::VectorXd& phi5, unsigned int step,double K_eq)
 {
 
   //RISOLVO IL SISTEMA NON LINEARE CON NEWTON
@@ -133,7 +133,7 @@ void compute_concentration(Eigen::MatrixXd& Ca, Eigen::MatrixXd& H_piu, Eigen::M
 }
   
 
-void compute_rhs(Eigen::VectorXd& rhs,const Eigen::VectorXd old_it, double phi1, double phi2, double phi3, double phi4, double phi5, double K_eq)
+void compute_rhs(Eigen::VectorXd& rhs,const Eigen::VectorXd& old_it, double phi1, double phi2, double phi3, double phi4, double phi5, double K_eq)
 {
   
   double Ca(old_it(0)), H_piu(old_it(1)), HCO3_meno(old_it(2)), CO2(old_it(3)), CaSiO3(old_it(4)), SiO2(old_it(5));
@@ -142,7 +142,7 @@ void compute_rhs(Eigen::VectorXd& rhs,const Eigen::VectorXd old_it, double phi1,
 }
 
 
-void compute_Jacob(Eigen::MatrixXd& J,const Eigen::VectorXd old_it)
+void compute_Jacob(Eigen::MatrixXd& J,const Eigen::VectorXd& old_it)
 {
      double HCO3_meno(old_it(2)),H_piu(old_it(1));
      J(5,1)=HCO3_meno;
