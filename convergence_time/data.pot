@@ -62,7 +62,7 @@
 
 [Discretization]
     #Cell number
-    Nx=10000
+    Nx=1
 
     [../]
 

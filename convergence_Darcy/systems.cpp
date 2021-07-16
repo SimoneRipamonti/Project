@@ -1,18 +1,24 @@
 #include "systems.hpp"
 #include <iostream>
 #include <vector>
+#include <utility>
 
-void set_Darcy_system(const Data_Darcy &data, Eigen::MatrixXd &Matrix,Eigen::VectorXd &rhs)
+//BISOGNEREBBE CERCARE COME CONCATENARE MATRICI SPARSE, MA NON È COSÌ SEMPLICE
+
+//void set_Darcy_system(const Data_Darcy &data, Eigen::MatrixXd &Matrix,Eigen::VectorXd &rhs, double h)
+void set_Darcy_system(const Data_Darcy &data, Eigen::SparseMatrix<double> &Matrix,Eigen::VectorXd &rhs, double h)
 {
 //All the data that are needed to define the Darcy System are extracted from the data structure
     auto &[L, K, phi, mu, Q_in, Q_out, p_in, p_out, f, Nx, BC_in, BC_out]=data;
+   
+ 
 
 //Computation of the spatial step
-    double h =static_cast<double>(L)/Nx;
+    
 
 //Assembling of the Mass Matrix of the first equation with its Boundary Condition
     Matrix_A A(Nx+1,Nx+1);
-    A.assemble_matrix(K,h,mu,BC_in,BC_out,p_in,Q_out);
+    A.assemble_matrix(K,h,mu,BC_in,BC_out,p_in,p_out,Q_in,Q_out);
 std::cout<<"A definito"<<std::endl;
 //Assembling of the B Matrix for the first equation of the system and assembling of the -B^T for the second equation of the system
 //For B we have to separate all the steps (we can't use the assemble_matrix() function since for -B^T the modification due to the BC condition have not to be set)
@@ -20,6 +26,7 @@ std::cout<<"A definito"<<std::endl;
     B.set_data(BC_in,BC_out,f,h);
     B.define_matrix();
     Eigen::MatrixXd B_T{B.get_matrix().transpose()};
+    //Eigen::SparseMatrix<double> B_T{B.get_matrix().transpose()};
     B.set_BC();
     B.set_rhs();
 
@@ -31,21 +38,26 @@ std::cout<<"B definito"<<std::endl;
     
 //Definition of the first row of M (A,B), we call it C
     Eigen::MatrixXd C(A.get_matrix().rows(),A.get_matrix().cols()+B.get_matrix().cols());
+    //Eigen::SparseMatrix<double> C(A.get_matrix().rows(),A.get_matrix().cols()+B.get_matrix().cols());
     C<<A.get_matrix(),B.get_matrix();
 
 std::cout<<"C definito"<<std::endl;
 
 //Definition of the second row of M (-B^T,0), we call it E
     //Eigen::MatrixXd D= Eigen::MatrixXd::Zero(B_T.rows(),B.get_matrix().cols());
-    Eigen::MatrixXd E(B_T.rows(),B_T.cols()+B_T.rows());
-    E<<-B_T,Eigen::MatrixXd::Zero(B_T.rows(),B.get_matrix().cols());
+   Eigen::MatrixXd E(B_T.rows(),B_T.cols()+B_T.rows());
+   //Eigen::SparseMatrix<double> E(B_T.rows(),B_T.cols()+B_T.rows());
+   E<<-B_T,Eigen::MatrixXd::Zero(B_T.rows(),B.get_matrix().cols());
 
 std::cout<<"E definito"<<std::endl;
 
 //Assembling of the matrix M
-    //Eigen::MatrixXd M(C.rows()+E.rows(),C.cols());
-    Matrix<<C,E;
+    Eigen::MatrixXd M(C.rows()+E.rows(),C.cols());
+   
+    M<<std::move(C),std::move(E);
 
+    Matrix=M.sparseView();
+    //Matrix<<C,E;
 std::cout<<"M definito"<<std::endl;
 
 //Definition of the rhs of the Darcy System. The rhs of the first equation and the one of the second are glued to build the all rhs.

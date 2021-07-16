@@ -6,7 +6,7 @@
 #include "parameters.hpp"
 
 //Definition of the Darcy System
-void set_Darcy_system(const Data_Darcy &data, Eigen::MatrixXd &Matrix,Eigen::VectorXd &rhs);
+void set_Darcy_system(Data_Darcy &data, Eigen::MatrixXd &Matrix,Eigen::VectorXd &rhs);
 
 /*//Definition of the Transport system solved with an explicit scheme
 void Transport_system_esplicit(Eigen::MatrixXd &solution,Eigen::VectorXd &velocity,Data_Transport &data);
