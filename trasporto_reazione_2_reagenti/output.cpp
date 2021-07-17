@@ -18,10 +18,13 @@ void Darcy_output_results(Eigen::VectorXd &sol,unsigned int Nx,double L) //The s
 
     file1.close();
 
+    double h =static_cast<double>(L)/Nx;
+
     // Pressure results to CSV file.
-    std::ofstream file2("pressure.csv", std::ofstream::out);
-    file2 << "space, pressure" << std::endl;
-    Eigen::VectorXd x2=Eigen::VectorXd::LinSpaced(Nx,0.05,L-0.05);//Definition of the space vecotr (Pressure values are stored in the middle of the cell)
+    std::string n{std::to_string(Nx)};
+    std::ofstream file2("pressure"+n+".csv", std::ofstream::out);
+    file2 << "space, "<<"Nx="+n<< std::endl;
+    Eigen::VectorXd x2=Eigen::VectorXd::LinSpaced(Nx,h,L-h);//Definition of the space vecotr (Pressure values are stored in the middle of the cell)
     Eigen::VectorXd pressure=sol.tail(Nx);//Definition of the pressure vector solution
 
     for (unsigned int i = 0; i<pressure.size(); ++i) //Loop to save the pressure values with respect to the spatial position on the CSV file
@@ -29,6 +32,7 @@ void Darcy_output_results(Eigen::VectorXd &sol,unsigned int Nx,double L) //The s
 
     file2.close();
 }
+
 
 
 void output_results_fixed_time(Eigen::MatrixXd &value1, unsigned int Nx, double L,unsigned int Nt)
@@ -111,6 +115,139 @@ void output_all_reagents(const Eigen::MatrixXd &Ca,const Eigen::MatrixXd &H_piu,
 }
 
 
+void pressure_exact_result(Eigen::VectorXd &value1, unsigned int Nx, double L)
+{
+    //Concentration value results to CSV file.
+    std::ofstream file1("exact_pressure.csv", std::ofstream::out);
+    file1<< "space, exact " << std::endl;
+    
+    double h =static_cast<double>(L)/Nx;
+    const Eigen::VectorXd x(Eigen::VectorXd::LinSpaced(Nx,h/2,L-h/2));//Definition of the space vector (Concnetration values are stored in the middle of the cell)
+    
+    for (unsigned int i = 0; i<Nx; ++i) //Loop to save the matrix by column in the CSV file
+    {
+        file1<< x[i] <<", ";
+     
+   
+        file1<<value1(i)<<", ";
+            
+
+        file1<<std::endl;
+        
+    }
+    file1.close();
+
+}
+
+
+void velocity_exact_result(Eigen::VectorXd &value1, unsigned int Nx, double L)
+{
+    //Concentration value results to CSV file.
+    std::ofstream file1("exact_velocity.csv", std::ofstream::out);
+    file1<< "space, exact " << std::endl;
+    
+    //double h =static_cast<double>(L)/Nx;
+    const Eigen::VectorXd x(Eigen::VectorXd::LinSpaced(Nx+1,0,L));//Definition of the space vector (Concnetration values are stored in the middle of the cell)
+    
+    for (unsigned int i = 0; i<Nx+1; ++i) //Loop to save the matrix by column in the CSV file
+    {
+        file1<< x[i] <<", ";
+     
+   
+        file1<<value1(i)<<", ";
+            
+
+        file1<<std::endl;
+        
+    }
+    file1.close();
+
+}
+
+
+void output_error(Eigen::VectorXd &value1, Eigen::VectorXi &Nx)
+{
+    //Concentration value results to CSV file.
+    std::ofstream file1("error.csv", std::ofstream::out);
+    file1<< "Nx, Error, order1 " << std::endl;
+    
+    
+    //const Eigen::VectorXd x(Eigen::VectorXd::LinSpaced(Nx(,h/2,L-h/2));//Definition of the space vector (Concnetration values are stored in the middle of the cell)
+    
+    for (unsigned int i = 0; i<value1.size(); ++i) //Loop to save the matrix by column in the CSV file
+    {
+        file1<< Nx(i) <<", ";
+     
+   
+        file1<<value1(i)<<", ";
+         
+        file1<<1./Nx(i)<<", ";
+            
+
+        file1<<std::endl;
+        
+    }
+    file1.close();
+
+}
+
+
+void output_results_fixed_time_2_reagents(Eigen::MatrixXd &value1, Eigen::MatrixXd &value2, unsigned int Nx, double L,unsigned int Nt)
+{
+    //Concentration value results to CSV file.
+    std::ofstream file1("Ca_fixed_time.csv", std::ofstream::out);
+    std::ofstream file2("CaSiO3_fixed_time.csv", std::ofstream::out);
+    file1<< "#space, t0,...,t_Nt-1" << std::endl;
+    file2<< "#space, t0,...,t_Nt-1" << std::endl;
+    
+    double h =static_cast<double>(L)/Nx;
+    const Eigen::VectorXd x(Eigen::VectorXd::LinSpaced(Nx,h/2,L-h/2));//Definition of the space vector (Concnetration values are stored in the middle of the cell)
+    
+    for (unsigned int i = 0; i<Nx; ++i) //Loop to save the matrix by column in the CSV file
+    {
+        file1<< x[i] <<", ";
+        file2<< x[i] <<", ";
+        
+        for (unsigned int j=0; j<Nt; ++j)
+            {file1<<value1(i,j)<<", ";
+             file2<<value2(i,j)<<", ";  }
+
+        file1<<std::endl;
+        file2<<std::endl;
+    }
+    file1.close();
+    file2.close();
+}
+
+
+void output_results_fixed_space_2_reagents(Eigen::MatrixXd &value1, Eigen::MatrixXd &value2,unsigned int Nx, double T,unsigned int Nt)
+{
+    //Concentration value results to CSV file.
+    std::ofstream file1("Ca_fixed_space.csv", std::ofstream::out);
+    std::ofstream file2("CaSiO3_fixed_space.csv", std::ofstream::out);
+    file1<< "#time, x0,...,x_Nx-1" << std::endl;
+    file2<< "#time, x0,...,x_Nx-1" << std::endl;
+    
+    double dt=static_cast<double>(T)/Nt;
+    const Eigen::VectorXd t(Eigen::VectorXd::LinSpaced(Nt,0.0,T-dt));//Definition of the space vector (Concnetration values are stored in the middle of the cell)
+    
+    for (unsigned int i = 0; i<Nt; ++i) //Loop to save the matrix by column in the CSV file
+    {
+        file1<< t[i] <<", ";
+        file2<< t[i]<<", ";
+  
+        for (unsigned int j=0; j<Nx; ++j)
+            {file1<<value1(j,i)<<", ";
+             file2<<value2(j,i)<<", ";
+            }
+        file1<<std::endl;
+        file2<<std::endl;
+    }
+    file1.close();
+    file2.close();
+}
+
+
 
 
 
@@ -141,9 +278,8 @@ void Transport_output_results_fixed_space(Eigen::MatrixXd &value1, unsigned int 
 
 }
 
+
 */
-
-
 
 
 

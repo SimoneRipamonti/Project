@@ -17,19 +17,17 @@
   #phi0=0.0*x
   [../]
 
-[BC]
+[BC_vel]
 
    #In-flow
-   Q_in=0.0
+   Q_in=0.
    
    #Out-flow
    Q_out=1.0e-1
-   #Q_out=0.0
    #Q_out=2.1e-1 #for testing code with different permeability
 
    #Pression on the left
    p_in=1.0e6
-   #p_in=0.0
    
    #Pression on the righ
    p_out=0.0
@@ -59,10 +57,7 @@
 [Source]
     #External Source
     #f=1.0e-1*(x>0.4)*(x<0.6) #da cambiare
-    #f=1.0e-1 #for testing code with different permeability
-    #f=0.0
-    f=sin(4*_pi*x)
-    #f=4*_pi*_pi*10^(-7)*sin(2*_pi*x)
+    f=1.0e-1 #for testing code with different permeability
    [../]
 
 [Discretization]
@@ -73,10 +68,10 @@
 
 [Time]
     #Final T
-    T=100000
+    T=1
     
     #Time step
-    Nt=10000
+    Nt=100
     
     [../]
 
@@ -109,32 +104,39 @@
      SiO2_0=1.0+0.0*x
 
      #Reaction_area
-     A=1.38
+     #A=1.38
+     A=1
 
      #Constant_reaction
      #Rate_const=10e{-1.3}
-     Rate_const=0.05011872336
+     #Rate_const=0.05011872336
+     Rate_const=1
      
      #Energy_activation
-     E=47000
-
+     #E=47000
+     E=0
+     
      #R constant
-     R=8.314
+     #R=8.314
+     R=1
    
      #Temperature
-     Temp=373.0
+     #Temp=373.0
+     Temp=1
    
      #K_sol
-     K_sol=10e9
+     #K_sol=10e9
+     K_sol=1e3
+     #K_sol=1
 
      #K_eq
-     K_eq=4.45e-7
+     K_eq=1
 
      #exponent for H_piu
      n=0.0
      
      #Ph
-     ph=-3.0
+     ph=0.0
     
     [../]
 

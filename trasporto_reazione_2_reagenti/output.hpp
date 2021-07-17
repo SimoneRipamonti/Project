@@ -15,6 +15,18 @@ void output_results_fixed_space(const std::string& title, const Eigen::MatrixXd 
 
 void output_all_reagents(const Eigen::MatrixXd &Ca,const Eigen::MatrixXd &H_piu,const Eigen::MatrixXd &CaSiO3,const Eigen::MatrixXd &CO2,const Eigen::MatrixXd &SiO2,const Eigen::MatrixXd &HCO3_meno, unsigned int position, double T, unsigned int Nt); 
 
+void pressure_exact_result(Eigen::VectorXd &value1, unsigned int Nx, double L);
+
+void velocity_exact_result(Eigen::VectorXd &value1, unsigned int Nx, double L);
+
+void output_error(Eigen::VectorXd &value1, Eigen::VectorXi &Nx);
+
+void output_results_fixed_time_2_reagents(Eigen::MatrixXd &value1, Eigen::MatrixXd &value2, unsigned int Nx, double L,unsigned int Nt);
+
+void output_results_fixed_space_2_reagents(Eigen::MatrixXd &value1, Eigen::MatrixXd &value2,unsigned int Nx, double T,unsigned int Nt);
+
+
+
 //void Transport_output_results_fixed_space(Eigen::MatrixXd &value1, unsigned int Nx, double T,unsigned int Nt);
 
 

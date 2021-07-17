@@ -25,10 +25,13 @@ a<<10,20,40,80,160;
 muparser_fun sol_ex;
 sol_ex.set_value("1e7*(1/(_pi*_pi*16)*sin(_pi*4*x)-0.1*x-1/(4*_pi)*x+0.1)");//"1e6*(1.0-x); caso lineare
 //sol_ex.set_value("1e6*(1.0-x)");//"1e6*(1.0-x); caso lineare
+//sol_ex.set_value("sin(_pi*2*x)-2*_pi*x");
+
 
 muparser_fun sol_vel;
-sol_vel.set_value("-1/(4*_pi)*cos(4*_pi*x)+0.1+1/(4*_pi)");
+//sol_vel.set_value("-2*_pi*10^(-7)*cos(2*_pi*x)+2*_pi*10^(-7)");
 //std::cout<<sol_ex(0)<<std::endl;
+sol_vel.set_value("-1/(4*_pi)*cos(4*_pi*x)+0.1+1/(4*_pi)");
 
 
 Eigen::VectorXd sol;

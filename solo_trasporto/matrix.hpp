@@ -127,7 +127,7 @@ class Matrix_F_piu:public AbstractMatrix
 public:
     Matrix_F_piu(unsigned int row, unsigned int col);
 
-    void set_data(const std::string &bc, double c_bc, const Eigen::VectorXd& vel);
+    void set_data(const std::string &bc, double c_bc, const Eigen::VectorXd &vel);
 
     void define_matrix() override;
 
@@ -135,7 +135,7 @@ public:
    
     void set_rhs() override;
 
-    void assemble_matrix(const std::string &bc, double c_bc, const Eigen::VectorXd& vel);
+    void assemble_matrix(const std::string &bc, double c_bc, const Eigen::VectorXd &vel);
     
     ~Matrix_F_piu() {};
 

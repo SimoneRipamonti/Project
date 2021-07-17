@@ -34,11 +34,12 @@ void Darcy_output_results(Eigen::VectorXd &sol,unsigned int Nx,double L) //The s
 }
 
 
+//Per un singolo tracciante
 
-void output_results_fixed_time(Eigen::MatrixXd &value1, unsigned int Nx, double L,unsigned int Nt)
+void output_results_fixed_time(const std::string& title, const Eigen::MatrixXd &value1, unsigned int Nx, double L,unsigned int Nt)
 {
     //Concentration value results to CSV file.
-    std::ofstream file1("Ca_fixed_time.csv", std::ofstream::out);
+    std::ofstream file1( title+"_fixed_time.csv", std::ofstream::out);
  
     file1<< "#space, t0,...,t_Nt-1" << std::endl;
     
@@ -60,11 +61,12 @@ void output_results_fixed_time(Eigen::MatrixXd &value1, unsigned int Nx, double 
 
 }
 
+//Per un singolo tracciante
 
 void output_results_fixed_space(const std::string& title, const Eigen::MatrixXd &value1, unsigned int Nx, double T,unsigned int Nt)
 {
     //Concentration value results to CSV file.
-    std::ofstream file1(title, std::ofstream::out);
+    std::ofstream file1(title+"_fixed_space.csv", std::ofstream::out);
     file1<< "time, x0,...,x_Nx-1" << std::endl;
    
     
@@ -86,6 +88,8 @@ void output_results_fixed_space(const std::string& title, const Eigen::MatrixXd 
 
 }
 
+
+//Per i 6 reagenti 
 void output_all_reagents(const Eigen::MatrixXd &Ca,const Eigen::MatrixXd &H_piu,const Eigen::MatrixXd &CaSiO3,const Eigen::MatrixXd &CO2,const Eigen::MatrixXd &SiO2,const Eigen::MatrixXd &HCO3_meno, unsigned int j, double T, unsigned int Nt)
 {
     //Concentration value results to CSV file.
@@ -114,7 +118,7 @@ void output_all_reagents(const Eigen::MatrixXd &Ca,const Eigen::MatrixXd &H_piu,
 
 }
 
-
+//Per la pressione esatta
 void pressure_exact_result(Eigen::VectorXd &value1, unsigned int Nx, double L)
 {
     //Concentration value results to CSV file.
@@ -139,7 +143,7 @@ void pressure_exact_result(Eigen::VectorXd &value1, unsigned int Nx, double L)
 
 }
 
-
+//Per la velocità esatta
 void velocity_exact_result(Eigen::VectorXd &value1, unsigned int Nx, double L)
 {
     //Concentration value results to CSV file.
@@ -164,7 +168,7 @@ void velocity_exact_result(Eigen::VectorXd &value1, unsigned int Nx, double L)
 
 }
 
-
+//Per l'errore
 void output_error(Eigen::VectorXd &value1, Eigen::VectorXi &Nx)
 {
     //Concentration value results to CSV file.
@@ -191,7 +195,7 @@ void output_error(Eigen::VectorXd &value1, Eigen::VectorXi &Nx)
 
 }
 
-
+//Per Trasporto e reazione 2 reagenti 
 void Transport_output_results_fixed_time(Eigen::MatrixXd &value1, Eigen::MatrixXd &value2, unsigned int Nx, double L,unsigned int Nt)
 {
     //Concentration value results to CSV file.
@@ -219,7 +223,7 @@ void Transport_output_results_fixed_time(Eigen::MatrixXd &value1, Eigen::MatrixX
     file2.close();
 }
 
-
+//Per Trasporto e reazione 2 reagenti 
 void Transport_output_results_fixed_space(Eigen::MatrixXd &value1, Eigen::MatrixXd &value2,unsigned int Nx, double T,unsigned int Nt)
 {
     //Concentration value results to CSV file.
