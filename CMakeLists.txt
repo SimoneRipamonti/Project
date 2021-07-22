@@ -14,9 +14,10 @@ find_package(Eigen3 REQUIRED HINTS $ENV{mkEigenPrefix})
 
 include_directories("${CMAKE_CURRENT_SOURCE_DIR}/externals/gnuplot-iostream" /home/simoripa96/Scrivania/pacs-examples/Examples/include SYSTEM ${EIGEN3_INCLUDE_DIRS})
 
-add_executable(my_exec main.cpp src/matrix.cpp src/muparser_fun.cpp src/output.cpp src/parameters.cpp src/systems.cpp src/data.pot)
+#add_executable(my_exec main.cpp src/matrix.cpp src/muparser_fun.cpp src/output.cpp src/parameters.cpp src/systems.cpp src/data.pot)
+add_executable(my_exec main.cpp src_completo/concentrations.cpp src_completo/matrix.cpp src_completo/parameters.cpp src_completo/muparser_fun.cpp)
 
-target_include_directories(my_exec PUBLIC src)
+target_include_directories(my_exec PUBLIC src_completo)
 
 target_link_libraries(my_exec ${Boost_LIBRARIES} /home/simoripa96/Scrivania/pacs-examples/Examples/lib/libmuparser.so)
 

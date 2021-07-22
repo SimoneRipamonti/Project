@@ -58,7 +58,7 @@ Eigen::MatrixXd rhs(Nx,Nx);
 concentration.assemble_transport(M,rhs,vel);
 //const Eigen::MatrixXd M_lu{M.fullPivLu()};
 
-int method{1};
+int method{3};
 
 
 //Termine di reazione
@@ -73,7 +73,7 @@ for(unsigned int i=1; i<Nt; i++)
   
   concentration.compute_rd(i,rd);//Calcolo i termini di reazione
   
-  concentration.one_step_transport_reaction(phi1,phi2,phi3,phi4,phi5,rd,M,rhs,method); //Calcolo un passo della Reazione
+  concentration.one_step_transport_reaction(phi1,phi2,phi3,phi4,phi5,rd,M,rhs,method,i); //Calcolo un passo della Reazione
   
   concentration.compute_concentration(i,phi1,phi2,phi3,phi4,phi5); //Calcolo le Concentrazioni effettive
 }

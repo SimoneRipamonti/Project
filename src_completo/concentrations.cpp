@@ -96,40 +96,79 @@ void Concentration::compute_rd(unsigned int step, Eigen::VectorXd& rd){
 
 }
 
-void Concentration::one_step_transport_reaction(Eigen::VectorXd& phi1, Eigen::VectorXd& phi2, Eigen::VectorXd& phi3, Eigen::VectorXd& phi4, Eigen::VectorXd& phi5, const Eigen::VectorXd& rd, const Eigen::MatrixXd& M, const Eigen::MatrixXd& rhs, int method){
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+void Concentration::one_step_transport_reaction(Eigen::VectorXd& phi1, Eigen::VectorXd& phi2, Eigen::VectorXd& phi3, Eigen::VectorXd& phi4, Eigen::VectorXd& phi5, Eigen::VectorXd& rd, const Eigen::MatrixXd& M, const Eigen::MatrixXd& rhs, int method, unsigned int step){
 
  switch(method)
-     { case 1:  
-       Euler_Esplicit(phi1,phi2,phi3,phi4,phi5,M,rhs,rd);
+     { case 1: //Euler Esplicit  
+       
+        Euler_Esplicit(phi1,phi2,phi3,phi4,phi5,rd,M,rhs);
        break; 
 
-       /*case "Predictor Corrector":
-       Euler_Esplicit(ph1,phi2,phi3,phi4,phi5,M,rhs,rd); 
+       case 2: //Predictor Corrector
+       {
+        Eigen::VectorXd phi1_{phi1}; //Mi servono perché devo conservare le phi al passo n
+        Eigen::VectorXd phi2_{phi2};
+        Eigen::VectorXd phi3_{phi3};
+        Eigen::VectorXd phi4_{phi4};
+        Eigen::VectorXd phi5_{phi5};
+
+        Euler_Esplicit(phi1_,phi2_,phi3_,phi4_,phi5_,rd,M,rhs); 
+        compute_concentration(step,phi1_,phi2_,phi3_,phi4_,phi5_);
+        compute_rd(step,rd);//calcolo il nuovo rd
        
-       Eigen::VectorXd Ca{Eigen::VectorXd::Zero(Nx)};
-       Eigen::VectorXd H_piu{Eigen::VectorXd::Zero(Nx)};
-       Eigen::VectorXd HCO3_meno{Eigen::VectorXd::Zero(Nx)};
-       Eigen::VectorXd CO2{Eigen::VectorXd::Zero(Nx)};
-       Eigen::VectorXd CaSiO3{Eigen::VectorXd::Zero(Nx)};
-       Eigen::VectorXd SiO2{Eigen::VectorXd::Zero(Nx)};
+        Euler_Esplicit(phi1,phi2,phi3,phi4,phi5,rd,M,rhs);
+       }
+       break;
+      
+       case 3: //Heun
+       {
+        Eigen::VectorXd phi1_{phi1};
+        Eigen::VectorXd phi2_{phi2};
+        Eigen::VectorXd phi3_{phi3};
+        Eigen::VectorXd phi4_{phi4};
+        Eigen::VectorXd phi5_{phi5};
        
-       compute_concentration(Ca,H_piu,HCO3_meno,CO2,CaSiO3,SiO2)
-       compute_phi
-       compute_rd()
-       Euler_Esplicit(....);
-  
-      case "Heun"
-      Euler_Esplicit(ph1,phi2,phi3,phi4,phi5,M,rhs,rd);
-      */
-     }
+        Euler_Esplicit(phi1_,phi2_,phi3_,phi4_,phi5_,rd,M,rhs);
+        compute_concentration(step,phi1_,phi2_,phi3_,phi4_,phi5_);
+
+        Eigen::VectorXd rd_{Eigen::VectorXd::Zero(data_transp.Nx)};
+        compute_rd(step,rd_);
+       
+        rd=0.5*rd+0.5*rd_;//ottengo il nuovo rd complessivo
+
+        Euler_Esplicit(phi1,phi2,phi3,phi4,phi5,rd,M,rhs);
+        }
+       
+       break;
+       }
   
 }
 
 void Concentration::Euler_Esplicit(Eigen::VectorXd& phi1, Eigen::VectorXd& phi2, Eigen::VectorXd& phi3, Eigen::VectorXd& phi4, Eigen::VectorXd& phi5, const Eigen::VectorXd& rd, const Eigen::MatrixXd& M, const Eigen::MatrixXd& rhs)
-{
+{ 
   transport_and_reaction(phi1,M,rhs,rd);
   transport_and_reaction(phi2,M,rhs,Eigen::VectorXd::Zero(phi2.size()));//no reaction
-  transport_and_reaction(phi3,M,rhs,Eigen::VectorXd::Zero(phi3.size()));//no reaction
+  transport_and_reaction(phi3,M,rhs,Eigen::VectorXd::Zero(phi2.size()));//no reaction
   transport_and_reaction(phi4,M,rhs,-rd);
   transport_and_reaction(phi5,M,rhs,rd);
 }
@@ -142,6 +181,25 @@ void Concentration::transport_and_reaction(Eigen::VectorXd& phi, const Eigen::Ma
      const Eigen::VectorXd temp=rhs*phi+rd;
      phi=M_lu.solve(temp);
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 void Concentration::compute_concentration(unsigned int step, const Eigen::VectorXd& phi1, const Eigen::VectorXd& phi2, const Eigen::VectorXd& phi3, const Eigen::VectorXd& phi4, const Eigen::VectorXd& phi5){
