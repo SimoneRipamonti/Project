@@ -40,7 +40,7 @@ void output_results_fixed_time(Eigen::MatrixXd &value1, unsigned int Nx, double 
     //Concentration value results to CSV file.
     std::ofstream file1("Ca_fixed_time.csv", std::ofstream::out);
  
-    file1<< "#space, t0,...,t_Nt-1" << std::endl;
+    file1<< "space, t0,...,t_Nt-1" << std::endl;
     
     double h =static_cast<double>(L)/Nx;
     const Eigen::VectorXd x(Eigen::VectorXd::LinSpaced(Nx,h/2,L-h/2));//Definition of the space vector (Concnetration values are stored in the middle of the cell)
@@ -197,8 +197,8 @@ void Transport_output_results_fixed_time(Eigen::MatrixXd &value1, Eigen::MatrixX
     //Concentration value results to CSV file.
     std::ofstream file1("Ca_fixed_time.csv", std::ofstream::out);
     std::ofstream file2("CaSiO3_fixed_time.csv", std::ofstream::out);
-    file1<< "#space, t0,...,t_Nt-1" << std::endl;
-    file2<< "#space, t0,...,t_Nt-1" << std::endl;
+    file1<< "space, t0,...,t_Nt-1" << std::endl;
+    file2<< "space, t0,...,t_Nt-1" << std::endl;
     
     double h =static_cast<double>(L)/Nx;
     const Eigen::VectorXd x(Eigen::VectorXd::LinSpaced(Nx,h/2,L-h/2));//Definition of the space vector (Concnetration values are stored in the middle of the cell)
@@ -225,8 +225,8 @@ void Transport_output_results_fixed_space(Eigen::MatrixXd &value1, Eigen::Matrix
     //Concentration value results to CSV file.
     std::ofstream file1("Ca_fixed_space.csv", std::ofstream::out);
     std::ofstream file2("CaSiO3_fixed_space.csv", std::ofstream::out);
-    file1<< "#time, x0,...,x_Nx-1" << std::endl;
-    file2<< "#time, x0,...,x_Nx-1" << std::endl;
+    file1<< "time, x0,...,x_Nx-1" << std::endl;
+    file2<< "time, x0,...,x_Nx-1" << std::endl;
     
     double dt=static_cast<double>(T)/Nt;
     const Eigen::VectorXd t(Eigen::VectorXd::LinSpaced(Nt,0.0,T-dt));//Definition of the space vector (Concnetration values are stored in the middle of the cell)

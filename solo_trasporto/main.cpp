@@ -30,9 +30,9 @@ Eigen::MatrixXd Ca(data_transport.Nx,data_transport.Nt);
 
 //std::cout<<vel.array().pow(2)<<std::endl;
 
-Transport_system_esplicit(Ca,vel,data_transport,data_2reagents);
+//Transport_system_esplicit(Ca,vel,data_transport,data_2reagents);
 
-//Transport_system_implicit(Ca,vel,data_transport,data_2reagents);
+Transport_system_implicit(Ca,vel,data_transport,data_2reagents);
 
 output_results_fixed_time("Ca",Ca,data_transport.Nx,data_transport.L,data_transport.Nt);
 

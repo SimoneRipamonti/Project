@@ -26,6 +26,7 @@ std::cout<<"A definito"<<std::endl;
     B.set_data(BC_in,BC_out,f,h);
     B.define_matrix();
     Eigen::MatrixXd B_T{B.get_matrix().transpose()};
+
     //Eigen::SparseMatrix<double> B_T{B.get_matrix().transpose()};
     B.set_BC();
     B.set_rhs();

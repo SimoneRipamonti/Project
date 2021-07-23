@@ -68,6 +68,7 @@
 
 [Time]
     #Final T
+    #Final T
     T=100000
     
     #Time step
@@ -90,6 +91,7 @@
 
      #Initical conentration H_piu
      H_piu_0=1.0e-7+0.0*x
+
 
      #Initical conentration HCO3_meno
      HCO3_meno_0=1.0+0.0*x
@@ -117,16 +119,16 @@
      R=8.314
    
      #Temperature
-     Temp=373.0
+     Temp=423.0 #150 gradi
    
      #K_sol
-     K_sol=10e9
+     K_sol=10e9#sarebbe 10^(9.012)
 
      #K_eq
      K_eq=4.45e-7
 
      #exponent for H_piu
-     n=0.0
+     n=0.31
      
      #Ph
      ph=-3.0

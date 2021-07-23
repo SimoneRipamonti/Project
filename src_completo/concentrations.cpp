@@ -39,6 +39,7 @@ void Concentration::set_initial_cond()
    Ca(i,0)=data_reagents.Ca_0(h+h*i);
    H_piu(i,0)=data_reagents.H_piu_0(h+h*i);
    HCO3_meno(i,0)=4.45e-7*data_reagents.CO2_0(h+h*i)/data_reagents.H_piu_0(h+h*i);
+   //HCO3_meno(i,0)=0.5;
    CO2(i,0)=data_reagents.CO2_0(h+h*i);
    CaSiO3(i,0)=data_reagents.CaSiO3_0(h+h*i);
    SiO2(i,0)=data_reagents.SiO2_0(h+h*i);
@@ -47,7 +48,7 @@ void Concentration::set_initial_cond()
 
 }
 
-void Concentration::assemble_transport(Eigen::MatrixXd& M, Eigen::MatrixXd& rhs, const Eigen::VectorXd& vel)
+void Concentration::assemble_transport(Eigen::SparseMatrix<double>& M, Eigen::MatrixXd& rhs, const Eigen::VectorXd& vel)
 {
    
    double h{static_cast<double>(data_transp.L/data_transp.Nx)};
@@ -64,9 +65,11 @@ void Concentration::assemble_transport(Eigen::MatrixXd& M, Eigen::MatrixXd& rhs,
    F_m.assemble_matrix("In",0.0,vel);
 
    
-   M=1/dt*C.get_matrix()+F_p.get_matrix()-F_m.get_matrix();
+   M=(1/dt*C.get_matrix()+F_p.get_matrix()-F_m.get_matrix()).sparseView();
+
 	
    rhs=1/dt*C.get_matrix();
+ 
 }
 
 
@@ -99,29 +102,13 @@ void Concentration::compute_rd(unsigned int step, Eigen::VectorXd& rd){
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-void Concentration::one_step_transport_reaction(Eigen::VectorXd& phi1, Eigen::VectorXd& phi2, Eigen::VectorXd& phi3, Eigen::VectorXd& phi4, Eigen::VectorXd& phi5, Eigen::VectorXd& rd, const Eigen::MatrixXd& M, const Eigen::MatrixXd& rhs, int method, unsigned int step){
+void Concentration::one_step_transport_reaction(Eigen::VectorXd& phi1, Eigen::VectorXd& phi2, Eigen::VectorXd& phi3, Eigen::VectorXd& phi4, Eigen::VectorXd& phi5, Eigen::VectorXd& rd, const Eigen::MatrixXd& rhs, int method, unsigned int step, Eigen::SparseLU<Eigen::SparseMatrix<double>, Eigen::COLAMDOrdering<int> > &solver){
 
  switch(method)
      { case 1: //Euler Esplicit  
        
-        Euler_Esplicit(phi1,phi2,phi3,phi4,phi5,rd,M,rhs);
+        //Euler_Esplicit(phi1,phi2,phi3,phi4,phi5,rd,M,rhs,solver);
+       Euler_Esplicit(phi1,phi2,phi3,phi4,phi5,rd,rhs,solver);
        break; 
 
        case 2: //Predictor Corrector
@@ -132,11 +119,11 @@ void Concentration::one_step_transport_reaction(Eigen::VectorXd& phi1, Eigen::Ve
         Eigen::VectorXd phi4_{phi4};
         Eigen::VectorXd phi5_{phi5};
 
-        Euler_Esplicit(phi1_,phi2_,phi3_,phi4_,phi5_,rd,M,rhs); 
+        Euler_Esplicit(phi1_,phi2_,phi3_,phi4_,phi5_,rd,rhs,solver); 
         compute_concentration(step,phi1_,phi2_,phi3_,phi4_,phi5_);
         compute_rd(step,rd);//calcolo il nuovo rd
        
-        Euler_Esplicit(phi1,phi2,phi3,phi4,phi5,rd,M,rhs);
+        Euler_Esplicit(phi1,phi2,phi3,phi4,phi5,rd,rhs,solver);
        }
        break;
       
@@ -148,7 +135,7 @@ void Concentration::one_step_transport_reaction(Eigen::VectorXd& phi1, Eigen::Ve
         Eigen::VectorXd phi4_{phi4};
         Eigen::VectorXd phi5_{phi5};
        
-        Euler_Esplicit(phi1_,phi2_,phi3_,phi4_,phi5_,rd,M,rhs);
+        Euler_Esplicit(phi1_,phi2_,phi3_,phi4_,phi5_,rd,rhs,solver);
         compute_concentration(step,phi1_,phi2_,phi3_,phi4_,phi5_);
 
         Eigen::VectorXd rd_{Eigen::VectorXd::Zero(data_transp.Nx)};
@@ -156,7 +143,7 @@ void Concentration::one_step_transport_reaction(Eigen::VectorXd& phi1, Eigen::Ve
        
         rd=0.5*rd+0.5*rd_;//ottengo il nuovo rd complessivo
 
-        Euler_Esplicit(phi1,phi2,phi3,phi4,phi5,rd,M,rhs);
+        Euler_Esplicit(phi1,phi2,phi3,phi4,phi5,rd,rhs,solver);
         }
        
        break;
@@ -164,34 +151,24 @@ void Concentration::one_step_transport_reaction(Eigen::VectorXd& phi1, Eigen::Ve
   
 }
 
-void Concentration::Euler_Esplicit(Eigen::VectorXd& phi1, Eigen::VectorXd& phi2, Eigen::VectorXd& phi3, Eigen::VectorXd& phi4, Eigen::VectorXd& phi5, const Eigen::VectorXd& rd, const Eigen::MatrixXd& M, const Eigen::MatrixXd& rhs)
+void Concentration::Euler_Esplicit(Eigen::VectorXd& phi1, Eigen::VectorXd& phi2, Eigen::VectorXd& phi3, Eigen::VectorXd& phi4, Eigen::VectorXd& phi5, const Eigen::VectorXd& rd, const Eigen::MatrixXd& rhs, Eigen::SparseLU<Eigen::SparseMatrix<double>, Eigen::COLAMDOrdering<int> > &solver)
 { 
-  transport_and_reaction(phi1,M,rhs,rd);
-  transport_and_reaction(phi2,M,rhs,Eigen::VectorXd::Zero(phi2.size()));//no reaction
-  transport_and_reaction(phi3,M,rhs,Eigen::VectorXd::Zero(phi2.size()));//no reaction
-  transport_and_reaction(phi4,M,rhs,-rd);
-  transport_and_reaction(phi5,M,rhs,rd);
+  transport_and_reaction(phi1,rhs,rd,solver);
+  transport_and_reaction(phi2,rhs,Eigen::VectorXd::Zero(phi2.size()),solver);//no reaction
+  transport_and_reaction(phi3,rhs,Eigen::VectorXd::Zero(phi2.size()),solver);//no reaction
+  transport_and_reaction(phi4,rhs,-rd,solver);
+  //transport_and_reaction(phi5,M,rhs,rd,solver);
+  transport_and_reaction(phi5,rhs,rd,solver);
 }
 
 
 
-void Concentration::transport_and_reaction(Eigen::VectorXd& phi, const Eigen::MatrixXd& M, const Eigen::MatrixXd& rhs, const Eigen::VectorXd& rd){
+void Concentration::transport_and_reaction(Eigen::VectorXd& phi, const Eigen::MatrixXd& rhs, const Eigen::VectorXd& rd,Eigen::SparseLU<Eigen::SparseMatrix<double>, Eigen::COLAMDOrdering<int> > &solver){
      
-     const auto M_lu=M.fullPivLu();
+     
      const Eigen::VectorXd temp=rhs*phi+rd;
-     phi=M_lu.solve(temp);
+     phi=solver.solve(temp);
 }
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -284,7 +261,7 @@ void Concentration::output_results_fixed_time(const std::string& name){
  
 std::ofstream file1(filename, std::ofstream::out);
 
-    file1<< "#space, t0,...,t_Nt-1" << std::endl;
+    file1<< "space, t0,...,t_Nt-1" << std::endl;
     
     double h =static_cast<double>(data_transp.L)/data_transp.Nx;
     const Eigen::VectorXd x(Eigen::VectorXd::LinSpaced(data_transp.Nx,h/2,data_transp.L-h/2));//Definition of the space vector (Concnetration values are stored in the middle of the cell)

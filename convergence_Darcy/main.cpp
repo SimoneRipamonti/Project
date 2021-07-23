@@ -20,8 +20,8 @@ Eigen::VectorXi a(5);
 Eigen::VectorXd errp(5);
 Eigen::VectorXd errvel(5);
 a<<10,20,40,80,160;
-
-
+//a<<100,200,400,800,100000;
+//a<<1,2,3,4,10;
 muparser_fun sol_ex;
 sol_ex.set_value("1e7*(1/(_pi*_pi*16)*sin(_pi*4*x)-0.1*x-1/(4*_pi)*x+0.1)");//"1e6*(1.0-x); caso lineare
 //sol_ex.set_value("1e6*(1.0-x)");//"1e6*(1.0-x); caso lineare
@@ -53,6 +53,10 @@ exact_vel.resize(data.Nx+1);
 Eigen::SparseMatrix<double> M(data.Nx+data.Nx+1,data.Nx+data.Nx+1);
 Eigen::VectorXd rhs(data.Nx+data.Nx+1);
 set_Darcy_system(data,M,rhs,h);
+//std::cout<<rhs<<std::endl;
+//std::cout<<"fine rhs"<<std::endl;
+
+//std::cout<<M<<std::endl;
 //std::cout<<"Sistema Darcy definito"<<std::endl;
 //Eigen::VectorXd sol=M.partialPivLu().solve(rhs);
 //Eigen::VectorXd sol=M.fullPivLu().solve(rhs);

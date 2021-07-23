@@ -139,8 +139,7 @@ void Transport_system_implicit(Eigen::MatrixXd &Ca, Eigen::VectorXd &vel,Data_Tr
    
     for (unsigned int i=0; i<Nx; ++i)
         Ca(i,0)=Ca_0(h/2+i*h);
-
-
+    Ca(0,0)=1.0;
 
     Matrix_F_piu F_p(Nx,Nx);
     F_p.assemble_matrix(bc_cond,C_in,vel);
@@ -161,9 +160,6 @@ void Transport_system_implicit(Eigen::MatrixXd &Ca, Eigen::VectorXd &vel,Data_Tr
   
     Eigen::VectorXd rhs(Nx);
     auto M_lu=M.fullPivLu();
- 
-    std::cout<<F_p.get_rhs()<<std::endl;
-    std::cout<<F_m.get_rhs()<<std::endl;
 
     for(unsigned int i=1; i<Nt; i++)
     {

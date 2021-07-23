@@ -41,7 +41,7 @@ void output_results_fixed_time(const std::string& title, const Eigen::MatrixXd &
     //Concentration value results to CSV file.
     std::ofstream file1( title+"_fixed_time.csv", std::ofstream::out);
  
-    file1<< "#space, t0,...,t_Nt-1" << std::endl;
+    file1<< "space, t0, t1, t2, t3, t4, t5, t6, t7, t8, t9" << std::endl;
     
     double h =static_cast<double>(L)/Nx;
     const Eigen::VectorXd x(Eigen::VectorXd::LinSpaced(Nx,h/2,L-h/2));//Definition of the space vector (Concnetration values are stored in the middle of the cell)
