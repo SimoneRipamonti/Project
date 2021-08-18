@@ -1,6 +1,7 @@
 #include "matrix.hpp"
 #include <exception>
 #include <cmath>
+#include <algorithm>
 
 //AbstractMatrix constructor
 AbstractMatrix::AbstractMatrix(unsigned int row_,unsigned int col_):row(row_),col(col_)
@@ -313,8 +314,10 @@ void Matrix_R::assemble_matrix(double area, double rate_const, double temperatur
 //Here the reaction matrix is update with the past_solution having in mind a particular square reaction rate
 void Matrix_R::update(const Eigen::VectorXd &past_sol) {
 
-     const Eigen::VectorXd p=past_sol.array().pow(2)/(const_eq*std::pow(10,-ph));  
-     rhs=react_const*(Eigen::VectorXd::Ones(row)-p);
+     const Eigen::VectorXd p=past_sol.array().pow(2)/(const_eq*std::pow(10,-2*ph)); //2 is due to the stechiometric coefficient of [H+] 
+     for(unsigned int i=0; i<rhs.size();++i)
+     	rhs(i)=std::max(react_const*(1.0-p(i)),0.0);
+     
 }
 
 
