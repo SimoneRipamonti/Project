@@ -41,56 +41,46 @@ Data_CO2 data_CO2("data.pot");
 unsigned int Nx{concentration.get_Nx()};
 unsigned int Nt{concentration.get_Nt()};
 
-Eigen::VectorXd vel{0.1*Eigen::VectorXd::Ones(Nx+1)};
+Eigen::VectorXd vel{0.0*Eigen::VectorXd::Ones(Nx+1)};
 
 
-Eigen::VectorXd phi1{Eigen::VectorXd::Zero(Nx)};
-Eigen::VectorXd phi2{Eigen::VectorXd::Zero(Nx)};
-Eigen::VectorXd phi3{Eigen::VectorXd::Zero(Nx)};
-Eigen::VectorXd phi4{Eigen::VectorXd::Zero(Nx)};
-Eigen::VectorXd phi5{Eigen::VectorXd::Zero(Nx)};
+Eigen::VectorXd psi1{Eigen::VectorXd::Zero(Nx)};
+Eigen::VectorXd psi2{Eigen::VectorXd::Zero(Nx)};
+Eigen::VectorXd psi3{Eigen::VectorXd::Zero(Nx)};
+Eigen::VectorXd psi4{Eigen::VectorXd::Zero(Nx)};
+Eigen::VectorXd psi5{Eigen::VectorXd::Zero(Nx)};
 
 
 
-//change_element (Ca);
 //Set the initial condition
 
 concentration.set_initial_cond();
 
 
-//Setting for Transport and Reaction Equation
-//Eigen::MatrixXd M(Nx,Nx);
-Eigen::SparseMatrix<double> M(Nx,Nx);
-Eigen::SparseMatrix<double> rhs(Nx,Nx);
-concentration.assemble_transport(M,rhs,vel);
+//Setting for transport part of the equation
+Eigen::SparseMatrix<double> M(Nx,Nx);//Mass matrix for the transport part
+Eigen::SparseMatrix<double> rhs(Nx,Nx);//rhs for the transport part
+concentration.assemble_transport(M,rhs,vel);//function that assembles the transport part
 
 
-
+//CO2 has to be treat separately since it is added constantly in the input section
 auto [C_in,C_out,bc_cond]=data_CO2;
 Eigen::SparseMatrix<double> M_CO2(Nx,Nx);
 Eigen::VectorXd rhs_CO2(Nx);
-
-
 concentration.assemble_transport_CO2(M_CO2,rhs_CO2,vel,C_in,C_out,bc_cond);
 
+
+//Here solver for the transport system is initialized
 Eigen::SparseLU<Eigen::SparseMatrix<double>, Eigen::COLAMDOrdering<int> >   solver;
-// fill A and b;
-// Compute the ordering permutation vector from the structural pattern of A
-solver.analyzePattern(M); 
-// Compute the numerical factorization 
+solver.analyzePattern(M);  
 solver.factorize(M); 
 
-
+//We make the same also for the CO2 transport part
 Eigen::SparseLU<Eigen::SparseMatrix<double>, Eigen::COLAMDOrdering<int> >   solver2;
-// fill A and b;
-// Compute the ordering permutation vector from the structural pattern of A
 solver2.analyzePattern(M_CO2); 
-// Compute the numerical factorization 
 solver2.factorize(M_CO2); 
 
-int method{1};
-
-//Termine di reazione
+//Reaction term
 Eigen::VectorXd rd{Eigen::VectorXd::Zero(Nx)};
 
 
@@ -98,15 +88,15 @@ Eigen::VectorXd rd{Eigen::VectorXd::Zero(Nx)};
 
 for(unsigned int i=1; i<Nt; i++)
 { 
-  concentration.compute_phi(i-1,phi1,phi2,phi3,phi4,phi5); //Calcolo le phi
+  concentration.compute_phi(i-1,psi1,psi2,psi3,psi4,psi5); // phi
 
-  concentration.compute_rd_kp(i-1,rd);//Calcolo i termini di reazione
+  concentration.compute_rd(i-1,rd);//Calcolo i termini di reazione
   
   //concentration.one_step_transport_reaction(phi1,phi2,phi3,phi4,phi5,rd,M,rhs,method,i,solver); //Calcolo un passo della Reazione
  
-  concentration.one_step_transport_reaction(phi1,phi2,phi3,phi4,phi5,rd,rhs,rhs_CO2,method,i,solver,solver2);
+  concentration.one_step_transport_reaction(psi1,psi2,psi3,psi4,psi5,rd,rhs,rhs_CO2,i,solver,solver2);
   
-  concentration.compute_concentration(i,phi1,phi2,phi3,phi4,phi5); //Calcolo le Concentrazioni effettive
+  concentration.compute_concentration(i,psi1,psi2,psi3,psi4,psi5); //Calcolo le Concentrazioni effettive
 }
 
 

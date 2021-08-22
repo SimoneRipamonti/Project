@@ -6,7 +6,7 @@ set xlabel 'Space' # label for the X axis
 
 
 
-plot "exact_pressure.csv" using 1:2 with lines, "pressure80.csv" using 1:2 with lines, "pressure160.csv" using 1:2 with lines
+plot "exact_pressure.csv" using 1:2 with lines, "pressure.csv" using 1:2 with lines
 
 #plot "exact.csv" using 1:2 with lines, 
 

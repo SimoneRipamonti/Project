@@ -14,28 +14,19 @@
 
 int main(int argc, char **argv)
 {
-/*Data_Darcy data_d("data.pot");
-
-Eigen::MatrixXd M;
-Eigen::VectorXd rhs;
-set_Darcy_system(data_d,M,rhs);
-Eigen::VectorXd sol_darcy=M.fullPivLu().solve(rhs);
-
-Darcy_output_results(sol_darcy,data_d.Nx,data_d.L);
-*/
-//Eigen::VectorXd vel=sol_darcy.head(data_d.Nx+1);
 
 Data_Transport data_transport("data.pot");
 Data_linear_decay data_linear_decay("data.pot");
 
-//Eigen::VectorXd vel=0.0*Eigen::VectorXd::Ones(data_t.Nx+1);//Per osservare il decadimento lineare
 Eigen::VectorXd vel=0.0*Eigen::VectorXd::Ones(data_transport.Nx+1);
 Eigen::MatrixXd Ca(data_transport.Nx,data_transport.Nt);
-//Eigen::MatrixXd CaSiO3(data_transport.Nx,data_transport.Nt);
 
-//std::cout<<vel.array().pow(2)<<std::endl;
 
-Transport_system_implicit(Ca,vel,data_transport,data_linear_decay);
+if(data_transport.method=="Esplicit")
+    Transport_system_esplicit(Ca,vel,data_transport,data_linear_decay);
+else if(data_transport.method=="Implicit")
+    Transport_system_implicit(Ca,vel,data_transport,data_linear_decay);
+else throw std::invalid_argument("Invalid argument: wrong input method, choose  or implicit or esplicit");
 
 output_results_fixed_space("Ca_fixed_space.csv", Ca, data_transport.Nx, data_transport.T, data_transport.Nt);
 

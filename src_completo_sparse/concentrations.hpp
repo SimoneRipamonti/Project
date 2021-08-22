@@ -10,6 +10,10 @@
 #include <Eigen/SparseLU>
 
 #include <string>
+
+
+enum Method{EsplicitEuler,PredictorCorrector,Heun};//Numerical scheme for solving the reaction part
+
 class Concentration
 {
 public:
@@ -19,51 +23,42 @@ public:
   
    unsigned int get_Nt();
 
-   /*double get_L();
+   void set_initial_cond(); //set initial condition for the reagents
+
+   void assemble_transport(Eigen::SparseMatrix<double>& M, Eigen::SparseMatrix<double>& rhs, const Eigen::VectorXd& vel); //set the matrix for the transport part of the equation
  
-   double get_T();*/
+   void  assemble_transport_CO2(Eigen::SparseMatrix<double>& M_CO2, Eigen::VectorXd& rhs_CO2, const Eigen::VectorXd& vel, double C_in, double C_out, const std::string& bc_cond); //set the matrix for the CO2 transport part of the equation
 
-   void set_initial_cond();
+   void compute_phi(unsigned int step, Eigen::VectorXd& psi1, Eigen::VectorXd& psi2, Eigen::VectorXd& psi3, Eigen::VectorXd& psi4, Eigen::VectorXd& psi5); //compute phi variables from reagents
 
-   void assemble_transport(Eigen::SparseMatrix<double>& M, Eigen::SparseMatrix<double>& rhs, const Eigen::VectorXd& vel);
- 
-   void  assemble_transport_CO2(Eigen::SparseMatrix<double>& M_CO2, Eigen::VectorXd& rhs_CO2, const Eigen::VectorXd& vel, double C_in, double C_out, const std::string& bc_cond);
+   void compute_rd(unsigned int step, Eigen::VectorXd& rd);//compute the reaction term of the equation
 
-   void compute_phi(unsigned int step, Eigen::VectorXd& phi1, Eigen::VectorXd& phi2, Eigen::VectorXd& phi3, Eigen::VectorXd& phi4, Eigen::VectorXd& phi5);
+   void compute_rd_kp(unsigned int step, Eigen::VectorXd& rd);//compute the reaction term of the equation
 
-   void compute_rd(unsigned int step, Eigen::VectorXd& rd);
+   void one_step_transport_reaction(Eigen::VectorXd& psi1, Eigen::VectorXd& psi2, Eigen::VectorXd& psi3, Eigen::VectorXd& psi4, Eigen::VectorXd& psi5, Eigen::VectorXd& rd, const  Eigen::SparseMatrix<double> rhs, const Eigen::VectorXd& rhs_CO2, unsigned int step, Eigen::SparseLU<Eigen::SparseMatrix<double>, Eigen::COLAMDOrdering<int> > &solver, Eigen::SparseLU<Eigen::SparseMatrix<double>, Eigen::COLAMDOrdering<int> > &solver2); //compute one temporal step for the transport-reaction equation
 
-   void compute_rd_kp(unsigned int step, Eigen::VectorXd& rd);
-   //void one_step_transport_reaction(Eigen::VectorXd& phi1, Eigen::VectorXd& phi2, Eigen::VectorXd& phi3, Eigen::VectorXd& phi4, Eigen::VectorXd& phi5, Eigen::VectorXd& rd, const Eigen::MatrixXd& M, const   Eigen::MatrixXd& rhs, int method, unsigned int step, Eigen::SparseLU<Eigen::SparseMatrix<double>, Eigen::COLAMDOrdering<int> > &solver);
-   
-   //void Euler_Esplicit(Eigen::VectorXd& phi1, Eigen::VectorXd& phi2, Eigen::VectorXd& phi3, Eigen::VectorXd& phi4, Eigen::VectorXd& phi5, const Eigen::VectorXd& rd, const Eigen::MatrixXd& M, const Eigen::MatrixXd& rhs, Eigen::SparseLU<Eigen::SparseMatrix<double>, Eigen::COLAMDOrdering<int> > &solver);
+   void Euler_Esplicit(Eigen::VectorXd& psi1, Eigen::VectorXd& psi2, Eigen::VectorXd& psi3, Eigen::VectorXd& psi4, Eigen::VectorXd& psi5, const Eigen::VectorXd& rd, const Eigen::SparseMatrix<double>&  rhs, const Eigen::VectorXd& rhs_CO2, Eigen::SparseLU<Eigen::SparseMatrix<double>, Eigen::COLAMDOrdering<int> > &solver, Eigen::SparseLU<Eigen::SparseMatrix<double>, Eigen::COLAMDOrdering<int> > &solver2); //solve the reaction part with an Esplicit Euler
 
-   //void transport_and_reaction(Eigen::VectorXd& phi, const Eigen::MatrixXd& M, const Eigen::MatrixXd& rhs, const Eigen::VectorXd& rd, Eigen::SparseLU<Eigen::SparseMatrix<double>, Eigen::COLAMDOrdering<int> > &solver);
+   void transport_and_reaction(Eigen::VectorXd& psi, const Eigen::SparseMatrix<double>& rhs, const Eigen::VectorXd& rd,Eigen::SparseLU<Eigen::SparseMatrix<double>, Eigen::COLAMDOrdering<int> > &solver);
+   //solve the equation for one psi
 
-
-   void one_step_transport_reaction(Eigen::VectorXd& phi1, Eigen::VectorXd& phi2, Eigen::VectorXd& phi3, Eigen::VectorXd& phi4, Eigen::VectorXd& phi5, Eigen::VectorXd& rd, const  Eigen::SparseMatrix<double> rhs, const Eigen::VectorXd& rhs_CO2, int method, unsigned int step, Eigen::SparseLU<Eigen::SparseMatrix<double>, Eigen::COLAMDOrdering<int> > &solver, Eigen::SparseLU<Eigen::SparseMatrix<double>, Eigen::COLAMDOrdering<int> > &solver2);
-
-   void Euler_Esplicit(Eigen::VectorXd& phi1, Eigen::VectorXd& phi2, Eigen::VectorXd& phi3, Eigen::VectorXd& phi4, Eigen::VectorXd& phi5, const Eigen::VectorXd& rd, const Eigen::SparseMatrix<double>&  rhs, const Eigen::VectorXd& rhs_CO2, Eigen::SparseLU<Eigen::SparseMatrix<double>, Eigen::COLAMDOrdering<int> > &solver, Eigen::SparseLU<Eigen::SparseMatrix<double>, Eigen::COLAMDOrdering<int> > &solver2);
-
-   //void P_C(Eigen::VectorXd& phi1, Eigen::VectorXd& phi2, Eigen::VectorXd& phi3, Eigen::VectorXd& phi4, Eigen::VectorXd& phi5, const Eigen::VectorXd& rd, const Eigen::SparseMatrix<double>& rhs, Eigen::SparseLU<Eigen::SparseMatrix<double>, Eigen::COLAMDOrdering<int> > &solver);
-   
-   void transport_and_reaction(Eigen::VectorXd& phi, const Eigen::SparseMatrix<double>& rhs, const Eigen::VectorXd& rd,Eigen::SparseLU<Eigen::SparseMatrix<double>, Eigen::COLAMDOrdering<int> > &solver);
-
-   void transport_and_reaction_CO2(Eigen::VectorXd& phi, const Eigen::SparseMatrix<double>& rhs, const Eigen::VectorXd& rhs_CO2, const Eigen::VectorXd& rd, Eigen::SparseLU<Eigen::SparseMatrix<double>, Eigen::COLAMDOrdering<int> > &solver2);
+   void transport_and_reaction_CO2(Eigen::VectorXd& psi, const Eigen::SparseMatrix<double>& rhs, const Eigen::VectorXd& rhs_CO2, const Eigen::VectorXd& rd, Eigen::SparseLU<Eigen::SparseMatrix<double>, Eigen::COLAMDOrdering<int> > &solver2);//solve the equation for the total concentration that include CO2 (psi2)
 
    //Risoluzione sistema non lineare
    
-   void compute_concentration(unsigned int step, const Eigen::VectorXd& phi1, const Eigen::VectorXd& phi2, const Eigen::VectorXd& phi3, const Eigen::VectorXd& phi4, const Eigen::VectorXd& phi5);
+   void compute_concentration(unsigned int step, const Eigen::VectorXd& psi1, const Eigen::VectorXd& psi2, const Eigen::VectorXd& psi3, const Eigen::VectorXd& psi4, const Eigen::VectorXd& psi5); //Solve the non linear system with the Newthon method, in order to compute the real concentrations
 
-   void compute_rhs(Eigen::VectorXd& rhs, const Eigen::VectorXd& old_it, double phi1, double phi2, double phi3, double phi4, double phi5);
+   void compute_rhs(Eigen::VectorXd& rhs, const Eigen::VectorXd& old_it, double phi1, double phi2, double phi3, double phi4, double phi5); //Compute the rhs of the Newton Scheme
 
-   void compute_Jacob(Eigen::MatrixXd& J,const Eigen::VectorXd& old_it);
+   void compute_Jacob(Eigen::MatrixXd& J,const Eigen::VectorXd& old_it); //Compute the unknowns Jacobian Element of the non linear system
 
-   void output_results_fixed_time(const std::string&);
+   //These functions save the results in .csv files
 
-   void output_results_fixed_space(const std::string&);
+   void output_results_fixed_time(const std::string&); //row=space, column=time
 
-   void output_all_reagents(unsigned int pos);
+   void output_results_fixed_space(const std::string&);//row=time, column=space
+
+   void output_all_reagents(unsigned int pos);//Evolution in time of the species in a given position
 
 
 private:
@@ -77,6 +72,8 @@ private:
    Data_Transport data_transp;
    Data_6Reagents data_reagents;
    Data_Reaction data_reaction;
+
+   Method method;
 };
 
 

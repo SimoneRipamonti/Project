@@ -85,12 +85,13 @@
 
      #Reaction_area
      #A=1.38
-     A=1.38e-7
-
+     A=1.38
+     #A=1.0
+     
      #Constant_reaction
      #Rate_const=10e{-1.3}
-     #Rate_const=0.05011872336
-     Rate_const=1
+     Rate_const=0.05011872336
+     #Rate_const=0.001
      
      #Energy_activation
      E=47000

@@ -44,17 +44,6 @@ public:
 
 
 
-class Data_linear_decay
-{
-public:
-   explicit Data_linear_decay(const std::string &filename);
-   
-   muparser_fun Ca_0;
-   double lambda;//Linear decay rate
-};
-
-
-
 class Data_6Reagents
 {
 public:
@@ -72,19 +61,9 @@ public:
     double K_sol;//Equilibrium constant for the dissolution reaction  CaSiO3 + 2H+ <--> Ca2+ + SiO2 + H2O
     double n;
 
-     double kp_i;//Precipitation rate constant
+    double kp_i;//Precipitation rate constant
 
-};
-
-class Data_2Reagents
-{
-public:
-    explicit Data_2Reagents(const std::string &filename);
-    
-    muparser_fun Ca_0;
-    muparser_fun CaSiO3_0;
-    double K_sol;
-    double ph;
+    int method;
 
 };
 
@@ -100,6 +79,7 @@ public:
     double E;//Activation energy
     double R;//Gas constant
     double Temperature;//Temperature
+ 
 
 };
 

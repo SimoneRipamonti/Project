@@ -1,4 +1,4 @@
 #!/bin/bash
 
-gnuplot -p example.gnuplot 
+gnuplot -p error.gnuplot 
 

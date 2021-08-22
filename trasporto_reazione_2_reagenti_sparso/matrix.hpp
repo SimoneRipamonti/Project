@@ -172,7 +172,7 @@ class Matrix_R:public AbstractMatrix
 public:
     Matrix_R(unsigned int row, unsigned int col);
 
-    void set_data(double area, double rate_const, double temperature, double R, double E, double ph,double const_eq);
+    void set_data(double area, double rate_const, double temperature, double R, double E, double ph,double const_eq, double h);
 
     void define_matrix() override;
 
@@ -180,7 +180,7 @@ public:
 
     void set_rhs() override;
    
-    void assemble_matrix(double area, double rate_const, double temperature, double R, double E, double ph,double const_eq);
+    void assemble_matrix(double area, double rate_const, double temperature, double R, double E, double ph,double const_eq, double h);
 
     void update(const Eigen::VectorXd &past_sol);//This fuction updare the Reaction matrix since we treat this part explicitely
 
@@ -190,6 +190,7 @@ private:
     double react_const;//constant rate
     double ph;//ph of the undergound water
     double const_eq;//eq constant of the reaction
+    double h;//spatial step
 };
 
 

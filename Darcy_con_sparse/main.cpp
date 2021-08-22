@@ -77,15 +77,9 @@ errvel(i-1)=(exact_vel-sol.head(data.Nx+1)).norm();
 }
 
 std::cout<<"Order of convergence for pressure:"<<std::log(errp(3)/errp(4))/std::log(2.0)<<std::endl;
-//std::cout<<std::log(errp(2)/errp(3))/std::log(2.0)<<std::endl;
-//std::cout<<std::log(errp(1)/errp(2))/std::log(2.0)<<std::endl;
-//std::cout<<std::log(errp(0)/errp(1))/std::log(2.0)<<std::endl;
 
 
 std::cout<<"Order of convergence for velocity:"<<std::log(errvel(3)/errvel(4))/std::log(2.0)<<std::endl;
-//std::cout<<std::log(errvel(2)/errvel(3))/std::log(2.0)<<std::endl;
-//std::cout<<std::log(errvel(1)/errvel(2))/std::log(2.0)<<std::endl;
-//std::cout<<std::log(errvel(0)/errvel(1))/std::log(2.0)<<std::endl;
 
 
 //Plot of the output results

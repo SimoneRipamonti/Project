@@ -13,7 +13,8 @@
   
   #Porosity
   #phi0=0.2+0*x
-  phi0=0.3+0.0*x
+  #phi0=0.3+0.0*x
+  phi0=1.0+0.0*x
   #phi0=0.0*x
   [../]
 
@@ -44,7 +45,7 @@
     #Boundary cond for C
     
     #In-flow cond
-    C_in=1000.0
+    C_in=0.0
 
     #Out-flow cond
     C_out=0.0
@@ -62,7 +63,7 @@
 
 [Discretization]
     #Cell number
-    Nx=100
+    Nx=1
 
     [../]
 
@@ -70,46 +71,38 @@
     #Final T
     #Final T
     T=100000
-    
+    #T=1
     #Time step
     Nt=10000
     
     [../]
 
-[Initial_Condition]
-    #Ca0 initial condition
-    #Ca0=1.0*(x<0.5)
-    Ca0=0.0+0.0*x
-    #caSiO3 initial condition
-    CaSiO30=1.0+0.0*x
-    
-    [../]
 
 [Reaction]
      #Initical conentration Ca0
      Ca_0=0.0+0.0*x
 
      #Initical conentration H_piu
-     #H_piu_0=1.0e-7+0.0*x
-     H_piu_0=0.00031622777+0.0*x
+     H_piu_0=1.0e-7+0.0*x
+     #H_piu_0=0.00031622777+0.0*x
 
 
      #Initical conentration HCO3_meno
      HCO3_meno_0=1.0+0.0*x
 
      #Initical conentration CO2
-     #CO2_0=1.0e-4+0.0*x
-     CO2_0=0.3691108
+     CO2_0=1.0e-4+0.0*x
+     #CO2_0=0.3691108
 
      #Initical conentration CaSiO3
-     #CaSiO3_0=1.0+0.0*x
-     CaSiO3_0=16.75041876
+     CaSiO3_0=1.0+0.0*x
+     #CaSiO3_0=16.75041876
    
      #Initical conentration SiO2
      SiO2_0=0.0+0.0*x
 
      #Reaction_area
-     A=1.38
+     A=1.38 #1.38*10e-7
 
      #Constant_reaction
      #Rate_const=10e{-1.3}
@@ -122,8 +115,8 @@
      R=8.314
    
      #Temperature
-     Temp=423.0 #150 gradi
-   
+     #Temp=423.0 #150 gradi
+     Temp=373.0
      #K_sol
      K_sol=10e9#sarebbe 10^(9.012)
 
@@ -134,11 +127,14 @@
      n=0.31
      
      #Ph
-     ph=-3.0
+     ph=-7.0
 
      #kp_i
      kp_i=3.98e-13
-    
+   
+     #temporal scheme
+     method=1
+
     [../]
 
 

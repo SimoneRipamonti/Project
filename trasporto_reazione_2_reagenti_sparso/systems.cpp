@@ -39,7 +39,7 @@ void Transport_system_esplicit_2_reagents(Eigen::MatrixXd &Ca,Eigen::MatrixXd &C
 
     //const Eigen::MatrixXd Reaction(Eigen::MatrixXd::Identity(Nx,Nx)); //Reaction matrix
     Matrix_R React(Nx,Nx);
-    React.assemble_matrix(Area,rate_const,Temperature,R,E,ph,K_sol);
+    React.assemble_matrix(Area,rate_const,Temperature,R,E,ph,K_sol,h);
     
   
     const Eigen::SparseMatrix<double> M{1/dt*C.get_matrix()};//matrix of the transport linear system
@@ -108,7 +108,7 @@ void Transport_system_implicit_2_reagents(Eigen::MatrixXd &Ca,Eigen::MatrixXd &C
 
     //const Eigen::MatrixXd Reaction(Eigen::MatrixXd::Identity(Nx,Nx)); //Reaction matrix
     Matrix_R React(Nx,Nx);
-    React.assemble_matrix(Area,rate_const,Temperature,R,E,ph,K_sol);
+    React.assemble_matrix(Area,rate_const,Temperature,R,E,ph,K_sol,h);
     
   
     const Eigen::SparseMatrix<double> M{1/dt*C.get_matrix()+F_p.get_matrix()-F_m.get_matrix()};//matrix of the transport linear system

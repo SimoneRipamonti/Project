@@ -54,16 +54,6 @@ Data_Reaction::Data_Reaction(const std::string &filename)
 }
 
 
-Data_linear_decay::Data_linear_decay(const std::string &filename)
-{
-    GetPot file(filename.c_str());
-
-    const std::string stringa1=file("Reaction/Ca_0","1.0+0.0*x");
-    Ca_0.set_value(stringa1);
-    
-    lambda=file("Reaction/lambda",1.0);
-}
-
 
 Data_6Reagents::Data_6Reagents(const std::string &filename)
 {
@@ -88,22 +78,10 @@ Data_6Reagents::Data_6Reagents(const std::string &filename)
     K_sol=file("Reaction/K_sol",1.);
     n=file("Reaction/n",1.);
     kp_i=file("Reaction/kp_i",3.98e-13);
+    method=file("Reaction/method",1);
 
 }
 
-Data_2Reagents::Data_2Reagents(const std::string &filename)
-{
-
-
-    GetPot file(filename.c_str());
-
-    const std::string stringa1=file("Reaction/Ca_0","1.0+0.0*x");
-    Ca_0.set_value(stringa1);
-    const std::string stringa5=file("Reaction/CaSiO3_0","1.0+0.0*x");
-    CaSiO3_0.set_value(stringa5);
-    K_sol=file("Reaction/K_sol",1.);
-    ph=file("Reaction/ph",7.);
-}
 
 Data_CO2::Data_CO2(const std::string &filename)
 {
