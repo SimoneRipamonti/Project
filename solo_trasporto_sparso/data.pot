@@ -53,11 +53,11 @@
     bc_trac=In
 
    #Numerical scheme
-   method=Implicit #Implicit
+   method=Esplicit #Implicit
  
    #Initial Condition
-   C_0=1.0*(x<0.5)
-
+   #C_0=1.0*(x<0.5)
+   C_0=1.0*(x>0.05)*(x<0.2)
     [../]
 
 [Source]
@@ -68,7 +68,7 @@
 
 [Discretization]
     #Cell number
-    Nx=10
+    Nx=1000
 
     [../]
 
@@ -77,7 +77,7 @@
     T=1
     
     #Time step
-    Nt=10
+    Nt=1000
     
     [../]
 

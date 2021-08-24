@@ -29,7 +29,7 @@ Data_linear_decay::Data_linear_decay(const std::string &filename)
 
     const std::string stringa1=file("Transport/C_0","1.0+0.0*x");
     Ca_0.set_value(stringa1);
-    
+
     lambda=file("Reaction/lambda",1.0);
 }
 

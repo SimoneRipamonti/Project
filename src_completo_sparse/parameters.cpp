@@ -73,7 +73,7 @@ Data_6Reagents::Data_6Reagents(const std::string &filename)
     CaSiO3_0.set_value(stringa5);
     const std::string stringa6=file("Reaction/SiO2_0","1.0+0.0*x");
     SiO2_0.set_value(stringa6);
-  
+
     K_eq=file("Reaction/K_eq",1.);
     K_sol=file("Reaction/K_sol",1.);
     n=file("Reaction/n",1.);
@@ -86,12 +86,12 @@ Data_6Reagents::Data_6Reagents(const std::string &filename)
 Data_CO2::Data_CO2(const std::string &filename)
 {
 
-   GetPot file(filename.c_str());
+    GetPot file(filename.c_str());
 
-   C_in=file("BC_trac/C_in",0.0);
-   C_out=file("BC_trac/C_out",0.0);
+    C_in=file("BC_trac/C_in",0.0);
+    C_out=file("BC_trac/C_out",0.0);
 
-   bc_cond=file("BC_trac/bc_trac","In");  
+    bc_cond=file("BC_trac/bc_trac","In");
 
 }
 

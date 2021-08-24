@@ -84,7 +84,7 @@ void Matrix_A::set_BC()
 
     if(outflow=="Flow")
     {
-       
+
         m.coeffRef(row-1,col-2)=0.;
         m.coeffRef(row-1,col-1)=1.;
         rhs(row-1)+=Q_out;
@@ -134,11 +134,11 @@ void Matrix_B::define_matrix()
 void Matrix_B::set_BC()
 {
     if(inflow=="Flow")
-            m.coeffRef(0,0)=0.;
-    
+        m.coeffRef(0,0)=0.;
+
     if(outflow=="Flow")
-            m.coeffRef(row-1,col-1)=0.;
-    
+        m.coeffRef(row-1,col-1)=0.;
+
 //If we have in Inflow/outflow pressure condition there is nothing to be made
 }
 
@@ -163,7 +163,7 @@ Matrix_C::Matrix_C(unsigned int row_,unsigned int col_):AbstractMatrix(row_,col_
 //set_data gives to the matrix object the physical and geometrical parameters which it needs to assemble the matrix
 
 void Matrix_C::set_data(const muparser_fun por_,double h_)
-{   
+{
     por=por_;
     h=h_;
 }
@@ -174,7 +174,7 @@ void Matrix_C::define_matrix()
 {
     for(unsigned int i=0; i<row; ++i)
         m.insert(i,i)=por(0.5*h+i*h)*h;//we include in the mass matrix of the transport equation (Matrix_C) already the product with the spatial step h and the porosity
-     
+
 }
 
 //The BC of the Transport problem are treated in the F matrices
@@ -214,19 +214,20 @@ void Matrix_F_piu::define_matrix()
         else
             m.insert(i,i+1)=velocity(i+1);
     }
-    
+
     if(velocity(row)>0)
-      m.insert(row-1,col-1)=velocity(row);
+        m.insert(row-1,col-1)=velocity(row);
 }
 
 void Matrix_F_piu::set_BC() {}
 
 //Here we treat the BC of the transport problem working on the rhs of the matrix
-void Matrix_F_piu::set_rhs() {
+void Matrix_F_piu::set_rhs()
+{
 
-   if(bc_cond=="In")
-       rhs(0)+=velocity(1)*c_bc;
- 
+    if(bc_cond=="In")
+        rhs(0)+=velocity(1)*c_bc;
+
 }
 
 void Matrix_F_piu::assemble_matrix(const std::string &bc_, double c_bc_, const Eigen::VectorXd& vel_)
@@ -251,7 +252,7 @@ void Matrix_F_meno::set_data(const std::string &bc_, double c_bc_, const Eigen::
 
 //Defintion of matrix F_meno as the right part of the upwind scheme with P1 element
 void Matrix_F_meno::define_matrix()
-{   
+{
     if(velocity(0)<0)
         m.insert(0,0)=velocity(0);
     for(unsigned int i=1; i<row; ++i)
@@ -274,8 +275,9 @@ void Matrix_F_meno::assemble_matrix(const std::string &bc_,double c_bc_, const E
 void Matrix_F_meno::set_BC() {}
 
 //Here we treat the BC of the transport problem working on the rhs of the matrix
-void Matrix_F_meno::set_rhs() {
-    
+void Matrix_F_meno::set_rhs()
+{
+
     if(bc_cond=="Out")
         rhs(row-1)+=velocity(row-1)*c_bc;
 
@@ -297,7 +299,7 @@ void Matrix_R::set_data(double area, double rate_const, double temperature, doub
 }
 
 //Defintion of matrix F_piu as the right part of the upwind scheme with P1 elemen
-void Matrix_R::define_matrix(){}
+void Matrix_R::define_matrix() {}
 
 void Matrix_R::set_BC() {}
 
@@ -313,12 +315,13 @@ void Matrix_R::assemble_matrix(double area, double rate_const, double temperatur
 
 
 //Here the reaction matrix is update with the past_solution having in mind a particular square reaction rate
-void Matrix_R::update(const Eigen::VectorXd &past_sol) {
+void Matrix_R::update(const Eigen::VectorXd &past_sol)
+{
 
-     const Eigen::VectorXd p=past_sol.array().pow(2)/(const_eq*std::pow(10,-2*ph)); //2 is due to the stechiometric coefficient of [H+] 
-     for(unsigned int i=0; i<rhs.size();++i)
-     	rhs(i)=h*std::max(react_const*(1.0-p(i)),0.0);
-     
+    const Eigen::VectorXd p=past_sol.array().pow(2)/(const_eq*std::pow(10,-2*ph)); //2 is due to the stechiometric coefficient of [H+]
+    for(unsigned int i=0; i<rhs.size(); ++i)
+        rhs(i)=h*std::max(react_const*(1.0-p(i)),0.0);
+
 }
 
 

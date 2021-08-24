@@ -68,7 +68,7 @@
 
 [Discretization]
     #Cell number
-    Nx=100
+    Nx=1000
 
     [../]
 
@@ -77,14 +77,14 @@
     T=1
     
     #Time step
-    Nt=100
+    Nt=1000
     
     [../]
 
 [Reaction]
 
      #Lambda for linear decay
-     lambda=0.1
+     lambda=5
     
     [../]
 

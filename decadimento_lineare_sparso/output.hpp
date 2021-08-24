@@ -6,11 +6,14 @@
 #include "parameters.hpp"
 
 
-
-//Function that saves the solution matrix (each row represent a spatial position and each column a temporal one) on a csv file 
+//Function that saves the solution in a .csv file the following way: each row is a spatial position, each column is a time instant 
 void output_results_fixed_time(const std::string& title, const Eigen::MatrixXd &value1, unsigned int Nx, double L,unsigned int Nt);
 
+//Function that saves the solution in a .csv file the following way: each row is a time instant, each column is a spatial position 
 void output_results_fixed_space(const std::string& title, const Eigen::MatrixXd &value1, unsigned int Nx, double T,unsigned int Nt);
+
+
+
 
 
 #endif

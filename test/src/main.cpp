@@ -12,24 +12,25 @@
 #include "parameters.hpp"
 #include <iostream>
 #include "matrix.hpp"
+#include "systems.hpp"
 
 
 
 int main(){
 
 //Parte su Darcy
-/*Data_Darcy data_d("data.pot");
+Data_Darcy data("data.pot");
 
 Eigen::MatrixXd M(data.Nx+data.Nx+1,data.Nx+data.Nx+1);
 Eigen::VectorXd rhs(data.Nx+data.Nx+1);
-set_Darcy_system(data_d,M,rhs);
+set_Darcy_system(data,M,rhs);
 Eigen::VectorXd sol_darcy=M.fullPivLu().solve(rhs);
 
-Darcy_output_results(sol_darcy,data_d.Nx,data_d.L);
-*/
+Darcy_output_results(sol_darcy,data.Nx,data.L);
 
 
 
+/*
 //Dati
 Data_Reaction data_reaction("data.pot");
 auto [Ca_0, H_piu_0, HCO3_meno_0, CO2_0, CaSiO3_0, SiO2_0, A, Rate_const, E, R, Temperature, K_eq, K_sol, n, L, Nx, T, Nt, phi]=data_reaction;
@@ -41,7 +42,7 @@ double dt=static_cast<double>(T/Nt);
 
 
 
-/*std::cout<<"kD1="<<Rate_const<<std::endl;
+std::cout<<"kD1="<<Rate_const<<std::endl;
 std::cout<<"Ea="<<E<<std::endl;
 std::cout<<"R="<<R<<std::endl;
 std::cout<<"Temperature="<<Temperature<<std::endl;
@@ -52,7 +53,7 @@ std::cout<<"Nx="<<Nx<<std::endl;
 std::cout<<"Nt="<<Nt<<std::endl;
 std::cout<<"L="<<L<<std::endl;
 std::cout<<"T="<<T<<std::endl;
-*/
+
 //Definizione variabili
 Eigen::MatrixXd Ca{Eigen::MatrixXd::Zero(Nx,Nt)};
 Eigen::MatrixXd H_piu{Eigen::MatrixXd::Zero(Nx,Nt)};
@@ -121,5 +122,6 @@ output_results_fixed_space("H_piu_fixed_space.csv",H_piu,Nx,T,Nt);
 output_results_fixed_space("SiO2_fixed_space.csv",H_piu,Nx,T,Nt);
 
 output_all_reagents(Ca,H_piu,HCO3_meno,CO2,CaSiO3,SiO2,0,T,Nt);
+*/
 
 }

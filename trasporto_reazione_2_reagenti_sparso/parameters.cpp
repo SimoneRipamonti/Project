@@ -18,7 +18,7 @@ Data_Transport::Data_Transport(const std::string &filename)
     C_in=file("Transport/C_in",1.0);
     C_out=file("Transport/C_out",1.0);
     bc_cond=file("Transport/bc_trac","In");
-   
+
 }
 
 Data_Reaction::Data_Reaction(const std::string &filename)
