@@ -10,19 +10,16 @@ find_package(Boost 1.40.0 COMPONENTS filesystem system iostreams REQUIRED)
 
 find_package(Eigen3 REQUIRED HINTS $ENV{mkEigenPrefix})
 
-include_directories("${CMAKE_CURRENT_SOURCE_DIR}/externals/gnuplot-iostream" ${CMAKE_CURRENT_SOURCE_DIR}/../pacs-examples/Examples/include SYSTEM ${EIGEN3_INCLUDE_DIRS})
+include_directories("${CMAKE_CURRENT_SOURCE_DIR}/externals/gnuplot-iostream" external/include SYSTEM ${EIGEN3_INCLUDE_DIRS} include)
 
 
-
-add_executable(my_exec main.cpp solo_trasporto_sparso/output.cpp solo_trasporto_sparso/matrix.cpp solo_trasporto_sparso/parameters.cpp solo_trasporto_sparso/muparser_fun.cpp solo_trasporto_sparso/systems.cpp)
-
-
-target_include_directories(my_exec PUBLIC solo_trasporto_sparso)
+add_executable(my_exec main.cpp trasport/output.cpp src/matrix.cpp src/parameters.cpp src/muparser_fun.cpp trasport/systems.cpp)
 
 
-target_link_libraries(my_exec ${Boost_LIBRARIES} ${CMAKE_CURRENT_SOURCE_DIR}/../pacs-examples/Examples/lib/libmuparser.so)
+target_include_directories(my_exec PUBLIC trasport)
 
 
+target_link_libraries(my_exec ${Boost_LIBRARIES} ${CMAKE_CURRENT_SOURCE_DIR}/external/lib/libmuparser.so)
 
 
 

@@ -40,7 +40,7 @@
    
   [../]
 
-[BC_trac] 
+[BC_trac]
     #Boundary cond for C
     
     #In-flow cond
@@ -52,12 +52,12 @@
    #Type of cond
     bc_trac=In
 
-   #Numerical scheme
-   method=Implicit #Implicit
- 
-   #Initial Condition
-   #C_0=1.0*(x<0.5)
-   C_0=1.0*(x>0.05)*(x<0.2)
+   #numerical scheme
+   method=Implicit   #Esplicit
+  
+   #Initial cond
+   C_0=1.0*(x<0.5)
+
     [../]
 
 [Source]
@@ -89,3 +89,4 @@
     [../]
 
 
+  
