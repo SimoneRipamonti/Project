@@ -1,0 +1,128 @@
+\hypertarget{classMatrix__F__meno}{}\section{Matrix\+\_\+\+F\+\_\+meno Class Reference}
+\label{classMatrix__F__meno}\index{Matrix\+\_\+\+F\+\_\+meno@{Matrix\+\_\+\+F\+\_\+meno}}
+
+
+Matrix F\+\_\+meno is the part of the Upwind Matrix which treats the right node of the cells.  
+
+
+
+
+{\ttfamily \#include $<$matrix.\+hpp$>$}
+
+
+
+Inheritance diagram for Matrix\+\_\+\+F\+\_\+meno\+:
+% FIG 0
+
+
+Collaboration diagram for Matrix\+\_\+\+F\+\_\+meno\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classMatrix__F__meno_a7f6fd26f5d527f93dc562eb4c3e61990}\label{classMatrix__F__meno_a7f6fd26f5d527f93dc562eb4c3e61990}} 
+{\bfseries Matrix\+\_\+\+F\+\_\+meno} (unsigned int \hyperlink{classAbstractMatrix_a27fb46bf2853d4927d92a81b8b7773fb}{row}, unsigned \hyperlink{classAbstractMatrix_af3ad3551ce094979488cef5df0e4fc1d}{col})
+\item 
+void \hyperlink{classMatrix__F__meno_aab592defd0ec60e5a6acb19e02717dea}{set\+\_\+data} (const std\+::string \&bc, double \hyperlink{classMatrix__F__meno_ac51bf5308b52c9ce9a726cafd0485928}{c\+\_\+bc}, const Eigen\+::\+Vector\+Xd \&vel)
+\item 
+void \hyperlink{classMatrix__F__meno_a3b660526da87f63e6091cf4422385d94}{define\+\_\+matrix} () override
+\item 
+void \hyperlink{classMatrix__F__meno_ac8ae0448eb45d2c2996d5cfdb2a587f9}{set\+\_\+\+BC} () override
+\item 
+void \hyperlink{classMatrix__F__meno_adbe40c5bd77fc92b0db81233797276ca}{set\+\_\+rhs} () override
+\item 
+void \hyperlink{classMatrix__F__meno_a5e4149e92a5c917a79f542859dc0cb7c}{assemble\+\_\+matrix} (const std\+::string \&bc, double \hyperlink{classMatrix__F__meno_ac51bf5308b52c9ce9a726cafd0485928}{c\+\_\+bc}, const Eigen\+::\+Vector\+Xd \&vel)
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::string \hyperlink{classMatrix__F__meno_a376fb6461d3178c01eecabe7d51901dc}{bc\+\_\+cond}
+\item 
+Eigen\+::\+Vector\+Xd \hyperlink{classMatrix__F__meno_a635dd00a661ca2453da2392f98422b61}{velocity}
+\item 
+double \hyperlink{classMatrix__F__meno_ac51bf5308b52c9ce9a726cafd0485928}{c\+\_\+bc}
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+Matrix F\+\_\+meno is the part of the Upwind Matrix which treats the right node of the cells. 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classMatrix__F__meno_a5e4149e92a5c917a79f542859dc0cb7c}\label{classMatrix__F__meno_a5e4149e92a5c917a79f542859dc0cb7c}} 
+\index{Matrix\+\_\+\+F\+\_\+meno@{Matrix\+\_\+\+F\+\_\+meno}!assemble\+\_\+matrix@{assemble\+\_\+matrix}}
+\index{assemble\+\_\+matrix@{assemble\+\_\+matrix}!Matrix\+\_\+\+F\+\_\+meno@{Matrix\+\_\+\+F\+\_\+meno}}
+\subsubsection{\texorpdfstring{assemble\+\_\+matrix()}{assemble\_matrix()}}
+{\footnotesize\ttfamily void Matrix\+\_\+\+F\+\_\+meno\+::assemble\+\_\+matrix (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{bc,  }\item[{double}]{c\+\_\+bc,  }\item[{const Eigen\+::\+Vector\+Xd \&}]{vel }\end{DoxyParamCaption})}
+
+Function that calls the above functions \hyperlink{classMatrix__F__meno_a3b660526da87f63e6091cf4422385d94}{define\+\_\+matrix()},\hyperlink{classMatrix__F__meno_ac8ae0448eb45d2c2996d5cfdb2a587f9}{set\+\_\+\+B\+C()}, \hyperlink{classMatrix__F__meno_adbe40c5bd77fc92b0db81233797276ca}{set\+\_\+rhs()} in order to assemble all the matrix F\+\_\+meno \mbox{\Hypertarget{classMatrix__F__meno_a3b660526da87f63e6091cf4422385d94}\label{classMatrix__F__meno_a3b660526da87f63e6091cf4422385d94}} 
+\index{Matrix\+\_\+\+F\+\_\+meno@{Matrix\+\_\+\+F\+\_\+meno}!define\+\_\+matrix@{define\+\_\+matrix}}
+\index{define\+\_\+matrix@{define\+\_\+matrix}!Matrix\+\_\+\+F\+\_\+meno@{Matrix\+\_\+\+F\+\_\+meno}}
+\subsubsection{\texorpdfstring{define\+\_\+matrix()}{define\_matrix()}}
+{\footnotesize\ttfamily void Matrix\+\_\+\+F\+\_\+meno\+::define\+\_\+matrix (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+Function that defines the specific algebraic operator (the matrix) in question. 
+
+Implements \hyperlink{classAbstractMatrix_a40016da151226fbfcd444839943d8fe3}{Abstract\+Matrix}.
+
+\mbox{\Hypertarget{classMatrix__F__meno_ac8ae0448eb45d2c2996d5cfdb2a587f9}\label{classMatrix__F__meno_ac8ae0448eb45d2c2996d5cfdb2a587f9}} 
+\index{Matrix\+\_\+\+F\+\_\+meno@{Matrix\+\_\+\+F\+\_\+meno}!set\+\_\+\+BC@{set\+\_\+\+BC}}
+\index{set\+\_\+\+BC@{set\+\_\+\+BC}!Matrix\+\_\+\+F\+\_\+meno@{Matrix\+\_\+\+F\+\_\+meno}}
+\subsubsection{\texorpdfstring{set\+\_\+\+B\+C()}{set\_BC()}}
+{\footnotesize\ttfamily void Matrix\+\_\+\+F\+\_\+meno\+::set\+\_\+\+BC (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+Function that imposes the BC on the matrix 
+
+Implements \hyperlink{classAbstractMatrix_aa0a17dacbeede4180531b115d4a9f3eb}{Abstract\+Matrix}.
+
+\mbox{\Hypertarget{classMatrix__F__meno_aab592defd0ec60e5a6acb19e02717dea}\label{classMatrix__F__meno_aab592defd0ec60e5a6acb19e02717dea}} 
+\index{Matrix\+\_\+\+F\+\_\+meno@{Matrix\+\_\+\+F\+\_\+meno}!set\+\_\+data@{set\+\_\+data}}
+\index{set\+\_\+data@{set\+\_\+data}!Matrix\+\_\+\+F\+\_\+meno@{Matrix\+\_\+\+F\+\_\+meno}}
+\subsubsection{\texorpdfstring{set\+\_\+data()}{set\_data()}}
+{\footnotesize\ttfamily void Matrix\+\_\+\+F\+\_\+meno\+::set\+\_\+data (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{bc,  }\item[{double}]{c\+\_\+bc,  }\item[{const Eigen\+::\+Vector\+Xd \&}]{vel }\end{DoxyParamCaption})}
+
+Function that takes as input and sets the specific data necessary for assemblying matrix F\+\_\+meno 
+\begin{DoxyParams}{Parameters}
+{\em bc} & type of boundary condition (in or out) \\
+\hline
+{\em c\+\_\+bc} & tracer bc value \\
+\hline
+{\em vel} & transport fluid velocity \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classMatrix__F__meno_adbe40c5bd77fc92b0db81233797276ca}\label{classMatrix__F__meno_adbe40c5bd77fc92b0db81233797276ca}} 
+\index{Matrix\+\_\+\+F\+\_\+meno@{Matrix\+\_\+\+F\+\_\+meno}!set\+\_\+rhs@{set\+\_\+rhs}}
+\index{set\+\_\+rhs@{set\+\_\+rhs}!Matrix\+\_\+\+F\+\_\+meno@{Matrix\+\_\+\+F\+\_\+meno}}
+\subsubsection{\texorpdfstring{set\+\_\+rhs()}{set\_rhs()}}
+{\footnotesize\ttfamily void Matrix\+\_\+\+F\+\_\+meno\+::set\+\_\+rhs (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+Function that sets the right-\/hand side corresponding to the problem 
+
+Implements \hyperlink{classAbstractMatrix_a1334661de25f76dc65f16538c167a03c}{Abstract\+Matrix}.
+
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{classMatrix__F__meno_a376fb6461d3178c01eecabe7d51901dc}\label{classMatrix__F__meno_a376fb6461d3178c01eecabe7d51901dc}} 
+\index{Matrix\+\_\+\+F\+\_\+meno@{Matrix\+\_\+\+F\+\_\+meno}!bc\+\_\+cond@{bc\+\_\+cond}}
+\index{bc\+\_\+cond@{bc\+\_\+cond}!Matrix\+\_\+\+F\+\_\+meno@{Matrix\+\_\+\+F\+\_\+meno}}
+\subsubsection{\texorpdfstring{bc\+\_\+cond}{bc\_cond}}
+{\footnotesize\ttfamily std\+::string Matrix\+\_\+\+F\+\_\+meno\+::bc\+\_\+cond\hspace{0.3cm}{\ttfamily [private]}}
+
+Type of bc condition (Inflow or Outflow) \mbox{\Hypertarget{classMatrix__F__meno_ac51bf5308b52c9ce9a726cafd0485928}\label{classMatrix__F__meno_ac51bf5308b52c9ce9a726cafd0485928}} 
+\index{Matrix\+\_\+\+F\+\_\+meno@{Matrix\+\_\+\+F\+\_\+meno}!c\+\_\+bc@{c\+\_\+bc}}
+\index{c\+\_\+bc@{c\+\_\+bc}!Matrix\+\_\+\+F\+\_\+meno@{Matrix\+\_\+\+F\+\_\+meno}}
+\subsubsection{\texorpdfstring{c\+\_\+bc}{c\_bc}}
+{\footnotesize\ttfamily double Matrix\+\_\+\+F\+\_\+meno\+::c\+\_\+bc\hspace{0.3cm}{\ttfamily [private]}}
+
+tracer bc value \mbox{\Hypertarget{classMatrix__F__meno_a635dd00a661ca2453da2392f98422b61}\label{classMatrix__F__meno_a635dd00a661ca2453da2392f98422b61}} 
+\index{Matrix\+\_\+\+F\+\_\+meno@{Matrix\+\_\+\+F\+\_\+meno}!velocity@{velocity}}
+\index{velocity@{velocity}!Matrix\+\_\+\+F\+\_\+meno@{Matrix\+\_\+\+F\+\_\+meno}}
+\subsubsection{\texorpdfstring{velocity}{velocity}}
+{\footnotesize\ttfamily Eigen\+::\+Vector\+Xd Matrix\+\_\+\+F\+\_\+meno\+::velocity\hspace{0.3cm}{\ttfamily [private]}}
+
+Transport fluid velocity 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{matrix_8hpp}{matrix.\+hpp}\end{DoxyCompactItemize}

@@ -1,6 +1,6 @@
 [domain]
   #Domain is [0,domain_length]
-  domain_length=1
+  domain_length=0.045
   
   [../]
 
@@ -12,8 +12,8 @@
   mu=1.0e-3
   
   #Porosity
-  #phi0=0.2+0*x
-  phi0=1+0.0*x
+  phi0=0.3+0*x
+  #phi0=1.0+0.0*x
   #phi0=0.0*x
   [../]
 
@@ -75,10 +75,10 @@
 
 [Time]
     #Final T
-    T=1
+    T=345600
     
     #Time step
-    Nt=100
+    Nt=10000
     
     [../]
 
@@ -88,25 +88,26 @@
      Ca_0=0.0+0.0*x
 
      #Initical conentration CaSiO3
-     CaSiO3_0=1.0+0.0*x
+     CaSiO3_0=16.7504+0.0*x
 
      #Reaction_area
      #A=1.38
      #A=1.38
-     A=1.0
+     A=1.9e-2
      
      #Constant_reaction
      #Rate_const=10e{-1.3}
      #Rate_const=0.05011872336
-     Rate_const=0.001
+     Rate_const=0.004466   #ho moltiplicato il valore sopra per [H+]^(n)
+     #Rate_const=0.001
      
      #Energy_activation
      #E=47000
-     E=0
+     E=4700
      
      #R constant
      R=8.314
-     R=1
+     #R=1
    
      #Temperature
      #Temp=373.0
@@ -115,7 +116,7 @@
      #K_sol
      #K_sol=10e9
      #K_sol=1e3
-     K_sol=1
+     K_sol=10e9
      
      #Ph
      ph=3.5

@@ -155,7 +155,7 @@ public:
 *\param por is the soil porosity
 *\param h is the spatial step
 */   
-   void set_data(const muparser_fun por,double h);
+   void set_data(const muparser_fun phi,double h);
 
     void define_matrix() override;
 
@@ -163,12 +163,12 @@ public:
 
     void set_rhs() override;
 
-    void assemble_matrix(const muparser_fun por,double h);/*!<Function that calls the above functions define_matrix(),set_BC(), set_rhs() in order to assemble all the matrix C*/
+    void assemble_matrix(const muparser_fun phi,double h);/*!<Function that calls the above functions define_matrix(),set_BC(), set_rhs() in order to assemble all the matrix C*/
 
     ~Matrix_C() {};
 
 private:
-    muparser_fun por;/*!<Soil porosity*/
+    muparser_fun phi;/*!<Soil porosity*/
     double h; /*!<Spatial step*/
 };
 
@@ -256,9 +256,11 @@ public:
 *\param E is the activation energy
 *\param ph is the water ph
 *\param const_eq is the equilibrium reaction constant
+*\param h is the spatial step
+*\param phi is the soil porosity
 */ 
 
-    void set_data(double area, double rate_const, double temperature, double R, double E, double ph,double const_eq, double h);
+    void set_data(double area, double rate_const, double temperature, double R, double E, double ph,double const_eq, double h, const muparser_fun phi);
 
     void define_matrix() override;
 
@@ -266,7 +268,7 @@ public:
 
     void set_rhs() override;
    
-    void assemble_matrix(double area, double rate_const, double temperature, double R, double E, double ph,double const_eq, double h);/*!<Function that calls the above functions define_matrix(),set_BC(), set_rhs() in order to assemble all the matrix */
+    void assemble_matrix(double area, double rate_const, double temperature, double R, double E, double ph,double const_eq, double h, const muparser_fun phi);/*!<Function that calls the above functions define_matrix(),set_BC(), set_rhs() in order to assemble all the matrix */
 
     void update(const Eigen::VectorXd &past_sol);/*!<Function that updates the Reaction matrix since we treat this part explicitely*/
 
@@ -277,6 +279,7 @@ private:
     double ph;/*!<water ph*/
     double const_eq;/*!<Equilibrium reaction constant*/
     double h;/*!<Spatial step*/
+    muparser_fun phi;/*!<Soil porosity*/
 };
 
 

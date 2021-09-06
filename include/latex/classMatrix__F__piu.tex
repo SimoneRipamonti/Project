@@ -1,0 +1,128 @@
+\hypertarget{classMatrix__F__piu}{}\section{Matrix\+\_\+\+F\+\_\+piu Class Reference}
+\label{classMatrix__F__piu}\index{Matrix\+\_\+\+F\+\_\+piu@{Matrix\+\_\+\+F\+\_\+piu}}
+
+
+Matrix F\+\_\+piu is the part of the Upwind Matrix which treats the left node of the cells.  
+
+
+
+
+{\ttfamily \#include $<$matrix.\+hpp$>$}
+
+
+
+Inheritance diagram for Matrix\+\_\+\+F\+\_\+piu\+:
+% FIG 0
+
+
+Collaboration diagram for Matrix\+\_\+\+F\+\_\+piu\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classMatrix__F__piu_a14c048fcc94a2b153d19f2ac017b7d08}\label{classMatrix__F__piu_a14c048fcc94a2b153d19f2ac017b7d08}} 
+{\bfseries Matrix\+\_\+\+F\+\_\+piu} (unsigned int \hyperlink{classAbstractMatrix_a27fb46bf2853d4927d92a81b8b7773fb}{row}, unsigned int \hyperlink{classAbstractMatrix_af3ad3551ce094979488cef5df0e4fc1d}{col})
+\item 
+void \hyperlink{classMatrix__F__piu_a4b631309cacec285bddcb02f5058459a}{set\+\_\+data} (const std\+::string \&bc, double \hyperlink{classMatrix__F__piu_ae3b52ffd1775204d798f71cb2a764418}{c\+\_\+bc}, const Eigen\+::\+Vector\+Xd \&vel)
+\item 
+void \hyperlink{classMatrix__F__piu_a137056684d91ecfac671f22518780d47}{define\+\_\+matrix} () override
+\item 
+void \hyperlink{classMatrix__F__piu_afa51e1c04b403a491178bbeda322ce9d}{set\+\_\+\+BC} () override
+\item 
+void \hyperlink{classMatrix__F__piu_a174bfb860e79ad913fef24202d3ce96d}{set\+\_\+rhs} () override
+\item 
+void \hyperlink{classMatrix__F__piu_a1c640185a5b427345d92e76c82b78f70}{assemble\+\_\+matrix} (const std\+::string \&bc, double \hyperlink{classMatrix__F__piu_ae3b52ffd1775204d798f71cb2a764418}{c\+\_\+bc}, const Eigen\+::\+Vector\+Xd \&vel)
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::string \hyperlink{classMatrix__F__piu_a21cf5eed26e8fb9e8ad570bc56b1ea68}{bc\+\_\+cond}
+\item 
+Eigen\+::\+Vector\+Xd \hyperlink{classMatrix__F__piu_add146b5bb9b16e37ca9fbd3727c5ebe3}{velocity}
+\item 
+double \hyperlink{classMatrix__F__piu_ae3b52ffd1775204d798f71cb2a764418}{c\+\_\+bc}
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+Matrix F\+\_\+piu is the part of the Upwind Matrix which treats the left node of the cells. 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classMatrix__F__piu_a1c640185a5b427345d92e76c82b78f70}\label{classMatrix__F__piu_a1c640185a5b427345d92e76c82b78f70}} 
+\index{Matrix\+\_\+\+F\+\_\+piu@{Matrix\+\_\+\+F\+\_\+piu}!assemble\+\_\+matrix@{assemble\+\_\+matrix}}
+\index{assemble\+\_\+matrix@{assemble\+\_\+matrix}!Matrix\+\_\+\+F\+\_\+piu@{Matrix\+\_\+\+F\+\_\+piu}}
+\subsubsection{\texorpdfstring{assemble\+\_\+matrix()}{assemble\_matrix()}}
+{\footnotesize\ttfamily void Matrix\+\_\+\+F\+\_\+piu\+::assemble\+\_\+matrix (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{bc,  }\item[{double}]{c\+\_\+bc,  }\item[{const Eigen\+::\+Vector\+Xd \&}]{vel }\end{DoxyParamCaption})}
+
+Function that calls the above functions \hyperlink{classMatrix__F__piu_a137056684d91ecfac671f22518780d47}{define\+\_\+matrix()},\hyperlink{classMatrix__F__piu_afa51e1c04b403a491178bbeda322ce9d}{set\+\_\+\+B\+C()}, \hyperlink{classMatrix__F__piu_a174bfb860e79ad913fef24202d3ce96d}{set\+\_\+rhs()} in order to assemble all the matrix F\+\_\+piu \mbox{\Hypertarget{classMatrix__F__piu_a137056684d91ecfac671f22518780d47}\label{classMatrix__F__piu_a137056684d91ecfac671f22518780d47}} 
+\index{Matrix\+\_\+\+F\+\_\+piu@{Matrix\+\_\+\+F\+\_\+piu}!define\+\_\+matrix@{define\+\_\+matrix}}
+\index{define\+\_\+matrix@{define\+\_\+matrix}!Matrix\+\_\+\+F\+\_\+piu@{Matrix\+\_\+\+F\+\_\+piu}}
+\subsubsection{\texorpdfstring{define\+\_\+matrix()}{define\_matrix()}}
+{\footnotesize\ttfamily void Matrix\+\_\+\+F\+\_\+piu\+::define\+\_\+matrix (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+Function that defines the specific algebraic operator (the matrix) in question. 
+
+Implements \hyperlink{classAbstractMatrix_a40016da151226fbfcd444839943d8fe3}{Abstract\+Matrix}.
+
+\mbox{\Hypertarget{classMatrix__F__piu_afa51e1c04b403a491178bbeda322ce9d}\label{classMatrix__F__piu_afa51e1c04b403a491178bbeda322ce9d}} 
+\index{Matrix\+\_\+\+F\+\_\+piu@{Matrix\+\_\+\+F\+\_\+piu}!set\+\_\+\+BC@{set\+\_\+\+BC}}
+\index{set\+\_\+\+BC@{set\+\_\+\+BC}!Matrix\+\_\+\+F\+\_\+piu@{Matrix\+\_\+\+F\+\_\+piu}}
+\subsubsection{\texorpdfstring{set\+\_\+\+B\+C()}{set\_BC()}}
+{\footnotesize\ttfamily void Matrix\+\_\+\+F\+\_\+piu\+::set\+\_\+\+BC (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+Function that imposes the BC on the matrix 
+
+Implements \hyperlink{classAbstractMatrix_aa0a17dacbeede4180531b115d4a9f3eb}{Abstract\+Matrix}.
+
+\mbox{\Hypertarget{classMatrix__F__piu_a4b631309cacec285bddcb02f5058459a}\label{classMatrix__F__piu_a4b631309cacec285bddcb02f5058459a}} 
+\index{Matrix\+\_\+\+F\+\_\+piu@{Matrix\+\_\+\+F\+\_\+piu}!set\+\_\+data@{set\+\_\+data}}
+\index{set\+\_\+data@{set\+\_\+data}!Matrix\+\_\+\+F\+\_\+piu@{Matrix\+\_\+\+F\+\_\+piu}}
+\subsubsection{\texorpdfstring{set\+\_\+data()}{set\_data()}}
+{\footnotesize\ttfamily void Matrix\+\_\+\+F\+\_\+piu\+::set\+\_\+data (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{bc,  }\item[{double}]{c\+\_\+bc,  }\item[{const Eigen\+::\+Vector\+Xd \&}]{vel }\end{DoxyParamCaption})}
+
+Function that takes as input and sets the specific data necessary for assemblying matrix F\+\_\+piu 
+\begin{DoxyParams}{Parameters}
+{\em bc} & type of boundary condition (in or out) \\
+\hline
+{\em c\+\_\+bc} & tracer bc value \\
+\hline
+{\em vel} & transport fluid velocity \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classMatrix__F__piu_a174bfb860e79ad913fef24202d3ce96d}\label{classMatrix__F__piu_a174bfb860e79ad913fef24202d3ce96d}} 
+\index{Matrix\+\_\+\+F\+\_\+piu@{Matrix\+\_\+\+F\+\_\+piu}!set\+\_\+rhs@{set\+\_\+rhs}}
+\index{set\+\_\+rhs@{set\+\_\+rhs}!Matrix\+\_\+\+F\+\_\+piu@{Matrix\+\_\+\+F\+\_\+piu}}
+\subsubsection{\texorpdfstring{set\+\_\+rhs()}{set\_rhs()}}
+{\footnotesize\ttfamily void Matrix\+\_\+\+F\+\_\+piu\+::set\+\_\+rhs (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+Function that sets the right-\/hand side corresponding to the problem 
+
+Implements \hyperlink{classAbstractMatrix_a1334661de25f76dc65f16538c167a03c}{Abstract\+Matrix}.
+
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{classMatrix__F__piu_a21cf5eed26e8fb9e8ad570bc56b1ea68}\label{classMatrix__F__piu_a21cf5eed26e8fb9e8ad570bc56b1ea68}} 
+\index{Matrix\+\_\+\+F\+\_\+piu@{Matrix\+\_\+\+F\+\_\+piu}!bc\+\_\+cond@{bc\+\_\+cond}}
+\index{bc\+\_\+cond@{bc\+\_\+cond}!Matrix\+\_\+\+F\+\_\+piu@{Matrix\+\_\+\+F\+\_\+piu}}
+\subsubsection{\texorpdfstring{bc\+\_\+cond}{bc\_cond}}
+{\footnotesize\ttfamily std\+::string Matrix\+\_\+\+F\+\_\+piu\+::bc\+\_\+cond\hspace{0.3cm}{\ttfamily [private]}}
+
+Type of bc condition (Inflow or Outflow) \mbox{\Hypertarget{classMatrix__F__piu_ae3b52ffd1775204d798f71cb2a764418}\label{classMatrix__F__piu_ae3b52ffd1775204d798f71cb2a764418}} 
+\index{Matrix\+\_\+\+F\+\_\+piu@{Matrix\+\_\+\+F\+\_\+piu}!c\+\_\+bc@{c\+\_\+bc}}
+\index{c\+\_\+bc@{c\+\_\+bc}!Matrix\+\_\+\+F\+\_\+piu@{Matrix\+\_\+\+F\+\_\+piu}}
+\subsubsection{\texorpdfstring{c\+\_\+bc}{c\_bc}}
+{\footnotesize\ttfamily double Matrix\+\_\+\+F\+\_\+piu\+::c\+\_\+bc\hspace{0.3cm}{\ttfamily [private]}}
+
+tracer bc value \mbox{\Hypertarget{classMatrix__F__piu_add146b5bb9b16e37ca9fbd3727c5ebe3}\label{classMatrix__F__piu_add146b5bb9b16e37ca9fbd3727c5ebe3}} 
+\index{Matrix\+\_\+\+F\+\_\+piu@{Matrix\+\_\+\+F\+\_\+piu}!velocity@{velocity}}
+\index{velocity@{velocity}!Matrix\+\_\+\+F\+\_\+piu@{Matrix\+\_\+\+F\+\_\+piu}}
+\subsubsection{\texorpdfstring{velocity}{velocity}}
+{\footnotesize\ttfamily Eigen\+::\+Vector\+Xd Matrix\+\_\+\+F\+\_\+piu\+::velocity\hspace{0.3cm}{\ttfamily [private]}}
+
+Transport fluid velocity 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{matrix_8hpp}{matrix.\+hpp}\end{DoxyCompactItemize}

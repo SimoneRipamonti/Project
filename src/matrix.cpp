@@ -3,20 +3,22 @@
 #include <cmath>
 #include <algorithm>
 
-//AbstractMatrix constructor
+///AbstractMatrix constructor
 AbstractMatrix::AbstractMatrix(unsigned int row_,unsigned int col_):row(row_),col(col_)
 {
     m.resize(row_,col_);
     rhs=Eigen::VectorXd::Zero(col_);
 }
 
-//Getters
-Eigen::SparseMatrix<double>& AbstractMatrix::get_matrix()
+/**
+ *Getters
+ */
+Eigen::SparseMatrix<double>& AbstractMatrix::get_matrix() 
 {
     return m;
 }
 
-Eigen::VectorXd& AbstractMatrix::get_rhs()
+Eigen::VectorXd& AbstractMatrix::get_rhs() 
 {
     return rhs;
 }
@@ -162,9 +164,9 @@ Matrix_C::Matrix_C(unsigned int row_,unsigned int col_):AbstractMatrix(row_,col_
 
 //set_data gives to the matrix object the physical and geometrical parameters which it needs to assemble the matrix
 
-void Matrix_C::set_data(const muparser_fun por_,double h_)
+void Matrix_C::set_data(const muparser_fun phi_,double h_)
 {
-    por=por_;
+    phi=phi_;
     h=h_;
 }
 
@@ -173,7 +175,7 @@ void Matrix_C::set_data(const muparser_fun por_,double h_)
 void Matrix_C::define_matrix()
 {
     for(unsigned int i=0; i<row; ++i)
-        m.insert(i,i)=por(0.5*h+i*h)*h;//we include in the mass matrix of the transport equation (Matrix_C) already the product with the spatial step h and the porosity
+        m.insert(i,i)=phi(0.5*h+i*h)*h;//we include in the mass matrix of the transport equation (Matrix_C) already the product with the spatial step h and the porosity
 
 }
 
@@ -185,9 +187,9 @@ void Matrix_C::set_BC()
 void Matrix_C::set_rhs()
 {}
 
-void Matrix_C::assemble_matrix(const muparser_fun por_,double h_)
+void Matrix_C::assemble_matrix(const muparser_fun phi_,double h_)
 {
-    set_data(por_,h_);
+    set_data(phi_,h_);
     define_matrix();
     set_BC();
     set_rhs();
@@ -289,13 +291,14 @@ void Matrix_F_meno::set_rhs()
 Matrix_R::Matrix_R(unsigned int row_,unsigned int col_):AbstractMatrix(row_,col_) {}
 
 //set_data gives to the matrix object the physical and geometrical parameters which it needs to assemble the matrix
-void Matrix_R::set_data(double area, double rate_const, double temperature, double R, double E, double ph_, double const_eq_, double h_)
+void Matrix_R::set_data(double area, double rate_const, double temperature, double R, double E, double ph_, double const_eq_, double h_, const muparser_fun phi_)
 {
     //react_const=area*rate_const*(std::exp(-E/(R*temperature)))*std::pow(10,-ph);
     react_const=area*rate_const*(std::exp(-E/(R*temperature)));
     ph=ph_;
     const_eq=const_eq_;
     h=h_;
+    phi=phi_;
 }
 
 //Defintion of matrix F_piu as the right part of the upwind scheme with P1 elemen
@@ -305,9 +308,9 @@ void Matrix_R::set_BC() {}
 
 void Matrix_R::set_rhs() {}
 
-void Matrix_R::assemble_matrix(double area, double rate_const, double temperature, double R, double E, double ph,double const_eq, double h)
+void Matrix_R::assemble_matrix(double area, double rate_const, double temperature, double R, double E, double ph,double const_eq, double h, const muparser_fun phi)
 {
-    set_data(area,rate_const,temperature,R,E,ph,const_eq,h);
+    set_data(area,rate_const,temperature,R,E,ph,const_eq,h,phi);
     define_matrix();
     set_BC();
     set_rhs();
@@ -320,7 +323,7 @@ void Matrix_R::update(const Eigen::VectorXd &past_sol)
 
     const Eigen::VectorXd p=past_sol.array().pow(2)/(const_eq*std::pow(10,-2*ph));
     for(unsigned int i=0; i<rhs.size(); ++i)
-        rhs(i)=h*std::max(react_const*(1.0-p(i)),0.0);
+        rhs(i)=h*phi(h/2+i*h)*std::max(react_const*(1.0-p(i)),0.0);
 
 }
 

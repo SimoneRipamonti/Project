@@ -1,0 +1,92 @@
+\hypertarget{classmuparser__fun}{}\section{muparser\+\_\+fun Class Reference}
+\label{classmuparser__fun}\index{muparser\+\_\+fun@{muparser\+\_\+fun}}
+
+
+Class for creating and set \hyperlink{classmuparser__fun}{muparser\+\_\+fun}.  
+
+
+
+
+{\ttfamily \#include $<$muparser\+\_\+fun.\+hpp$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classmuparser__fun_a17c98796657ea4da75ca6e273f0b6965}{muparser\+\_\+fun} ()=default
+\item 
+\hyperlink{classmuparser__fun_a106b21c0b17eb9fbc347fd510f617efb}{muparser\+\_\+fun} (const \hyperlink{classmuparser__fun}{muparser\+\_\+fun} \&m)
+\item 
+void \hyperlink{classmuparser__fun_a1e7855a7285191f81deddf262cac949a}{set\+\_\+value} (const std\+::string \&)
+\item 
+double \hyperlink{classmuparser__fun_ad6ad244f299a60774735832c4ea28d66}{operator()} (const double \&)
+\item 
+\hyperlink{classmuparser__fun}{muparser\+\_\+fun} \& \hyperlink{classmuparser__fun_a6e4082f4ba40e947b734195a337823d9}{operator=} (const \hyperlink{classmuparser__fun}{muparser\+\_\+fun} \&p)
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+double \hyperlink{classmuparser__fun_ac4fe6d4c1437a4f66039268cdd304b75}{var}
+\item 
+mu\+::\+Parser \hyperlink{classmuparser__fun_ad94fb029c66d186b6fe278b51df8dfc4}{parser}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Class for creating and set \hyperlink{classmuparser__fun}{muparser\+\_\+fun}. 
+
+Class that permit to store functions, passed from the pot file, in muparser function (handle function in Matlab) 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classmuparser__fun_a17c98796657ea4da75ca6e273f0b6965}\label{classmuparser__fun_a17c98796657ea4da75ca6e273f0b6965}} 
+\index{muparser\+\_\+fun@{muparser\+\_\+fun}!muparser\+\_\+fun@{muparser\+\_\+fun}}
+\index{muparser\+\_\+fun@{muparser\+\_\+fun}!muparser\+\_\+fun@{muparser\+\_\+fun}}
+\subsubsection{\texorpdfstring{muparser\+\_\+fun()}{muparser\_fun()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily muparser\+\_\+fun\+::muparser\+\_\+fun (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+default constructor \mbox{\Hypertarget{classmuparser__fun_a106b21c0b17eb9fbc347fd510f617efb}\label{classmuparser__fun_a106b21c0b17eb9fbc347fd510f617efb}} 
+\index{muparser\+\_\+fun@{muparser\+\_\+fun}!muparser\+\_\+fun@{muparser\+\_\+fun}}
+\index{muparser\+\_\+fun@{muparser\+\_\+fun}!muparser\+\_\+fun@{muparser\+\_\+fun}}
+\subsubsection{\texorpdfstring{muparser\+\_\+fun()}{muparser\_fun()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily muparser\+\_\+fun\+::muparser\+\_\+fun (\begin{DoxyParamCaption}\item[{const \hyperlink{classmuparser__fun}{muparser\+\_\+fun} \&}]{m }\end{DoxyParamCaption})}
+
+copy-\/constructor 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classmuparser__fun_ad6ad244f299a60774735832c4ea28d66}\label{classmuparser__fun_ad6ad244f299a60774735832c4ea28d66}} 
+\index{muparser\+\_\+fun@{muparser\+\_\+fun}!operator()@{operator()}}
+\index{operator()@{operator()}!muparser\+\_\+fun@{muparser\+\_\+fun}}
+\subsubsection{\texorpdfstring{operator()()}{operator()()}}
+{\footnotesize\ttfamily double muparser\+\_\+fun\+::operator() (\begin{DoxyParamCaption}\item[{const double \&}]{ }\end{DoxyParamCaption})}
+
+operator that permit to evaluate the function at a particular value of the independent variable \mbox{\Hypertarget{classmuparser__fun_a6e4082f4ba40e947b734195a337823d9}\label{classmuparser__fun_a6e4082f4ba40e947b734195a337823d9}} 
+\index{muparser\+\_\+fun@{muparser\+\_\+fun}!operator=@{operator=}}
+\index{operator=@{operator=}!muparser\+\_\+fun@{muparser\+\_\+fun}}
+\subsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily \hyperlink{classmuparser__fun}{muparser\+\_\+fun}\& muparser\+\_\+fun\+::operator= (\begin{DoxyParamCaption}\item[{const \hyperlink{classmuparser__fun}{muparser\+\_\+fun} \&}]{p }\end{DoxyParamCaption})}
+
+copy operator \mbox{\Hypertarget{classmuparser__fun_a1e7855a7285191f81deddf262cac949a}\label{classmuparser__fun_a1e7855a7285191f81deddf262cac949a}} 
+\index{muparser\+\_\+fun@{muparser\+\_\+fun}!set\+\_\+value@{set\+\_\+value}}
+\index{set\+\_\+value@{set\+\_\+value}!muparser\+\_\+fun@{muparser\+\_\+fun}}
+\subsubsection{\texorpdfstring{set\+\_\+value()}{set\_value()}}
+{\footnotesize\ttfamily void muparser\+\_\+fun\+::set\+\_\+value (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{ }\end{DoxyParamCaption})}
+
+function that takes in input the string that represents the function to be treat and gives as output the respective muparser function 
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{classmuparser__fun_ad94fb029c66d186b6fe278b51df8dfc4}\label{classmuparser__fun_ad94fb029c66d186b6fe278b51df8dfc4}} 
+\index{muparser\+\_\+fun@{muparser\+\_\+fun}!parser@{parser}}
+\index{parser@{parser}!muparser\+\_\+fun@{muparser\+\_\+fun}}
+\subsubsection{\texorpdfstring{parser}{parser}}
+{\footnotesize\ttfamily mu\+::\+Parser muparser\+\_\+fun\+::parser\hspace{0.3cm}{\ttfamily [private]}}
+
+Parser from the muparser library \mbox{\Hypertarget{classmuparser__fun_ac4fe6d4c1437a4f66039268cdd304b75}\label{classmuparser__fun_ac4fe6d4c1437a4f66039268cdd304b75}} 
+\index{muparser\+\_\+fun@{muparser\+\_\+fun}!var@{var}}
+\index{var@{var}!muparser\+\_\+fun@{muparser\+\_\+fun}}
+\subsubsection{\texorpdfstring{var}{var}}
+{\footnotesize\ttfamily double muparser\+\_\+fun\+::var\hspace{0.3cm}{\ttfamily [private]}}
+
+Indipendent variable of the muparser function 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+muparser\+\_\+fun.\+hpp\end{DoxyCompactItemize}

@@ -42,7 +42,8 @@ int main()
     unsigned int Nx{concentration.get_Nx()};
     unsigned int Nt{concentration.get_Nt()};
 
-    Eigen::VectorXd vel{0.0*Eigen::VectorXd::Ones(Nx+1)};
+    //Eigen::VectorXd vel{6.67e-8*Eigen::VectorXd::Ones(Nx+1)};
+    Eigen::VectorXd vel{6.67e-9*Eigen::VectorXd::Ones(Nx+1)};
 
 
     Eigen::VectorXd psi1{Eigen::VectorXd::Zero(Nx)};
@@ -87,26 +88,88 @@ int main()
 
 //Loop Temporale
 
-    for(unsigned int i=1; i<Nt; i++)
+    for(unsigned int i=1; i<Nt+1; i++)
     {
-        concentration.compute_phi(i-1,psi1,psi2,psi3,psi4,psi5); // phi
+        concentration.compute_psi(i-1,psi1,psi2,psi3,psi4,psi5); // phi
+        
+        unsigned int a=Nx/10; 
+         /*if(i==2)
+        {   
+              std::cout<<"psi1="<<std::endl;
+            for(unsigned int j=0;j<Nx;j+=a)
+              {std::cout<<psi1(j)<<std::endl;}
+             
+             std::cout<<"psi2="<<std::endl;
+            for(unsigned int j=0;j<Nx;j+=a)
+             {std::cout<<psi2(j)<<std::endl;}
+               
+             std::cout<<"psi3="<<std::endl;
+            for(unsigned int j=0;j<Nx;j+=a)
+              {std::cout<<psi3(j)<<std::endl;}
+             
+   	    std::cout<<"psi4="<<std::endl;
+            for(unsigned int j=0;j<Nx;j+=a)
+              {std::cout<<psi4(j)<<std::endl;}
+               
+	    std::cout<<"psi5="<<std::endl;
+            for(unsigned int j=0;j<Nx;j+=a)
+              {std::cout<<psi5(j)<<std::endl;}
+               
+        }*/
 
         concentration.compute_rd(i-1,rd);//Calcolo i termini di reazione
+        
+        if(i==1)
+        {std::cout<<"rd="<<std::endl;
+            for(unsigned int j=0;j<Nx;j++)
+              {std::cout<<rd(j)<<std::endl;}}
 
         //concentration.one_step_transport_reaction(phi1,phi2,phi3,phi4,phi5,rd,M,rhs,method,i,solver); //Calcolo un passo della Reazione
 
         concentration.one_step_transport_reaction(psi1,psi2,psi3,psi4,psi5,rd,rhs,rhs_CO2,i,solver,solver2);
+ 
+        
+        /*if(i==1)
+        {   
+              std::cout<<"psi1="<<std::endl;
+            for(unsigned int j=0;j<Nx;j+=a)
+               {std::cout<<psi1(j)<<std::endl;}
+             
+             std::cout<<"psi2="<<std::endl;
+            for(unsigned int j=0;j<Nx;j+=a)
+             {std::cout<<psi2(j)<<std::endl;}
+               
+             std::cout<<"psi3="<<std::endl;
+            for(unsigned int j=0;j<Nx;j+=a)
+              {std::cout<<psi3(j)<<std::endl;}
+             
+   	    std::cout<<"psi4="<<std::endl;
+            for(unsigned int j=0;j<Nx;j+=a)
+              {std::cout<<psi4(j)<<std::endl;}
+               
+	    std::cout<<"psi5="<<std::endl;
+            for(unsigned int j=0;j<Nx;j+=a)
+              {std::cout<<psi5(j)<<std::endl;}
+               
+        }*/
+
+         
 
         concentration.compute_concentration(i,psi1,psi2,psi3,psi4,psi5); //Calcolo le Concentrazioni effettive
     }
 
 
     concentration.output_results_fixed_time("Ca");
+    concentration.output_results_fixed_time("H_piu");
+    concentration.output_results_fixed_time("HCO3_meno");
+    concentration.output_results_fixed_time("CO2");
+    concentration.output_results_fixed_time("CaSiO3");
+    concentration.output_results_fixed_time("SiO2"); 
 
-    concentration.output_results_fixed_space("Ca");
+    //concentration.output_results_fixed_space("Ca");
 
-    concentration.output_results_fixed_space("CaSiO3");
+    //concentration.output_results_fixed_space("CaSiO3");
 
-    concentration.output_all_reagents(Nx-1);
+    //concentration.output_all_reagents(Nx-1);
 
 }

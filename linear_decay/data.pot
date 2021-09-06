@@ -13,7 +13,7 @@
   
   #Porosity
   #phi0=0.2+0*x
-  phi0=1+0.0*x
+  phi0=1.0+0.0*x
   #phi0=0.0*x
   [../]
 
@@ -84,7 +84,7 @@
 [Linear_dec]
 
      #Lambda for linear decay
-     lambda=5
+     lambda=3.0
     
     [../]
 

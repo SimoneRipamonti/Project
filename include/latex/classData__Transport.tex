@@ -1,0 +1,112 @@
+\hypertarget{classData__Transport}{}\section{Data\+\_\+\+Transport Class Reference}
+\label{classData__Transport}\index{Data\+\_\+\+Transport@{Data\+\_\+\+Transport}}
+
+
+Data for the Transport equation.  
+
+
+
+
+{\ttfamily \#include $<$parameters.\+hpp$>$}
+
+
+
+Collaboration diagram for Data\+\_\+\+Transport\+:
+% FIG 0
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classData__Transport_a32766e6d540e05d518c9de22c00dc290}{Data\+\_\+\+Transport} (const std\+::string \&filename)
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+double \hyperlink{classData__Transport_a5fa7473b6c53b7a6c217bb98ad018b3f}{L}
+\item 
+\hyperlink{classmuparser__fun}{muparser\+\_\+fun} \hyperlink{classData__Transport_af5032faf024d666c17b41cda75cabf2b}{phi}
+\item 
+unsigned int \hyperlink{classData__Transport_a1dbfd22dbcaaa6b152d2d5924a88ae48}{Nx}
+\item 
+\mbox{\Hypertarget{classData__Transport_a2c9fff729baa391078482324d2ee860c}\label{classData__Transport_a2c9fff729baa391078482324d2ee860c}} 
+unsigned int {\bfseries Nt}
+\item 
+double \hyperlink{classData__Transport_abf3c76b02af6f7a2ca96fa6299d00fec}{T}
+\item 
+double \hyperlink{classData__Transport_ab0ecc6cc8672b5c74dcb732baed443ca}{C\+\_\+in}
+\item 
+double \hyperlink{classData__Transport_ae538de71274b5c5c394cf1ab2595641a}{C\+\_\+out}
+\item 
+std\+::string \hyperlink{classData__Transport_a72f6bee03d1aa06b11004640e3d60ec1}{bc\+\_\+cond}
+\item 
+std\+::string \hyperlink{classData__Transport_a7a81d76b7f50e16143a10121db8c7e40}{method}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Data for the Transport equation. 
+
+This class contains variables related to the physical setting of the problem, informations related to the boundary conditions for the Transport\textquotesingle{}s equations and values related to the spatial/time discretization 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classData__Transport_a32766e6d540e05d518c9de22c00dc290}\label{classData__Transport_a32766e6d540e05d518c9de22c00dc290}} 
+\index{Data\+\_\+\+Transport@{Data\+\_\+\+Transport}!Data\+\_\+\+Transport@{Data\+\_\+\+Transport}}
+\index{Data\+\_\+\+Transport@{Data\+\_\+\+Transport}!Data\+\_\+\+Transport@{Data\+\_\+\+Transport}}
+\subsubsection{\texorpdfstring{Data\+\_\+\+Transport()}{Data\_Transport()}}
+{\footnotesize\ttfamily Data\+\_\+\+Transport\+::\+Data\+\_\+\+Transport (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{filename }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+Constructor 
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{classData__Transport_a72f6bee03d1aa06b11004640e3d60ec1}\label{classData__Transport_a72f6bee03d1aa06b11004640e3d60ec1}} 
+\index{Data\+\_\+\+Transport@{Data\+\_\+\+Transport}!bc\+\_\+cond@{bc\+\_\+cond}}
+\index{bc\+\_\+cond@{bc\+\_\+cond}!Data\+\_\+\+Transport@{Data\+\_\+\+Transport}}
+\subsubsection{\texorpdfstring{bc\+\_\+cond}{bc\_cond}}
+{\footnotesize\ttfamily std\+::string Data\+\_\+\+Transport\+::bc\+\_\+cond}
+
+Type of boundary condition \mbox{\Hypertarget{classData__Transport_ab0ecc6cc8672b5c74dcb732baed443ca}\label{classData__Transport_ab0ecc6cc8672b5c74dcb732baed443ca}} 
+\index{Data\+\_\+\+Transport@{Data\+\_\+\+Transport}!C\+\_\+in@{C\+\_\+in}}
+\index{C\+\_\+in@{C\+\_\+in}!Data\+\_\+\+Transport@{Data\+\_\+\+Transport}}
+\subsubsection{\texorpdfstring{C\+\_\+in}{C\_in}}
+{\footnotesize\ttfamily double Data\+\_\+\+Transport\+::\+C\+\_\+in}
+
+In-\/section data of the tracer \mbox{\Hypertarget{classData__Transport_ae538de71274b5c5c394cf1ab2595641a}\label{classData__Transport_ae538de71274b5c5c394cf1ab2595641a}} 
+\index{Data\+\_\+\+Transport@{Data\+\_\+\+Transport}!C\+\_\+out@{C\+\_\+out}}
+\index{C\+\_\+out@{C\+\_\+out}!Data\+\_\+\+Transport@{Data\+\_\+\+Transport}}
+\subsubsection{\texorpdfstring{C\+\_\+out}{C\_out}}
+{\footnotesize\ttfamily double Data\+\_\+\+Transport\+::\+C\+\_\+out}
+
+Out-\/section data of the tracer \mbox{\Hypertarget{classData__Transport_a5fa7473b6c53b7a6c217bb98ad018b3f}\label{classData__Transport_a5fa7473b6c53b7a6c217bb98ad018b3f}} 
+\index{Data\+\_\+\+Transport@{Data\+\_\+\+Transport}!L@{L}}
+\index{L@{L}!Data\+\_\+\+Transport@{Data\+\_\+\+Transport}}
+\subsubsection{\texorpdfstring{L}{L}}
+{\footnotesize\ttfamily double Data\+\_\+\+Transport\+::L}
+
+Domain length \mbox{\Hypertarget{classData__Transport_a7a81d76b7f50e16143a10121db8c7e40}\label{classData__Transport_a7a81d76b7f50e16143a10121db8c7e40}} 
+\index{Data\+\_\+\+Transport@{Data\+\_\+\+Transport}!method@{method}}
+\index{method@{method}!Data\+\_\+\+Transport@{Data\+\_\+\+Transport}}
+\subsubsection{\texorpdfstring{method}{method}}
+{\footnotesize\ttfamily std\+::string Data\+\_\+\+Transport\+::method}
+
+Type of temporal numerical scheme chosen (Esplicit/\+Implicit) \mbox{\Hypertarget{classData__Transport_a1dbfd22dbcaaa6b152d2d5924a88ae48}\label{classData__Transport_a1dbfd22dbcaaa6b152d2d5924a88ae48}} 
+\index{Data\+\_\+\+Transport@{Data\+\_\+\+Transport}!Nx@{Nx}}
+\index{Nx@{Nx}!Data\+\_\+\+Transport@{Data\+\_\+\+Transport}}
+\subsubsection{\texorpdfstring{Nx}{Nx}}
+{\footnotesize\ttfamily unsigned int Data\+\_\+\+Transport\+::\+Nx}
+
+Number of spatial intervals \mbox{\Hypertarget{classData__Transport_af5032faf024d666c17b41cda75cabf2b}\label{classData__Transport_af5032faf024d666c17b41cda75cabf2b}} 
+\index{Data\+\_\+\+Transport@{Data\+\_\+\+Transport}!phi@{phi}}
+\index{phi@{phi}!Data\+\_\+\+Transport@{Data\+\_\+\+Transport}}
+\subsubsection{\texorpdfstring{phi}{phi}}
+{\footnotesize\ttfamily \hyperlink{classmuparser__fun}{muparser\+\_\+fun} Data\+\_\+\+Transport\+::phi}
+
+Soil porosity \mbox{\Hypertarget{classData__Transport_abf3c76b02af6f7a2ca96fa6299d00fec}\label{classData__Transport_abf3c76b02af6f7a2ca96fa6299d00fec}} 
+\index{Data\+\_\+\+Transport@{Data\+\_\+\+Transport}!T@{T}}
+\index{T@{T}!Data\+\_\+\+Transport@{Data\+\_\+\+Transport}}
+\subsubsection{\texorpdfstring{T}{T}}
+{\footnotesize\ttfamily double Data\+\_\+\+Transport\+::T}
+
+Number of time intervals Time interval 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+parameters.\+hpp\end{DoxyCompactItemize}

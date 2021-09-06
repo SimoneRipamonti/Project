@@ -21,10 +21,13 @@ void Transport_system_esplicit(Eigen::MatrixXd &Ca, Eigen::VectorXd &vel,Data_Tr
     double h =static_cast<double>(L)/Nx;
     double dt=static_cast<double>(T)/Nt;
 
-    //The Initial Condition are saved in an Eigen Vector. We recall that the value of the chemical species is saved in the middle of the cell (as the pressure in the Darcy System)
+    Eigen::MatrixXd Reaction{h*Eigen::MatrixXd::Identity(Nx,Nx)}; //Reaction matrix for the linear decay (It is just the Identity matrix multiplied by h and the porosity)
 
-    for (unsigned int i=0; i<Nx; ++i)
-        Ca(i,0)=Ca_0(h/2+i*h);
+      //Initial Condition are saved in an Eigen Vector. We recall that the value of the chemical species is saved in the middle of the cell (as the pressure in the Darcy System) 
+
+   for (unsigned int i=0; i<Nx; ++i)
+        {Ca(i,0)=Ca_0(h/2+i*h);
+         Reaction(i,i)*=phi(h/2+i*h);}
 
     Matrix_F_piu F_p(Nx,Nx);
     F_p.assemble_matrix(bc_cond,C_in,vel);
@@ -34,8 +37,6 @@ void Transport_system_esplicit(Eigen::MatrixXd &Ca, Eigen::VectorXd &vel,Data_Tr
 
     Matrix_C C(Nx,Nx);
     C.assemble_matrix(phi,h);
-
-    const Eigen::MatrixXd Reaction{h*Eigen::MatrixXd::Identity(Nx,Nx)}; //Reaction matrix
 
     const Eigen::SparseMatrix<double>  M{1/dt*C.get_matrix()}; //Definition of the sparse upwind matrix for the esplicit scheme
 
@@ -49,7 +50,7 @@ void Transport_system_esplicit(Eigen::MatrixXd &Ca, Eigen::VectorXd &vel,Data_Tr
     solver.factorize(M);
 
 
-    for(unsigned int i=1; i<Nt; i++)
+    for(unsigned int i=1; i<Nt+1; i++)
     {
         rhs=(1/dt*C.get_matrix()-F_p.get_matrix()+F_m.get_matrix()-lambda*Reaction)*Ca.col(i-1)+C.get_rhs();
         Ca.col(i)=solver.solve(rhs);
@@ -71,13 +72,14 @@ void Transport_system_implicit(Eigen::MatrixXd &Ca, Eigen::VectorXd &vel,Data_Tr
     double h =static_cast<double>(L)/Nx;
     double dt=static_cast<double>(T)/Nt;
 
-    //The Initial Condition are saved in an Eigen Vector. We recall that the value of the chemical species is saved in the middle of the cell (as the pressure in the Darcy System)
 
-    for (unsigned int i=0; i<Nx; ++i)
-        Ca(i,0)=Ca_0(h/2+i*h);
+    Eigen::MatrixXd Reaction{h*Eigen::MatrixXd::Identity(Nx,Nx)}; //Reaction matrix for the linear decay (It is just the Identity matrix multiplied by h and the porosity)
 
-    Ca(0,0)=1.0;
+      //Initial Condition are saved in an Eigen Vector. We recall that the value of the chemical species is saved in the middle of the cell (as the pressure in the Darcy System) 
 
+   for (unsigned int i=0; i<Nx; ++i)
+        {Ca(i,0)=Ca_0(h/2+i*h);
+         Reaction(i,i)*=phi(h/2+i*h);}
 
     Matrix_F_piu F_p(Nx,Nx);
     F_p.assemble_matrix(bc_cond,C_in,vel);
@@ -87,8 +89,6 @@ void Transport_system_implicit(Eigen::MatrixXd &Ca, Eigen::VectorXd &vel,Data_Tr
 
     Matrix_C C(Nx,Nx);
     C.assemble_matrix(phi,h);
-
-    const Eigen::MatrixXd Reaction{h*Eigen::MatrixXd::Identity(Nx,Nx)}; //Reaction matrix
 
     const Eigen::SparseMatrix<double>  M{1/dt*C.get_matrix()+F_p.get_matrix()-F_m.get_matrix()}; //Definition of the sparse upwind matrix for the implicit scheme
 
@@ -101,9 +101,9 @@ void Transport_system_implicit(Eigen::MatrixXd &Ca, Eigen::VectorXd &vel,Data_Tr
     // Compute the numerical factorization
     solver.factorize(M);
 
-    for(unsigned int i=1; i<Nt; i++)
+    for(unsigned int i=1; i<Nt+1; i++)
     {
-        rhs=(1/dt*C.get_matrix()-lambda*Reaction)*Ca.col(i-1)+C.get_rhs();//Bisognerebbe moltiplicarlo per la porosità il termine reattivo
+        rhs=(1/dt*C.get_matrix()-lambda*Reaction)*Ca.col(i-1)+C.get_rhs();
         Ca.col(i)=solver.solve(rhs);
 
     }

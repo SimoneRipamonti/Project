@@ -16,14 +16,14 @@ int main(int argc, char **argv)
     Data_2Reagents data_2reagents("data.pot");
 
     Eigen::VectorXd vel=0.0*Eigen::VectorXd::Ones(data_transport.Nx+1);
-    Eigen::MatrixXd Ca(data_transport.Nx,data_transport.Nt);
-    Eigen::MatrixXd CaSiO3(data_transport.Nx,data_transport.Nt);
+    Eigen::MatrixXd Ca(data_transport.Nx,data_transport.Nt+1);
+    Eigen::MatrixXd CaSiO3(data_transport.Nx,data_transport.Nt+1);
 
 
     Transport_system_implicit_2_reagents(Ca,CaSiO3,vel,data_transport,data_reaction,data_2reagents);
 
-    output_results_fixed_time_2_reagents(Ca,CaSiO3,data_transport.Nx,data_transport.L,data_transport.Nt);
+    output_results_fixed_time_2_reagents(Ca,CaSiO3,data_transport.L,data_transport.Nx,data_transport.T,data_transport.Nt);
 
-    output_results_fixed_space_2_reagents(Ca,CaSiO3,data_transport.Nx,data_transport.T,data_transport.Nt);
+    output_results_fixed_space_2_reagents(Ca,CaSiO3,data_transport.L,data_transport.Nx,data_transport.T,data_transport.Nt);
 
 }

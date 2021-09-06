@@ -1,0 +1,118 @@
+\hypertarget{classMatrix__C}{}\section{Matrix\+\_\+C Class Reference}
+\label{classMatrix__C}\index{Matrix\+\_\+C@{Matrix\+\_\+C}}
+
+
+Matrix C is the mass matrix for the Transport problem.  
+
+
+
+
+{\ttfamily \#include $<$matrix.\+hpp$>$}
+
+
+
+Inheritance diagram for Matrix\+\_\+C\+:
+% FIG 0
+
+
+Collaboration diagram for Matrix\+\_\+C\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classMatrix__C_a9e4a2ba41703e9547e7fa8fccf041966}\label{classMatrix__C_a9e4a2ba41703e9547e7fa8fccf041966}} 
+{\bfseries Matrix\+\_\+C} (unsigned int \hyperlink{classAbstractMatrix_a27fb46bf2853d4927d92a81b8b7773fb}{row}, unsigned int \hyperlink{classAbstractMatrix_af3ad3551ce094979488cef5df0e4fc1d}{col})
+\item 
+void \hyperlink{classMatrix__C_af91d61fdcd02ac2c6c87d2dbdbdf18a2}{set\+\_\+data} (const \hyperlink{classmuparser__fun}{muparser\+\_\+fun} \hyperlink{classMatrix__C_a45440dbea003cf386406ad510e32bc25}{por}, double \hyperlink{classMatrix__C_ac381c022ef4080ac749c69d92a9f5927}{h})
+\item 
+void \hyperlink{classMatrix__C_a062ab76d181505d1db2e391f02152376}{define\+\_\+matrix} () override
+\item 
+void \hyperlink{classMatrix__C_a9235c2dbf2853fae4122251726a7efce}{set\+\_\+\+BC} () override
+\item 
+void \hyperlink{classMatrix__C_af305bfe533e702d629df3fb0409bc8d2}{set\+\_\+rhs} () override
+\item 
+void \hyperlink{classMatrix__C_a63752476cb62dc7c22a9b9359f42a995}{assemble\+\_\+matrix} (const \hyperlink{classmuparser__fun}{muparser\+\_\+fun} \hyperlink{classMatrix__C_a45440dbea003cf386406ad510e32bc25}{por}, double \hyperlink{classMatrix__C_ac381c022ef4080ac749c69d92a9f5927}{h})
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classmuparser__fun}{muparser\+\_\+fun} \hyperlink{classMatrix__C_a45440dbea003cf386406ad510e32bc25}{por}
+\item 
+double \hyperlink{classMatrix__C_ac381c022ef4080ac749c69d92a9f5927}{h}
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+Matrix C is the mass matrix for the Transport problem. 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classMatrix__C_a63752476cb62dc7c22a9b9359f42a995}\label{classMatrix__C_a63752476cb62dc7c22a9b9359f42a995}} 
+\index{Matrix\+\_\+C@{Matrix\+\_\+C}!assemble\+\_\+matrix@{assemble\+\_\+matrix}}
+\index{assemble\+\_\+matrix@{assemble\+\_\+matrix}!Matrix\+\_\+C@{Matrix\+\_\+C}}
+\subsubsection{\texorpdfstring{assemble\+\_\+matrix()}{assemble\_matrix()}}
+{\footnotesize\ttfamily void Matrix\+\_\+\+C\+::assemble\+\_\+matrix (\begin{DoxyParamCaption}\item[{const \hyperlink{classmuparser__fun}{muparser\+\_\+fun}}]{por,  }\item[{double}]{h }\end{DoxyParamCaption})}
+
+Function that calls the above functions \hyperlink{classMatrix__C_a062ab76d181505d1db2e391f02152376}{define\+\_\+matrix()},\hyperlink{classMatrix__C_a9235c2dbf2853fae4122251726a7efce}{set\+\_\+\+B\+C()}, \hyperlink{classMatrix__C_af305bfe533e702d629df3fb0409bc8d2}{set\+\_\+rhs()} in order to assemble all the matrix C \mbox{\Hypertarget{classMatrix__C_a062ab76d181505d1db2e391f02152376}\label{classMatrix__C_a062ab76d181505d1db2e391f02152376}} 
+\index{Matrix\+\_\+C@{Matrix\+\_\+C}!define\+\_\+matrix@{define\+\_\+matrix}}
+\index{define\+\_\+matrix@{define\+\_\+matrix}!Matrix\+\_\+C@{Matrix\+\_\+C}}
+\subsubsection{\texorpdfstring{define\+\_\+matrix()}{define\_matrix()}}
+{\footnotesize\ttfamily void Matrix\+\_\+\+C\+::define\+\_\+matrix (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+Function that defines the specific algebraic operator (the matrix) in question. 
+
+Implements \hyperlink{classAbstractMatrix_a40016da151226fbfcd444839943d8fe3}{Abstract\+Matrix}.
+
+\mbox{\Hypertarget{classMatrix__C_a9235c2dbf2853fae4122251726a7efce}\label{classMatrix__C_a9235c2dbf2853fae4122251726a7efce}} 
+\index{Matrix\+\_\+C@{Matrix\+\_\+C}!set\+\_\+\+BC@{set\+\_\+\+BC}}
+\index{set\+\_\+\+BC@{set\+\_\+\+BC}!Matrix\+\_\+C@{Matrix\+\_\+C}}
+\subsubsection{\texorpdfstring{set\+\_\+\+B\+C()}{set\_BC()}}
+{\footnotesize\ttfamily void Matrix\+\_\+\+C\+::set\+\_\+\+BC (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+Function that imposes the BC on the matrix 
+
+Implements \hyperlink{classAbstractMatrix_aa0a17dacbeede4180531b115d4a9f3eb}{Abstract\+Matrix}.
+
+\mbox{\Hypertarget{classMatrix__C_af91d61fdcd02ac2c6c87d2dbdbdf18a2}\label{classMatrix__C_af91d61fdcd02ac2c6c87d2dbdbdf18a2}} 
+\index{Matrix\+\_\+C@{Matrix\+\_\+C}!set\+\_\+data@{set\+\_\+data}}
+\index{set\+\_\+data@{set\+\_\+data}!Matrix\+\_\+C@{Matrix\+\_\+C}}
+\subsubsection{\texorpdfstring{set\+\_\+data()}{set\_data()}}
+{\footnotesize\ttfamily void Matrix\+\_\+\+C\+::set\+\_\+data (\begin{DoxyParamCaption}\item[{const \hyperlink{classmuparser__fun}{muparser\+\_\+fun}}]{por,  }\item[{double}]{h }\end{DoxyParamCaption})}
+
+Function that takes as input and sets the specific data necessary for assemblying matrix C 
+\begin{DoxyParams}{Parameters}
+{\em por} & is the soil porosity \\
+\hline
+{\em h} & is the spatial step \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classMatrix__C_af305bfe533e702d629df3fb0409bc8d2}\label{classMatrix__C_af305bfe533e702d629df3fb0409bc8d2}} 
+\index{Matrix\+\_\+C@{Matrix\+\_\+C}!set\+\_\+rhs@{set\+\_\+rhs}}
+\index{set\+\_\+rhs@{set\+\_\+rhs}!Matrix\+\_\+C@{Matrix\+\_\+C}}
+\subsubsection{\texorpdfstring{set\+\_\+rhs()}{set\_rhs()}}
+{\footnotesize\ttfamily void Matrix\+\_\+\+C\+::set\+\_\+rhs (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+Function that sets the right-\/hand side corresponding to the problem 
+
+Implements \hyperlink{classAbstractMatrix_a1334661de25f76dc65f16538c167a03c}{Abstract\+Matrix}.
+
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{classMatrix__C_ac381c022ef4080ac749c69d92a9f5927}\label{classMatrix__C_ac381c022ef4080ac749c69d92a9f5927}} 
+\index{Matrix\+\_\+C@{Matrix\+\_\+C}!h@{h}}
+\index{h@{h}!Matrix\+\_\+C@{Matrix\+\_\+C}}
+\subsubsection{\texorpdfstring{h}{h}}
+{\footnotesize\ttfamily double Matrix\+\_\+\+C\+::h\hspace{0.3cm}{\ttfamily [private]}}
+
+Spatial step \mbox{\Hypertarget{classMatrix__C_a45440dbea003cf386406ad510e32bc25}\label{classMatrix__C_a45440dbea003cf386406ad510e32bc25}} 
+\index{Matrix\+\_\+C@{Matrix\+\_\+C}!por@{por}}
+\index{por@{por}!Matrix\+\_\+C@{Matrix\+\_\+C}}
+\subsubsection{\texorpdfstring{por}{por}}
+{\footnotesize\ttfamily \hyperlink{classmuparser__fun}{muparser\+\_\+fun} Matrix\+\_\+\+C\+::por\hspace{0.3cm}{\ttfamily [private]}}
+
+Soil porosity 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{matrix_8hpp}{matrix.\+hpp}\end{DoxyCompactItemize}

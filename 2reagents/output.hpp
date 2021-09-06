@@ -5,10 +5,15 @@
 #include "matrix.hpp"
 #include "parameters.hpp"
 
+/*!
+ *Function that saves the solution for each reagent in a .csv file the following way: each row is a spatial position, each column is a time instant 
+ */
+void output_results_fixed_time_2_reagents(Eigen::MatrixXd &value1, Eigen::MatrixXd &value2, double L, unsigned int Nx, double T,unsigned int Nt);
 
-void output_results_fixed_time_2_reagents(Eigen::MatrixXd &value1, Eigen::MatrixXd &value2, unsigned int Nx, double L,unsigned int Nt);
-
-void output_results_fixed_space_2_reagents(Eigen::MatrixXd &value1, Eigen::MatrixXd &value2,unsigned int Nx, double T,unsigned int Nt);
+/*!
+ *Function that saves the solution for each in a .csv file the following way: each row is a time instant, each column is a spatial position 
+ */
+void output_results_fixed_space_2_reagents(Eigen::MatrixXd &value1, Eigen::MatrixXd &value2,double L, unsigned int Nx, double T,unsigned int Nt);
 
 
 #endif

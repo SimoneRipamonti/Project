@@ -1,0 +1,216 @@
+The system is: Linux - 5.4.0-81-generic - x86_64
+Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" succeeded.
+Compiler: /u/sw/pkgs/toolchains/gcc-glibc/9/prefix/bin/g++ 
+Build flags: 
+Id flags:  
+
+The output was:
+0
+
+
+Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "a.out"
+
+The CXX compiler identification is GNU, found in "/home/simoripa96/Scrivania/my_project/build/CMakeFiles/3.16.4/CompilerIdCXX/a.out"
+
+Determining if the CXX compiler works passed with the following output:
+Change Dir: /home/simoripa96/Scrivania/my_project/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/u/sw/pkgs/toolchains/gcc-glibc/9/base/bin/gmake cmTC_00c02/fast && /u/sw/pkgs/toolchains/gcc-glibc/9/base/bin/gmake -f CMakeFiles/cmTC_00c02.dir/build.make CMakeFiles/cmTC_00c02.dir/build
+gmake[1]: Entering directory '/home/simoripa96/Scrivania/my_project/build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_00c02.dir/testCXXCompiler.cxx.o
+/u/sw/pkgs/toolchains/gcc-glibc/9/prefix/bin/g++     -o CMakeFiles/cmTC_00c02.dir/testCXXCompiler.cxx.o -c /home/simoripa96/Scrivania/my_project/build/CMakeFiles/CMakeTmp/testCXXCompiler.cxx
+Linking CXX executable cmTC_00c02
+/u/sw/pkgs/toolchains/gcc-glibc/9/base/bin/cmake -E cmake_link_script CMakeFiles/cmTC_00c02.dir/link.txt --verbose=1
+/u/sw/pkgs/toolchains/gcc-glibc/9/prefix/bin/g++       CMakeFiles/cmTC_00c02.dir/testCXXCompiler.cxx.o  -o cmTC_00c02 
+gmake[1]: Leaving directory '/home/simoripa96/Scrivania/my_project/build/CMakeFiles/CMakeTmp'
+
+
+
+Detecting CXX compiler ABI info compiled with the following output:
+Change Dir: /home/simoripa96/Scrivania/my_project/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/u/sw/pkgs/toolchains/gcc-glibc/9/base/bin/gmake cmTC_b11d6/fast && /u/sw/pkgs/toolchains/gcc-glibc/9/base/bin/gmake -f CMakeFiles/cmTC_b11d6.dir/build.make CMakeFiles/cmTC_b11d6.dir/build
+gmake[1]: Entering directory '/home/simoripa96/Scrivania/my_project/build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_b11d6.dir/CMakeCXXCompilerABI.cpp.o
+/u/sw/pkgs/toolchains/gcc-glibc/9/prefix/bin/g++    -v -o CMakeFiles/cmTC_b11d6.dir/CMakeCXXCompilerABI.cpp.o -c /u/sw/pkgs/toolchains/gcc-glibc/9/base/share/cmake-3.16/Modules/CMakeCXXCompilerABI.cpp
+Using built-in specs.
+COLLECT_GCC=/u/sw/pkgs/toolchains/gcc-glibc/9/prefix/bin/g++
+Target: x86_64-mk-linux
+Configured with: ../gcc-9.2.0/configure --build=x86_64-mk-linux --prefix=/u/sw/pkgs/toolchains/gcc-glibc/9/prefix --with-local-prefix=/u/sw/pkgs/toolchains/gcc-glibc/9/base --with-native-system-header-dir=/u/sw/pkgs/toolchains/gcc-glibc/9/prefix/include --with-pkgversion=mk --with-bugurl=https://github.com/elauksap/mk/issues --disable-nls --disable-multilib --enable-shared --enable-threads=posix --enable-__cxa_atexit --enable-lto --enable-libgomp --disable-libstdcxx-pch --enable-bootstrap --enable-languages=c,c++,fortran
+Thread model: posix
+gcc version 9.2.0 (mk) 
+COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_b11d6.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64'
+ /u/sw/pkgs/toolchains/gcc-glibc/9/prefix/libexec/gcc/x86_64-mk-linux/9.2.0/cc1plus -quiet -v -D_GNU_SOURCE /u/sw/pkgs/toolchains/gcc-glibc/9/base/share/cmake-3.16/Modules/CMakeCXXCompilerABI.cpp -quiet -dumpbase CMakeCXXCompilerABI.cpp -mtune=generic -march=x86-64 -auxbase-strip CMakeFiles/cmTC_b11d6.dir/CMakeCXXCompilerABI.cpp.o -version -o /tmp/cc94Jr2U.s
+GNU C++14 (mk) version 9.2.0 (x86_64-mk-linux)
+	compiled by GNU C version 9.2.0, GMP version 6.1.2, MPFR version 4.0.1, MPC version 1.1.0, isl version isl-0.19-GMP
+
+GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+ignoring nonexistent directory "/u/sw/pkgs/toolchains/gcc-glibc/9/prefix/lib/gcc/x86_64-mk-linux/9.2.0/../../../../x86_64-mk-linux/include"
+ignoring duplicate directory "/u/sw/pkgs/toolchains/gcc-glibc/9/prefix/include"
+#include "..." search starts here:
+#include <...> search starts here:
+ /u/sw/pkgs/toolchains/gcc-glibc/9/prefix/lib/gcc/x86_64-mk-linux/9.2.0/../../../../include/c++/9.2.0
+ /u/sw/pkgs/toolchains/gcc-glibc/9/prefix/lib/gcc/x86_64-mk-linux/9.2.0/../../../../include/c++/9.2.0/x86_64-mk-linux
+ /u/sw/pkgs/toolchains/gcc-glibc/9/prefix/lib/gcc/x86_64-mk-linux/9.2.0/../../../../include/c++/9.2.0/backward
+ /u/sw/pkgs/toolchains/gcc-glibc/9/prefix/lib/gcc/x86_64-mk-linux/9.2.0/include
+ /u/sw/pkgs/toolchains/gcc-glibc/9/base/include
+ /u/sw/pkgs/toolchains/gcc-glibc/9/prefix/include
+ /u/sw/pkgs/toolchains/gcc-glibc/9/prefix/lib/gcc/x86_64-mk-linux/9.2.0/include-fixed
+End of search list.
+GNU C++14 (mk) version 9.2.0 (x86_64-mk-linux)
+	compiled by GNU C version 9.2.0, GMP version 6.1.2, MPFR version 4.0.1, MPC version 1.1.0, isl version isl-0.19-GMP
+
+GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+Compiler executable checksum: 043ea27e7142f8ed52f5ba9c651f4377
+COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_b11d6.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64'
+ /u/sw/pkgs/toolchains/gcc-glibc/9/prefix/lib/gcc/x86_64-mk-linux/9.2.0/../../../../x86_64-mk-linux/bin/as -v --64 -o CMakeFiles/cmTC_b11d6.dir/CMakeCXXCompilerABI.cpp.o /tmp/cc94Jr2U.s
+GNU assembler version 2.34 (x86_64-mk-linux) using BFD version (mk) 2.34
+COMPILER_PATH=/u/sw/pkgs/toolchains/gcc-glibc/9/prefix/libexec/gcc/x86_64-mk-linux/9.2.0/:/u/sw/pkgs/toolchains/gcc-glibc/9/prefix/libexec/gcc/x86_64-mk-linux/9.2.0/:/u/sw/pkgs/toolchains/gcc-glibc/9/prefix/libexec/gcc/x86_64-mk-linux/:/u/sw/pkgs/toolchains/gcc-glibc/9/prefix/lib/gcc/x86_64-mk-linux/9.2.0/:/u/sw/pkgs/toolchains/gcc-glibc/9/prefix/lib/gcc/x86_64-mk-linux/:/u/sw/pkgs/toolchains/gcc-glibc/9/prefix/lib/gcc/x86_64-mk-linux/9.2.0/../../../../x86_64-mk-linux/bin/
+LIBRARY_PATH=/u/sw/pkgs/toolchains/gcc-glibc/9/prefix/lib/gcc/x86_64-mk-linux/9.2.0/:/u/sw/pkgs/toolchains/gcc-glibc/9/prefix/lib/gcc/x86_64-mk-linux/9.2.0/../../../../x86_64-mk-linux/lib/../lib/:/u/sw/pkgs/toolchains/gcc-glibc/9/prefix/lib/gcc/x86_64-mk-linux/9.2.0/../../../../lib/:/u/sw/pkgs/toolchains/gcc-glibc/9/prefix/lib/gcc/x86_64-mk-linux/9.2.0/../../../../x86_64-mk-linux/lib/:/u/sw/pkgs/toolchains/gcc-glibc/9/prefix/lib/gcc/x86_64-mk-linux/9.2.0/../../../:/u/sw/pkgs/toolchains/gcc-glibc/9/prefix/lib:/u/sw/pkgs/toolchains/gcc-glibc/9/base/lib
+COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_b11d6.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64'
+Linking CXX executable cmTC_b11d6
+/u/sw/pkgs/toolchains/gcc-glibc/9/base/bin/cmake -E cmake_link_script CMakeFiles/cmTC_b11d6.dir/link.txt --verbose=1
+/u/sw/pkgs/toolchains/gcc-glibc/9/prefix/bin/g++      -v CMakeFiles/cmTC_b11d6.dir/CMakeCXXCompilerABI.cpp.o  -o cmTC_b11d6 
+Using built-in specs.
+COLLECT_GCC=/u/sw/pkgs/toolchains/gcc-glibc/9/prefix/bin/g++
+COLLECT_LTO_WRAPPER=/u/sw/pkgs/toolchains/gcc-glibc/9/prefix/libexec/gcc/x86_64-mk-linux/9.2.0/lto-wrapper
+Target: x86_64-mk-linux
+Configured with: ../gcc-9.2.0/configure --build=x86_64-mk-linux --prefix=/u/sw/pkgs/toolchains/gcc-glibc/9/prefix --with-local-prefix=/u/sw/pkgs/toolchains/gcc-glibc/9/base --with-native-system-header-dir=/u/sw/pkgs/toolchains/gcc-glibc/9/prefix/include --with-pkgversion=mk --with-bugurl=https://github.com/elauksap/mk/issues --disable-nls --disable-multilib --enable-shared --enable-threads=posix --enable-__cxa_atexit --enable-lto --enable-libgomp --disable-libstdcxx-pch --enable-bootstrap --enable-languages=c,c++,fortran
+Thread model: posix
+gcc version 9.2.0 (mk) 
+COMPILER_PATH=/u/sw/pkgs/toolchains/gcc-glibc/9/prefix/libexec/gcc/x86_64-mk-linux/9.2.0/:/u/sw/pkgs/toolchains/gcc-glibc/9/prefix/libexec/gcc/x86_64-mk-linux/9.2.0/:/u/sw/pkgs/toolchains/gcc-glibc/9/prefix/libexec/gcc/x86_64-mk-linux/:/u/sw/pkgs/toolchains/gcc-glibc/9/prefix/lib/gcc/x86_64-mk-linux/9.2.0/:/u/sw/pkgs/toolchains/gcc-glibc/9/prefix/lib/gcc/x86_64-mk-linux/:/u/sw/pkgs/toolchains/gcc-glibc/9/prefix/lib/gcc/x86_64-mk-linux/9.2.0/../../../../x86_64-mk-linux/bin/
+LIBRARY_PATH=/u/sw/pkgs/toolchains/gcc-glibc/9/prefix/lib/gcc/x86_64-mk-linux/9.2.0/:/u/sw/pkgs/toolchains/gcc-glibc/9/prefix/lib/gcc/x86_64-mk-linux/9.2.0/../../../../x86_64-mk-linux/lib/../lib/:/u/sw/pkgs/toolchains/gcc-glibc/9/prefix/lib/gcc/x86_64-mk-linux/9.2.0/../../../../lib/:/u/sw/pkgs/toolchains/gcc-glibc/9/prefix/lib/gcc/x86_64-mk-linux/9.2.0/../../../../x86_64-mk-linux/lib/:/u/sw/pkgs/toolchains/gcc-glibc/9/prefix/lib/gcc/x86_64-mk-linux/9.2.0/../../../:/u/sw/pkgs/toolchains/gcc-glibc/9/prefix/lib:/u/sw/pkgs/toolchains/gcc-glibc/9/base/lib
+COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_b11d6' '-shared-libgcc' '-mtune=generic' '-march=x86-64'
+ /u/sw/pkgs/toolchains/gcc-glibc/9/prefix/libexec/gcc/x86_64-mk-linux/9.2.0/collect2 -plugin /u/sw/pkgs/toolchains/gcc-glibc/9/prefix/libexec/gcc/x86_64-mk-linux/9.2.0/liblto_plugin.so -plugin-opt=/u/sw/pkgs/toolchains/gcc-glibc/9/prefix/libexec/gcc/x86_64-mk-linux/9.2.0/lto-wrapper -plugin-opt=-fresolution=/tmp/ccclYNZX.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --eh-frame-hdr -m elf_x86_64 -dynamic-linker /u/sw/pkgs/toolchains/gcc-glibc/9/prefix/lib/ld-linux-x86-64.so.2 -o cmTC_b11d6 /u/sw/pkgs/toolchains/gcc-glibc/9/prefix/lib/gcc/x86_64-mk-linux/9.2.0/../../../../lib/crt1.o /u/sw/pkgs/toolchains/gcc-glibc/9/prefix/lib/gcc/x86_64-mk-linux/9.2.0/../../../../lib/crti.o /u/sw/pkgs/toolchains/gcc-glibc/9/prefix/lib/gcc/x86_64-mk-linux/9.2.0/crtbegin.o -L/u/sw/pkgs/toolchains/gcc-glibc/9/prefix/lib/gcc/x86_64-mk-linux/9.2.0 -L/u/sw/pkgs/toolchains/gcc-glibc/9/prefix/lib/gcc/x86_64-mk-linux/9.2.0/../../../../x86_64-mk-linux/lib/../lib -L/u/sw/pkgs/toolchains/gcc-glibc/9/prefix/lib/gcc/x86_64-mk-linux/9.2.0/../../../../lib -L/u/sw/pkgs/toolchains/gcc-glibc/9/prefix/lib/gcc/x86_64-mk-linux/9.2.0/../../../../x86_64-mk-linux/lib -L/u/sw/pkgs/toolchains/gcc-glibc/9/prefix/lib/gcc/x86_64-mk-linux/9.2.0/../../.. -L/u/sw/pkgs/toolchains/gcc-glibc/9/prefix/lib -L/u/sw/pkgs/toolchains/gcc-glibc/9/base/lib CMakeFiles/cmTC_b11d6.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /u/sw/pkgs/toolchains/gcc-glibc/9/prefix/lib/gcc/x86_64-mk-linux/9.2.0/crtend.o /u/sw/pkgs/toolchains/gcc-glibc/9/prefix/lib/gcc/x86_64-mk-linux/9.2.0/../../../../lib/crtn.o
+COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_b11d6' '-shared-libgcc' '-mtune=generic' '-march=x86-64'
+gmake[1]: Leaving directory '/home/simoripa96/Scrivania/my_project/build/CMakeFiles/CMakeTmp'
+
+
+
+Parsed CXX implicit include dir info from above output: rv=done
+  found start of include info
+  found start of implicit include info
+    add: [/u/sw/pkgs/toolchains/gcc-glibc/9/prefix/lib/gcc/x86_64-mk-linux/9.2.0/../../../../include/c++/9.2.0]
+    add: [/u/sw/pkgs/toolchains/gcc-glibc/9/prefix/lib/gcc/x86_64-mk-linux/9.2.0/../../../../include/c++/9.2.0/x86_64-mk-linux]
+    add: [/u/sw/pkgs/toolchains/gcc-glibc/9/prefix/lib/gcc/x86_64-mk-linux/9.2.0/../../../../include/c++/9.2.0/backward]
+    add: [/u/sw/pkgs/toolchains/gcc-glibc/9/prefix/lib/gcc/x86_64-mk-linux/9.2.0/include]
+    add: [/u/sw/pkgs/toolchains/gcc-glibc/9/base/include]
+    add: [/u/sw/pkgs/toolchains/gcc-glibc/9/prefix/include]
+    add: [/u/sw/pkgs/toolchains/gcc-glibc/9/prefix/lib/gcc/x86_64-mk-linux/9.2.0/include-fixed]
+  end of search list found
+  collapse include dir [/u/sw/pkgs/toolchains/gcc-glibc/9/prefix/lib/gcc/x86_64-mk-linux/9.2.0/../../../../include/c++/9.2.0] ==> [/u/sw/pkgs/toolchains/gcc-glibc/9/prefix/include/c++/9.2.0]
+  collapse include dir [/u/sw/pkgs/toolchains/gcc-glibc/9/prefix/lib/gcc/x86_64-mk-linux/9.2.0/../../../../include/c++/9.2.0/x86_64-mk-linux] ==> [/u/sw/pkgs/toolchains/gcc-glibc/9/prefix/include/c++/9.2.0/x86_64-mk-linux]
+  collapse include dir [/u/sw/pkgs/toolchains/gcc-glibc/9/prefix/lib/gcc/x86_64-mk-linux/9.2.0/../../../../include/c++/9.2.0/backward] ==> [/u/sw/pkgs/toolchains/gcc-glibc/9/prefix/include/c++/9.2.0/backward]
+  collapse include dir [/u/sw/pkgs/toolchains/gcc-glibc/9/prefix/lib/gcc/x86_64-mk-linux/9.2.0/include] ==> [/u/sw/pkgs/toolchains/gcc-glibc/9/prefix/lib/gcc/x86_64-mk-linux/9.2.0/include]
+  collapse include dir [/u/sw/pkgs/toolchains/gcc-glibc/9/base/include] ==> [/u/sw/pkgs/toolchains/gcc-glibc/9/base/include]
+  collapse include dir [/u/sw/pkgs/toolchains/gcc-glibc/9/prefix/include] ==> [/u/sw/pkgs/toolchains/gcc-glibc/9/prefix/include]
+  collapse include dir [/u/sw/pkgs/toolchains/gcc-glibc/9/prefix/lib/gcc/x86_64-mk-linux/9.2.0/include-fixed] ==> [/u/sw/pkgs/toolchains/gcc-glibc/9/prefix/lib/gcc/x86_64-mk-linux/9.2.0/include-fixed]
+  implicit include dirs: [/u/sw/pkgs/toolchains/gcc-glibc/9/prefix/include/c++/9.2.0;/u/sw/pkgs/toolchains/gcc-glibc/9/prefix/include/c++/9.2.0/x86_64-mk-linux;/u/sw/pkgs/toolchains/gcc-glibc/9/prefix/include/c++/9.2.0/backward;/u/sw/pkgs/toolchains/gcc-glibc/9/prefix/lib/gcc/x86_64-mk-linux/9.2.0/include;/u/sw/pkgs/toolchains/gcc-glibc/9/base/include;/u/sw/pkgs/toolchains/gcc-glibc/9/prefix/include;/u/sw/pkgs/toolchains/gcc-glibc/9/prefix/lib/gcc/x86_64-mk-linux/9.2.0/include-fixed]
+
+
+Parsed CXX implicit link information from above output:
+  link line regex: [^( *|.*[/\])(ld|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\]+-)?ld|collect2)[^/\]*( |$)]
+  ignore line: [Change Dir: /home/simoripa96/Scrivania/my_project/build/CMakeFiles/CMakeTmp]
+  ignore line: []
+  ignore line: [Run Build Command(s):/u/sw/pkgs/toolchains/gcc-glibc/9/base/bin/gmake cmTC_b11d6/fast && /u/sw/pkgs/toolchains/gcc-glibc/9/base/bin/gmake -f CMakeFiles/cmTC_b11d6.dir/build.make CMakeFiles/cmTC_b11d6.dir/build]
+  ignore line: [gmake[1]: Entering directory '/home/simoripa96/Scrivania/my_project/build/CMakeFiles/CMakeTmp']
+  ignore line: [Building CXX object CMakeFiles/cmTC_b11d6.dir/CMakeCXXCompilerABI.cpp.o]
+  ignore line: [/u/sw/pkgs/toolchains/gcc-glibc/9/prefix/bin/g++    -v -o CMakeFiles/cmTC_b11d6.dir/CMakeCXXCompilerABI.cpp.o -c /u/sw/pkgs/toolchains/gcc-glibc/9/base/share/cmake-3.16/Modules/CMakeCXXCompilerABI.cpp]
+  ignore line: [Using built-in specs.]
+  ignore line: [COLLECT_GCC=/u/sw/pkgs/toolchains/gcc-glibc/9/prefix/bin/g++]
+  ignore line: [Target: x86_64-mk-linux]
+  ignore line: [Configured with: ../gcc-9.2.0/configure --build=x86_64-mk-linux --prefix=/u/sw/pkgs/toolchains/gcc-glibc/9/prefix --with-local-prefix=/u/sw/pkgs/toolchains/gcc-glibc/9/base --with-native-system-header-dir=/u/sw/pkgs/toolchains/gcc-glibc/9/prefix/include --with-pkgversion=mk --with-bugurl=https://github.com/elauksap/mk/issues --disable-nls --disable-multilib --enable-shared --enable-threads=posix --enable-__cxa_atexit --enable-lto --enable-libgomp --disable-libstdcxx-pch --enable-bootstrap --enable-languages=c c++ fortran]
+  ignore line: [Thread model: posix]
+  ignore line: [gcc version 9.2.0 (mk) ]
+  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_b11d6.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64']
+  ignore line: [ /u/sw/pkgs/toolchains/gcc-glibc/9/prefix/libexec/gcc/x86_64-mk-linux/9.2.0/cc1plus -quiet -v -D_GNU_SOURCE /u/sw/pkgs/toolchains/gcc-glibc/9/base/share/cmake-3.16/Modules/CMakeCXXCompilerABI.cpp -quiet -dumpbase CMakeCXXCompilerABI.cpp -mtune=generic -march=x86-64 -auxbase-strip CMakeFiles/cmTC_b11d6.dir/CMakeCXXCompilerABI.cpp.o -version -o /tmp/cc94Jr2U.s]
+  ignore line: [GNU C++14 (mk) version 9.2.0 (x86_64-mk-linux)]
+  ignore line: [	compiled by GNU C version 9.2.0  GMP version 6.1.2  MPFR version 4.0.1  MPC version 1.1.0  isl version isl-0.19-GMP]
+  ignore line: []
+  ignore line: [GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072]
+  ignore line: [ignoring nonexistent directory "/u/sw/pkgs/toolchains/gcc-glibc/9/prefix/lib/gcc/x86_64-mk-linux/9.2.0/../../../../x86_64-mk-linux/include"]
+  ignore line: [ignoring duplicate directory "/u/sw/pkgs/toolchains/gcc-glibc/9/prefix/include"]
+  ignore line: [#include "..." search starts here:]
+  ignore line: [#include <...> search starts here:]
+  ignore line: [ /u/sw/pkgs/toolchains/gcc-glibc/9/prefix/lib/gcc/x86_64-mk-linux/9.2.0/../../../../include/c++/9.2.0]
+  ignore line: [ /u/sw/pkgs/toolchains/gcc-glibc/9/prefix/lib/gcc/x86_64-mk-linux/9.2.0/../../../../include/c++/9.2.0/x86_64-mk-linux]
+  ignore line: [ /u/sw/pkgs/toolchains/gcc-glibc/9/prefix/lib/gcc/x86_64-mk-linux/9.2.0/../../../../include/c++/9.2.0/backward]
+  ignore line: [ /u/sw/pkgs/toolchains/gcc-glibc/9/prefix/lib/gcc/x86_64-mk-linux/9.2.0/include]
+  ignore line: [ /u/sw/pkgs/toolchains/gcc-glibc/9/base/include]
+  ignore line: [ /u/sw/pkgs/toolchains/gcc-glibc/9/prefix/include]
+  ignore line: [ /u/sw/pkgs/toolchains/gcc-glibc/9/prefix/lib/gcc/x86_64-mk-linux/9.2.0/include-fixed]
+  ignore line: [End of search list.]
+  ignore line: [GNU C++14 (mk) version 9.2.0 (x86_64-mk-linux)]
+  ignore line: [	compiled by GNU C version 9.2.0  GMP version 6.1.2  MPFR version 4.0.1  MPC version 1.1.0  isl version isl-0.19-GMP]
+  ignore line: []
+  ignore line: [GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072]
+  ignore line: [Compiler executable checksum: 043ea27e7142f8ed52f5ba9c651f4377]
+  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_b11d6.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64']
+  ignore line: [ /u/sw/pkgs/toolchains/gcc-glibc/9/prefix/lib/gcc/x86_64-mk-linux/9.2.0/../../../../x86_64-mk-linux/bin/as -v --64 -o CMakeFiles/cmTC_b11d6.dir/CMakeCXXCompilerABI.cpp.o /tmp/cc94Jr2U.s]
+  ignore line: [GNU assembler version 2.34 (x86_64-mk-linux) using BFD version (mk) 2.34]
+  ignore line: [COMPILER_PATH=/u/sw/pkgs/toolchains/gcc-glibc/9/prefix/libexec/gcc/x86_64-mk-linux/9.2.0/:/u/sw/pkgs/toolchains/gcc-glibc/9/prefix/libexec/gcc/x86_64-mk-linux/9.2.0/:/u/sw/pkgs/toolchains/gcc-glibc/9/prefix/libexec/gcc/x86_64-mk-linux/:/u/sw/pkgs/toolchains/gcc-glibc/9/prefix/lib/gcc/x86_64-mk-linux/9.2.0/:/u/sw/pkgs/toolchains/gcc-glibc/9/prefix/lib/gcc/x86_64-mk-linux/:/u/sw/pkgs/toolchains/gcc-glibc/9/prefix/lib/gcc/x86_64-mk-linux/9.2.0/../../../../x86_64-mk-linux/bin/]
+  ignore line: [LIBRARY_PATH=/u/sw/pkgs/toolchains/gcc-glibc/9/prefix/lib/gcc/x86_64-mk-linux/9.2.0/:/u/sw/pkgs/toolchains/gcc-glibc/9/prefix/lib/gcc/x86_64-mk-linux/9.2.0/../../../../x86_64-mk-linux/lib/../lib/:/u/sw/pkgs/toolchains/gcc-glibc/9/prefix/lib/gcc/x86_64-mk-linux/9.2.0/../../../../lib/:/u/sw/pkgs/toolchains/gcc-glibc/9/prefix/lib/gcc/x86_64-mk-linux/9.2.0/../../../../x86_64-mk-linux/lib/:/u/sw/pkgs/toolchains/gcc-glibc/9/prefix/lib/gcc/x86_64-mk-linux/9.2.0/../../../:/u/sw/pkgs/toolchains/gcc-glibc/9/prefix/lib:/u/sw/pkgs/toolchains/gcc-glibc/9/base/lib]
+  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_b11d6.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64']
+  ignore line: [Linking CXX executable cmTC_b11d6]
+  ignore line: [/u/sw/pkgs/toolchains/gcc-glibc/9/base/bin/cmake -E cmake_link_script CMakeFiles/cmTC_b11d6.dir/link.txt --verbose=1]
+  ignore line: [/u/sw/pkgs/toolchains/gcc-glibc/9/prefix/bin/g++      -v CMakeFiles/cmTC_b11d6.dir/CMakeCXXCompilerABI.cpp.o  -o cmTC_b11d6 ]
+  ignore line: [Using built-in specs.]
+  ignore line: [COLLECT_GCC=/u/sw/pkgs/toolchains/gcc-glibc/9/prefix/bin/g++]
+  ignore line: [COLLECT_LTO_WRAPPER=/u/sw/pkgs/toolchains/gcc-glibc/9/prefix/libexec/gcc/x86_64-mk-linux/9.2.0/lto-wrapper]
+  ignore line: [Target: x86_64-mk-linux]
+  ignore line: [Configured with: ../gcc-9.2.0/configure --build=x86_64-mk-linux --prefix=/u/sw/pkgs/toolchains/gcc-glibc/9/prefix --with-local-prefix=/u/sw/pkgs/toolchains/gcc-glibc/9/base --with-native-system-header-dir=/u/sw/pkgs/toolchains/gcc-glibc/9/prefix/include --with-pkgversion=mk --with-bugurl=https://github.com/elauksap/mk/issues --disable-nls --disable-multilib --enable-shared --enable-threads=posix --enable-__cxa_atexit --enable-lto --enable-libgomp --disable-libstdcxx-pch --enable-bootstrap --enable-languages=c c++ fortran]
+  ignore line: [Thread model: posix]
+  ignore line: [gcc version 9.2.0 (mk) ]
+  ignore line: [COMPILER_PATH=/u/sw/pkgs/toolchains/gcc-glibc/9/prefix/libexec/gcc/x86_64-mk-linux/9.2.0/:/u/sw/pkgs/toolchains/gcc-glibc/9/prefix/libexec/gcc/x86_64-mk-linux/9.2.0/:/u/sw/pkgs/toolchains/gcc-glibc/9/prefix/libexec/gcc/x86_64-mk-linux/:/u/sw/pkgs/toolchains/gcc-glibc/9/prefix/lib/gcc/x86_64-mk-linux/9.2.0/:/u/sw/pkgs/toolchains/gcc-glibc/9/prefix/lib/gcc/x86_64-mk-linux/:/u/sw/pkgs/toolchains/gcc-glibc/9/prefix/lib/gcc/x86_64-mk-linux/9.2.0/../../../../x86_64-mk-linux/bin/]
+  ignore line: [LIBRARY_PATH=/u/sw/pkgs/toolchains/gcc-glibc/9/prefix/lib/gcc/x86_64-mk-linux/9.2.0/:/u/sw/pkgs/toolchains/gcc-glibc/9/prefix/lib/gcc/x86_64-mk-linux/9.2.0/../../../../x86_64-mk-linux/lib/../lib/:/u/sw/pkgs/toolchains/gcc-glibc/9/prefix/lib/gcc/x86_64-mk-linux/9.2.0/../../../../lib/:/u/sw/pkgs/toolchains/gcc-glibc/9/prefix/lib/gcc/x86_64-mk-linux/9.2.0/../../../../x86_64-mk-linux/lib/:/u/sw/pkgs/toolchains/gcc-glibc/9/prefix/lib/gcc/x86_64-mk-linux/9.2.0/../../../:/u/sw/pkgs/toolchains/gcc-glibc/9/prefix/lib:/u/sw/pkgs/toolchains/gcc-glibc/9/base/lib]
+  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_b11d6' '-shared-libgcc' '-mtune=generic' '-march=x86-64']
+  link line: [ /u/sw/pkgs/toolchains/gcc-glibc/9/prefix/libexec/gcc/x86_64-mk-linux/9.2.0/collect2 -plugin /u/sw/pkgs/toolchains/gcc-glibc/9/prefix/libexec/gcc/x86_64-mk-linux/9.2.0/liblto_plugin.so -plugin-opt=/u/sw/pkgs/toolchains/gcc-glibc/9/prefix/libexec/gcc/x86_64-mk-linux/9.2.0/lto-wrapper -plugin-opt=-fresolution=/tmp/ccclYNZX.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --eh-frame-hdr -m elf_x86_64 -dynamic-linker /u/sw/pkgs/toolchains/gcc-glibc/9/prefix/lib/ld-linux-x86-64.so.2 -o cmTC_b11d6 /u/sw/pkgs/toolchains/gcc-glibc/9/prefix/lib/gcc/x86_64-mk-linux/9.2.0/../../../../lib/crt1.o /u/sw/pkgs/toolchains/gcc-glibc/9/prefix/lib/gcc/x86_64-mk-linux/9.2.0/../../../../lib/crti.o /u/sw/pkgs/toolchains/gcc-glibc/9/prefix/lib/gcc/x86_64-mk-linux/9.2.0/crtbegin.o -L/u/sw/pkgs/toolchains/gcc-glibc/9/prefix/lib/gcc/x86_64-mk-linux/9.2.0 -L/u/sw/pkgs/toolchains/gcc-glibc/9/prefix/lib/gcc/x86_64-mk-linux/9.2.0/../../../../x86_64-mk-linux/lib/../lib -L/u/sw/pkgs/toolchains/gcc-glibc/9/prefix/lib/gcc/x86_64-mk-linux/9.2.0/../../../../lib -L/u/sw/pkgs/toolchains/gcc-glibc/9/prefix/lib/gcc/x86_64-mk-linux/9.2.0/../../../../x86_64-mk-linux/lib -L/u/sw/pkgs/toolchains/gcc-glibc/9/prefix/lib/gcc/x86_64-mk-linux/9.2.0/../../.. -L/u/sw/pkgs/toolchains/gcc-glibc/9/prefix/lib -L/u/sw/pkgs/toolchains/gcc-glibc/9/base/lib CMakeFiles/cmTC_b11d6.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /u/sw/pkgs/toolchains/gcc-glibc/9/prefix/lib/gcc/x86_64-mk-linux/9.2.0/crtend.o /u/sw/pkgs/toolchains/gcc-glibc/9/prefix/lib/gcc/x86_64-mk-linux/9.2.0/../../../../lib/crtn.o]
+    arg [/u/sw/pkgs/toolchains/gcc-glibc/9/prefix/libexec/gcc/x86_64-mk-linux/9.2.0/collect2] ==> ignore
+    arg [-plugin] ==> ignore
+    arg [/u/sw/pkgs/toolchains/gcc-glibc/9/prefix/libexec/gcc/x86_64-mk-linux/9.2.0/liblto_plugin.so] ==> ignore
+    arg [-plugin-opt=/u/sw/pkgs/toolchains/gcc-glibc/9/prefix/libexec/gcc/x86_64-mk-linux/9.2.0/lto-wrapper] ==> ignore
+    arg [-plugin-opt=-fresolution=/tmp/ccclYNZX.res] ==> ignore
+    arg [-plugin-opt=-pass-through=-lgcc_s] ==> ignore
+    arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
+    arg [-plugin-opt=-pass-through=-lc] ==> ignore
+    arg [-plugin-opt=-pass-through=-lgcc_s] ==> ignore
+    arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
+    arg [--eh-frame-hdr] ==> ignore
+    arg [-m] ==> ignore
+    arg [elf_x86_64] ==> ignore
+    arg [-dynamic-linker] ==> ignore
+    arg [/u/sw/pkgs/toolchains/gcc-glibc/9/prefix/lib/ld-linux-x86-64.so.2] ==> ignore
+    arg [-o] ==> ignore
+    arg [cmTC_b11d6] ==> ignore
+    arg [/u/sw/pkgs/toolchains/gcc-glibc/9/prefix/lib/gcc/x86_64-mk-linux/9.2.0/../../../../lib/crt1.o] ==> ignore
+    arg [/u/sw/pkgs/toolchains/gcc-glibc/9/prefix/lib/gcc/x86_64-mk-linux/9.2.0/../../../../lib/crti.o] ==> ignore
+    arg [/u/sw/pkgs/toolchains/gcc-glibc/9/prefix/lib/gcc/x86_64-mk-linux/9.2.0/crtbegin.o] ==> ignore
+    arg [-L/u/sw/pkgs/toolchains/gcc-glibc/9/prefix/lib/gcc/x86_64-mk-linux/9.2.0] ==> dir [/u/sw/pkgs/toolchains/gcc-glibc/9/prefix/lib/gcc/x86_64-mk-linux/9.2.0]
+    arg [-L/u/sw/pkgs/toolchains/gcc-glibc/9/prefix/lib/gcc/x86_64-mk-linux/9.2.0/../../../../x86_64-mk-linux/lib/../lib] ==> dir [/u/sw/pkgs/toolchains/gcc-glibc/9/prefix/lib/gcc/x86_64-mk-linux/9.2.0/../../../../x86_64-mk-linux/lib/../lib]
+    arg [-L/u/sw/pkgs/toolchains/gcc-glibc/9/prefix/lib/gcc/x86_64-mk-linux/9.2.0/../../../../lib] ==> dir [/u/sw/pkgs/toolchains/gcc-glibc/9/prefix/lib/gcc/x86_64-mk-linux/9.2.0/../../../../lib]
+    arg [-L/u/sw/pkgs/toolchains/gcc-glibc/9/prefix/lib/gcc/x86_64-mk-linux/9.2.0/../../../../x86_64-mk-linux/lib] ==> dir [/u/sw/pkgs/toolchains/gcc-glibc/9/prefix/lib/gcc/x86_64-mk-linux/9.2.0/../../../../x86_64-mk-linux/lib]
+    arg [-L/u/sw/pkgs/toolchains/gcc-glibc/9/prefix/lib/gcc/x86_64-mk-linux/9.2.0/../../..] ==> dir [/u/sw/pkgs/toolchains/gcc-glibc/9/prefix/lib/gcc/x86_64-mk-linux/9.2.0/../../..]
+    arg [-L/u/sw/pkgs/toolchains/gcc-glibc/9/prefix/lib] ==> dir [/u/sw/pkgs/toolchains/gcc-glibc/9/prefix/lib]
+    arg [-L/u/sw/pkgs/toolchains/gcc-glibc/9/base/lib] ==> dir [/u/sw/pkgs/toolchains/gcc-glibc/9/base/lib]
+    arg [CMakeFiles/cmTC_b11d6.dir/CMakeCXXCompilerABI.cpp.o] ==> ignore
+    arg [-lstdc++] ==> lib [stdc++]
+    arg [-lm] ==> lib [m]
+    arg [-lgcc_s] ==> lib [gcc_s]
+    arg [-lgcc] ==> lib [gcc]
+    arg [-lc] ==> lib [c]
+    arg [-lgcc_s] ==> lib [gcc_s]
+    arg [-lgcc] ==> lib [gcc]
+    arg [/u/sw/pkgs/toolchains/gcc-glibc/9/prefix/lib/gcc/x86_64-mk-linux/9.2.0/crtend.o] ==> ignore
+    arg [/u/sw/pkgs/toolchains/gcc-glibc/9/prefix/lib/gcc/x86_64-mk-linux/9.2.0/../../../../lib/crtn.o] ==> ignore
+  collapse library dir [/u/sw/pkgs/toolchains/gcc-glibc/9/prefix/lib/gcc/x86_64-mk-linux/9.2.0] ==> [/u/sw/pkgs/toolchains/gcc-glibc/9/prefix/lib/gcc/x86_64-mk-linux/9.2.0]
+  collapse library dir [/u/sw/pkgs/toolchains/gcc-glibc/9/prefix/lib/gcc/x86_64-mk-linux/9.2.0/../../../../x86_64-mk-linux/lib/../lib] ==> [/u/sw/pkgs/toolchains/gcc-glibc/9/prefix/x86_64-mk-linux/lib]
+  collapse library dir [/u/sw/pkgs/toolchains/gcc-glibc/9/prefix/lib/gcc/x86_64-mk-linux/9.2.0/../../../../lib] ==> [/u/sw/pkgs/toolchains/gcc-glibc/9/prefix/lib]
+  collapse library dir [/u/sw/pkgs/toolchains/gcc-glibc/9/prefix/lib/gcc/x86_64-mk-linux/9.2.0/../../../../x86_64-mk-linux/lib] ==> [/u/sw/pkgs/toolchains/gcc-glibc/9/prefix/x86_64-mk-linux/lib]
+  collapse library dir [/u/sw/pkgs/toolchains/gcc-glibc/9/prefix/lib/gcc/x86_64-mk-linux/9.2.0/../../..] ==> [/u/sw/pkgs/toolchains/gcc-glibc/9/prefix/lib]
+  collapse library dir [/u/sw/pkgs/toolchains/gcc-glibc/9/prefix/lib] ==> [/u/sw/pkgs/toolchains/gcc-glibc/9/prefix/lib]
+  collapse library dir [/u/sw/pkgs/toolchains/gcc-glibc/9/base/lib] ==> [/u/sw/pkgs/toolchains/gcc-glibc/9/base/lib]
+  implicit libs: [stdc++;m;gcc_s;gcc;c;gcc_s;gcc]
+  implicit dirs: [/u/sw/pkgs/toolchains/gcc-glibc/9/prefix/lib/gcc/x86_64-mk-linux/9.2.0;/u/sw/pkgs/toolchains/gcc-glibc/9/prefix/x86_64-mk-linux/lib;/u/sw/pkgs/toolchains/gcc-glibc/9/prefix/lib;/u/sw/pkgs/toolchains/gcc-glibc/9/base/lib]
+  implicit fwks: []
+
+

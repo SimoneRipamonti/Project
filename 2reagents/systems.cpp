@@ -2,7 +2,7 @@
 #include <iostream>
 #include <vector>
 
-//Implicit transport upwind and esplicit reaction
+//Explicit transport upwind and esplicit reaction
 void Transport_system_esplicit_2_reagents(Eigen::MatrixXd &Ca,Eigen::MatrixXd &CaSiO3, Eigen::VectorXd &vel,Data_Transport &data_transport,Data_Reaction &data_reaction, Data_2Reagents &data_2reagents) //As input there is the matrix solution where we store our solution at each istant,
 //each row represent a spatial position, each column represent a time istant.
 //In the vector vel there is the velocity evaluated at each node cell.
@@ -10,6 +10,7 @@ void Transport_system_esplicit_2_reagents(Eigen::MatrixXd &Ca,Eigen::MatrixXd &C
     //All the data that are needed to define the Transport System are extracted from the data structure
     auto &[L,phi,Nx,Nt,T,C_in,C_out,bc_cond,method]=data_transport;
     auto &[Ca_0,CaSiO3_0,K_sol,ph]=data_2reagents;
+    //auto &[Area,rate_const,E,R,Temperature]=data_reaction;
     auto &[Area,rate_const,E,R,Temperature]=data_reaction;
 
     //Computation of the spatial and temporal step from the data
@@ -39,7 +40,8 @@ void Transport_system_esplicit_2_reagents(Eigen::MatrixXd &Ca,Eigen::MatrixXd &C
 
     //const Eigen::MatrixXd Reaction(Eigen::MatrixXd::Identity(Nx,Nx)); //Reaction matrix
     Matrix_R React(Nx,Nx);
-    React.assemble_matrix(Area,rate_const,Temperature,R,E,ph,K_sol,h);
+    //React.assemble_matrix(Area,rate_const,Temperature,R,E,ph,K_sol,h,phi);
+    React.assemble_matrix(Area,rate_const,Temperature,R,E,ph,K_sol,h,phi);
 
 
     const Eigen::SparseMatrix<double> M{1/dt*C.get_matrix()};//matrix of the transport linear system
@@ -54,12 +56,12 @@ void Transport_system_esplicit_2_reagents(Eigen::MatrixXd &Ca,Eigen::MatrixXd &C
     Eigen::VectorXd rhs(Nx);//rhs of the transport linear system
 
 
-    for(unsigned int i=1; i<Nt; i++)
+    for(unsigned int i=1; i<Nt+1; i++)
     {
         React.update(Ca.col(i-1));
-        rhs=(1/dt*C.get_matrix()-F_p.get_matrix()+F_m.get_matrix())*Ca.col(i-1)+F_p.get_rhs()-F_m.get_rhs()+React.get_rhs();
+        rhs=(1/dt*C.get_matrix()-F_p.get_matrix()+F_m.get_matrix())*Ca.col(i-1)+F_p.get_rhs()-F_m.get_rhs()+React.get_rhs().cwiseProduct(CaSiO3.col(i-1));;
         Ca.col(i)=solver.solve(rhs);
-        CaSiO3.col(i)=CaSiO3.col(i-1)-dt*React.get_rhs();
+        CaSiO3.col(i)=CaSiO3.col(i-1)-dt/(h*phi(h/2+i*h))*React.get_rhs().cwiseProduct(CaSiO3.col(i-1));
     }
 }
 
@@ -108,7 +110,7 @@ void Transport_system_implicit_2_reagents(Eigen::MatrixXd &Ca,Eigen::MatrixXd &C
 
     //const Eigen::MatrixXd Reaction(Eigen::MatrixXd::Identity(Nx,Nx)); //Reaction matrix
     Matrix_R React(Nx,Nx);
-    React.assemble_matrix(Area,rate_const,Temperature,R,E,ph,K_sol,h);
+    React.assemble_matrix(Area,rate_const,Temperature,R,E,ph,K_sol,h,phi);
 
 
     const Eigen::SparseMatrix<double> M{1/dt*C.get_matrix()+F_p.get_matrix()-F_m.get_matrix()};//matrix of the transport linear system
@@ -122,13 +124,14 @@ void Transport_system_implicit_2_reagents(Eigen::MatrixXd &Ca,Eigen::MatrixXd &C
 
     Eigen::VectorXd rhs(Nx);//rhs of the transport linear system
 
-
-    for(unsigned int i=1; i<Nt; i++)
+    for(unsigned int i=1; i<Nt+1; i++)
     {
         React.update(Ca.col(i-1));
-        rhs=(1/dt*C.get_matrix())*Ca.col(i-1)+F_p.get_rhs()-F_m.get_rhs()+React.get_rhs();
+        rhs=(1/dt*C.get_matrix())*Ca.col(i-1)+F_p.get_rhs()-F_m.get_rhs()+React.get_rhs().cwiseProduct(CaSiO3.col(i-1));//CaSiO3.col(i-1)*React.get_rhs();
+        //rhs=(1/dt*C.get_matrix())*Ca.col(i-1)+F_p.get_rhs()-F_m.get_rhs()+React.get_rhs();//CaSiO3.col(i-1)*React.get_rhs();
         Ca.col(i)=solver.solve(rhs);
-        CaSiO3.col(i)=CaSiO3.col(i-1)-dt*React.get_rhs();
+        CaSiO3.col(i)=CaSiO3.col(i-1)-dt/(h*phi(h/2+i*h))*React.get_rhs().cwiseProduct(CaSiO3.col(i-1));//dt/h*CaSiO3.col(i-1)*React.get_rhs();//we have to divide for h because of the way we build React.rhs()
+        //CaSiO3.col(i)=CaSiO3.col(i-1)-dt/h*React.get_rhs();
     }
 }
 

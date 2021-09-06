@@ -2,8 +2,10 @@ set datafile separator ','
 
 set key autotitle columnhead # use the first line as title
 set key font ",12"
-set ylabel "Velocity" # label for the Y axis
-set xlabel 'Space' # label for the X axis
+set ylabel "Velocity [m/s]" # label for the Y axis
+set ylabel font ",12"
+set xlabel 'Space [m]' # label for the X axis
+set xlabel font ",12"
 
 
 

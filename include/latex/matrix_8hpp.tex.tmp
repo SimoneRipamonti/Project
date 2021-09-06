@@ -1,0 +1,41 @@
+\hypertarget{matrix_8hpp}{}\section{matrix.\+hpp File Reference}
+\label{matrix_8hpp}\index{matrix.\+hpp@{matrix.\+hpp}}
+
+
+discretized equations\textquotesingle{} matrices  
+
+
+{\ttfamily \#include \char`\"{}muparser\+\_\+fun.\+hpp\char`\"{}}\newline
+{\ttfamily \#include $<$string$>$}\newline
+{\ttfamily \#include $<$Eigen/\+Dense$>$}\newline
+{\ttfamily \#include $<$Eigen/\+Sparse$>$}\newline
+Include dependency graph for matrix.\+hpp\+:
+% FIG 0
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classAbstractMatrix}{Abstract\+Matrix}
+\begin{DoxyCompactList}\small\item\em Definition of an Abstract class for the matrices of the Darcy and Transport System. \end{DoxyCompactList}\item 
+class \hyperlink{classMatrix__A}{Matrix\+\_\+A}
+\begin{DoxyCompactList}\small\item\em Matrix A is the mass velocity matrix of the Darcy problem. \end{DoxyCompactList}\item 
+class \hyperlink{classMatrix__B}{Matrix\+\_\+B}
+\begin{DoxyCompactList}\small\item\em Matrix B is the saddle\+\_\+point matrix of the Darcy\+\_\+\+System. \end{DoxyCompactList}\item 
+class \hyperlink{classMatrix__C}{Matrix\+\_\+C}
+\begin{DoxyCompactList}\small\item\em Matrix C is the mass matrix for the Transport problem. \end{DoxyCompactList}\item 
+class \hyperlink{classMatrix__F__piu}{Matrix\+\_\+\+F\+\_\+piu}
+\begin{DoxyCompactList}\small\item\em Matrix F\+\_\+piu is the part of the Upwind Matrix which treats the left node of the cells. \end{DoxyCompactList}\item 
+class \hyperlink{classMatrix__F__meno}{Matrix\+\_\+\+F\+\_\+meno}
+\begin{DoxyCompactList}\small\item\em Matrix F\+\_\+meno is the part of the Upwind Matrix which treats the right node of the cells. \end{DoxyCompactList}\item 
+class \hyperlink{classMatrix__R}{Matrix\+\_\+R}
+\begin{DoxyCompactList}\small\item\em Matrix R is the Reaction matrix. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+discretized equations\textquotesingle{} matrices 
+
+\begin{DoxyAuthor}{Author}
+Simone Ripamonti 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+2021-\/05 
+\end{DoxyDate}
