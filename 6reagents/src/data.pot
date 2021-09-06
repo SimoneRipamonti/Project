@@ -95,8 +95,8 @@
 
      #Initical conentration H_piu
      #H_piu_0=10.0e-3.5+0.0*x
-     #H_piu_0=0.0031622776+0.0*x 
-     H_piu_0=0.0+0.0*x  
+     H_piu_0=0.0031622776+0.0*x 
+     #H_piu_0=0.0+0.0*x  
      #10.0e-3.5+0.0*x=0.00031622776
 
 
@@ -108,16 +108,16 @@
      CO2_0=0.0+0.0*x
 
      #Initical conentration CaSiO3
-     #CaSiO3_0=16.7504+0.0*x
+     CaSiO3_0=16.7504+0.0*x
      #CaSiO3_0=16.75041876
-     CaSiO3_0=0.0+0.0*x
+     #CaSiO3_0=0.0+0.0*x
      #Initical conentration SiO2
      SiO2_0=0.0+0.0*x
 
      #Reaction_area
      #A=1.38e4 #1.38*10e-7
-     #A=2.76e7
-     A=0.
+     A=2.76e-4
+     #A=0.
      #A=1.9e-2
      #Constant_reaction
      #Rate_const=10e{-1.3}

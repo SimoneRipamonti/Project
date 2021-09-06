@@ -23,7 +23,7 @@ Collaboration diagram for Matrix\+\_\+R\+:
 \mbox{\Hypertarget{classMatrix__R_af03976837635a34f0d1b9ea585fda9fc}\label{classMatrix__R_af03976837635a34f0d1b9ea585fda9fc}} 
 {\bfseries Matrix\+\_\+R} (unsigned int \hyperlink{classAbstractMatrix_a27fb46bf2853d4927d92a81b8b7773fb}{row}, unsigned int \hyperlink{classAbstractMatrix_af3ad3551ce094979488cef5df0e4fc1d}{col})
 \item 
-void \hyperlink{classMatrix__R_ae3f3ac08d895f527362542dd3b288d62}{set\+\_\+data} (double area, double rate\+\_\+const, double temperature, double R, double E, double \hyperlink{classMatrix__R_ae8345433c06d0d0249c09783c4ff80bc}{ph}, double \hyperlink{classMatrix__R_ab5ca8aff010e279569065f76d28c4437}{const\+\_\+eq}, double \hyperlink{classMatrix__R_ac5bb79872f4324d89760f8047a1e63a4}{h})
+void \hyperlink{classMatrix__R_a3892fa1560916146774ac953f9f6474c}{set\+\_\+data} (double area, double rate\+\_\+const, double temperature, double R, double E, double \hyperlink{classMatrix__R_ae8345433c06d0d0249c09783c4ff80bc}{ph}, double \hyperlink{classMatrix__R_ab5ca8aff010e279569065f76d28c4437}{const\+\_\+eq}, double \hyperlink{classMatrix__R_ac5bb79872f4324d89760f8047a1e63a4}{h}, const \hyperlink{classmuparser__fun}{muparser\+\_\+fun} \hyperlink{classMatrix__R_a8527ebc8844931d65e65c168956398ff}{phi})
 \item 
 void \hyperlink{classMatrix__R_a311aefa7be3bbb741d1958e840bc4613}{define\+\_\+matrix} () override
 \item 
@@ -31,7 +31,7 @@ void \hyperlink{classMatrix__R_a33b829a44256d8d363891f3fc3d58244}{set\+\_\+\+BC}
 \item 
 void \hyperlink{classMatrix__R_a6305da2e94b8841f14061f3ad1ed9464}{set\+\_\+rhs} () override
 \item 
-void \hyperlink{classMatrix__R_ae09d3c9f7420ecec1f61313a78cd1ce9}{assemble\+\_\+matrix} (double area, double rate\+\_\+const, double temperature, double R, double E, double \hyperlink{classMatrix__R_ae8345433c06d0d0249c09783c4ff80bc}{ph}, double \hyperlink{classMatrix__R_ab5ca8aff010e279569065f76d28c4437}{const\+\_\+eq}, double \hyperlink{classMatrix__R_ac5bb79872f4324d89760f8047a1e63a4}{h})
+void \hyperlink{classMatrix__R_a09330cb1b8c809a4a29364c5f7b101b6}{assemble\+\_\+matrix} (double area, double rate\+\_\+const, double temperature, double R, double E, double \hyperlink{classMatrix__R_ae8345433c06d0d0249c09783c4ff80bc}{ph}, double \hyperlink{classMatrix__R_ab5ca8aff010e279569065f76d28c4437}{const\+\_\+eq}, double \hyperlink{classMatrix__R_ac5bb79872f4324d89760f8047a1e63a4}{h}, const \hyperlink{classmuparser__fun}{muparser\+\_\+fun} \hyperlink{classMatrix__R_a8527ebc8844931d65e65c168956398ff}{phi})
 \item 
 void \hyperlink{classMatrix__R_ab896dfe91327ba364fdcaab15e7f2547}{update} (const Eigen\+::\+Vector\+Xd \&past\+\_\+sol)
 \end{DoxyCompactItemize}
@@ -45,6 +45,8 @@ double \hyperlink{classMatrix__R_ae8345433c06d0d0249c09783c4ff80bc}{ph}
 double \hyperlink{classMatrix__R_ab5ca8aff010e279569065f76d28c4437}{const\+\_\+eq}
 \item 
 double \hyperlink{classMatrix__R_ac5bb79872f4324d89760f8047a1e63a4}{h}
+\item 
+\hyperlink{classmuparser__fun}{muparser\+\_\+fun} \hyperlink{classMatrix__R_a8527ebc8844931d65e65c168956398ff}{phi}
 \end{DoxyCompactItemize}
 \subsection*{Additional Inherited Members}
 
@@ -53,11 +55,11 @@ double \hyperlink{classMatrix__R_ac5bb79872f4324d89760f8047a1e63a4}{h}
 Matrix R is the Reaction matrix. 
 
 \subsection{Member Function Documentation}
-\mbox{\Hypertarget{classMatrix__R_ae09d3c9f7420ecec1f61313a78cd1ce9}\label{classMatrix__R_ae09d3c9f7420ecec1f61313a78cd1ce9}} 
+\mbox{\Hypertarget{classMatrix__R_a09330cb1b8c809a4a29364c5f7b101b6}\label{classMatrix__R_a09330cb1b8c809a4a29364c5f7b101b6}} 
 \index{Matrix\+\_\+R@{Matrix\+\_\+R}!assemble\+\_\+matrix@{assemble\+\_\+matrix}}
 \index{assemble\+\_\+matrix@{assemble\+\_\+matrix}!Matrix\+\_\+R@{Matrix\+\_\+R}}
 \subsubsection{\texorpdfstring{assemble\+\_\+matrix()}{assemble\_matrix()}}
-{\footnotesize\ttfamily void Matrix\+\_\+\+R\+::assemble\+\_\+matrix (\begin{DoxyParamCaption}\item[{double}]{area,  }\item[{double}]{rate\+\_\+const,  }\item[{double}]{temperature,  }\item[{double}]{R,  }\item[{double}]{E,  }\item[{double}]{ph,  }\item[{double}]{const\+\_\+eq,  }\item[{double}]{h }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void Matrix\+\_\+\+R\+::assemble\+\_\+matrix (\begin{DoxyParamCaption}\item[{double}]{area,  }\item[{double}]{rate\+\_\+const,  }\item[{double}]{temperature,  }\item[{double}]{R,  }\item[{double}]{E,  }\item[{double}]{ph,  }\item[{double}]{const\+\_\+eq,  }\item[{double}]{h,  }\item[{const \hyperlink{classmuparser__fun}{muparser\+\_\+fun}}]{phi }\end{DoxyParamCaption})}
 
 Function that calls the above functions \hyperlink{classMatrix__R_a311aefa7be3bbb741d1958e840bc4613}{define\+\_\+matrix()},\hyperlink{classMatrix__R_a33b829a44256d8d363891f3fc3d58244}{set\+\_\+\+B\+C()}, \hyperlink{classMatrix__R_a6305da2e94b8841f14061f3ad1ed9464}{set\+\_\+rhs()} in order to assemble all the matrix \mbox{\Hypertarget{classMatrix__R_a311aefa7be3bbb741d1958e840bc4613}\label{classMatrix__R_a311aefa7be3bbb741d1958e840bc4613}} 
 \index{Matrix\+\_\+R@{Matrix\+\_\+R}!define\+\_\+matrix@{define\+\_\+matrix}}
@@ -79,11 +81,11 @@ Function that imposes the BC on the matrix
 
 Implements \hyperlink{classAbstractMatrix_aa0a17dacbeede4180531b115d4a9f3eb}{Abstract\+Matrix}.
 
-\mbox{\Hypertarget{classMatrix__R_ae3f3ac08d895f527362542dd3b288d62}\label{classMatrix__R_ae3f3ac08d895f527362542dd3b288d62}} 
+\mbox{\Hypertarget{classMatrix__R_a3892fa1560916146774ac953f9f6474c}\label{classMatrix__R_a3892fa1560916146774ac953f9f6474c}} 
 \index{Matrix\+\_\+R@{Matrix\+\_\+R}!set\+\_\+data@{set\+\_\+data}}
 \index{set\+\_\+data@{set\+\_\+data}!Matrix\+\_\+R@{Matrix\+\_\+R}}
 \subsubsection{\texorpdfstring{set\+\_\+data()}{set\_data()}}
-{\footnotesize\ttfamily void Matrix\+\_\+\+R\+::set\+\_\+data (\begin{DoxyParamCaption}\item[{double}]{area,  }\item[{double}]{rate\+\_\+const,  }\item[{double}]{temperature,  }\item[{double}]{R,  }\item[{double}]{E,  }\item[{double}]{ph,  }\item[{double}]{const\+\_\+eq,  }\item[{double}]{h }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void Matrix\+\_\+\+R\+::set\+\_\+data (\begin{DoxyParamCaption}\item[{double}]{area,  }\item[{double}]{rate\+\_\+const,  }\item[{double}]{temperature,  }\item[{double}]{R,  }\item[{double}]{E,  }\item[{double}]{ph,  }\item[{double}]{const\+\_\+eq,  }\item[{double}]{h,  }\item[{const \hyperlink{classmuparser__fun}{muparser\+\_\+fun}}]{phi }\end{DoxyParamCaption})}
 
 Function that takes as input and sets the specific data necessary for assemblying matrix R 
 \begin{DoxyParams}{Parameters}
@@ -100,6 +102,10 @@ Function that takes as input and sets the specific data necessary for assemblyin
 {\em ph} & is the water ph \\
 \hline
 {\em const\+\_\+eq} & is the equilibrium reaction constant \\
+\hline
+{\em h} & is the spatial step \\
+\hline
+{\em phi} & is the soil porosity \\
 \hline
 \end{DoxyParams}
 \mbox{\Hypertarget{classMatrix__R_a6305da2e94b8841f14061f3ad1ed9464}\label{classMatrix__R_a6305da2e94b8841f14061f3ad1ed9464}} 
@@ -139,7 +145,13 @@ Spatial step \mbox{\Hypertarget{classMatrix__R_ae8345433c06d0d0249c09783c4ff80bc
 \subsubsection{\texorpdfstring{ph}{ph}}
 {\footnotesize\ttfamily double Matrix\+\_\+\+R\+::ph\hspace{0.3cm}{\ttfamily [private]}}
 
-water ph \mbox{\Hypertarget{classMatrix__R_af2872298a4ebd9ac7493a1f55e3fa586}\label{classMatrix__R_af2872298a4ebd9ac7493a1f55e3fa586}} 
+water ph \mbox{\Hypertarget{classMatrix__R_a8527ebc8844931d65e65c168956398ff}\label{classMatrix__R_a8527ebc8844931d65e65c168956398ff}} 
+\index{Matrix\+\_\+R@{Matrix\+\_\+R}!phi@{phi}}
+\index{phi@{phi}!Matrix\+\_\+R@{Matrix\+\_\+R}}
+\subsubsection{\texorpdfstring{phi}{phi}}
+{\footnotesize\ttfamily \hyperlink{classmuparser__fun}{muparser\+\_\+fun} Matrix\+\_\+\+R\+::phi\hspace{0.3cm}{\ttfamily [private]}}
+
+Soil porosity \mbox{\Hypertarget{classMatrix__R_af2872298a4ebd9ac7493a1f55e3fa586}\label{classMatrix__R_af2872298a4ebd9ac7493a1f55e3fa586}} 
 \index{Matrix\+\_\+R@{Matrix\+\_\+R}!react\+\_\+const@{react\+\_\+const}}
 \index{react\+\_\+const@{react\+\_\+const}!Matrix\+\_\+R@{Matrix\+\_\+R}}
 \subsubsection{\texorpdfstring{react\+\_\+const}{react\_const}}

@@ -1,0 +1,9 @@
+//"1e6*(1.0-x); caso lineare
+//sol_ex.set_value("1e6*(1.0-x)");//"1e6*(1.0-x); caso lineare
+//sol_ex.set_value("sin(_pi*2*x)-2*_pi*x");
+
+//VEL
+//sol_vel.set_value("-2*_pi*10^(-7)*cos(2*_pi*x)+2*_pi*10^(-7)");
+
+
+

@@ -92,8 +92,8 @@ int main()
     {
         concentration.compute_psi(i-1,psi1,psi2,psi3,psi4,psi5); // phi
         
-        unsigned int a=Nx/10; 
-         /*if(i==2)
+        /*unsigned int a=Nx/10; 
+         if(i==6)
         {   
               std::cout<<"psi1="<<std::endl;
             for(unsigned int j=0;j<Nx;j+=a)
@@ -119,17 +119,15 @@ int main()
 
         concentration.compute_rd(i-1,rd);//Calcolo i termini di reazione
         
-        if(i==1)
+        /*if(i==7)
         {std::cout<<"rd="<<std::endl;
             for(unsigned int j=0;j<Nx;j++)
-              {std::cout<<rd(j)<<std::endl;}}
-
-        //concentration.one_step_transport_reaction(phi1,phi2,phi3,phi4,phi5,rd,M,rhs,method,i,solver); //Calcolo un passo della Reazione
+              {std::cout<<rd(j)<<std::endl;}}*/
 
         concentration.one_step_transport_reaction(psi1,psi2,psi3,psi4,psi5,rd,rhs,rhs_CO2,i,solver,solver2);
  
         
-        /*if(i==1)
+        /*if(i==6)
         {   
               std::cout<<"psi1="<<std::endl;
             for(unsigned int j=0;j<Nx;j+=a)
@@ -156,6 +154,7 @@ int main()
          
 
         concentration.compute_concentration(i,psi1,psi2,psi3,psi4,psi5); //Calcolo le Concentrazioni effettive
+        
     }
 
 

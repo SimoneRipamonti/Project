@@ -127,11 +127,9 @@ void Transport_system_implicit_2_reagents(Eigen::MatrixXd &Ca,Eigen::MatrixXd &C
     for(unsigned int i=1; i<Nt+1; i++)
     {
         React.update(Ca.col(i-1));
-        rhs=(1/dt*C.get_matrix())*Ca.col(i-1)+F_p.get_rhs()-F_m.get_rhs()+React.get_rhs().cwiseProduct(CaSiO3.col(i-1));//CaSiO3.col(i-1)*React.get_rhs();
-        //rhs=(1/dt*C.get_matrix())*Ca.col(i-1)+F_p.get_rhs()-F_m.get_rhs()+React.get_rhs();//CaSiO3.col(i-1)*React.get_rhs();
+        rhs=(1/dt*C.get_matrix())*Ca.col(i-1)+F_p.get_rhs()-F_m.get_rhs()+React.get_rhs().cwiseProduct(CaSiO3.col(i-1));
         Ca.col(i)=solver.solve(rhs);
-        CaSiO3.col(i)=CaSiO3.col(i-1)-dt/(h*phi(h/2+i*h))*React.get_rhs().cwiseProduct(CaSiO3.col(i-1));//dt/h*CaSiO3.col(i-1)*React.get_rhs();//we have to divide for h because of the way we build React.rhs()
-        //CaSiO3.col(i)=CaSiO3.col(i-1)-dt/h*React.get_rhs();
+        CaSiO3.col(i)=CaSiO3.col(i-1)-dt/(h*phi(h/2+i*h))*React.get_rhs().cwiseProduct(CaSiO3.col(i-1));
     }
 }
 

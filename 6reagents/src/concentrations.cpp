@@ -43,8 +43,8 @@ void Concentration::set_initial_cond()
     {
         Ca(i,0)=data_reagents.Ca_0(h+h*i);
         H_piu(i,0)=data_reagents.H_piu_0(h+h*i);
-        //HCO3_meno(i,0)=data_reagents.K_eq*data_reagents.CO2_0(h+h*i)/data_reagents.H_piu_0(h+h*i);
-        HCO3_meno(i,0)=0.0;
+        HCO3_meno(i,0)=data_reagents.K_eq*data_reagents.CO2_0(h+h*i)/data_reagents.H_piu_0(h+h*i);
+        //HCO3_meno(i,0)=0.0;
         CO2(i,0)=data_reagents.CO2_0(h+h*i);
         CaSiO3(i,0)=data_reagents.CaSiO3_0(h+h*i);
         SiO2(i,0)=data_reagents.SiO2_0(h+h*i);
@@ -149,14 +149,13 @@ void Concentration::compute_rd(unsigned int step, Eigen::VectorXd& rd) const
     {
         temp=const_r*std::pow(H_piu(i,step),data_reagents.n);
 
-        //omega=Ca(i,step)*SiO2(i,step)/(H_piu(i,step)*H_piu(i,step));//nel codice di Anna c'è anche un Hpiu al quadrato
+        omega=Ca(i,step)*SiO2(i,step)/(H_piu(i,step)*H_piu(i,step));//nel codice di Anna c'è anche un Hpiu al quadrato
         omega/=data_reagents.K_sol;
-        /*if(step==0 && i==0)
+        /*if(step==6 && i==3)
         {std::cout<<"omega="<<omega<<std::endl;
          std::cout<<"temp="<<temp<<std::endl;}*/
 
         rd(i)=phi(h/2+i*h)*temp*std::max((1-omega),0.)*CaSiO3(i,step);
-        //rd(i)=phi(h/2+i*h)*temp*std::max((1-omega),0.);
 
     }
     
@@ -207,6 +206,10 @@ void Concentration::one_step_transport_reaction(Eigen::VectorXd& psi1, Eigen::Ve
        std::cout<<"temp2="<<std::endl;
        for(unsigned int j=0;j<data_transp.Nx;j+=a)
              {std::cout<<temp2(j)<<std::endl;}
+
+       std::cout<<"h="<<h<<std::endl;
+
+       std::cout<<"dt="<<dt<<std::endl;
 
          const Eigen::VectorXd temp3=rhs*psi3;
        
@@ -288,11 +291,9 @@ void Concentration::one_step_transport_reaction(Eigen::VectorXd& psi1, Eigen::Ve
 void Concentration::Euler_Esplicit(Eigen::VectorXd& psi1, Eigen::VectorXd& psi2, Eigen::VectorXd& psi3, Eigen::VectorXd& psi4, Eigen::VectorXd& psi5, const Eigen::VectorXd& rd, const Eigen::SparseMatrix<double>& rhs, const Eigen::VectorXd& rhs_CO2, Eigen::SparseLU<Eigen::SparseMatrix<double>, Eigen::COLAMDOrdering<int> > &solver, Eigen::SparseLU<Eigen::SparseMatrix<double>, Eigen::COLAMDOrdering<int> > &solver2) const
 {
     transport_and_reaction(psi1,rhs,rd,solver);
-    //transport_and_reaction(psi2,rhs,Eigen::VectorXd::Zero(psi2.size()),solver);//no reaction
     transport_and_reaction(psi2,rhs,-2*rd,solver);
     transport_and_reaction_CO2(psi3,rhs,rhs_CO2,Eigen::VectorXd::Zero(psi2.size()),solver2);//no reaction
     transport_and_reaction(psi4,rhs,-rd,solver);
-    //transport_and_reaction(phi5,M,rhs,rd,solver);
     transport_and_reaction(psi5,rhs,rd,solver);
 }
 
@@ -343,7 +344,9 @@ void Concentration::compute_concentration(unsigned int step, const Eigen::Vector
     for(unsigned int i=0; i<Ca.rows(); ++i)
     {
         old_it<<Ca(i,step-1),H_piu(i,step-1),HCO3_meno(i,step-1),CO2(i,step-1),CaSiO3(i,step-1),SiO2(i,step-1);  //guess iniziale
-
+        
+        /*if (step==1 && i==3)
+           {std::cout<<"old_it="<<old_it<<std::endl;}*/
         unsigned int max_iter=500;
         double tol=1.0e-14;
         double err=1;
@@ -364,6 +367,18 @@ void Concentration::compute_concentration(unsigned int step, const Eigen::Vector
         CO2(i,step)=old_it(3);
         CaSiO3(i,step)=old_it(4);
         SiO2(i,step)=old_it(5);
+
+        
+        /*if(step==6)
+         {std::cout<<"Ca="<<Ca.col(step)<<std::endl;
+          std::cout<<"H_piu="<<H_piu.col(step)<<std::endl;
+          std::cout<<"HCO3_meno="<<HCO3_meno.col(step)<<std::endl;
+          std::cout<<"CO2="<<CO2.col(step)<<std::endl;
+          std::cout<<"CaSiO3="<<CaSiO3.col(step)<<std::endl;
+          std::cout<<"SiO2="<<SiO2.col(step)<<std::endl;}*/
+
+        /*if(step==1 && i==3)
+           { std::cout<<"sol="<<Ca(i,step)<<","<<H_piu(i,step)<<","<<HCO3_meno(i,step)<<","<<CO2(i,step)<<","<<CaSiO3(i,step)<<","<<SiO2(i,step)<<std::endl;}*/
     }
 
 }
@@ -421,10 +436,10 @@ void Concentration::output_results_fixed_time(const std::string& name) const
 
     std::ofstream file1(filename, std::ofstream::out);
 
-    const unsigned int a=data_transp.Nt/10; //we print the result on the file each "a" seconds
+    //const unsigned int a=data_transp.Nt/10; //we print the result on the file each "a" seconds
 
     file1<<"space, ";
-    for (unsigned int i=0.; i<data_transp.Nt+1; i+=a)
+    for (unsigned int i=0.; i<data_transp.Nt+1; i+=1)
         file1<<"t="+std::to_string(i*dt)+"s, ";
     file1<<std::endl;
 
@@ -434,7 +449,7 @@ void Concentration::output_results_fixed_time(const std::string& name) const
     {
         file1<< x[i] <<", ";
 
-        for (unsigned int j=0; j<data_transp.Nt+1; j+=a)
+        for (unsigned int j=0; j<data_transp.Nt+1; j++)
         {
             file1<<value1(i,j)<<", ";
         }
@@ -538,64 +553,4 @@ void Concentration::output_all_reagents(unsigned int pos) const
     file1.close();
 
 }
-
-/*
-void Concentration::output_results_fixed_time_psi(const std::string& name, const Eigen::VectorXd& psi, unsigned step) const
-{
-
-    std::string filename;
-    //Eigen::MatrixXd value1(data_transp.Nx,data_transp.Nt);
-    if(name=="psi1")
-    {
-        filename="psi1_fixed_time.csv";
-        //value1=Ca;
-    }
-    else if(name=="psi2")
-    {
-        filename="psi2_fixed_time.csv";
-        //value1=H_piu;
-    }
-    else if(name=="psi3")
-    {
-        filename="psi3_fixed_time.csv";
-        //value1=HCO3_meno;
-    }
-    else if(name=="CO2")
-    {
-        filename="psi4_fixed_time.csv";
-        //value1=CO2;
-    }
-    else
-    {
-        filename="psi5_fixed_time.csv";
-        //value1=SiO2;
-    }
-
-    std::ofstream file1(filename, std::ofstream::out);
-
-    const unsigned int a=data_transp.Nt/10; //we print the result on the file each "a" seconds
-    file1<<"space, ";
-    for (unsigned int i=0.; i<data_transp.Nt; i+=a)
-        file1<<"t="+std::to_string(i*dt)+"s, ";
-    file1<<std::endl;
-
-    const Eigen::VectorXd x(Eigen::VectorXd::LinSpaced(data_transp.Nx,h/2,data_transp.L-h/2));//Definition of the space vector (Concnetration values are stored in the middle of the cell)
-
-    for (unsigned int i = 0; i<data_transp.Nx; ++i) //Loop to save the matrix by column in the CSV file
-    {
-        file1<< x[i] <<", ";
-
-        file1<<value1(i,j)<<", ";
-        
-
-        file1<<std::endl;
-
-    }
-    file1.close();
-
-}*/
-
-
-
-
 

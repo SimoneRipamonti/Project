@@ -18,7 +18,7 @@ void Darcy_output_results(Eigen::VectorXd &sol,unsigned int Nx,double L) //The s
 
     file1.close();
 
-    double h =static_cast<double>(L)/Nx;
+    const double h =static_cast<double>(L)/Nx;
 
     // Pressure results to CSV file.
     std::ofstream file2("pressure"+std::to_string(Nx)+".csv", std::ofstream::out);
@@ -39,7 +39,7 @@ void pressure_exact_result(Eigen::VectorXd &value1, unsigned int Nx, double L)
     std::ofstream file1("exact_pressure.csv", std::ofstream::out);
     file1<< "space, exact pressure" << std::endl;
 
-    double h =static_cast<double>(L)/Nx;
+    const double h =static_cast<double>(L)/Nx;
     const Eigen::VectorXd x(Eigen::VectorXd::LinSpaced(Nx,h/2,L-h/2));//Definition of the space vector (Concnetration values are stored in the middle of the cell)
 
     for (unsigned int i = 0; i<Nx; ++i) //Loop to save the matrix by column in the CSV file

@@ -5,6 +5,6 @@ digraph "Matrix_C"
   Node2 [label="Matrix_C",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black"];
   Node3 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node3 [label="AbstractMatrix",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classAbstractMatrix.html",tooltip="Definition of an Abstract class for the matrices of the Darcy and Transport System. "];
-  Node4 -> Node2 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" por" ,fontname="Helvetica"];
+  Node4 -> Node2 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" phi" ,fontname="Helvetica"];
   Node4 [label="muparser_fun",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classmuparser__fun.html",tooltip="Class for creating and set muparser_fun. "];
 }

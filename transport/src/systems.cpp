@@ -8,7 +8,7 @@ void Transport_system_esplicit(Eigen::MatrixXd &Ca, Eigen::VectorXd &vel,Data_Tr
 {
     //All the data that are needed to define the Transport System are extracted from the data structure
     auto &[L,phi,Nx,Nt,T,C_in,C_out,bc_cond,method]=data_transport;
-    //muparser_fun C_0{initial_cond.C_0};
+
     auto &[C_0,lambda]=initial_cond;    
  
     //Computation of the spatial and temporal step from the data
@@ -21,6 +21,7 @@ void Transport_system_esplicit(Eigen::MatrixXd &Ca, Eigen::VectorXd &vel,Data_Tr
     for (unsigned int i=0; i<Nx; ++i)
         Ca(i,0)=C_0(h/2+i*h);
     
+    //We need to have compatibility between the bc and temproal ones for the first concentration degree of freedom
     if(bc_cond=="In")
        Ca(0,0)=C_in;
     else
@@ -34,12 +35,12 @@ void Transport_system_esplicit(Eigen::MatrixXd &Ca, Eigen::VectorXd &vel,Data_Tr
     Matrix_F_meno F_m(Nx,Nx);
     F_m.assemble_matrix(bc_cond,C_out,vel);
 
+    //Definition of the Mass Matrix for the transport
     Matrix_C C(Nx,Nx);
     C.assemble_matrix(phi,h);
 
-    //Here there is a different definition of the linear matrix of the system (and also of the rhs in the time loop)
+    //Definition of the linear system explicit matrix
     const Eigen::SparseMatrix<double> M{1/dt*C.get_matrix()};
-
 
     //Solver for the sparse Transport system
     Eigen::SparseLU<Eigen::SparseMatrix<double>, Eigen::COLAMDOrdering<int> >   solver;
@@ -97,10 +98,11 @@ void Transport_system_implicit(Eigen::MatrixXd &Ca, Eigen::VectorXd &vel, Data_T
     Matrix_F_meno F_m(Nx,Nx);
     F_m.assemble_matrix(bc_cond,C_out,vel);
 
+    //Definition of the Mass Matrix for the transport
     Matrix_C C(Nx,Nx);
     C.assemble_matrix(phi,h);
 
-
+    //Definition of the linear system implicit matrix
     const Eigen::SparseMatrix<double> M{1/dt*C.get_matrix()+F_p.get_matrix()-F_m.get_matrix()};
 
     //Solver for the sparse Transport system
