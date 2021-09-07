@@ -1,5 +1,5 @@
 set term png
-set output "pressure.png"
+set output "solutions/pressure.png"
 
 
 set datafile separator ','
