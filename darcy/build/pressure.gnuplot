@@ -1,3 +1,7 @@
+set term png
+set output "pressure.png"
+
+
 set datafile separator ','
 
 set key autotitle columnhead # use the first line as title
