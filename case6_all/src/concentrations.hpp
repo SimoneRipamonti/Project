@@ -19,7 +19,7 @@ typedef Eigen::VectorXd Vector;
 typedef Eigen::SparseLU<Eigen::SparseMatrix<double>, Eigen::COLAMDOrdering<int> > Solver;
 
 /*!
-*\brief Class for the 6 regents case.
+*\brief Class for the 6 reagents case.
 *
 *This class has as attributes the concentrations of the reagents and as member functions functions that set and simulate the problem in question.
 */

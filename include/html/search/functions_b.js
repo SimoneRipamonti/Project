@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['_7eabstractmatrix',['~AbstractMatrix',['../classAbstractMatrix.html#ae04267719092a2174faa32054fdf079e',1,'AbstractMatrix']]]
+  ['update',['update',['../classMatrix__R.html#ab896dfe91327ba364fdcaab15e7f2547',1,'Matrix_R']]]
 ];

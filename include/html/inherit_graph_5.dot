@@ -3,5 +3,5 @@ digraph "Graphical Class Hierarchy"
   edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
   node [fontname="Helvetica",fontsize="10",shape=record];
   rankdir="LR";
-  Node0 [label="Data_linear_decay",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classData__linear__decay.html",tooltip="Data for the Linear decay problem. "];
+  Node0 [label="Data_Darcy",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classData__Darcy.html",tooltip="Data for the Darcy system. "];
 }

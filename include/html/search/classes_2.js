@@ -1,10 +1,10 @@
 var searchData=
 [
-  ['matrix_5fa',['Matrix_A',['../classMatrix__A.html',1,'']]],
-  ['matrix_5fb',['Matrix_B',['../classMatrix__B.html',1,'']]],
-  ['matrix_5fc',['Matrix_C',['../classMatrix__C.html',1,'']]],
-  ['matrix_5ff_5fmeno',['Matrix_F_meno',['../classMatrix__F__meno.html',1,'']]],
-  ['matrix_5ff_5fpiu',['Matrix_F_piu',['../classMatrix__F__piu.html',1,'']]],
-  ['matrix_5fr',['Matrix_R',['../classMatrix__R.html',1,'']]],
-  ['muparser_5ffun',['muparser_fun',['../classmuparser__fun.html',1,'']]]
+  ['data_5f2reagents',['Data_2Reagents',['../classData__2Reagents.html',1,'']]],
+  ['data_5f6reagents',['Data_6Reagents',['../classData__6Reagents.html',1,'']]],
+  ['data_5fco2',['Data_CO2',['../classData__CO2.html',1,'']]],
+  ['data_5fdarcy',['Data_Darcy',['../classData__Darcy.html',1,'']]],
+  ['data_5flinear_5fdecay',['Data_linear_decay',['../classData__linear__decay.html',1,'']]],
+  ['data_5freaction',['Data_Reaction',['../classData__Reaction.html',1,'']]],
+  ['data_5ftransport',['Data_Transport',['../classData__Transport.html',1,'']]]
 ];

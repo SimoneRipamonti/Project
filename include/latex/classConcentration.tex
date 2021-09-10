@@ -1,0 +1,415 @@
+\hypertarget{classConcentration}{}\section{Concentration Class Reference}
+\label{classConcentration}\index{Concentration@{Concentration}}
+
+
+Class for the 6 regents case.  
+
+
+
+
+{\ttfamily \#include $<$concentrations.\+hpp$>$}
+
+
+
+Collaboration diagram for Concentration\+:
+% FIG 0
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classConcentration_aacf470262d170239e4c69a3c728c3250}{Concentration} (const std\+::string \&filename)
+\item 
+unsigned int \hyperlink{classConcentration_aba844806c75ec258a0f2aeb8a4f94daa}{get\+\_\+\+Nx} () const
+\item 
+unsigned int \hyperlink{classConcentration_a1940fd79a1408f45782389c2b9be08ca}{get\+\_\+\+Nt} () const
+\item 
+void \hyperlink{classConcentration_ac214e0b8b1723da27b5ef9711bb5e5d9}{set\+\_\+initial\+\_\+cond} ()
+\item 
+void \hyperlink{classConcentration_a601757eb5beca6d3dca1deb1591f1c15}{assemble\+\_\+transport} (Matrix \&M, Matrix \&rhs, const Vector \&vel) const
+\item 
+\mbox{\Hypertarget{classConcentration_a52f7d2a2c57e26d69d25e5a774334a13}\label{classConcentration_a52f7d2a2c57e26d69d25e5a774334a13}} 
+void {\bfseries define\+\_\+transport\+\_\+solver} (Solver \&solver, Solver \&solver1, Matrix \&M\+\_\+rhs, Vector \&rhs\+\_\+\+C\+O2, const Vector \&vel, unsigned int Nx)
+\item 
+void \hyperlink{classConcentration_a73fae4bed15fcf3c0296d7220c4f2e53}{assemble\+\_\+\+C\+O2\+\_\+rhs} (Vector \&rhs\+\_\+\+C\+O2, const Vector \&vel, double C\+\_\+in, double C\+\_\+out, const std\+::string \&bc)
+\item 
+void \hyperlink{classConcentration_ab00a6f7838bebf7cddaedbab247192b7}{compute\+\_\+psi} (unsigned int step, Vector \&psi1, Vector \&psi2, Vector \&psi3, Vector \&psi4, Vector \&psi5) const
+\item 
+void \hyperlink{classConcentration_a64980d7bc4cc7d90f4cf16496ed2db59}{compute\+\_\+rd} (unsigned int step, Vector \&rd) const
+\item 
+void \hyperlink{classConcentration_ae8ecace885fbce740b7b9a7708ffba89}{compute\+\_\+rd\+\_\+kp} (unsigned int step, Vector \&rd) const
+\item 
+void \hyperlink{classConcentration_a6ad7f6581bc6d2154584c97c247e75cf}{one\+\_\+step\+\_\+transport\+\_\+reaction} (Vector \&psi1, Vector \&psi2, Vector \&psi3, Vector \&psi4, Vector \&psi5, Vector \&rd, const Matrix \&rhs, const Vector \&rhs\+\_\+\+C\+O2, unsigned int step, Solver \&solver, Solver \&solver1)
+\item 
+void \hyperlink{classConcentration_abacfffb5a8ae37d8a360628633c4477d}{Euler\+\_\+\+Esplicit} (Vector \&psi1, Vector \&psi2, Vector \&psi3, Vector \&psi4, Vector \&psi5, const Vector \&rd, const Matrix \&rhs, const Vector \&rhs\+\_\+\+C\+O2, Solver \&solver, Solver \&solver1) const
+\item 
+void \hyperlink{classConcentration_a138eaad56f3cf6182dca4fe614b2e203}{transport\+\_\+and\+\_\+reaction} (Vector \&psi, const Matrix \&M\+\_\+rhs, const Vector \&rhs\+\_\+\+C\+O2, const Vector \&rd, Solver \&solver) const
+\item 
+void \hyperlink{classConcentration_a76d9c1ef7c4d3e37abe2ccef7851a856}{compute\+\_\+concentration} (unsigned int step, const Vector \&psi1, const Vector \&psi2, const Vector \&psi3, const Vector \&psi4, const Vector \&psi5)
+\item 
+void \hyperlink{classConcentration_a392671ef7d7f48fe9f55dc6e7a4365f4}{compute\+\_\+rhs} (Vector \&rhs, const Vector \&old\+\_\+it, double psi1, double psi2, double psi3, double psi4, double psi5) const
+\item 
+void \hyperlink{classConcentration_aac5f795f4721dc2cd15daaf9600fe24d}{compute\+\_\+\+Jacob} (Eigen\+::\+Matrix\+Xd \&J, const Vector \&old\+\_\+it) const
+\item 
+void \hyperlink{classConcentration_a3949ab18b97ffe8dfe1db0015c8f7541}{output\+\_\+results\+\_\+fixed\+\_\+time} (const std\+::string \&name) const
+\item 
+void \hyperlink{classConcentration_aa11eb4b7075f751ffa05e79bd917328f}{output\+\_\+results\+\_\+fixed\+\_\+space} (const std\+::string \&name) const
+\item 
+void \hyperlink{classConcentration_ab7a1370059ae7b9a5132d58df1f772eb}{output\+\_\+all\+\_\+reagents} (unsigned int pos) const
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Eigen\+::\+Matrix\+Xd \hyperlink{classConcentration_a65164ca0c1bcb6865e0aa9cf2d60a630}{Ca}
+\item 
+Eigen\+::\+Matrix\+Xd \hyperlink{classConcentration_a686fda40d81196734de4f3326052dab7}{H\+\_\+piu}
+\item 
+Eigen\+::\+Matrix\+Xd \hyperlink{classConcentration_a4458882575c5a611280e0ea0a4bc3e96}{H\+C\+O3\+\_\+meno}
+\item 
+Eigen\+::\+Matrix\+Xd \hyperlink{classConcentration_af4f0c95c46eee5f4f1f595ce408447bd}{C\+O2}
+\item 
+Eigen\+::\+Matrix\+Xd \hyperlink{classConcentration_a20bfffe357c2fab8804f00a6a43f309c}{Ca\+Si\+O3}
+\item 
+Eigen\+::\+Matrix\+Xd \hyperlink{classConcentration_a2b06dc966fe05efd87ea6719a3666fb7}{Si\+O2}
+\item 
+\hyperlink{classData__Transport}{Data\+\_\+\+Transport} \hyperlink{classConcentration_ae1b0828446b189440a98f1c7a5d81713}{data\+\_\+transp}
+\item 
+\hyperlink{classData__6Reagents}{Data\+\_\+6\+Reagents} \hyperlink{classConcentration_a2ab60402f98e90ed314d6568db042211}{data\+\_\+reagents}
+\item 
+\hyperlink{classData__Reaction}{Data\+\_\+\+Reaction} \hyperlink{classConcentration_aa648a3d29eb835841a10925b3c67e87c}{data\+\_\+reaction}
+\item 
+\hyperlink{classData__CO2}{Data\+\_\+\+C\+O2} \hyperlink{classConcentration_a040655810176004deaa482ad2dd54154}{data\+\_\+\+C\+O2}
+\item 
+double \hyperlink{classConcentration_af6109bf824236bb512b6acd084f81b15}{h}
+\item 
+double \hyperlink{classConcentration_a3eafd293f64c3e762e8a8a8a50271727}{dt}
+\item 
+Method \hyperlink{classConcentration_a8ac0f36cf7d5f6d170fcd4a6b8bd9b28}{method}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Class for the 6 regents case. 
+
+This class has as attributes the concentrations of the reagents and as member functions functions that set and simulate the problem in question. 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classConcentration_aacf470262d170239e4c69a3c728c3250}\label{classConcentration_aacf470262d170239e4c69a3c728c3250}} 
+\index{Concentration@{Concentration}!Concentration@{Concentration}}
+\index{Concentration@{Concentration}!Concentration@{Concentration}}
+\subsubsection{\texorpdfstring{Concentration()}{Concentration()}}
+{\footnotesize\ttfamily Concentration\+::\+Concentration (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{filename }\end{DoxyParamCaption})}
+
+Constructor 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classConcentration_a73fae4bed15fcf3c0296d7220c4f2e53}\label{classConcentration_a73fae4bed15fcf3c0296d7220c4f2e53}} 
+\index{Concentration@{Concentration}!assemble\+\_\+\+C\+O2\+\_\+rhs@{assemble\+\_\+\+C\+O2\+\_\+rhs}}
+\index{assemble\+\_\+\+C\+O2\+\_\+rhs@{assemble\+\_\+\+C\+O2\+\_\+rhs}!Concentration@{Concentration}}
+\subsubsection{\texorpdfstring{assemble\+\_\+\+C\+O2\+\_\+rhs()}{assemble\_CO2\_rhs()}}
+{\footnotesize\ttfamily void Concentration\+::assemble\+\_\+\+C\+O2\+\_\+rhs (\begin{DoxyParamCaption}\item[{Vector \&}]{rhs\+\_\+\+C\+O2,  }\item[{const Vector \&}]{vel,  }\item[{double}]{C\+\_\+in,  }\item[{double}]{C\+\_\+out,  }\item[{const std\+::string \&}]{bc }\end{DoxyParamCaption})}
+
+Function that sets the rhs for the C\+O\+\_\+2 transport part, since it\textquotesingle{}s the only reagent with a costant input bc 
+\begin{DoxyParams}{Parameters}
+{\em M\+\_\+\+C\+O\+\_\+2} & reference to the sparse matrix that solves the transport problem \\
+\hline
+{\em rhs\+\_\+\+C\+O2} & reference to the sparse matrix which will be multiplied by the past past solution vector to form the rhs of the transport problem \\
+\hline
+{\em vel} & constant reference to the fluid velocity \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classConcentration_a601757eb5beca6d3dca1deb1591f1c15}\label{classConcentration_a601757eb5beca6d3dca1deb1591f1c15}} 
+\index{Concentration@{Concentration}!assemble\+\_\+transport@{assemble\+\_\+transport}}
+\index{assemble\+\_\+transport@{assemble\+\_\+transport}!Concentration@{Concentration}}
+\subsubsection{\texorpdfstring{assemble\+\_\+transport()}{assemble\_transport()}}
+{\footnotesize\ttfamily void Concentration\+::assemble\+\_\+transport (\begin{DoxyParamCaption}\item[{Matrix \&}]{M,  }\item[{Matrix \&}]{rhs,  }\item[{const Vector \&}]{vel }\end{DoxyParamCaption}) const}
+
+Function that sets the matrices for the transport part equation 
+\begin{DoxyParams}{Parameters}
+{\em M} & reference to the sparse matrix that solves the transport problem \\
+\hline
+{\em rhs} & reference to the sparse matrix which will be multiplied by the past past solution vector to form the rhs of the transport problem \\
+\hline
+{\em vel} & constant reference to the fluid velocity \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classConcentration_a76d9c1ef7c4d3e37abe2ccef7851a856}\label{classConcentration_a76d9c1ef7c4d3e37abe2ccef7851a856}} 
+\index{Concentration@{Concentration}!compute\+\_\+concentration@{compute\+\_\+concentration}}
+\index{compute\+\_\+concentration@{compute\+\_\+concentration}!Concentration@{Concentration}}
+\subsubsection{\texorpdfstring{compute\+\_\+concentration()}{compute\_concentration()}}
+{\footnotesize\ttfamily void Concentration\+::compute\+\_\+concentration (\begin{DoxyParamCaption}\item[{unsigned int}]{step,  }\item[{const Vector \&}]{psi1,  }\item[{const Vector \&}]{psi2,  }\item[{const Vector \&}]{psi3,  }\item[{const Vector \&}]{psi4,  }\item[{const Vector \&}]{psi5 }\end{DoxyParamCaption})}
+
+Functions that solves the non linear system with the Newthon method, in order to compute the real concentrations 
+\begin{DoxyParams}{Parameters}
+{\em step} & is an unsigned int that tells us at what time instant we are t=step$\ast$dt \\
+\hline
+{\em psi\+\_\+i} & reference to the i-\/total concentration \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classConcentration_aac5f795f4721dc2cd15daaf9600fe24d}\label{classConcentration_aac5f795f4721dc2cd15daaf9600fe24d}} 
+\index{Concentration@{Concentration}!compute\+\_\+\+Jacob@{compute\+\_\+\+Jacob}}
+\index{compute\+\_\+\+Jacob@{compute\+\_\+\+Jacob}!Concentration@{Concentration}}
+\subsubsection{\texorpdfstring{compute\+\_\+\+Jacob()}{compute\_Jacob()}}
+{\footnotesize\ttfamily void Concentration\+::compute\+\_\+\+Jacob (\begin{DoxyParamCaption}\item[{Eigen\+::\+Matrix\+Xd \&}]{J,  }\item[{const Vector \&}]{old\+\_\+it }\end{DoxyParamCaption}) const}
+
+Functions that computes Jacobian last row 
+\begin{DoxyParams}{Parameters}
+{\em J} & reference to the Jacobian Matrix (that is a 6x6 matrix since it is specific for a single spatial node) \\
+\hline
+{\em old\+\_\+it} & reference to the old iterate \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classConcentration_ab00a6f7838bebf7cddaedbab247192b7}\label{classConcentration_ab00a6f7838bebf7cddaedbab247192b7}} 
+\index{Concentration@{Concentration}!compute\+\_\+psi@{compute\+\_\+psi}}
+\index{compute\+\_\+psi@{compute\+\_\+psi}!Concentration@{Concentration}}
+\subsubsection{\texorpdfstring{compute\+\_\+psi()}{compute\_psi()}}
+{\footnotesize\ttfamily void Concentration\+::compute\+\_\+psi (\begin{DoxyParamCaption}\item[{unsigned int}]{step,  }\item[{Vector \&}]{psi1,  }\item[{Vector \&}]{psi2,  }\item[{Vector \&}]{psi3,  }\item[{Vector \&}]{psi4,  }\item[{Vector \&}]{psi5 }\end{DoxyParamCaption}) const}
+
+Function that computes the total concentrations from the reagents 
+\begin{DoxyParams}{Parameters}
+{\em psi\+\_\+i} & reference to the i-\/total concentration at instant equal to t=step$\ast$dt \\
+\hline
+{\em step} & is an unsigned int that tells us at what time instant we are t=step$\ast$dt \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classConcentration_a64980d7bc4cc7d90f4cf16496ed2db59}\label{classConcentration_a64980d7bc4cc7d90f4cf16496ed2db59}} 
+\index{Concentration@{Concentration}!compute\+\_\+rd@{compute\+\_\+rd}}
+\index{compute\+\_\+rd@{compute\+\_\+rd}!Concentration@{Concentration}}
+\subsubsection{\texorpdfstring{compute\+\_\+rd()}{compute\_rd()}}
+{\footnotesize\ttfamily void Concentration\+::compute\+\_\+rd (\begin{DoxyParamCaption}\item[{unsigned int}]{step,  }\item[{Vector \&}]{rd }\end{DoxyParamCaption}) const}
+
+Function that computes the reaction term of the equation in the classical standard way with all the reagent parameters (Activation Energy, Area,Temperature, constant reaction term) 
+\begin{DoxyParams}{Parameters}
+{\em rd} & reference to the equation reaction term \\
+\hline
+{\em step} & is an unsigned int that tells us at what time instant we are t=step$\ast$dt \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classConcentration_ae8ecace885fbce740b7b9a7708ffba89}\label{classConcentration_ae8ecace885fbce740b7b9a7708ffba89}} 
+\index{Concentration@{Concentration}!compute\+\_\+rd\+\_\+kp@{compute\+\_\+rd\+\_\+kp}}
+\index{compute\+\_\+rd\+\_\+kp@{compute\+\_\+rd\+\_\+kp}!Concentration@{Concentration}}
+\subsubsection{\texorpdfstring{compute\+\_\+rd\+\_\+kp()}{compute\_rd\_kp()}}
+{\footnotesize\ttfamily void Concentration\+::compute\+\_\+rd\+\_\+kp (\begin{DoxyParamCaption}\item[{unsigned int}]{step,  }\item[{Vector \&}]{rd }\end{DoxyParamCaption}) const}
+
+Function that computes the reaction term of the equation using the precipitation constant k\+\_\+p 
+\begin{DoxyParams}{Parameters}
+{\em rd} & reference to the equation reaction term \\
+\hline
+{\em step} & is an unsigned int that tells us at what time instant we are t=step$\ast$dt \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classConcentration_a392671ef7d7f48fe9f55dc6e7a4365f4}\label{classConcentration_a392671ef7d7f48fe9f55dc6e7a4365f4}} 
+\index{Concentration@{Concentration}!compute\+\_\+rhs@{compute\+\_\+rhs}}
+\index{compute\+\_\+rhs@{compute\+\_\+rhs}!Concentration@{Concentration}}
+\subsubsection{\texorpdfstring{compute\+\_\+rhs()}{compute\_rhs()}}
+{\footnotesize\ttfamily void Concentration\+::compute\+\_\+rhs (\begin{DoxyParamCaption}\item[{Vector \&}]{rhs,  }\item[{const Vector \&}]{old\+\_\+it,  }\item[{double}]{psi1,  }\item[{double}]{psi2,  }\item[{double}]{psi3,  }\item[{double}]{psi4,  }\item[{double}]{psi5 }\end{DoxyParamCaption}) const}
+
+Functions that computes the rhs of the Newton Scheme 
+\begin{DoxyParams}{Parameters}
+{\em rhs} & reference to rhe right-\/hand side to be computed \\
+\hline
+{\em old\+\_\+it} & reference to the old iterate \\
+\hline
+{\em psi\+\_\+i} & reference to the i-\/total concentration \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classConcentration_abacfffb5a8ae37d8a360628633c4477d}\label{classConcentration_abacfffb5a8ae37d8a360628633c4477d}} 
+\index{Concentration@{Concentration}!Euler\+\_\+\+Esplicit@{Euler\+\_\+\+Esplicit}}
+\index{Euler\+\_\+\+Esplicit@{Euler\+\_\+\+Esplicit}!Concentration@{Concentration}}
+\subsubsection{\texorpdfstring{Euler\+\_\+\+Esplicit()}{Euler\_Esplicit()}}
+{\footnotesize\ttfamily void Concentration\+::\+Euler\+\_\+\+Esplicit (\begin{DoxyParamCaption}\item[{Vector \&}]{psi1,  }\item[{Vector \&}]{psi2,  }\item[{Vector \&}]{psi3,  }\item[{Vector \&}]{psi4,  }\item[{Vector \&}]{psi5,  }\item[{const Vector \&}]{rd,  }\item[{const Matrix \&}]{rhs,  }\item[{const Vector \&}]{rhs\+\_\+\+C\+O2,  }\item[{Solver \&}]{solver,  }\item[{Solver \&}]{solver1 }\end{DoxyParamCaption}) const}
+
+Function that solves the reaction part with an Esplicit Euler 
+\begin{DoxyParams}{Parameters}
+{\em psi\+\_\+i} & reference to the i-\/total concentration \\
+\hline
+{\em rd} & is reference to rhe reaction term of the equation \\
+\hline
+{\em step} & is an unsigned int that tells us at what time instant we are t=step$\ast$dt \\
+\hline
+{\em rhs} & reference to the right-\/hand matrix for the transport equation \\
+\hline
+{\em rhs\+\_\+\+C\+O\+\_\+2} & referencto to the right-\/hand matrix for the C\+O\+\_\+2 transport equation \\
+\hline
+{\em solver} & reference to the solver for the transport problem \\
+\hline
+{\em solver2} & reference to the solver for the C\+O\+\_\+2 transport problem \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classConcentration_a1940fd79a1408f45782389c2b9be08ca}\label{classConcentration_a1940fd79a1408f45782389c2b9be08ca}} 
+\index{Concentration@{Concentration}!get\+\_\+\+Nt@{get\+\_\+\+Nt}}
+\index{get\+\_\+\+Nt@{get\+\_\+\+Nt}!Concentration@{Concentration}}
+\subsubsection{\texorpdfstring{get\+\_\+\+Nt()}{get\_Nt()}}
+{\footnotesize\ttfamily unsigned int Concentration\+::get\+\_\+\+Nt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+Getter for Nt \mbox{\Hypertarget{classConcentration_aba844806c75ec258a0f2aeb8a4f94daa}\label{classConcentration_aba844806c75ec258a0f2aeb8a4f94daa}} 
+\index{Concentration@{Concentration}!get\+\_\+\+Nx@{get\+\_\+\+Nx}}
+\index{get\+\_\+\+Nx@{get\+\_\+\+Nx}!Concentration@{Concentration}}
+\subsubsection{\texorpdfstring{get\+\_\+\+Nx()}{get\_Nx()}}
+{\footnotesize\ttfamily unsigned int Concentration\+::get\+\_\+\+Nx (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+Getter for Nx \mbox{\Hypertarget{classConcentration_a6ad7f6581bc6d2154584c97c247e75cf}\label{classConcentration_a6ad7f6581bc6d2154584c97c247e75cf}} 
+\index{Concentration@{Concentration}!one\+\_\+step\+\_\+transport\+\_\+reaction@{one\+\_\+step\+\_\+transport\+\_\+reaction}}
+\index{one\+\_\+step\+\_\+transport\+\_\+reaction@{one\+\_\+step\+\_\+transport\+\_\+reaction}!Concentration@{Concentration}}
+\subsubsection{\texorpdfstring{one\+\_\+step\+\_\+transport\+\_\+reaction()}{one\_step\_transport\_reaction()}}
+{\footnotesize\ttfamily void Concentration\+::one\+\_\+step\+\_\+transport\+\_\+reaction (\begin{DoxyParamCaption}\item[{Vector \&}]{psi1,  }\item[{Vector \&}]{psi2,  }\item[{Vector \&}]{psi3,  }\item[{Vector \&}]{psi4,  }\item[{Vector \&}]{psi5,  }\item[{Vector \&}]{rd,  }\item[{const Matrix \&}]{rhs,  }\item[{const Vector \&}]{rhs\+\_\+\+C\+O2,  }\item[{unsigned int}]{step,  }\item[{Solver \&}]{solver,  }\item[{Solver \&}]{solver1 }\end{DoxyParamCaption})}
+
+Function that computes one temporal step for the transport-\/reaction equation 
+\begin{DoxyParams}{Parameters}
+{\em psi\+\_\+i} & reference to the i-\/total concentration \\
+\hline
+{\em rd} & is reference to rhe reaction term of the equation \\
+\hline
+{\em step} & is an unsigned int that tells us at what time instant we are t=step$\ast$dt \\
+\hline
+{\em rhs} & reference to the right-\/hand matrix for the transport equation \\
+\hline
+{\em rhs\+\_\+\+C\+O\+\_\+2} & referencto to the right-\/hand matrix for the C\+O\+\_\+2 transport equation \\
+\hline
+{\em solver} & reference to the solver for the transport problem \\
+\hline
+{\em solver2} & reference to the solver for the C\+O\+\_\+2 transport problem \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classConcentration_ab7a1370059ae7b9a5132d58df1f772eb}\label{classConcentration_ab7a1370059ae7b9a5132d58df1f772eb}} 
+\index{Concentration@{Concentration}!output\+\_\+all\+\_\+reagents@{output\+\_\+all\+\_\+reagents}}
+\index{output\+\_\+all\+\_\+reagents@{output\+\_\+all\+\_\+reagents}!Concentration@{Concentration}}
+\subsubsection{\texorpdfstring{output\+\_\+all\+\_\+reagents()}{output\_all\_reagents()}}
+{\footnotesize\ttfamily void Concentration\+::output\+\_\+all\+\_\+reagents (\begin{DoxyParamCaption}\item[{unsigned int}]{pos }\end{DoxyParamCaption}) const}
+
+Function that saves the solution for each reagent in a specific spatial position during time 
+\begin{DoxyParams}{Parameters}
+{\em pos} & is the spatial position where we want to know all the 6 reagents evolution in time \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classConcentration_aa11eb4b7075f751ffa05e79bd917328f}\label{classConcentration_aa11eb4b7075f751ffa05e79bd917328f}} 
+\index{Concentration@{Concentration}!output\+\_\+results\+\_\+fixed\+\_\+space@{output\+\_\+results\+\_\+fixed\+\_\+space}}
+\index{output\+\_\+results\+\_\+fixed\+\_\+space@{output\+\_\+results\+\_\+fixed\+\_\+space}!Concentration@{Concentration}}
+\subsubsection{\texorpdfstring{output\+\_\+results\+\_\+fixed\+\_\+space()}{output\_results\_fixed\_space()}}
+{\footnotesize\ttfamily void Concentration\+::output\+\_\+results\+\_\+fixed\+\_\+space (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{name }\end{DoxyParamCaption}) const}
+
+Function that saves the solution for a specific reagent in a .csv file in the following way\+: each row is a time instant, each column is a spatial position 
+\begin{DoxyParams}{Parameters}
+{\em name} & string which tells us the reagent \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classConcentration_a3949ab18b97ffe8dfe1db0015c8f7541}\label{classConcentration_a3949ab18b97ffe8dfe1db0015c8f7541}} 
+\index{Concentration@{Concentration}!output\+\_\+results\+\_\+fixed\+\_\+time@{output\+\_\+results\+\_\+fixed\+\_\+time}}
+\index{output\+\_\+results\+\_\+fixed\+\_\+time@{output\+\_\+results\+\_\+fixed\+\_\+time}!Concentration@{Concentration}}
+\subsubsection{\texorpdfstring{output\+\_\+results\+\_\+fixed\+\_\+time()}{output\_results\_fixed\_time()}}
+{\footnotesize\ttfamily void Concentration\+::output\+\_\+results\+\_\+fixed\+\_\+time (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{name }\end{DoxyParamCaption}) const}
+
+Function that saves the solution for a specific reagent in a .csv file in the following way\+: each row is a spatial position, each column is a time instant 
+\begin{DoxyParams}{Parameters}
+{\em name} & string which tells us the reagent \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classConcentration_ac214e0b8b1723da27b5ef9711bb5e5d9}\label{classConcentration_ac214e0b8b1723da27b5ef9711bb5e5d9}} 
+\index{Concentration@{Concentration}!set\+\_\+initial\+\_\+cond@{set\+\_\+initial\+\_\+cond}}
+\index{set\+\_\+initial\+\_\+cond@{set\+\_\+initial\+\_\+cond}!Concentration@{Concentration}}
+\subsubsection{\texorpdfstring{set\+\_\+initial\+\_\+cond()}{set\_initial\_cond()}}
+{\footnotesize\ttfamily void Concentration\+::set\+\_\+initial\+\_\+cond (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Function that sets initial condition for the reagents \mbox{\Hypertarget{classConcentration_a138eaad56f3cf6182dca4fe614b2e203}\label{classConcentration_a138eaad56f3cf6182dca4fe614b2e203}} 
+\index{Concentration@{Concentration}!transport\+\_\+and\+\_\+reaction@{transport\+\_\+and\+\_\+reaction}}
+\index{transport\+\_\+and\+\_\+reaction@{transport\+\_\+and\+\_\+reaction}!Concentration@{Concentration}}
+\subsubsection{\texorpdfstring{transport\+\_\+and\+\_\+reaction()}{transport\_and\_reaction()}}
+{\footnotesize\ttfamily void Concentration\+::transport\+\_\+and\+\_\+reaction (\begin{DoxyParamCaption}\item[{Vector \&}]{psi,  }\item[{const Matrix \&}]{M\+\_\+rhs,  }\item[{const Vector \&}]{rhs\+\_\+\+C\+O2,  }\item[{const Vector \&}]{rd,  }\item[{Solver \&}]{solver }\end{DoxyParamCaption}) const}
+
+Function that solves the equation for one psi 
+\begin{DoxyParams}{Parameters}
+{\em psi} & reference to the total concentration \\
+\hline
+{\em M\+\_\+rhs} & reference to the right-\/hand matrix for the transport equation \\
+\hline
+{\em rhs\+\_\+\+C\+O2} & reference to the vector that identify the rhs for the C\+O2 transport problem due to the in boundary condition \\
+\hline
+{\em rd} & reference to rhe reaction term of the equation \\
+\hline
+{\em solver} & reference to the solver for the transport problem \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{classConcentration_a65164ca0c1bcb6865e0aa9cf2d60a630}\label{classConcentration_a65164ca0c1bcb6865e0aa9cf2d60a630}} 
+\index{Concentration@{Concentration}!Ca@{Ca}}
+\index{Ca@{Ca}!Concentration@{Concentration}}
+\subsubsection{\texorpdfstring{Ca}{Ca}}
+{\footnotesize\ttfamily Eigen\+::\+Matrix\+Xd Concentration\+::\+Ca\hspace{0.3cm}{\ttfamily [private]}}
+
+Matrix that stores the \mbox{[}Ca+\mbox{]} in time and space \mbox{\Hypertarget{classConcentration_a20bfffe357c2fab8804f00a6a43f309c}\label{classConcentration_a20bfffe357c2fab8804f00a6a43f309c}} 
+\index{Concentration@{Concentration}!Ca\+Si\+O3@{Ca\+Si\+O3}}
+\index{Ca\+Si\+O3@{Ca\+Si\+O3}!Concentration@{Concentration}}
+\subsubsection{\texorpdfstring{Ca\+Si\+O3}{CaSiO3}}
+{\footnotesize\ttfamily Eigen\+::\+Matrix\+Xd Concentration\+::\+Ca\+Si\+O3\hspace{0.3cm}{\ttfamily [private]}}
+
+Matrix that stores the \mbox{[}Ca\+Si\+O\+\_\+3\mbox{]} in time and space \mbox{\Hypertarget{classConcentration_af4f0c95c46eee5f4f1f595ce408447bd}\label{classConcentration_af4f0c95c46eee5f4f1f595ce408447bd}} 
+\index{Concentration@{Concentration}!C\+O2@{C\+O2}}
+\index{C\+O2@{C\+O2}!Concentration@{Concentration}}
+\subsubsection{\texorpdfstring{C\+O2}{CO2}}
+{\footnotesize\ttfamily Eigen\+::\+Matrix\+Xd Concentration\+::\+C\+O2\hspace{0.3cm}{\ttfamily [private]}}
+
+Matrix that stores the \mbox{[}C\+O\+\_\+2\mbox{]} in time and space \mbox{\Hypertarget{classConcentration_a040655810176004deaa482ad2dd54154}\label{classConcentration_a040655810176004deaa482ad2dd54154}} 
+\index{Concentration@{Concentration}!data\+\_\+\+C\+O2@{data\+\_\+\+C\+O2}}
+\index{data\+\_\+\+C\+O2@{data\+\_\+\+C\+O2}!Concentration@{Concentration}}
+\subsubsection{\texorpdfstring{data\+\_\+\+C\+O2}{data\_CO2}}
+{\footnotesize\ttfamily \hyperlink{classData__CO2}{Data\+\_\+\+C\+O2} Concentration\+::data\+\_\+\+C\+O2\hspace{0.3cm}{\ttfamily [private]}}
+
+Input C\+O2 data (It\textquotesingle{}s the only reagent with a constant inflow \mbox{\Hypertarget{classConcentration_aa648a3d29eb835841a10925b3c67e87c}\label{classConcentration_aa648a3d29eb835841a10925b3c67e87c}} 
+\index{Concentration@{Concentration}!data\+\_\+reaction@{data\+\_\+reaction}}
+\index{data\+\_\+reaction@{data\+\_\+reaction}!Concentration@{Concentration}}
+\subsubsection{\texorpdfstring{data\+\_\+reaction}{data\_reaction}}
+{\footnotesize\ttfamily \hyperlink{classData__Reaction}{Data\+\_\+\+Reaction} Concentration\+::data\+\_\+reaction\hspace{0.3cm}{\ttfamily [private]}}
+
+Physical data for the reaction setting \mbox{\Hypertarget{classConcentration_a2ab60402f98e90ed314d6568db042211}\label{classConcentration_a2ab60402f98e90ed314d6568db042211}} 
+\index{Concentration@{Concentration}!data\+\_\+reagents@{data\+\_\+reagents}}
+\index{data\+\_\+reagents@{data\+\_\+reagents}!Concentration@{Concentration}}
+\subsubsection{\texorpdfstring{data\+\_\+reagents}{data\_reagents}}
+{\footnotesize\ttfamily \hyperlink{classData__6Reagents}{Data\+\_\+6\+Reagents} Concentration\+::data\+\_\+reagents\hspace{0.3cm}{\ttfamily [private]}}
+
+Data for the 6 reagents \mbox{\Hypertarget{classConcentration_ae1b0828446b189440a98f1c7a5d81713}\label{classConcentration_ae1b0828446b189440a98f1c7a5d81713}} 
+\index{Concentration@{Concentration}!data\+\_\+transp@{data\+\_\+transp}}
+\index{data\+\_\+transp@{data\+\_\+transp}!Concentration@{Concentration}}
+\subsubsection{\texorpdfstring{data\+\_\+transp}{data\_transp}}
+{\footnotesize\ttfamily \hyperlink{classData__Transport}{Data\+\_\+\+Transport} Concentration\+::data\+\_\+transp\hspace{0.3cm}{\ttfamily [private]}}
+
+Data for the transport part \mbox{\Hypertarget{classConcentration_a3eafd293f64c3e762e8a8a8a50271727}\label{classConcentration_a3eafd293f64c3e762e8a8a8a50271727}} 
+\index{Concentration@{Concentration}!dt@{dt}}
+\index{dt@{dt}!Concentration@{Concentration}}
+\subsubsection{\texorpdfstring{dt}{dt}}
+{\footnotesize\ttfamily double Concentration\+::dt\hspace{0.3cm}{\ttfamily [private]}}
+
+Temporal step \mbox{\Hypertarget{classConcentration_af6109bf824236bb512b6acd084f81b15}\label{classConcentration_af6109bf824236bb512b6acd084f81b15}} 
+\index{Concentration@{Concentration}!h@{h}}
+\index{h@{h}!Concentration@{Concentration}}
+\subsubsection{\texorpdfstring{h}{h}}
+{\footnotesize\ttfamily double Concentration\+::h\hspace{0.3cm}{\ttfamily [private]}}
+
+Spatial step \mbox{\Hypertarget{classConcentration_a686fda40d81196734de4f3326052dab7}\label{classConcentration_a686fda40d81196734de4f3326052dab7}} 
+\index{Concentration@{Concentration}!H\+\_\+piu@{H\+\_\+piu}}
+\index{H\+\_\+piu@{H\+\_\+piu}!Concentration@{Concentration}}
+\subsubsection{\texorpdfstring{H\+\_\+piu}{H\_piu}}
+{\footnotesize\ttfamily Eigen\+::\+Matrix\+Xd Concentration\+::\+H\+\_\+piu\hspace{0.3cm}{\ttfamily [private]}}
+
+Matrix that stores the \mbox{[}H+\mbox{]} in time and space \mbox{\Hypertarget{classConcentration_a4458882575c5a611280e0ea0a4bc3e96}\label{classConcentration_a4458882575c5a611280e0ea0a4bc3e96}} 
+\index{Concentration@{Concentration}!H\+C\+O3\+\_\+meno@{H\+C\+O3\+\_\+meno}}
+\index{H\+C\+O3\+\_\+meno@{H\+C\+O3\+\_\+meno}!Concentration@{Concentration}}
+\subsubsection{\texorpdfstring{H\+C\+O3\+\_\+meno}{HCO3\_meno}}
+{\footnotesize\ttfamily Eigen\+::\+Matrix\+Xd Concentration\+::\+H\+C\+O3\+\_\+meno\hspace{0.3cm}{\ttfamily [private]}}
+
+Matrix that stores the \mbox{[}H\+C\+O\+\_\+3-\/\mbox{]} in time and space \mbox{\Hypertarget{classConcentration_a8ac0f36cf7d5f6d170fcd4a6b8bd9b28}\label{classConcentration_a8ac0f36cf7d5f6d170fcd4a6b8bd9b28}} 
+\index{Concentration@{Concentration}!method@{method}}
+\index{method@{method}!Concentration@{Concentration}}
+\subsubsection{\texorpdfstring{method}{method}}
+{\footnotesize\ttfamily Method Concentration\+::method\hspace{0.3cm}{\ttfamily [private]}}
+
+Numerical method that solves the reaction part \mbox{\Hypertarget{classConcentration_a2b06dc966fe05efd87ea6719a3666fb7}\label{classConcentration_a2b06dc966fe05efd87ea6719a3666fb7}} 
+\index{Concentration@{Concentration}!Si\+O2@{Si\+O2}}
+\index{Si\+O2@{Si\+O2}!Concentration@{Concentration}}
+\subsubsection{\texorpdfstring{Si\+O2}{SiO2}}
+{\footnotesize\ttfamily Eigen\+::\+Matrix\+Xd Concentration\+::\+Si\+O2\hspace{0.3cm}{\ttfamily [private]}}
+
+Matrix that stores the \mbox{[}Si\+O\+\_\+2\mbox{]} in time and space 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+concentrations.\+hpp\end{DoxyCompactItemize}

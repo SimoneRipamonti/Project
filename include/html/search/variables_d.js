@@ -1,5 +1,8 @@
 var searchData=
 [
-  ['q_5fin',['Q_in',['../classMatrix__A.html#a7be771744ff633dfda78bce1b68cc5b2',1,'Matrix_A::Q_in()'],['../classData__Darcy.html#a0b571112f2b3767a50d6c9ee5d9b64f2',1,'Data_Darcy::Q_in()']]],
-  ['q_5fout',['Q_out',['../classMatrix__A.html#a79f4a0f55c11a99d755ecd2a4dd1bc29',1,'Matrix_A::Q_out()'],['../classData__Darcy.html#a904d9b426d753e4a8b61599c2aac0afd',1,'Data_Darcy::Q_out()']]]
+  ['p_5fin',['p_in',['../classData__Darcy.html#a4c9aef907e96d72e9d75e4d9a69bd8c0',1,'Data_Darcy::p_in()'],['../classMatrix__A.html#a04c5dd82581ef0bb8db493c51b13e38d',1,'Matrix_A::P_in()']]],
+  ['p_5fout',['p_out',['../classData__Darcy.html#a0c67d809cec0e3a70fa8103e1727b3d5',1,'Data_Darcy::p_out()'],['../classMatrix__A.html#ab43806a46a28b0826c121227ffef1d13',1,'Matrix_A::P_out()']]],
+  ['parser',['parser',['../group__MuParser.html#gad94fb029c66d186b6fe278b51df8dfc4',1,'muparser_fun']]],
+  ['ph',['ph',['../classMatrix__R.html#ae8345433c06d0d0249c09783c4ff80bc',1,'Matrix_R::ph()'],['../classData__2Reagents.html#aaa48e75cb9735514e5ba6a3ce3e0cce9',1,'Data_2Reagents::ph()']]],
+  ['phi',['phi',['../classMatrix__C.html#a35d4d4197169e42d19a30fc6acca94bf',1,'Matrix_C::phi()'],['../classMatrix__R.html#a8527ebc8844931d65e65c168956398ff',1,'Matrix_R::phi()'],['../classData__Darcy.html#a2838fcf94c2a9e3ae7fa234964d63b47',1,'Data_Darcy::phi()'],['../classData__Transport.html#af5032faf024d666c17b41cda75cabf2b',1,'Data_Transport::phi()']]]
 ];
