@@ -9,8 +9,7 @@
 
 //Esplicit transport upwind
 
-void Transport_system_esplicit(Eigen::MatrixXd &Ca, Eigen::VectorXd &vel,Data_Transport &data_transport, Data_linear_decay &data_linear_decay) //As input there is the matrix solution where we store our solution at each istant,
-//each row represent a spatial position, each column represent a time istant.
+void Transport_system_esplicit(Eigen::MatrixXd &Ca, Eigen::VectorXd &vel,Data_Transport &data_transport, Data_linear_decay &data_linear_decay) //As input there is the matrix solution where we store our solution at each istant, each row represent a spatial position, each column represent a time istant.
 //In the vector vel there is the velocity evaluated at each node cell.
 {
     //All the data that are needed to define the Transport System are extracted from the data structure
@@ -24,8 +23,7 @@ void Transport_system_esplicit(Eigen::MatrixXd &Ca, Eigen::VectorXd &vel,Data_Tr
     Eigen::MatrixXd Reaction{h*Eigen::MatrixXd::Identity(Nx,Nx)}; //Reaction matrix for the linear decay (It is just the Identity matrix multiplied by h and the porosity)
 
     //The Initial Condition are saved in an Eigen Vector. We recall that the value of the chemical species is saved in the middle of the cell (as the pressure in the Darcy System) 
-
-   for (unsigned int i=0; i<Nx; ++i)
+    for (unsigned int i=0; i<Nx; ++i)
         {Ca(i,0)=Ca_0(h/2+i*h);
          Reaction(i,i)*=phi(h/2+i*h);}
 
@@ -64,8 +62,7 @@ void Transport_system_esplicit(Eigen::MatrixXd &Ca, Eigen::VectorXd &vel,Data_Tr
 }
 
 //Implicit transport upwind and esplicit reaction
-void Transport_system_implicit(Eigen::MatrixXd &Ca, Eigen::VectorXd &vel,Data_Transport &data_transport, Data_linear_decay &data_linear_decay) //As input there is the matrix solution where we store our solution at each istant,
-//each row represent a spatial position, each column represent a time istant.
+void Transport_system_implicit(Eigen::MatrixXd &Ca, Eigen::VectorXd &vel,Data_Transport &data_transport, Data_linear_decay &data_linear_decay) //As input there is the matrix solution where we store our solution at each istant, each row represent a spatial position, each column represent a time istant.
 //In the vector vel there is the velocity evaluated at each node cell.
 {
     //All the data that are needed to define the Transport System are extracted from the data structure
@@ -79,8 +76,7 @@ void Transport_system_implicit(Eigen::MatrixXd &Ca, Eigen::VectorXd &vel,Data_Tr
 
     Eigen::MatrixXd Reaction{h*Eigen::MatrixXd::Identity(Nx,Nx)}; //Reaction matrix for the linear decay (It is just the Identity matrix multiplied by h and the porosity)
 
-      //Initial Condition are saved in an Eigen Vector. We recall that the value of the chemical species is saved in the middle of the cell (as the pressure in the Darcy System) 
-
+   //Initial Condition are saved in an Eigen Vector. We recall that the value of the chemical species is saved in the middle of the cell (as the pressure in the Darcy System) 
    for (unsigned int i=0; i<Nx; ++i)
         {Ca(i,0)=Ca_0(h/2+i*h);
          Reaction(i,i)*=phi(h/2+i*h);}

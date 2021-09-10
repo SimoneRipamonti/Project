@@ -36,8 +36,6 @@ void set_Darcy_system(const Data_Darcy &data, Eigen::SparseMatrix<double> &M,Eig
 }
 
 
-
-//Function that taking as input A and B create the big sparse matrix M=[[A,B];[B^T,0]]
 Matrix block_matrix(const Matrix& A, const Matrix& B)
 {
     std::vector<Triplet> t;
@@ -54,7 +52,7 @@ Matrix block_matrix(const Matrix& A, const Matrix& B)
     return M;
 }
 
-//Auxiliar Funxtion used to create the big block matrix
+
 void triplets_with_shift(std::vector<Triplet>& t, const Matrix& A, int shift_row, int shift_col)
 {
     for (int k(0); k < A.outerSize(); ++k)

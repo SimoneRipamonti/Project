@@ -1,5 +1,9 @@
 var searchData=
 [
+  ['darcy_5ffunctions',['Darcy_Functions',['../group__Darcy__Functions.html',1,'']]],
+  ['darcy_5foutput',['Darcy_Output',['../group__Darcy__Output.html',1,'']]],
+  ['darcy_5foutput_5fresults',['Darcy_output_results',['../group__Darcy__Output.html#gae32dbfb8ae1dae7d94ce2a07b441be8f',1,'output_darcy.hpp']]],
+  ['darcy_5fvelocity',['Darcy_velocity',['../group__Darcy__Functions.html#gade1d46d5d0ad46fbe3419c023a693335',1,'darcy.hpp']]],
   ['data_5f2reagents',['Data_2Reagents',['../classData__2Reagents.html',1,'Data_2Reagents'],['../classData__2Reagents.html#a2a78ff38ce2ab53ffca0f2c7dd9523bc',1,'Data_2Reagents::Data_2Reagents()']]],
   ['data_5f6reagents',['Data_6Reagents',['../classData__6Reagents.html',1,'Data_6Reagents'],['../classData__6Reagents.html#a5a222af278c0506507fd868cbb8f4c55',1,'Data_6Reagents::Data_6Reagents()']]],
   ['data_5fco2',['Data_CO2',['../classData__CO2.html',1,'Data_CO2'],['../classData__CO2.html#aaad81b67f6ee1130fa892ff4592fffcb',1,'Data_CO2::Data_CO2()']]],

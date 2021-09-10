@@ -4,6 +4,11 @@
 #include <string>
 #include "muparser_fun.hpp"
 
+
+/** \addtogroup Parameters
+ *\brief different classes which store data we need for the different problems, reading them through a GetPot file
+ *  @{
+*/
 /*!
   *\brief Data for the Darcy system.
   *
@@ -150,6 +155,7 @@ public:
 
 };
 
+/** @}*/
 
 
 #endif

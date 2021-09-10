@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['operator_28_29',['operator()',['../classmuparser__fun.html#ad6ad244f299a60774735832c4ea28d66',1,'muparser_fun']]],
-  ['operator_3d',['operator=',['../classmuparser__fun.html#a6e4082f4ba40e947b734195a337823d9',1,'muparser_fun']]]
+  ['muparser_5ffun',['muparser_fun',['../group__MuParser.html#ga17c98796657ea4da75ca6e273f0b6965',1,'muparser_fun::muparser_fun()=default'],['../group__MuParser.html#ga106b21c0b17eb9fbc347fd510f617efb',1,'muparser_fun::muparser_fun(const muparser_fun &amp;m)']]]
 ];

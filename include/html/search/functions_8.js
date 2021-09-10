@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['_7eabstractmatrix',['~AbstractMatrix',['../classAbstractMatrix.html#ae04267719092a2174faa32054fdf079e',1,'AbstractMatrix']]]
+  ['triplets_5fwith_5fshift',['triplets_with_shift',['../group__Darcy__Functions.html#gafc7f845f0586c4a17350967bd9058834',1,'darcy.hpp']]]
 ];

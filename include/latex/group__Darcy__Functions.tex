@@ -1,0 +1,78 @@
+\hypertarget{group__Darcy__Functions}{}\section{Darcy\+\_\+\+Functions}
+\label{group__Darcy__Functions}\index{Darcy\+\_\+\+Functions@{Darcy\+\_\+\+Functions}}
+
+
+Functions that are related to the definition and resolution of the Darcy system.  
+
+
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{group__Darcy__Functions_gafbabf263d46e20e1944c836bbbf5c770}{set\+\_\+\+Darcy\+\_\+system} (const \hyperlink{classData__Darcy}{Data\+\_\+\+Darcy} \&data, Eigen\+::\+Sparse\+Matrix$<$ double $>$ \&Matrix, Eigen\+::\+Vector\+Xd \&rhs, double h)
+\item 
+Matrix \hyperlink{group__Darcy__Functions_gae0c2d848e71b808e093e4f4f3926062a}{block\+\_\+matrix} (const Matrix \&A, const Matrix \&B)
+\item 
+void \hyperlink{group__Darcy__Functions_gafc7f845f0586c4a17350967bd9058834}{triplets\+\_\+with\+\_\+shift} (std\+::vector$<$ Triplet $>$ \&t, const Matrix \&A, int shift\+\_\+row, int shift\+\_\+col)
+\item 
+void \hyperlink{group__Darcy__Functions_gade1d46d5d0ad46fbe3419c023a693335}{Darcy\+\_\+velocity} (const \hyperlink{classData__Darcy}{Data\+\_\+\+Darcy} \&data, Eigen\+::\+Vector\+Xd \&vel)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Functions that are related to the definition and resolution of the Darcy system. 
+
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{group__Darcy__Functions_gae0c2d848e71b808e093e4f4f3926062a}\label{group__Darcy__Functions_gae0c2d848e71b808e093e4f4f3926062a}} 
+\index{Darcy\+\_\+\+Functions@{Darcy\+\_\+\+Functions}!block\+\_\+matrix@{block\+\_\+matrix}}
+\index{block\+\_\+matrix@{block\+\_\+matrix}!Darcy\+\_\+\+Functions@{Darcy\+\_\+\+Functions}}
+\subsubsection{\texorpdfstring{block\+\_\+matrix()}{block\_matrix()}}
+{\footnotesize\ttfamily Matrix block\+\_\+matrix (\begin{DoxyParamCaption}\item[{const Matrix \&}]{A,  }\item[{const Matrix \&}]{B }\end{DoxyParamCaption})}
+
+Function for the definition of the big sparse block matrix 
+\begin{DoxyParams}{Parameters}
+{\em A} & is the A matrix of the Darcy system \\
+\hline
+{\em B} & is the B matrix of the Darcy system \\
+\hline
+{\em Matrix} & is the output darcy system matrix \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{group__Darcy__Functions_gade1d46d5d0ad46fbe3419c023a693335}\label{group__Darcy__Functions_gade1d46d5d0ad46fbe3419c023a693335}} 
+\index{Darcy\+\_\+\+Functions@{Darcy\+\_\+\+Functions}!Darcy\+\_\+velocity@{Darcy\+\_\+velocity}}
+\index{Darcy\+\_\+velocity@{Darcy\+\_\+velocity}!Darcy\+\_\+\+Functions@{Darcy\+\_\+\+Functions}}
+\subsubsection{\texorpdfstring{Darcy\+\_\+velocity()}{Darcy\_velocity()}}
+{\footnotesize\ttfamily void Darcy\+\_\+velocity (\begin{DoxyParamCaption}\item[{const \hyperlink{classData__Darcy}{Data\+\_\+\+Darcy} \&}]{data,  }\item[{Eigen\+::\+Vector\+Xd \&}]{vel }\end{DoxyParamCaption})}
+
+Function that creates and solves the Darcy system in order to compute the Darcy velocity (it is used in case6\+\_\+all) 
+\begin{DoxyParams}{Parameters}
+{\em data} & is a reference to the data that we need to define the Darcy problem \\
+\hline
+{\em vel} & is a reference to the vector where we want to store the Darcy velocity \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{group__Darcy__Functions_gafbabf263d46e20e1944c836bbbf5c770}\label{group__Darcy__Functions_gafbabf263d46e20e1944c836bbbf5c770}} 
+\index{Darcy\+\_\+\+Functions@{Darcy\+\_\+\+Functions}!set\+\_\+\+Darcy\+\_\+system@{set\+\_\+\+Darcy\+\_\+system}}
+\index{set\+\_\+\+Darcy\+\_\+system@{set\+\_\+\+Darcy\+\_\+system}!Darcy\+\_\+\+Functions@{Darcy\+\_\+\+Functions}}
+\subsubsection{\texorpdfstring{set\+\_\+\+Darcy\+\_\+system()}{set\_Darcy\_system()}}
+{\footnotesize\ttfamily void set\+\_\+\+Darcy\+\_\+system (\begin{DoxyParamCaption}\item[{const \hyperlink{classData__Darcy}{Data\+\_\+\+Darcy} \&}]{data,  }\item[{Eigen\+::\+Sparse\+Matrix$<$ double $>$ \&}]{Matrix,  }\item[{Eigen\+::\+Vector\+Xd \&}]{rhs,  }\item[{double}]{h }\end{DoxyParamCaption})}
+
+Function for definition of the Darcy System 
+\begin{DoxyParams}{Parameters}
+{\em data} & is a reference to the data that we need to define the Darcy problem \\
+\hline
+{\em Matrix} & is a reference to a the sparse matrix where we want to store the entire Darcy system matrix (\mbox{[}\mbox{[}A,B\mbox{]};\mbox{[}-\/\+B$^\wedge$T,0\mbox{]}\mbox{]}) \\
+\hline
+{\em rhs} & is a reference to the rhs of the Darcy system \\
+\hline
+{\em h} & is the spatial step \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{group__Darcy__Functions_gafc7f845f0586c4a17350967bd9058834}\label{group__Darcy__Functions_gafc7f845f0586c4a17350967bd9058834}} 
+\index{Darcy\+\_\+\+Functions@{Darcy\+\_\+\+Functions}!triplets\+\_\+with\+\_\+shift@{triplets\+\_\+with\+\_\+shift}}
+\index{triplets\+\_\+with\+\_\+shift@{triplets\+\_\+with\+\_\+shift}!Darcy\+\_\+\+Functions@{Darcy\+\_\+\+Functions}}
+\subsubsection{\texorpdfstring{triplets\+\_\+with\+\_\+shift()}{triplets\_with\_shift()}}
+{\footnotesize\ttfamily void triplets\+\_\+with\+\_\+shift (\begin{DoxyParamCaption}\item[{std\+::vector$<$ Triplet $>$ \&}]{t,  }\item[{const Matrix \&}]{A,  }\item[{int}]{shift\+\_\+row,  }\item[{int}]{shift\+\_\+col }\end{DoxyParamCaption})}
+
+Auxiliar function for the definiton of the big block matrix 

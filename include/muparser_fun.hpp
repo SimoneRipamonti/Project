@@ -7,6 +7,10 @@
 #include <string>
 
 
+/** \addtogroup MuParser
+ *\brief Class for creating and set muparser_fun
+ *  @{
+ */
 /*!
   *\brief Class for creating and set muparser_fun
   *

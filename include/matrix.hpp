@@ -1,6 +1,6 @@
 /** 
  *  \file   matrix.hpp 
- *  \brief  discretized equations' matrices 
+ *  \brief  matrices representing the algebraic operators obtained from the discretization of differential equations 
  *  \author Simone Ripamonti
  *  \date   2021-05 
  ***********************************************/
@@ -12,6 +12,12 @@
 #include <Eigen/Dense>
 #include <Eigen/Sparse>
 
+
+
+/** \addtogroup Matrices
+ *\brief classes that identify matrices representing the algebraic operators obtained from the discretization of differential equations 
+ *  @{
+*/
 /**
   *\brief Definition of an Abstract class for the matrices of the Darcy and Transport System.
   *
@@ -281,6 +287,8 @@ private:
     double h;/*!<Spatial step*/
     muparser_fun phi;/*!<Soil porosity*/
 };
+
+/** @}*/
 
 
 

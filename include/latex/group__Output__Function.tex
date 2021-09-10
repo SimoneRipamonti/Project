@@ -1,0 +1,59 @@
+\hypertarget{group__Output__Function}{}\section{Output\+\_\+\+Function}
+\label{group__Output__Function}\index{Output\+\_\+\+Function@{Output\+\_\+\+Function}}
+
+
+Functions that print on a csv file the solutions of spatial-\/temporal problems (the trasnport and reaction ones)  
+
+
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{group__Output__Function_gaae2d723f21cd4cc2466fe792c1d5636a}\label{group__Output__Function_gaae2d723f21cd4cc2466fe792c1d5636a}} 
+void {\bfseries output\+\_\+results\+\_\+fixed\+\_\+time} (const std\+::string \&title, const Eigen\+::\+Matrix\+Xd \&value1, double L, unsigned int Nx, double T, unsigned int Nt)
+\item 
+void \hyperlink{group__Output__Function_gaef7d57ba13573ecd5504571c34b24767}{output\+\_\+results\+\_\+fixed\+\_\+space} (const std\+::string \&title, const Eigen\+::\+Matrix\+Xd \&value1, double L, unsigned int Nx, double T, unsigned int Nt)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Functions that print on a csv file the solutions of spatial-\/temporal problems (the trasnport and reaction ones) 
+
+/$\ast$! Function that saves the solution in a .csv file the following way\+: each row is a spatial position, each column is a time instant 
+\begin{DoxyParams}{Parameters}
+{\em title} & is the file title \\
+\hline
+{\em value1} & is a reference to the matrix where we have stored our solution \\
+\hline
+{\em L} & is the domain length \\
+\hline
+{\em Nx} & is the number of spatial steps \\
+\hline
+{\em T} & is the temporal domain \\
+\hline
+{\em Nt} & is the number of temporal steps \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{group__Output__Function_gaef7d57ba13573ecd5504571c34b24767}\label{group__Output__Function_gaef7d57ba13573ecd5504571c34b24767}} 
+\index{Output\+\_\+\+Function@{Output\+\_\+\+Function}!output\+\_\+results\+\_\+fixed\+\_\+space@{output\+\_\+results\+\_\+fixed\+\_\+space}}
+\index{output\+\_\+results\+\_\+fixed\+\_\+space@{output\+\_\+results\+\_\+fixed\+\_\+space}!Output\+\_\+\+Function@{Output\+\_\+\+Function}}
+\subsubsection{\texorpdfstring{output\+\_\+results\+\_\+fixed\+\_\+space()}{output\_results\_fixed\_space()}}
+{\footnotesize\ttfamily void output\+\_\+results\+\_\+fixed\+\_\+space (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{title,  }\item[{const Eigen\+::\+Matrix\+Xd \&}]{value1,  }\item[{double}]{L,  }\item[{unsigned int}]{Nx,  }\item[{double}]{T,  }\item[{unsigned int}]{Nt }\end{DoxyParamCaption})}
+
+Function that saves the solution in a .csv file the following way\+: each row is a time instant, each column is a spatial position 
+\begin{DoxyParams}{Parameters}
+{\em title} & is the file title \\
+\hline
+{\em value1} & is a reference to the matrix where we have stored our solution \\
+\hline
+{\em L} & is the domain length \\
+\hline
+{\em Nx} & is the number of spatial steps \\
+\hline
+{\em T} & is the temporal domain \\
+\hline
+{\em Nt} & is the number of temporal steps \\
+\hline
+\end{DoxyParams}

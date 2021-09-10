@@ -115,6 +115,7 @@ void Transport_system_implicit(Eigen::MatrixXd &Ca, Eigen::VectorXd &vel, Data_T
     //Initialization of the rhs of the Transport System
     Eigen::VectorXd rhs(Nx);
 
+    //Temporal loop for solving at each istant the transport problem
     for(unsigned int i=1; i<Nt+1; i++)
     {
         rhs=(1/dt*C.get_matrix())*Ca.col(i-1)+F_p.get_rhs()-F_m.get_rhs();

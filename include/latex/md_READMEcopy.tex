@@ -1,0 +1,17 @@
+\#\+Codice per la risoluzione del sistema di Darcy in 1D e risoluzione equazione di trasporto e reazione di un tracciante.
+
+\#file data.\+pot Contiene tutti i dati necessari al problema
+
+\#muparser\+\_\+fun.\+hpp/cpp Definendo variabili come la porosità, la sorgente esterna o la permeabilità come funzioni dello spazio (handle function in Matlab) bisogna acquisirle tramite le funzionalità della libreria muparser, utilizzata in questa classe.
+
+\#parameters.\+hpp/cpp Grazie a Get\+Pot si acquisiscono i dati dal file data.\+pot e li si salvano in opportune variabili. Per le variabili come la permeabilità, la porosità e la sorgente esterna si utilizza la classe \hyperlink{classmuparser__fun}{muparser\+\_\+fun}.
+
+\#matrix.\+hpp/matrix.cpp Si definisce prima di tutto l\textquotesingle{}Abstract\+\_\+\+Matrix class generale per tutte le matrici (operatori) necessari alla risoluzione del sistema di Darcy e del problema di trasporto. In seguito si definisicono le singole matrici\+: A è la matrice di massa dell\textquotesingle{}equazione di Darcy; B è la matrice del sistema punto sella (sempre di Darcy)(N\+O\+TA\+: in questo codice viene definita come la Trasposta di quella riportata nelle note, per comodità di implementazione); C è la matrice di massa del tracciante; F\+\_\+piu è la matrice relativa ai flussi uscenti; F\+\_\+meno è la matrice relativa ai flussi entranti; (F\+\_\+piu e F\+\_\+meno saltano fuori dall\textquotesingle{}integrazione sul bordo del termine di trasporto).
+
+\#functions.\+hpp/cpp Si definiscono due funzioni\+: 1) La funzione che assembla il sistema di Darcy, fornendo come output la matrice complessiva M e il suo rhs. 2) La funzione che permette di scrivere su file .csv (che poi verranno plottati) i risultati sia della velocità che della pressione. (In output si hanno i file velocity.\+csv e pressure.\+csv).
+
+\#velocity.\+sh,pressure.\+sh Due file bash che lanciati dopo aver lanciato il main (cioè dopo che i file .csv sono stati riempiti coi dati) permettono di plottare il risultato tramite gnuplot.
+
+I\+M\+P\+O\+R\+T\+A\+N\+T\+E1\+: P\+ER C\+O\+M\+P\+I\+L\+A\+RE B\+I\+S\+O\+G\+NA C\+A\+M\+B\+I\+A\+RE LE V\+A\+R\+I\+A\+B\+I\+LI D\+EL M\+A\+K\+E\+F\+I\+LE I\+N\+S\+E\+R\+E\+N\+DO I P\+E\+R\+C\+O\+R\+SI C\+HE C\+O\+N\+D\+U\+C\+O\+NO A\+L\+LE L\+I\+B\+R\+E\+R\+IE N\+E\+C\+E\+S\+S\+A\+R\+IE.
+
+I\+M\+P\+O\+R\+T\+A\+N\+T\+E2\+: U\+NA V\+O\+L\+TA C\+A\+M\+B\+I\+A\+TI I P\+E\+R\+C\+O\+R\+SI N\+EI M\+A\+K\+E\+F\+I\+LE S\+C\+R\+I\+VE SU T\+E\+R\+M\+I\+N\+A\+LE \char`\"{}module load boost\char`\"{} P\+ER A\+T\+T\+I\+V\+A\+RE LE F\+U\+N\+Z\+I\+O\+N\+A\+L\+I\+TÀ DI G\+N\+U\+P\+L\+OT 

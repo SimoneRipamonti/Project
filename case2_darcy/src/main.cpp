@@ -11,9 +11,10 @@
 #include <cmath>
 
 
+//This main shows the behaviour of the Darcy code with a permeability that is not continous 
 int main(int argc, char **argv)
 {
-    Data_Darcy data("data.pot");
+    Data_Darcy data("data.pot");//We get the data from a file
 
     double h =static_cast<double>(data.L)/data.Nx; //space step
 
@@ -33,7 +34,7 @@ int main(int argc, char **argv)
     sol= solver.solve(rhs);//The Darcy system is solved and the solution is stored in the sol vector
 
  
-    Darcy_output_results(sol,data.Nx,data.L);
+    Darcy_output_results(sol,data.Nx,data.L);//Store the output result in csv files
 
 
 

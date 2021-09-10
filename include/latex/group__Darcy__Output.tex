@@ -1,0 +1,84 @@
+\hypertarget{group__Darcy__Output}{}\section{Darcy\+\_\+\+Output}
+\label{group__Darcy__Output}\index{Darcy\+\_\+\+Output@{Darcy\+\_\+\+Output}}
+
+
+Functions that print on a csv file the solutions of Darcy problem.  
+
+
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{group__Darcy__Output_gae32dbfb8ae1dae7d94ce2a07b441be8f}{Darcy\+\_\+output\+\_\+results} (Eigen\+::\+Vector\+Xd \&value, unsigned int Nx, double L)
+\item 
+void \hyperlink{group__Darcy__Output_ga2bf9f94eb4d11df1e138108c4658977f}{pressure\+\_\+exact\+\_\+result} (Eigen\+::\+Vector\+Xd \&value1, unsigned int Nx, double L)
+\item 
+void \hyperlink{group__Darcy__Output_gafcb77d3ca0cd554e2141658c6701a001}{velocity\+\_\+exact\+\_\+result} (Eigen\+::\+Vector\+Xd \&value1, unsigned int Nx, double L)
+\item 
+void \hyperlink{group__Darcy__Output_gaa0d7356820b3cad723d8b5c85b2f77e1}{output\+\_\+error} (Eigen\+::\+Vector\+Xd \&value1, Eigen\+::\+Vector\+Xi \&Nx)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Functions that print on a csv file the solutions of Darcy problem. 
+
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{group__Darcy__Output_gae32dbfb8ae1dae7d94ce2a07b441be8f}\label{group__Darcy__Output_gae32dbfb8ae1dae7d94ce2a07b441be8f}} 
+\index{Darcy\+\_\+\+Output@{Darcy\+\_\+\+Output}!Darcy\+\_\+output\+\_\+results@{Darcy\+\_\+output\+\_\+results}}
+\index{Darcy\+\_\+output\+\_\+results@{Darcy\+\_\+output\+\_\+results}!Darcy\+\_\+\+Output@{Darcy\+\_\+\+Output}}
+\subsubsection{\texorpdfstring{Darcy\+\_\+output\+\_\+results()}{Darcy\_output\_results()}}
+{\footnotesize\ttfamily void Darcy\+\_\+output\+\_\+results (\begin{DoxyParamCaption}\item[{Eigen\+::\+Vector\+Xd \&}]{value,  }\item[{unsigned int}]{Nx,  }\item[{double}]{L }\end{DoxyParamCaption})}
+
+Function that saves the solution (velocity+pressure) of the Darcy system on two different csv files (one for pressure and one for velocity) 
+\begin{DoxyParams}{Parameters}
+{\em value} & is a refence to the vector which contains the values that we want to store \\
+\hline
+{\em Nx} & is the number of spatial inervals \\
+\hline
+{\em L} & is the domain lenght \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{group__Darcy__Output_gaa0d7356820b3cad723d8b5c85b2f77e1}\label{group__Darcy__Output_gaa0d7356820b3cad723d8b5c85b2f77e1}} 
+\index{Darcy\+\_\+\+Output@{Darcy\+\_\+\+Output}!output\+\_\+error@{output\+\_\+error}}
+\index{output\+\_\+error@{output\+\_\+error}!Darcy\+\_\+\+Output@{Darcy\+\_\+\+Output}}
+\subsubsection{\texorpdfstring{output\+\_\+error()}{output\_error()}}
+{\footnotesize\ttfamily void output\+\_\+error (\begin{DoxyParamCaption}\item[{Eigen\+::\+Vector\+Xd \&}]{value1,  }\item[{Eigen\+::\+Vector\+Xi \&}]{Nx }\end{DoxyParamCaption})}
+
+Function that saves the error values in a csv file 
+\begin{DoxyParams}{Parameters}
+{\em value1} & is a refence to the vector which contains the values that we want to store \\
+\hline
+{\em Nx} & is a reference to the vector which contains all the spatial steps used for the convergence analyses \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{group__Darcy__Output_ga2bf9f94eb4d11df1e138108c4658977f}\label{group__Darcy__Output_ga2bf9f94eb4d11df1e138108c4658977f}} 
+\index{Darcy\+\_\+\+Output@{Darcy\+\_\+\+Output}!pressure\+\_\+exact\+\_\+result@{pressure\+\_\+exact\+\_\+result}}
+\index{pressure\+\_\+exact\+\_\+result@{pressure\+\_\+exact\+\_\+result}!Darcy\+\_\+\+Output@{Darcy\+\_\+\+Output}}
+\subsubsection{\texorpdfstring{pressure\+\_\+exact\+\_\+result()}{pressure\_exact\_result()}}
+{\footnotesize\ttfamily void pressure\+\_\+exact\+\_\+result (\begin{DoxyParamCaption}\item[{Eigen\+::\+Vector\+Xd \&}]{value1,  }\item[{unsigned int}]{Nx,  }\item[{double}]{L }\end{DoxyParamCaption})}
+
+Function that saves the exact pressure values at the nodes point in a csv file 
+\begin{DoxyParams}{Parameters}
+{\em value1} & is a refence to the vector which contains the values that we want to store \\
+\hline
+{\em Nx} & is the number of spatial inervals \\
+\hline
+{\em L} & is the domain lenght \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{group__Darcy__Output_gafcb77d3ca0cd554e2141658c6701a001}\label{group__Darcy__Output_gafcb77d3ca0cd554e2141658c6701a001}} 
+\index{Darcy\+\_\+\+Output@{Darcy\+\_\+\+Output}!velocity\+\_\+exact\+\_\+result@{velocity\+\_\+exact\+\_\+result}}
+\index{velocity\+\_\+exact\+\_\+result@{velocity\+\_\+exact\+\_\+result}!Darcy\+\_\+\+Output@{Darcy\+\_\+\+Output}}
+\subsubsection{\texorpdfstring{velocity\+\_\+exact\+\_\+result()}{velocity\_exact\_result()}}
+{\footnotesize\ttfamily void velocity\+\_\+exact\+\_\+result (\begin{DoxyParamCaption}\item[{Eigen\+::\+Vector\+Xd \&}]{value1,  }\item[{unsigned int}]{Nx,  }\item[{double}]{L }\end{DoxyParamCaption})}
+
+Function that saves the exact velocity values at the nodes point in a csv file 
+\begin{DoxyParams}{Parameters}
+{\em value1} & is a refence to the vector which contains the values that we want to store \\
+\hline
+{\em Nx} & is the number of spatial inervals \\
+\hline
+{\em L} & is the domain lenght \\
+\hline
+\end{DoxyParams}

@@ -6,10 +6,10 @@
 
 
 
-
+//Concentration value results to CSV file.
 void output_results_fixed_time_2_reagents(Eigen::MatrixXd &value1, Eigen::MatrixXd &value2, double L, unsigned int Nx, double T,unsigned int Nt)
 {
-    //Concentration value results to CSV file.
+    
     std::ofstream file1("Ca_fixed_time.csv", std::ofstream::out);
     std::ofstream file2("CaSiO3_fixed_time.csv", std::ofstream::out);
    
@@ -48,10 +48,10 @@ void output_results_fixed_time_2_reagents(Eigen::MatrixXd &value1, Eigen::Matrix
 }
 
 
-
+//Concentration value results to CSV file.
 void output_results_fixed_space_2_reagents(Eigen::MatrixXd &value1, Eigen::MatrixXd &value2,double L, unsigned int Nx, double T,unsigned int Nt)
 {
-    //Concentration value results to CSV file.
+   
     std::ofstream file1("Ca_fixed_space.csv", std::ofstream::out);
     std::ofstream file2("CaSiO3_fixed_space.csv", std::ofstream::out);
 

@@ -164,7 +164,7 @@ private:
    Data_Transport data_transp;/*!<Data for the transport part*/
    Data_6Reagents data_reagents;/*!<Data for the 6 reagents*/
    Data_Reaction data_reaction;/*!<Physical data for the reaction setting*/
-   Data_CO2 data_CO2;
+   Data_CO2 data_CO2;/*!<Input CO2 data (It's the only reagent with a constant inflow*/ 
    
    double h;/*!<Spatial step*/
    double dt;/*!<Temporal step*/

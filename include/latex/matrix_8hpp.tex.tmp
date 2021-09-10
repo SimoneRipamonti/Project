@@ -2,7 +2,7 @@
 \label{matrix_8hpp}\index{matrix.\+hpp@{matrix.\+hpp}}
 
 
-discretized equations\textquotesingle{} matrices  
+matrices representing the algebraic operators obtained from the discretization of differential equations  
 
 
 {\ttfamily \#include \char`\"{}muparser\+\_\+fun.\+hpp\char`\"{}}\newline
@@ -11,6 +11,8 @@ discretized equations\textquotesingle{} matrices
 {\ttfamily \#include $<$Eigen/\+Sparse$>$}\newline
 Include dependency graph for matrix.\+hpp\+:
 % FIG 0
+This graph shows which files directly or indirectly include this file\+:
+% FIG 1
 \subsection*{Classes}
 \begin{DoxyCompactItemize}
 \item 
@@ -31,7 +33,7 @@ class \hyperlink{classMatrix__R}{Matrix\+\_\+R}
 
 
 \subsection{Detailed Description}
-discretized equations\textquotesingle{} matrices 
+matrices representing the algebraic operators obtained from the discretization of differential equations 
 
 \begin{DoxyAuthor}{Author}
 Simone Ripamonti 
