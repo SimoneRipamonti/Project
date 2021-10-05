@@ -9,7 +9,7 @@ set key font ",12"
 set ylabel "CO_2 [mol/L]" # label for the Y axis
 set xlabel 'Space [m]' # label for the X axis
 
-#set yrange [0:1.5]                     # intervallo x in questo caso 0-5
+#set yrange [0:0.002]                     # intervallo x in questo caso 0-5
 
 #set logscale x
 #set logscale y    

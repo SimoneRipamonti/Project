@@ -3,6 +3,7 @@
 
 #include <Eigen/Dense>
 #include "parameters.hpp"
+#include "matrix.hpp"
 
 #include <Eigen/LU>
 #include <Eigen/IterativeLinearSolvers>
@@ -14,8 +15,6 @@
 
 enum Method{EsplicitEuler,PredictorCorrector,Heun};//Numerical scheme for solving the reaction part
 
-typedef Eigen::SparseMatrix<double> Matrix;
-typedef Eigen::VectorXd Vector;
 typedef Eigen::SparseLU<Eigen::SparseMatrix<double>, Eigen::COLAMDOrdering<int> > Solver;
 
 /*!

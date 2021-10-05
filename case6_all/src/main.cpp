@@ -29,6 +29,8 @@ int main()
     Vector vel(data.Nx+1);
 
     Darcy_velocity(data,vel);
+    
+    //vel=Eigen::VectorXd::Zero(data.Nx+1);
 
     Concentration concentration("data.pot");
 
@@ -64,10 +66,7 @@ int main()
         concentration.compute_psi(i-1,psi1,psi2,psi3,psi4,psi5); // phi 
 
         concentration.compute_rd_kp(i-1,rd);//Calcolo i termini di reazione
-        
-        //if(i==1)
-        //{std::cout<<rd<<std::endl;}
-
+       
         concentration.one_step_transport_reaction(psi1,psi2,psi3,psi4,psi5,rd,M_rhs,rhs_CO2,i,solver,solver1);
  
         concentration.compute_concentration(i,psi1,psi2,psi3,psi4,psi5); //Calcolo le Concentrazioni effettive

@@ -49,9 +49,9 @@
     #Boundary cond for C
     
     #In-flow cond
-    C_in=0.3691108
+    #C_in=0.3691108
     #C_in=1.0e-3
-    #C_in=1.0
+    C_in=0.5
     #C_in=5.0
     #Out-flow cond
     C_out=0.0
@@ -88,7 +88,7 @@
     T=345600
     #T=1.0
     #Time step
-    Nt=1000
+    Nt=10000
     #Nt=10000
     
     [../]
@@ -99,9 +99,9 @@
      Ca_0=0.0+0.0*x
 
      #Initical conentration H_piu
-     #H_piu_0=10.0e-3.5+0.0*x
-     #H_piu_0=0.0031622776+0.0*x 
-     H_piu_0=1.0e-9+0.0*x  
+     #H_piu_0=10e-3.5+0.0*x
+     H_piu_0=0.0031622776+0.0*x 
+     #H_piu_0=1.0e-9+0.0*x  
      #H_piu_0=0.0+0.0*x
      #10.0e-3.5+0.0*x=0.00031622776
 
@@ -155,11 +155,10 @@
 
      #kp_i
      #kp_i=3.98e-13
-     kp_i=1.810492e-9
+     #kp_i=1.810492e-10
      #kp_i=0.0
+     kp_i=1.83e-8
   
      #temporal scheme
      method=1
-
-
-  
+     

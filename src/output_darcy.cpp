@@ -5,7 +5,7 @@
 #include <vector>
 
 
-void Darcy_output_results(Eigen::VectorXd &sol,unsigned int Nx,double L) //The solution vector is built by the vector velocity (for the first Nx+1 values) and the vector pressure (for the last Nx values)
+void Darcy_output_results(Vector &sol,unsigned int Nx,double L) //The solution vector is built by the vector velocity (for the first Nx+1 values) and the vector pressure (for the last Nx values)
 {
     // Velocity results to CSV file.
     std::ofstream file1("velocity"+std::to_string(Nx)+".csv", std::ofstream::out);
@@ -33,7 +33,7 @@ void Darcy_output_results(Eigen::VectorXd &sol,unsigned int Nx,double L) //The s
 }
 
 
-void pressure_exact_result(Eigen::VectorXd &value1, unsigned int Nx, double L)
+void pressure_exact_result(Vector &value1, unsigned int Nx, double L)
 {
     //Concentration value results to CSV file.
     std::ofstream file1("exact_pressure.csv", std::ofstream::out);
@@ -58,7 +58,7 @@ void pressure_exact_result(Eigen::VectorXd &value1, unsigned int Nx, double L)
 }
 
 
-void velocity_exact_result(Eigen::VectorXd &value1, unsigned int Nx, double L)
+void velocity_exact_result(Vector &value1, unsigned int Nx, double L)
 {
     //Concentration value results to CSV file.
     std::ofstream file1("exact_velocity.csv", std::ofstream::out);
@@ -82,7 +82,7 @@ void velocity_exact_result(Eigen::VectorXd &value1, unsigned int Nx, double L)
 }
 
 
-void output_error(Eigen::VectorXd &value1, Eigen::VectorXi &Nx)
+void output_error(Vector &value1, Eigen::VectorXi &Nx)
 {
     //Concentration value results to CSV file.
     std::ofstream file1("error.csv", std::ofstream::out);

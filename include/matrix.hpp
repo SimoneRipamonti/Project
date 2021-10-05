@@ -13,6 +13,8 @@
 #include <Eigen/Sparse>
 
 
+typedef Eigen::SparseMatrix<double> Matrix;
+typedef Eigen::VectorXd Vector;
 
 /** \addtogroup Matrices
  *\brief classes that identify matrices representing the algebraic operators obtained from the discretization of differential equations 
@@ -42,9 +44,9 @@ public:
 
     virtual void set_rhs()=0;/*!<Function that sets the right-hand side corresponding to the problem*/
   
-    Eigen::SparseMatrix<double>& get_matrix(); /*!<Function that gives in return the sparse matrix*/
+    Matrix& get_matrix(); /*!<Function that gives in return the sparse matrix*/
 
-    Eigen::VectorXd& get_rhs();/*!<Function that gives in return the right-hand side*/
+    Vector& get_rhs();/*!<Function that gives in return the right-hand side*/
 
     void print_m() const;/*!<Function that prints the matrix*/
     
@@ -56,8 +58,8 @@ public:
 protected:
     unsigned int row; /*!<Number of rows*/
     unsigned int col;/*!<Number of columns*/
-    Eigen::SparseMatrix<double> m;/*!<Sparse matrix that represent the algebraic operator*/
-    Eigen::VectorXd rhs;/*!<Right-hand side of the algebraic operator*/
+    Matrix m;/*!<Sparse matrix that represent the algebraic operator*/
+    Vector rhs;/*!<Right-hand side of the algebraic operator*/
 
 
 };
@@ -85,7 +87,7 @@ public:
 *\param q_in  is the inflow bc
 *\param q_out is the outflow bc
 */
-    void set_data(const muparser_fun &per,double h, double mu,const std::string &inf,const std::string &outf, double p_in, double p_out, double q_in, double q_out); 
+    void set_data(const muparser_fun &per, double h, double mu, const std::string &inf, const std::string &outf, double p_in, double p_out, double q_in, double q_out); 
 
     void define_matrix() override;
 
@@ -96,7 +98,7 @@ public:
 /*!
  *Function that calls the above functions define_matrix(),set_BC(), set_rhs() in order to assemble all the matrix A
  */
-    void assemble_matrix(const muparser_fun &per,double h, double mu,const std::string &inf,const std::string &outf, double p_in, double p_out, double q_in, double q_out);
+    void assemble_matrix(const muparser_fun &per,double h, double mu, const std::string &inf, const std::string &outf, double p_in, double p_out, double q_in, double q_out);
 
     ~Matrix_A() {};
 
@@ -128,7 +130,7 @@ public:
 *\param f is the external source of the Darcy system's second equation
 *\param h is the spatial step
 */
-    void set_data(const std::string inf,const std::string out,const muparser_fun &f,double h);
+    void set_data(const std::string inf, const std::string out, const muparser_fun &f, double h);
 
     void define_matrix() override;
 
@@ -136,7 +138,7 @@ public:
 
     void set_rhs() override;
 
-    void assemble_matrix(const std::string inf,const std::string out,const muparser_fun &f,double h);/*!<Function that calls the above functions define_matrix(),set_BC(), set_rhs() in order to assemble all the matrix B*/
+    void assemble_matrix(const std::string inf, const std::string out, const muparser_fun &f, double h);/*!<Function that calls the above functions define_matrix(),set_BC(), set_rhs() in order to assemble all the matrix B*/
 
     ~Matrix_B() {};
 
@@ -169,7 +171,7 @@ public:
 
     void set_rhs() override;
 
-    void assemble_matrix(const muparser_fun phi,double h);/*!<Function that calls the above functions define_matrix(),set_BC(), set_rhs() in order to assemble all the matrix C*/
+    void assemble_matrix(const muparser_fun phi, double h);/*!<Function that calls the above functions define_matrix(),set_BC(), set_rhs() in order to assemble all the matrix C*/
 
     ~Matrix_C() {};
 
@@ -209,7 +211,7 @@ public:
 
 private:
     std::string bc_cond;/*!<Type of bc condition (Inflow or Outflow)*/
-    Eigen::VectorXd velocity;/*!<Transport fluid velocity*/
+    Vector velocity;/*!<Transport fluid velocity*/
     double c_bc;/*!<tracer bc value*/
 };
 
@@ -241,7 +243,7 @@ public:
 
 private:
     std::string bc_cond;/*!<Type of bc condition (Inflow or Outflow)*/
-    Eigen::VectorXd velocity;/*!<Transport fluid velocity*/
+    Vector velocity;/*!<Transport fluid velocity*/
     double c_bc;/*!<tracer bc value*/
 };
 
@@ -266,7 +268,7 @@ public:
 *\param phi is the soil porosity
 */ 
 
-    void set_data(double area, double rate_const, double temperature, double R, double E, double ph,double const_eq, double h, const muparser_fun phi);
+    void set_data(double area, double rate_const, double temperature, double R, double E, double ph, double const_eq, double h, const muparser_fun phi);
 
     void define_matrix() override;
 
@@ -274,7 +276,7 @@ public:
 
     void set_rhs() override;
    
-    void assemble_matrix(double area, double rate_const, double temperature, double R, double E, double ph,double const_eq, double h, const muparser_fun phi);/*!<Function that calls the above functions define_matrix(),set_BC(), set_rhs() in order to assemble all the matrix */
+    void assemble_matrix(double area, double rate_const, double temperature, double R, double E, double ph, double const_eq, double h, const muparser_fun phi);/*!<Function that calls the above functions define_matrix(),set_BC(), set_rhs() in order to assemble all the matrix */
 
     void update(const Eigen::VectorXd &past_sol);/*!<Function that updates the Reaction matrix since we treat this part explicitely*/
 

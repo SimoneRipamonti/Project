@@ -44,6 +44,7 @@ void Concentration::set_initial_cond()
         Ca(i,0)=data_reagents.Ca_0(h+h*i);
         H_piu(i,0)=data_reagents.H_piu_0(h+h*i);
         HCO3_meno(i,0)=data_reagents.K_eq*data_reagents.CO2_0(h+h*i)/data_reagents.H_piu_0(h+h*i);
+        //std::cout<<HCO3_meno(i,0)<<std::endl;
         //HCO3_meno(i,0)=H_piu(i,0);
         CO2(i,0)=data_reagents.CO2_0(h+h*i);
         CaSiO3(i,0)=data_reagents.CaSiO3_0(h+h*i);
@@ -119,6 +120,8 @@ void Concentration::assemble_CO2_rhs(Vector& rhs_CO2, const Vector& vel, double 
     rhs_CO2=rhs_CO2=F_p.get_rhs()-F_m.get_rhs();
 
 }
+
+
 
 
 
@@ -363,10 +366,10 @@ void Concentration::compute_concentration(unsigned int step, const Vector& psi1,
         /*if (step==1 && i==3)
            {std::cout<<"old_it="<<old_it<<std::endl;}*/
         unsigned int max_iter=500;
-        double tol=1.0e-25;
+        double tol=1.0e-15;
         double err=1;
         Vector dx(6);
-
+        
         for(unsigned int iter=0; iter<max_iter and err>tol; ++iter)
         {
             compute_rhs(rhs, old_it, psi1(i), psi2(i), psi3(i), psi4(i), psi5(i));///Calcolo F(x_k);
@@ -376,10 +379,9 @@ void Concentration::compute_concentration(unsigned int step, const Vector& psi1,
             err=dx.norm()/old_it.norm();//Valuto errore
             old_it+=dx;//x_k+1
             
-            /*if(step==10 and i==0)
-            {std::cout<<"err="<<err<<std::endl;
-            std::cout<<"iter="<<iter<<std::endl;}*/
-                      
+            if( (step==10 or step==100 or step==400 or step==700) and i==0)
+            {std::cout<<"step="<<step<<",iter="<<iter<<",err="<<err<<",res="<<rhs.norm()<<std::endl;}
+            
         }
         Ca(i,step)=old_it(0);
         H_piu(i,step)=old_it(1);
@@ -457,9 +459,11 @@ void Concentration::output_results_fixed_time(const std::string& name) const
     std::ofstream file1(filename, std::ofstream::out);
 
     const unsigned int a=data_transp.Nt/10; //we print the result on the file each "a" seconds
-
+    //const unsigned int a=1; 
+     
     file1<<"space, ";
     for (unsigned int i=0.; i<data_transp.Nt+1; i+=a)
+    //for (unsigned int i=0.; i<100; i+=10)
         file1<<"t="+std::to_string(i*dt)+"s, ";
     file1<<std::endl;
 
@@ -470,6 +474,7 @@ void Concentration::output_results_fixed_time(const std::string& name) const
         file1<< x[i] <<", ";
 
         for (unsigned int j=0; j<data_transp.Nt+1; j+=a)
+        //for (unsigned int j=0; j<100; j+=10)
         {
             file1<<value1(i,j)<<", ";
         }

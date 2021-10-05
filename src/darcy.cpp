@@ -3,7 +3,7 @@
 #include <vector>
 #include <utility>
 
-void set_Darcy_system(const Data_Darcy &data, Eigen::SparseMatrix<double> &M,Eigen::VectorXd &rhs, double h)
+void set_Darcy_system(const Data_Darcy &data, Matrix &M, Vector &rhs, double h)
 {
 //All the data that are needed to define the Darcy System are extracted from the data structure
     auto &[L, K, phi, mu, Q_in, Q_out, p_in, p_out, f, Nx, BC_in, BC_out]=data;
@@ -63,7 +63,7 @@ void triplets_with_shift(std::vector<Triplet>& t, const Matrix& A, int shift_row
 
 
 
-void Darcy_velocity(const Data_Darcy &data, Eigen::VectorXd &vel)
+void Darcy_velocity(const Data_Darcy &data, Vector &vel)
 {
   
     double h =static_cast<double>(data.L)/data.Nx; //space step
