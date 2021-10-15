@@ -85,7 +85,7 @@
 [Linear_dec]
 
      #Lambda for linear decay
-     lambda=5
+     lambda=0
     
     [../]
 

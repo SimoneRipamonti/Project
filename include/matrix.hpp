@@ -15,6 +15,7 @@
 
 typedef Eigen::SparseMatrix<double> Matrix;
 typedef Eigen::VectorXd Vector;
+typedef Eigen::SparseLU<Matrix, Eigen::COLAMDOrdering<int> > Solver;
 
 /** \addtogroup Matrices
  *\brief classes that identify matrices representing the algebraic operators obtained from the discretization of differential equations 

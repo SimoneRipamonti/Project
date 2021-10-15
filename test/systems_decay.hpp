@@ -1,5 +1,5 @@
-#ifndef SYSTEMS_HH
-#define SYSTEMS_HH
+#ifndef SYSTEMS_DECAY_HH
+#define SYSTEMS_DECAY_HH
 
 #include <Eigen/Dense>
 #include "matrix.hpp"

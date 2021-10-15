@@ -3,7 +3,7 @@
 #include "parameters.hpp"
 #include "matrix.hpp"
 #include "output.hpp"
-#include "systems.hpp"
+#include "transport_decay.hpp"
 #include <fstream>
 #include <exception>
 #include <Eigen/LU>
@@ -18,7 +18,7 @@ int main(int argc, char **argv)
     Data_Transport data_transport("data.pot");//We get the data we need for transport
     Data_linear_decay initial_cond("data.pot");//We get also the linear decay data because inside its definition there is the initial condition of our tracer
 
-    Eigen::VectorXd vel{Eigen::VectorXd::Ones(data_transport.Nx+1)};//transport velocity, we take for semplicity velocity equal to 1[m/s]
+    Vector vel{Eigen::VectorXd::Ones(data_transport.Nx+1)};//transport velocity, we take for semplicity velocity equal to 1[m/s]
 
 
     Eigen::MatrixXd Ca(data_transport.Nx,data_transport.Nt+1);//matrix where we store our solution for the tracer (the rows are the spatial steps and the columns are the temporal ones) 

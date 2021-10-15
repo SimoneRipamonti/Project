@@ -33,16 +33,20 @@ int main()
     //vel=Eigen::VectorXd::Zero(data.Nx+1);
 
     Concentration concentration("data.pot");
+    
+    //Set the initial condition for the reagents
+    concentration.set_initial_cond();
 
     unsigned int Nx{concentration.get_Nx()};
     unsigned int Nt{concentration.get_Nt()};
-
-   //Eigen::VectorXd vel{6.67e-9*Eigen::VectorXd::Ones(Nx+1)};
+    
+    //Eigen::VectorXd vel{6.67e-9*Eigen::VectorXd::Ones(Nx+1)};
 
     Solver  solver, solver1;
     Matrix M_rhs(Nx,Nx);
-    Vector rhs_CO2(Nx);
-    concentration.define_transport_solver(solver, solver1, M_rhs, rhs_CO2, vel, Nx);
+    Vector rhs_psi2(Nx);
+    Vector rhs_psi3(Nx);
+    concentration.define_transport_solver(solver, solver1, M_rhs, rhs_psi2, rhs_psi3, vel, Nx);
 
 
     //Total concentration initialization
@@ -55,9 +59,6 @@ int main()
     //Reaction term
     Vector rd{Vector::Zero(Nx)};
 
-    //Set the initial condition for the reagents
-    concentration.set_initial_cond();
-
 
 //Loop Temporale
 
@@ -67,7 +68,7 @@ int main()
 
         concentration.compute_rd_kp(i-1,rd);//Calcolo i termini di reazione
        
-        concentration.one_step_transport_reaction(psi1,psi2,psi3,psi4,psi5,rd,M_rhs,rhs_CO2,i,solver,solver1);
+        concentration.one_step_transport_reaction(psi1,psi2,psi3,psi4,psi5,rd,M_rhs,rhs_psi2,rhs_psi3,i,solver,solver1);
  
         concentration.compute_concentration(i,psi1,psi2,psi3,psi4,psi5); //Calcolo le Concentrazioni effettive
         

@@ -13,7 +13,7 @@ find_package(Eigen3 REQUIRED HINTS $ENV{mkEigenPrefix})
 include_directories("${CMAKE_CURRENT_SOURCE_DIR}/../externals/gnuplot-iostream" ../external/include SYSTEM ${EIGEN3_INCLUDE_DIRS} ../include)
 
 
-add_executable(main src/main.cpp ../src/matrix.cpp ../src/parameters.cpp ../src/muparser_fun.cpp ../src/darcy.cpp src/concentrations.cpp)
+add_executable(main src/main.cpp ../src/matrix.cpp ../src/parameters.cpp ../src/muparser_fun.cpp ../src/darcy.cpp src/concentrations.cpp ../src/functions.cpp)
 
 
 target_include_directories(main PUBLIC src)

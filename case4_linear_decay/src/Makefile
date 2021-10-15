@@ -14,7 +14,7 @@ LINK.o := $(LINK.cc) # Use C++ linker.
 
 EXEC = main
 SRCS = $(wildcard *.cpp)
-SRCS += ../../src/matrix.cpp ../../src/muparser_fun.cpp ../../src/parameters.cpp ../../src/output.cpp
+SRCS += ../../src/matrix.cpp ../../src/muparser_fun.cpp ../../src/parameters.cpp ../../src/output.cpp ../../src/functions.cpp ../../src/transport_decay.cpp
 OBJS = $(SRCS:.cpp=.o)
 
 

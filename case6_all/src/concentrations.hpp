@@ -15,8 +15,6 @@
 
 enum Method{EsplicitEuler,PredictorCorrector,Heun};//Numerical scheme for solving the reaction part
 
-typedef Eigen::SparseLU<Eigen::SparseMatrix<double>, Eigen::COLAMDOrdering<int> > Solver;
-
 /*!
 *\brief Class for the 6 reagents case.
 *
@@ -42,7 +40,7 @@ public:
   void assemble_transport(Matrix& M, Matrix& rhs, const Vector& vel) const;
 
 
-  void define_transport_solver(Solver& solver, Solver& solver1, Matrix& M_rhs, Vector& rhs_CO2, const Vector& vel, unsigned int Nx);
+  void define_transport_solver(Solver& solver, Solver& solver1, Matrix& M_rhs, Vector& rhs_psi2, Vector& rhs_psi3, const Vector& vel, unsigned int Nx);
   
 /*!
    *Function that sets the rhs for the CO_2 transport part, since it's the only reagent with a costant input bc 
@@ -50,7 +48,7 @@ public:
    *\param rhs_CO2 reference to the sparse matrix which will be multiplied by the past past solution vector to form the rhs of the transport problem
    *\param vel constant reference to the fluid velocity
 */
-   void  assemble_CO2_rhs(Vector& rhs_CO2, const Vector& vel, double C_in, double C_out, const std::string& bc); 
+   void  assemble_rhs(Vector& rhs_psi2, Vector& rhs_psi3, const Vector& vel, double C_in, double C_out, const std::string& bc); 
 
 
 /*!
@@ -84,7 +82,7 @@ public:
  *\param solver reference to the solver for the transport problem
  *\param solver2 reference to the solver for the CO_2 transport problem
 */
-   void one_step_transport_reaction(Vector& psi1, Vector& psi2, Vector& psi3, Vector& psi4, Vector& psi5, Vector& rd, const Matrix& rhs, const Vector& rhs_CO2, unsigned int step, Solver &solver, Solver &solver1); 
+   void one_step_transport_reaction(Vector& psi1, Vector& psi2, Vector& psi3, Vector& psi4, Vector& psi5, Vector& rd, const Matrix& rhs, const Vector& rhs_psi2, const Vector& rhs_psi3, unsigned int step, Solver &solver, Solver &solver1); 
 
 
 /*!
@@ -97,7 +95,7 @@ public:
  *\param solver reference to the solver for the transport problem
  *\param solver2 reference to the solver for the CO_2 transport problem
 */
-   void Euler_Esplicit(Vector& psi1, Vector& psi2, Vector& psi3, Vector& psi4, Vector& psi5, const Vector& rd, const Matrix&  rhs, const Vector& rhs_CO2, Solver &solver, Solver &solver1) const; 
+   void Euler_Esplicit(Vector& psi1, Vector& psi2, Vector& psi3, Vector& psi4, Vector& psi5, const Vector& rd, const Matrix&  rhs, const Vector& rhs_psi2, const Vector& rhs_psi3, Solver &solver, Solver &solver1) const; 
 
 /*!
  * Function that solves the equation for one psi

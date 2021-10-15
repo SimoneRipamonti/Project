@@ -4,6 +4,7 @@
 #include "matrix.hpp"
 #include "output_darcy.hpp"
 #include "darcy.hpp"
+#include "functions.hpp"
 #include <Eigen/LU>
 #include <Eigen/IterativeLinearSolvers>
 #include <Eigen/Sparse>
@@ -18,8 +19,8 @@ int main(int argc, char **argv)
     Data_Darcy data("data.pot");
 
     Eigen::VectorXi a(5); //vector that contains the numbers of spatial steps 
-    Eigen::VectorXd errp(5);//vector pressure error
-    Eigen::VectorXd errvel(5);//vector velocity error
+    Vector errp(5);//vector pressure error
+    Vector errvel(5);//vector velocity error
 
     a<<10,20,40,80,160;//Spatial steps
 
@@ -31,10 +32,10 @@ int main(int argc, char **argv)
     sol_vel.set_value("-1/(4*_pi)*cos(4*_pi*x)+0.1+1/(4*_pi)");
 
 
-    Eigen::VectorXd sol;//vector that stores the numerical solution
+    Vector sol;//vector that stores the numerical solution
 
-    Eigen::VectorXd exact; //vector that stores the exact solution for pressure
-    Eigen::VectorXd exact_vel; //vector that stores the exact solution for velocity
+    Vector exact; //vector that stores the exact solution for pressure
+    Vector exact_vel; //vector that stores the exact solution for velocity
    
     //Loop where at each iterate we change the number of steps
     for (unsigned int i=1; i<6; ++i)
@@ -47,16 +48,12 @@ int main(int argc, char **argv)
         exact.resize(data.Nx);
         exact_vel.resize(data.Nx+1);
 
-        Eigen::SparseMatrix<double> M(data.Nx+data.Nx+1,data.Nx+data.Nx+1);//Initialization of the big matrix for the Darcy system
-        Eigen::VectorXd rhs(data.Nx+data.Nx+1);//Initialization of the rhs of Darcy
+        Matrix M(data.Nx+data.Nx+1,data.Nx+data.Nx+1);//Initialization of the big matrix for the Darcy system
+        Vector rhs(data.Nx+data.Nx+1);//Initialization of the rhs of Darcy
         set_Darcy_system(data,M,rhs,h);//Definition of the Darcy system Mx=rhs
 
-
-        Eigen::SparseLU<Eigen::SparseMatrix<double>, Eigen::COLAMDOrdering<int> >   solver; //Initialization of the Solver for the sparse system
-
-        solver.analyzePattern(M); // Compute the ordering permutation vector from the structural pattern of A
-
-        solver.factorize(M); // Compute the numerical factorization
+        Solver solver;
+        set_solver(M,solver);
 
         sol= solver.solve(rhs);//The Darcy system is solved and the solution is stored in the sol vector
 

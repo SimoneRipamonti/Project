@@ -16,7 +16,7 @@ int main(int argc, char **argv)
     Data_2Reagents data_2reagents("data.pot");
     
     //For this simulation we take the velocity equal to zero for semplicity, in the next case (case6_all) we will consider also the transport part
-    Eigen::VectorXd vel{Eigen::VectorXd::Zero(data_transport.Nx+1)};
+    Vector vel{Eigen::VectorXd::Zero(data_transport.Nx+1)};
     
     //Matrices that store the result in space and time for Ca and for CaSiO3 reagents
     Eigen::MatrixXd Ca(data_transport.Nx,data_transport.Nt+1);

@@ -1,6 +1,7 @@
 #include "concentrations.hpp"
 #include "matrix.hpp"
 #include "gnuplot-iostream.hpp"
+#include "functions.hpp"
 #include <iostream>
 #include <fstream>
 
@@ -54,7 +55,7 @@ void Concentration::set_initial_cond()
 
 }
 
-void Concentration::define_transport_solver(Solver& solver, Solver& solver1, Matrix& M_rhs, Vector& rhs_CO2, const Vector& vel, unsigned int Nx) 
+void Concentration::define_transport_solver(Solver& solver, Solver& solver1, Matrix& M_rhs, Vector& rhs_psi2, Vector& rhs_psi3, const Vector& vel, unsigned int Nx) 
 {
 
     Matrix M(Nx,Nx);
@@ -62,20 +63,15 @@ void Concentration::define_transport_solver(Solver& solver, Solver& solver1, Mat
     
     //Setting for the BC for the CO2 transport equation
     auto &[C_in,C_out,bc_cond]=data_CO2;
-    assemble_CO2_rhs(rhs_CO2,vel,C_in,C_out,bc_cond);
+    assemble_rhs(rhs_psi2,rhs_psi3,vel,C_in,C_out,bc_cond);
 
     //Setting for the solid ODE equation    
     Matrix M_solid(Nx,Nx);//Mass matrix for solid (CaSiO3)
     Matrix rhs_solid(Nx,Nx);//rhs for the solid part
     assemble_transport(M_solid,rhs_solid,Vector::Zero(Nx+1));//function that assemble the mass matrix for the solid reagent
-
-    //Here solver for the transport system is initialized
-    solver.analyzePattern(M);
-    solver.factorize(M);
-
-    //Here solver for the solid system is initialized
-    solver1.analyzePattern(M_solid);
-    solver1.factorize(M_solid);
+    
+    set_solver(M,solver);
+    set_solver(M_solid,solver1);
 }
 
 
@@ -102,22 +98,48 @@ void Concentration::assemble_transport(Matrix& M, Matrix& M_rhs, const Vector& v
 }
 
 
-void Concentration::assemble_CO2_rhs(Vector& rhs_CO2, const Vector& vel, double C_in, double C_out, const std::string& bc)
+void Concentration::assemble_rhs(Vector& rhs_psi2, Vector& rhs_psi3, const Vector& vel, double C_in, double C_out, const std::string& bc)
 {
-    Matrix_F_piu F_p(data_transp.Nx,data_transp.Nx);
-    F_p.set_data(bc,C_in,vel);
-    F_p.set_rhs();
+    Matrix_F_piu F_p_CO2(data_transp.Nx,data_transp.Nx);
+    F_p_CO2.set_data(bc,C_in,vel);
+    F_p_CO2.set_rhs();
 
-    Matrix_F_meno F_m(data_transp.Nx,data_transp.Nx);
-    F_m.set_data(bc,C_out,vel);
-    F_m.set_rhs();
-
+    Matrix_F_meno F_m_CO2(data_transp.Nx,data_transp.Nx);
+    F_m_CO2.set_data(bc,C_out,vel);
+    F_m_CO2.set_rhs();
+    
     if(bc=="In")
       CO2(0,0)=C_in;
     else
       CO2(data_transp.Nx-1,data_transp.Nt-1)=C_out;
+    
+    double C_in_HCO3_meno=data_reagents.K_eq*C_in/H_piu(0,0);
+    double C_out_HCO3_meno=data_reagents.K_eq*C_out/H_piu(data_transp.Nx-1,0);
+    
+    std::cout<<"C_in="<<C_in<<std::endl;
+    std::cout<<"C_out="<<C_out<<std::endl;
+    
+    std::cout<<"C_in_HCO3="<<C_in_HCO3_meno<<std::endl;
+    std::cout<<"C_out_HCO3="<<C_out_HCO3_meno<<std::endl;
+   
+    
+    Matrix_F_piu F_p_HCO3_meno(data_transp.Nx,data_transp.Nx);
+    F_p_HCO3_meno.set_data(bc,C_in_HCO3_meno,vel);
+    F_p_HCO3_meno.set_rhs();
 
-    rhs_CO2=rhs_CO2=F_p.get_rhs()-F_m.get_rhs();
+    Matrix_F_meno F_m_HCO3_meno(data_transp.Nx,data_transp.Nx);
+    F_m_HCO3_meno.set_data(bc,C_out_HCO3_meno,vel);
+    F_m_HCO3_meno.set_rhs();
+    
+    if(bc=="In")
+      HCO3_meno(0,0)=C_in_HCO3_meno;
+    else
+      HCO3_meno(data_transp.Nx-1,data_transp.Nt-1)=C_out_HCO3_meno;
+    
+    rhs_psi3=F_p_CO2.get_rhs()-F_m_CO2.get_rhs()+F_p_HCO3_meno.get_rhs()-F_m_HCO3_meno.get_rhs();
+    rhs_psi2=F_m_HCO3_meno.get_rhs()-F_p_HCO3_meno.get_rhs();
+    //std::cout<<"rhs_psi2="<<rhs_psi2<<std::endl;
+    //std::cout<<"rhs_psi3="<<rhs_psi3<<std::endl;
 
 }
 
@@ -214,7 +236,7 @@ void Concentration::compute_rd_kp(unsigned int step, Vector& rd) const
 
 
 
-void Concentration::one_step_transport_reaction(Vector& psi1, Vector& psi2, Vector& psi3, Vector& psi4, Vector& psi5, Vector& rd, const Matrix& M_rhs, const Vector& rhs_CO2, unsigned int step, Solver &solver, Solver &solver1)
+void Concentration::one_step_transport_reaction(Vector& psi1, Vector& psi2, Vector& psi3, Vector& psi4, Vector& psi5, Vector& rd, const Matrix& M_rhs, const Vector& rhs_psi2, const Vector& rhs_psi3, unsigned int step, Solver &solver, Solver &solver1)
 {
 
  /*if(step==1)
@@ -268,7 +290,10 @@ void Concentration::one_step_transport_reaction(Vector& psi1, Vector& psi2, Vect
     case EsplicitEuler: //Euler Esplicit
 
         //Euler_Esplicit(phi1,phi2,phi3,phi4,phi5,rd,M,rhs,solver);
-        Euler_Esplicit(psi1,psi2,psi3,psi4,psi5,rd,M_rhs,rhs_CO2,solver,solver1);
+        {Euler_Esplicit(psi1,psi2,psi3,psi4,psi5,rd,M_rhs,rhs_psi2,rhs_psi3,solver,solver1);
+         if(step==10 or step==100 or step==200)
+           {std::cout<<"psi3="<<psi3(0)<<std::endl;}
+        }
         break;
 
     case PredictorCorrector: //Predictor Corrector
@@ -279,25 +304,25 @@ void Concentration::one_step_transport_reaction(Vector& psi1, Vector& psi2, Vect
         Vector psi4_{psi4};
         Vector psi5_{psi5};
      
-        Euler_Esplicit(psi1_,psi2_,psi3_,psi4_,psi5_,rd,M_rhs,rhs_CO2,solver,solver1);
+        Euler_Esplicit(psi1_,psi2_,psi3_,psi4_,psi5_,rd,M_rhs,rhs_psi2,rhs_psi3,solver,solver1);
         compute_concentration(step,psi1_,psi2_,psi3_,psi4_,psi5_);
         compute_rd(step,rd);//calcolo il nuovo rd
 
 
         //P_C(phi1,phi2,phi3,phi4,phi5,rd,rhs,solver);
-        Euler_Esplicit(psi1,psi2,psi3,psi4,psi5,rd,M_rhs,rhs_CO2,solver,solver1);
+        Euler_Esplicit(psi1,psi2,psi3,psi4,psi5,rd,M_rhs,rhs_psi2,rhs_psi3,solver,solver1);
     }
     break;
 
     case Heun: //Heun
     {
-        Eigen::VectorXd psi1_{psi1};
-        Eigen::VectorXd psi2_{psi2};
-        Eigen::VectorXd psi3_{psi3};
-        Eigen::VectorXd psi4_{psi4};
-        Eigen::VectorXd psi5_{psi5};
+        Vector psi1_{psi1};
+        Vector psi2_{psi2};
+        Vector psi3_{psi3};
+        Vector psi4_{psi4};
+        Vector psi5_{psi5};
 
-        Euler_Esplicit(psi1_,psi2_,psi3_,psi4_,psi5_,rd,M_rhs,rhs_CO2,solver,solver1);
+        Euler_Esplicit(psi1_,psi2_,psi3_,psi4_,psi5_,rd,M_rhs,rhs_psi2,rhs_psi3,solver,solver1);
         compute_concentration(step,psi1_,psi2_,psi3_,psi4_,psi5_);
 
         Vector rd_{Eigen::VectorXd::Zero(data_transp.Nx)};
@@ -305,7 +330,7 @@ void Concentration::one_step_transport_reaction(Vector& psi1, Vector& psi2, Vect
 
         rd=0.5*rd+0.5*rd_;//ottengo il nuovo rd complessivo
 
-        Euler_Esplicit(psi1,psi2,psi3,psi4,psi5,rd,M_rhs,rhs_CO2,solver,solver1);
+        Euler_Esplicit(psi1,psi2,psi3,psi4,psi5,rd,M_rhs,rhs_psi2,rhs_psi3,solver,solver1);
     }
 
     break;
@@ -313,11 +338,11 @@ void Concentration::one_step_transport_reaction(Vector& psi1, Vector& psi2, Vect
 
 }
 
-void Concentration::Euler_Esplicit(Vector& psi1, Vector& psi2, Vector& psi3, Vector& psi4, Vector& psi5, const Vector& rd, const Matrix&  M_rhs, const Vector& rhs_CO2, Solver &solver, Solver &solver1) const
+void Concentration::Euler_Esplicit(Vector& psi1, Vector& psi2, Vector& psi3, Vector& psi4, Vector& psi5, const Vector& rd, const Matrix&  M_rhs, const Vector& rhs_psi2, const Vector& rhs_psi3, Solver &solver, Solver &solver1) const
 {
     transport_and_reaction(psi1,M_rhs,Vector::Zero(psi1.size()),rd,solver);//reaction but not input bc (rhs=0) 
-    transport_and_reaction(psi2,M_rhs,Vector::Zero(psi2.size()),-2*rd,solver);//reaction but not input bc (rhs=0)
-    transport_and_reaction(psi3,M_rhs,rhs_CO2,Vector::Zero(psi3.size()),solver);//not reaction but input boundary (rd=0)
+    transport_and_reaction(psi2,M_rhs,rhs_psi2,-2*rd,solver);//reaction with input bc (rhs=0)
+    transport_and_reaction(psi3,M_rhs,rhs_psi3,Vector::Zero(psi3.size()),solver);//not reaction but input boundary (rd=0)
     transport_and_reaction(psi4,M_rhs,Vector::Zero(psi4.size()),-rd,solver1);//reaction but not input bc (rhs=0) (different solver because solid is not moving)
     transport_and_reaction(psi5,M_rhs,Vector::Zero(psi5.size()),rd,solver);//reaction but not input bc    (rhs=0)
 }
