@@ -4,19 +4,22 @@
 #include <vector>
 
 
-//Esplicit transport upwind
-void Transport_system_esplicit(Eigen::MatrixXd &Ca, Vector &vel, Data_Transport &data_transport, Data_linear_decay &initial_cond) //As input there is the matrix solution where we store our solution at each istant: each row represent a spatial position, each column represent a time istant. In the vector vel there is the velocity evaluated at each node cell.
+//Explicit transport upwind and explicit reaction
+void Transport_system_explicit(Eigen::MatrixXd &Ca, Vector &vel, Data_Transport &data_transport, Data_linear_decay &data_linear_decay)
 {
+    //Initialization of the matrices and vectors for the transport and decay problem
     unsigned int Nx{data_transport.Nx};
     Matrix M(Nx,Nx), rhs1(Nx,Nx);
     Vector rhs2(Nx);
-    //Definition of the linear system explicit matrix
-    Transport_esp(Ca,vel,data_transport,initial_cond,M,rhs1,rhs2);  
     
+    //Definition of the matrices and vector needed to solve the transport and decay problem
+    Transport_exp(Ca,vel,data_transport,data_linear_decay,M,rhs1,rhs2);  
+    
+    //Set of the linear system solver
     Solver solver;
     set_solver(M,solver);
     
-    //Initialization of the rhs of the Transport System
+    //Initialization of the rhs of the transport and decay system
     Vector rhs(Nx);
 
     //Temporal loop for solving at each istant the transport problem
@@ -33,20 +36,21 @@ void Transport_system_esplicit(Eigen::MatrixXd &Ca, Vector &vel, Data_Transport 
 
 
 //Implicit transport upwind and esplicit reaction
-void Transport_system_implicit(Eigen::MatrixXd &Ca, Vector &vel, Data_Transport &data_transport, Data_linear_decay &initial_cond) //As input there is the matrix solution where we store our solution at each istant,
-//each row represent a spatial position, each column represent a time istant.
-//In the vector vel there is the velocity evaluated at each node cell.
+void Transport_system_implicit(Eigen::MatrixXd &Ca, Vector &vel, Data_Transport &data_transport, Data_linear_decay &data_linear_decay) 
 {
+    //Initialization of the matrices and vectors for the transport and decay problem
     unsigned int Nx{data_transport.Nx};
     Matrix M(Nx,Nx), rhs1(Nx,Nx);
     Vector rhs2(Nx);
-    //Definition of the linear system explicit matrix
-    Transport_imp(Ca,vel,data_transport,initial_cond,M,rhs1,rhs2);  
     
+    //Definition of the matrices and vector needed to solve the transport and decay problem
+    Transport_imp(Ca,vel,data_transport,data_linear_decay,M,rhs1,rhs2);  
+    
+    //Set of the linear system solver
     Solver solver;
     set_solver(M,solver);
 
-    //Initialization of the rhs of the Transport System
+    //Initialization of the rhs of the transport and decay system
     Vector rhs(Nx);
 
     //Temporal loop for solving at each istant the transport problem

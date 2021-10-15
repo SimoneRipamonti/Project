@@ -48,6 +48,15 @@ It contains the muparser_fun class which is defined in the muparser_fun.hpp file
 
 This class permit us to read and use functions which are given as handle function in the data.pot file. 
 
+# Functions
+It contains 3 different functions:
+
+-the first one is related to the setting of the solver
+-the second and the third ones are used in the transport_decay.cpp file in order to set the linear system for the transport and decay problem
+
+#Transport and decay functions
+It contains the funcitons which define and solve the transport and decay problem
+
 
 
 

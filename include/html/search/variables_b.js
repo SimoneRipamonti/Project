@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['n',['n',['../classData__6Reagents.html#ab4e2397757b2d8d4c6c7871fe73d5f8d',1,'Data_6Reagents']]],
-  ['nx',['Nx',['../classData__Darcy.html#a5bdb5c38b6f66e242b6b9ab723def8f0',1,'Data_Darcy::Nx()'],['../classData__Transport.html#a1dbfd22dbcaaa6b152d2d5924a88ae48',1,'Data_Transport::Nx()']]]
+  ['outflow_182',['outflow',['../classMatrix__A.html#a66d9e3023a933b7622aedd449821b8fb',1,'Matrix_A::outflow()'],['../classMatrix__B.html#a447ea580c1b63f7e3984cedbb217c61c',1,'Matrix_B::outflow()']]]
 ];

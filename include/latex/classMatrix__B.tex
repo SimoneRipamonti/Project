@@ -1,5 +1,5 @@
-\hypertarget{classMatrix__B}{}\section{Matrix\+\_\+B Class Reference}
-\label{classMatrix__B}\index{Matrix\+\_\+B@{Matrix\+\_\+B}}
+\hypertarget{classMatrix__B}{}\doxysection{Matrix\+\_\+B Class Reference}
+\label{classMatrix__B}\index{Matrix\_B@{Matrix\_B}}
 
 
 Matrix B is the saddle\+\_\+point matrix of the Darcy\+\_\+\+System.  
@@ -17,71 +17,71 @@ Inheritance diagram for Matrix\+\_\+B\+:
 
 Collaboration diagram for Matrix\+\_\+B\+:
 % FIG 1
-\subsection*{Public Member Functions}
+\doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\Hypertarget{classMatrix__B_a581fdeb9726adc58a29d84ee00a5803f}\label{classMatrix__B_a581fdeb9726adc58a29d84ee00a5803f}} 
-{\bfseries Matrix\+\_\+B} (unsigned int \hyperlink{classAbstractMatrix_a27fb46bf2853d4927d92a81b8b7773fb}{row}, unsigned int \hyperlink{classAbstractMatrix_af3ad3551ce094979488cef5df0e4fc1d}{col})
+{\bfseries Matrix\+\_\+B} (unsigned int \mbox{\hyperlink{classAbstractMatrix_a27fb46bf2853d4927d92a81b8b7773fb}{row}}, unsigned int \mbox{\hyperlink{classAbstractMatrix_af3ad3551ce094979488cef5df0e4fc1d}{col}})
 \item 
-void \hyperlink{classMatrix__B_a65bf84cdaf6687394a6bd6e4a5558868}{set\+\_\+data} (const std\+::string inf, const std\+::string out, const \hyperlink{classmuparser__fun}{muparser\+\_\+fun} \&f, double \hyperlink{classMatrix__B_ad45ceefd12c2c4221943b5e92bafcee5}{h})
+void \mbox{\hyperlink{classMatrix__B_a65bf84cdaf6687394a6bd6e4a5558868}{set\+\_\+data}} (const std\+::string inf, const std\+::string out, const \mbox{\hyperlink{classmuparser__fun}{muparser\+\_\+fun}} \&f, double \mbox{\hyperlink{classMatrix__B_ad45ceefd12c2c4221943b5e92bafcee5}{h}})
 \item 
-void \hyperlink{classMatrix__B_a996a421d226769d39583f228d0ce0f00}{define\+\_\+matrix} () override
+void \mbox{\hyperlink{classMatrix__B_a996a421d226769d39583f228d0ce0f00}{define\+\_\+matrix}} () override
 \item 
-void \hyperlink{classMatrix__B_a1a076a3ccac19b0ad436686bc8b8babd}{set\+\_\+\+BC} () override
+void \mbox{\hyperlink{classMatrix__B_a1a076a3ccac19b0ad436686bc8b8babd}{set\+\_\+\+BC}} () override
 \item 
-void \hyperlink{classMatrix__B_ab4f89f8522128bd9677fd301f4f96c6e}{set\+\_\+rhs} () override
+void \mbox{\hyperlink{classMatrix__B_ab4f89f8522128bd9677fd301f4f96c6e}{set\+\_\+rhs}} () override
 \item 
-void \hyperlink{classMatrix__B_a4f6fc5aef429ca2b80901e280ab5a593}{assemble\+\_\+matrix} (const std\+::string inf, const std\+::string out, const \hyperlink{classmuparser__fun}{muparser\+\_\+fun} \&f, double \hyperlink{classMatrix__B_ad45ceefd12c2c4221943b5e92bafcee5}{h})
+void \mbox{\hyperlink{classMatrix__B_a4f6fc5aef429ca2b80901e280ab5a593}{assemble\+\_\+matrix}} (const std\+::string inf, const std\+::string out, const \mbox{\hyperlink{classmuparser__fun}{muparser\+\_\+fun}} \&f, double \mbox{\hyperlink{classMatrix__B_ad45ceefd12c2c4221943b5e92bafcee5}{h}})
 \end{DoxyCompactItemize}
-\subsection*{Private Attributes}
+\doxysubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
-std\+::string \hyperlink{classMatrix__B_aa09ba2dc48bc7ad46d5e0e7bb70d43da}{inflow}
+std\+::string \mbox{\hyperlink{classMatrix__B_aa09ba2dc48bc7ad46d5e0e7bb70d43da}{inflow}}
 \item 
-std\+::string \hyperlink{classMatrix__B_a447ea580c1b63f7e3984cedbb217c61c}{outflow}
+std\+::string \mbox{\hyperlink{classMatrix__B_a447ea580c1b63f7e3984cedbb217c61c}{outflow}}
 \item 
-\hyperlink{classmuparser__fun}{muparser\+\_\+fun} \hyperlink{classMatrix__B_ad2925cbb0e6aed0a6795e85af422a62f}{source}
+\mbox{\hyperlink{classmuparser__fun}{muparser\+\_\+fun}} \mbox{\hyperlink{classMatrix__B_ad2925cbb0e6aed0a6795e85af422a62f}{source}}
 \item 
-double \hyperlink{classMatrix__B_ad45ceefd12c2c4221943b5e92bafcee5}{h}
+double \mbox{\hyperlink{classMatrix__B_ad45ceefd12c2c4221943b5e92bafcee5}{h}}
 \end{DoxyCompactItemize}
-\subsection*{Additional Inherited Members}
+\doxysubsection*{Additional Inherited Members}
 
 
-\subsection{Detailed Description}
+\doxysubsection{Detailed Description}
 Matrix B is the saddle\+\_\+point matrix of the Darcy\+\_\+\+System. 
 
-\subsection{Member Function Documentation}
+\doxysubsection{Member Function Documentation}
 \mbox{\Hypertarget{classMatrix__B_a4f6fc5aef429ca2b80901e280ab5a593}\label{classMatrix__B_a4f6fc5aef429ca2b80901e280ab5a593}} 
-\index{Matrix\+\_\+B@{Matrix\+\_\+B}!assemble\+\_\+matrix@{assemble\+\_\+matrix}}
-\index{assemble\+\_\+matrix@{assemble\+\_\+matrix}!Matrix\+\_\+B@{Matrix\+\_\+B}}
-\subsubsection{\texorpdfstring{assemble\+\_\+matrix()}{assemble\_matrix()}}
-{\footnotesize\ttfamily void Matrix\+\_\+\+B\+::assemble\+\_\+matrix (\begin{DoxyParamCaption}\item[{const std\+::string}]{inf,  }\item[{const std\+::string}]{out,  }\item[{const \hyperlink{classmuparser__fun}{muparser\+\_\+fun} \&}]{f,  }\item[{double}]{h }\end{DoxyParamCaption})}
+\index{Matrix\_B@{Matrix\_B}!assemble\_matrix@{assemble\_matrix}}
+\index{assemble\_matrix@{assemble\_matrix}!Matrix\_B@{Matrix\_B}}
+\doxysubsubsection{\texorpdfstring{assemble\_matrix()}{assemble\_matrix()}}
+{\footnotesize\ttfamily void Matrix\+\_\+\+B\+::assemble\+\_\+matrix (\begin{DoxyParamCaption}\item[{const std\+::string}]{inf,  }\item[{const std\+::string}]{out,  }\item[{const \mbox{\hyperlink{classmuparser__fun}{muparser\+\_\+fun}} \&}]{f,  }\item[{double}]{h }\end{DoxyParamCaption})}
 
-Function that calls the above functions \hyperlink{classMatrix__B_a996a421d226769d39583f228d0ce0f00}{define\+\_\+matrix()},\hyperlink{classMatrix__B_a1a076a3ccac19b0ad436686bc8b8babd}{set\+\_\+\+B\+C()}, \hyperlink{classMatrix__B_ab4f89f8522128bd9677fd301f4f96c6e}{set\+\_\+rhs()} in order to assemble all the matrix B \mbox{\Hypertarget{classMatrix__B_a996a421d226769d39583f228d0ce0f00}\label{classMatrix__B_a996a421d226769d39583f228d0ce0f00}} 
-\index{Matrix\+\_\+B@{Matrix\+\_\+B}!define\+\_\+matrix@{define\+\_\+matrix}}
-\index{define\+\_\+matrix@{define\+\_\+matrix}!Matrix\+\_\+B@{Matrix\+\_\+B}}
-\subsubsection{\texorpdfstring{define\+\_\+matrix()}{define\_matrix()}}
+Function that calls the above functions \mbox{\hyperlink{classMatrix__B_a996a421d226769d39583f228d0ce0f00}{define\+\_\+matrix()}},\mbox{\hyperlink{classMatrix__B_a1a076a3ccac19b0ad436686bc8b8babd}{set\+\_\+\+BC()}}, \mbox{\hyperlink{classMatrix__B_ab4f89f8522128bd9677fd301f4f96c6e}{set\+\_\+rhs()}} in order to assemble all the matrix B \mbox{\Hypertarget{classMatrix__B_a996a421d226769d39583f228d0ce0f00}\label{classMatrix__B_a996a421d226769d39583f228d0ce0f00}} 
+\index{Matrix\_B@{Matrix\_B}!define\_matrix@{define\_matrix}}
+\index{define\_matrix@{define\_matrix}!Matrix\_B@{Matrix\_B}}
+\doxysubsubsection{\texorpdfstring{define\_matrix()}{define\_matrix()}}
 {\footnotesize\ttfamily void Matrix\+\_\+\+B\+::define\+\_\+matrix (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
 
 Function that defines the specific algebraic operator (the matrix) in question. 
 
-Implements \hyperlink{classAbstractMatrix_a40016da151226fbfcd444839943d8fe3}{Abstract\+Matrix}.
+Implements \mbox{\hyperlink{classAbstractMatrix_a40016da151226fbfcd444839943d8fe3}{Abstract\+Matrix}}.
 
 \mbox{\Hypertarget{classMatrix__B_a1a076a3ccac19b0ad436686bc8b8babd}\label{classMatrix__B_a1a076a3ccac19b0ad436686bc8b8babd}} 
-\index{Matrix\+\_\+B@{Matrix\+\_\+B}!set\+\_\+\+BC@{set\+\_\+\+BC}}
-\index{set\+\_\+\+BC@{set\+\_\+\+BC}!Matrix\+\_\+B@{Matrix\+\_\+B}}
-\subsubsection{\texorpdfstring{set\+\_\+\+B\+C()}{set\_BC()}}
+\index{Matrix\_B@{Matrix\_B}!set\_BC@{set\_BC}}
+\index{set\_BC@{set\_BC}!Matrix\_B@{Matrix\_B}}
+\doxysubsubsection{\texorpdfstring{set\_BC()}{set\_BC()}}
 {\footnotesize\ttfamily void Matrix\+\_\+\+B\+::set\+\_\+\+BC (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
 
 Function that imposes the BC on the matrix 
 
-Implements \hyperlink{classAbstractMatrix_aa0a17dacbeede4180531b115d4a9f3eb}{Abstract\+Matrix}.
+Implements \mbox{\hyperlink{classAbstractMatrix_aa0a17dacbeede4180531b115d4a9f3eb}{Abstract\+Matrix}}.
 
 \mbox{\Hypertarget{classMatrix__B_a65bf84cdaf6687394a6bd6e4a5558868}\label{classMatrix__B_a65bf84cdaf6687394a6bd6e4a5558868}} 
-\index{Matrix\+\_\+B@{Matrix\+\_\+B}!set\+\_\+data@{set\+\_\+data}}
-\index{set\+\_\+data@{set\+\_\+data}!Matrix\+\_\+B@{Matrix\+\_\+B}}
-\subsubsection{\texorpdfstring{set\+\_\+data()}{set\_data()}}
-{\footnotesize\ttfamily void Matrix\+\_\+\+B\+::set\+\_\+data (\begin{DoxyParamCaption}\item[{const std\+::string}]{inf,  }\item[{const std\+::string}]{out,  }\item[{const \hyperlink{classmuparser__fun}{muparser\+\_\+fun} \&}]{f,  }\item[{double}]{h }\end{DoxyParamCaption})}
+\index{Matrix\_B@{Matrix\_B}!set\_data@{set\_data}}
+\index{set\_data@{set\_data}!Matrix\_B@{Matrix\_B}}
+\doxysubsubsection{\texorpdfstring{set\_data()}{set\_data()}}
+{\footnotesize\ttfamily void Matrix\+\_\+\+B\+::set\+\_\+data (\begin{DoxyParamCaption}\item[{const std\+::string}]{inf,  }\item[{const std\+::string}]{out,  }\item[{const \mbox{\hyperlink{classmuparser__fun}{muparser\+\_\+fun}} \&}]{f,  }\item[{double}]{h }\end{DoxyParamCaption})}
 
 Function that takes as input and sets the specific data necessary for assemblying matrix B 
 \begin{DoxyParams}{Parameters}
@@ -95,44 +95,44 @@ Function that takes as input and sets the specific data necessary for assemblyin
 \hline
 \end{DoxyParams}
 \mbox{\Hypertarget{classMatrix__B_ab4f89f8522128bd9677fd301f4f96c6e}\label{classMatrix__B_ab4f89f8522128bd9677fd301f4f96c6e}} 
-\index{Matrix\+\_\+B@{Matrix\+\_\+B}!set\+\_\+rhs@{set\+\_\+rhs}}
-\index{set\+\_\+rhs@{set\+\_\+rhs}!Matrix\+\_\+B@{Matrix\+\_\+B}}
-\subsubsection{\texorpdfstring{set\+\_\+rhs()}{set\_rhs()}}
+\index{Matrix\_B@{Matrix\_B}!set\_rhs@{set\_rhs}}
+\index{set\_rhs@{set\_rhs}!Matrix\_B@{Matrix\_B}}
+\doxysubsubsection{\texorpdfstring{set\_rhs()}{set\_rhs()}}
 {\footnotesize\ttfamily void Matrix\+\_\+\+B\+::set\+\_\+rhs (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
 
 Function that sets the right-\/hand side corresponding to the problem 
 
-Implements \hyperlink{classAbstractMatrix_a1334661de25f76dc65f16538c167a03c}{Abstract\+Matrix}.
+Implements \mbox{\hyperlink{classAbstractMatrix_a1334661de25f76dc65f16538c167a03c}{Abstract\+Matrix}}.
 
 
 
-\subsection{Member Data Documentation}
+\doxysubsection{Member Data Documentation}
 \mbox{\Hypertarget{classMatrix__B_ad45ceefd12c2c4221943b5e92bafcee5}\label{classMatrix__B_ad45ceefd12c2c4221943b5e92bafcee5}} 
-\index{Matrix\+\_\+B@{Matrix\+\_\+B}!h@{h}}
-\index{h@{h}!Matrix\+\_\+B@{Matrix\+\_\+B}}
-\subsubsection{\texorpdfstring{h}{h}}
+\index{Matrix\_B@{Matrix\_B}!h@{h}}
+\index{h@{h}!Matrix\_B@{Matrix\_B}}
+\doxysubsubsection{\texorpdfstring{h}{h}}
 {\footnotesize\ttfamily double Matrix\+\_\+\+B\+::h\hspace{0.3cm}{\ttfamily [private]}}
 
 Spatial step \mbox{\Hypertarget{classMatrix__B_aa09ba2dc48bc7ad46d5e0e7bb70d43da}\label{classMatrix__B_aa09ba2dc48bc7ad46d5e0e7bb70d43da}} 
-\index{Matrix\+\_\+B@{Matrix\+\_\+B}!inflow@{inflow}}
-\index{inflow@{inflow}!Matrix\+\_\+B@{Matrix\+\_\+B}}
-\subsubsection{\texorpdfstring{inflow}{inflow}}
+\index{Matrix\_B@{Matrix\_B}!inflow@{inflow}}
+\index{inflow@{inflow}!Matrix\_B@{Matrix\_B}}
+\doxysubsubsection{\texorpdfstring{inflow}{inflow}}
 {\footnotesize\ttfamily std\+::string Matrix\+\_\+\+B\+::inflow\hspace{0.3cm}{\ttfamily [private]}}
 
 Type of in-\/section data (pressure or velocity) \mbox{\Hypertarget{classMatrix__B_a447ea580c1b63f7e3984cedbb217c61c}\label{classMatrix__B_a447ea580c1b63f7e3984cedbb217c61c}} 
-\index{Matrix\+\_\+B@{Matrix\+\_\+B}!outflow@{outflow}}
-\index{outflow@{outflow}!Matrix\+\_\+B@{Matrix\+\_\+B}}
-\subsubsection{\texorpdfstring{outflow}{outflow}}
+\index{Matrix\_B@{Matrix\_B}!outflow@{outflow}}
+\index{outflow@{outflow}!Matrix\_B@{Matrix\_B}}
+\doxysubsubsection{\texorpdfstring{outflow}{outflow}}
 {\footnotesize\ttfamily std\+::string Matrix\+\_\+\+B\+::outflow\hspace{0.3cm}{\ttfamily [private]}}
 
 Type of out-\/section data (pressure or velocity) \mbox{\Hypertarget{classMatrix__B_ad2925cbb0e6aed0a6795e85af422a62f}\label{classMatrix__B_ad2925cbb0e6aed0a6795e85af422a62f}} 
-\index{Matrix\+\_\+B@{Matrix\+\_\+B}!source@{source}}
-\index{source@{source}!Matrix\+\_\+B@{Matrix\+\_\+B}}
-\subsubsection{\texorpdfstring{source}{source}}
-{\footnotesize\ttfamily \hyperlink{classmuparser__fun}{muparser\+\_\+fun} Matrix\+\_\+\+B\+::source\hspace{0.3cm}{\ttfamily [private]}}
+\index{Matrix\_B@{Matrix\_B}!source@{source}}
+\index{source@{source}!Matrix\_B@{Matrix\_B}}
+\doxysubsubsection{\texorpdfstring{source}{source}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classmuparser__fun}{muparser\+\_\+fun}} Matrix\+\_\+\+B\+::source\hspace{0.3cm}{\ttfamily [private]}}
 
 External source f 
 
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 
-\hyperlink{matrix_8hpp}{matrix.\+hpp}\end{DoxyCompactItemize}
+\mbox{\hyperlink{matrix_8hpp}{matrix.\+hpp}}\end{DoxyCompactItemize}

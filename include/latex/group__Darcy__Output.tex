@@ -1,34 +1,34 @@
-\hypertarget{group__Darcy__Output}{}\section{Darcy\+\_\+\+Output}
-\label{group__Darcy__Output}\index{Darcy\+\_\+\+Output@{Darcy\+\_\+\+Output}}
+\hypertarget{group__Darcy__Output}{}\doxysection{Darcy\+\_\+\+Output}
+\label{group__Darcy__Output}\index{Darcy\_Output@{Darcy\_Output}}
 
 
 Functions that print on a csv file the solutions of Darcy problem.  
 
 
-\subsection*{Functions}
+\doxysubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-void \hyperlink{group__Darcy__Output_gae32dbfb8ae1dae7d94ce2a07b441be8f}{Darcy\+\_\+output\+\_\+results} (Eigen\+::\+Vector\+Xd \&value, unsigned int Nx, double L)
+void \mbox{\hyperlink{group__Darcy__Output_ga11f160305d81ac1e6da3259b67420794}{Darcy\+\_\+output\+\_\+results}} (Vector \&value, unsigned int Nx, double L)
 \item 
-void \hyperlink{group__Darcy__Output_ga2bf9f94eb4d11df1e138108c4658977f}{pressure\+\_\+exact\+\_\+result} (Eigen\+::\+Vector\+Xd \&value1, unsigned int Nx, double L)
+void \mbox{\hyperlink{group__Darcy__Output_gaeb74871fbdeb0825e65dab0da0e3eed6}{pressure\+\_\+exact\+\_\+result}} (Vector \&value1, unsigned int Nx, double L)
 \item 
-void \hyperlink{group__Darcy__Output_gafcb77d3ca0cd554e2141658c6701a001}{velocity\+\_\+exact\+\_\+result} (Eigen\+::\+Vector\+Xd \&value1, unsigned int Nx, double L)
+void \mbox{\hyperlink{group__Darcy__Output_gafe8b24f3222c086b58a2b186746fca3a}{velocity\+\_\+exact\+\_\+result}} (Vector \&value1, unsigned int Nx, double L)
 \item 
-void \hyperlink{group__Darcy__Output_gaa0d7356820b3cad723d8b5c85b2f77e1}{output\+\_\+error} (Eigen\+::\+Vector\+Xd \&value1, Eigen\+::\+Vector\+Xi \&Nx)
+void \mbox{\hyperlink{group__Darcy__Output_gaafc5969f4e00be02e337a961b15df4bf}{output\+\_\+error}} (Vector \&value1, Eigen\+::\+Vector\+Xi \&Nx)
 \end{DoxyCompactItemize}
 
 
-\subsection{Detailed Description}
+\doxysubsection{Detailed Description}
 Functions that print on a csv file the solutions of Darcy problem. 
 
 
 
-\subsection{Function Documentation}
-\mbox{\Hypertarget{group__Darcy__Output_gae32dbfb8ae1dae7d94ce2a07b441be8f}\label{group__Darcy__Output_gae32dbfb8ae1dae7d94ce2a07b441be8f}} 
-\index{Darcy\+\_\+\+Output@{Darcy\+\_\+\+Output}!Darcy\+\_\+output\+\_\+results@{Darcy\+\_\+output\+\_\+results}}
-\index{Darcy\+\_\+output\+\_\+results@{Darcy\+\_\+output\+\_\+results}!Darcy\+\_\+\+Output@{Darcy\+\_\+\+Output}}
-\subsubsection{\texorpdfstring{Darcy\+\_\+output\+\_\+results()}{Darcy\_output\_results()}}
-{\footnotesize\ttfamily void Darcy\+\_\+output\+\_\+results (\begin{DoxyParamCaption}\item[{Eigen\+::\+Vector\+Xd \&}]{value,  }\item[{unsigned int}]{Nx,  }\item[{double}]{L }\end{DoxyParamCaption})}
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{group__Darcy__Output_ga11f160305d81ac1e6da3259b67420794}\label{group__Darcy__Output_ga11f160305d81ac1e6da3259b67420794}} 
+\index{Darcy\_Output@{Darcy\_Output}!Darcy\_output\_results@{Darcy\_output\_results}}
+\index{Darcy\_output\_results@{Darcy\_output\_results}!Darcy\_Output@{Darcy\_Output}}
+\doxysubsubsection{\texorpdfstring{Darcy\_output\_results()}{Darcy\_output\_results()}}
+{\footnotesize\ttfamily void Darcy\+\_\+output\+\_\+results (\begin{DoxyParamCaption}\item[{Vector \&}]{value,  }\item[{unsigned int}]{Nx,  }\item[{double}]{L }\end{DoxyParamCaption})}
 
 Function that saves the solution (velocity+pressure) of the Darcy system on two different csv files (one for pressure and one for velocity) 
 \begin{DoxyParams}{Parameters}
@@ -39,24 +39,25 @@ Function that saves the solution (velocity+pressure) of the Darcy system on two 
 {\em L} & is the domain lenght \\
 \hline
 \end{DoxyParams}
-\mbox{\Hypertarget{group__Darcy__Output_gaa0d7356820b3cad723d8b5c85b2f77e1}\label{group__Darcy__Output_gaa0d7356820b3cad723d8b5c85b2f77e1}} 
-\index{Darcy\+\_\+\+Output@{Darcy\+\_\+\+Output}!output\+\_\+error@{output\+\_\+error}}
-\index{output\+\_\+error@{output\+\_\+error}!Darcy\+\_\+\+Output@{Darcy\+\_\+\+Output}}
-\subsubsection{\texorpdfstring{output\+\_\+error()}{output\_error()}}
-{\footnotesize\ttfamily void output\+\_\+error (\begin{DoxyParamCaption}\item[{Eigen\+::\+Vector\+Xd \&}]{value1,  }\item[{Eigen\+::\+Vector\+Xi \&}]{Nx }\end{DoxyParamCaption})}
+\mbox{\Hypertarget{group__Darcy__Output_gaafc5969f4e00be02e337a961b15df4bf}\label{group__Darcy__Output_gaafc5969f4e00be02e337a961b15df4bf}} 
+\index{Darcy\_Output@{Darcy\_Output}!output\_error@{output\_error}}
+\index{output\_error@{output\_error}!Darcy\_Output@{Darcy\_Output}}
+\doxysubsubsection{\texorpdfstring{output\_error()}{output\_error()}}
+{\footnotesize\ttfamily void output\+\_\+error (\begin{DoxyParamCaption}\item[{Vector \&}]{value1,  }\item[{Eigen\+::\+Vector\+Xi \&}]{Nx }\end{DoxyParamCaption})}
 
 Function that saves the error values in a csv file 
 \begin{DoxyParams}{Parameters}
 {\em value1} & is a refence to the vector which contains the values that we want to store \\
 \hline
-{\em Nx} & is a reference to the vector which contains all the spatial steps used for the convergence analyses \\
+{\em Nx} & is a reference to the vector which contains all the spatial steps used for the convergence analyses ~\newline
+ \\
 \hline
 \end{DoxyParams}
-\mbox{\Hypertarget{group__Darcy__Output_ga2bf9f94eb4d11df1e138108c4658977f}\label{group__Darcy__Output_ga2bf9f94eb4d11df1e138108c4658977f}} 
-\index{Darcy\+\_\+\+Output@{Darcy\+\_\+\+Output}!pressure\+\_\+exact\+\_\+result@{pressure\+\_\+exact\+\_\+result}}
-\index{pressure\+\_\+exact\+\_\+result@{pressure\+\_\+exact\+\_\+result}!Darcy\+\_\+\+Output@{Darcy\+\_\+\+Output}}
-\subsubsection{\texorpdfstring{pressure\+\_\+exact\+\_\+result()}{pressure\_exact\_result()}}
-{\footnotesize\ttfamily void pressure\+\_\+exact\+\_\+result (\begin{DoxyParamCaption}\item[{Eigen\+::\+Vector\+Xd \&}]{value1,  }\item[{unsigned int}]{Nx,  }\item[{double}]{L }\end{DoxyParamCaption})}
+\mbox{\Hypertarget{group__Darcy__Output_gaeb74871fbdeb0825e65dab0da0e3eed6}\label{group__Darcy__Output_gaeb74871fbdeb0825e65dab0da0e3eed6}} 
+\index{Darcy\_Output@{Darcy\_Output}!pressure\_exact\_result@{pressure\_exact\_result}}
+\index{pressure\_exact\_result@{pressure\_exact\_result}!Darcy\_Output@{Darcy\_Output}}
+\doxysubsubsection{\texorpdfstring{pressure\_exact\_result()}{pressure\_exact\_result()}}
+{\footnotesize\ttfamily void pressure\+\_\+exact\+\_\+result (\begin{DoxyParamCaption}\item[{Vector \&}]{value1,  }\item[{unsigned int}]{Nx,  }\item[{double}]{L }\end{DoxyParamCaption})}
 
 Function that saves the exact pressure values at the nodes point in a csv file 
 \begin{DoxyParams}{Parameters}
@@ -67,11 +68,11 @@ Function that saves the exact pressure values at the nodes point in a csv file
 {\em L} & is the domain lenght \\
 \hline
 \end{DoxyParams}
-\mbox{\Hypertarget{group__Darcy__Output_gafcb77d3ca0cd554e2141658c6701a001}\label{group__Darcy__Output_gafcb77d3ca0cd554e2141658c6701a001}} 
-\index{Darcy\+\_\+\+Output@{Darcy\+\_\+\+Output}!velocity\+\_\+exact\+\_\+result@{velocity\+\_\+exact\+\_\+result}}
-\index{velocity\+\_\+exact\+\_\+result@{velocity\+\_\+exact\+\_\+result}!Darcy\+\_\+\+Output@{Darcy\+\_\+\+Output}}
-\subsubsection{\texorpdfstring{velocity\+\_\+exact\+\_\+result()}{velocity\_exact\_result()}}
-{\footnotesize\ttfamily void velocity\+\_\+exact\+\_\+result (\begin{DoxyParamCaption}\item[{Eigen\+::\+Vector\+Xd \&}]{value1,  }\item[{unsigned int}]{Nx,  }\item[{double}]{L }\end{DoxyParamCaption})}
+\mbox{\Hypertarget{group__Darcy__Output_gafe8b24f3222c086b58a2b186746fca3a}\label{group__Darcy__Output_gafe8b24f3222c086b58a2b186746fca3a}} 
+\index{Darcy\_Output@{Darcy\_Output}!velocity\_exact\_result@{velocity\_exact\_result}}
+\index{velocity\_exact\_result@{velocity\_exact\_result}!Darcy\_Output@{Darcy\_Output}}
+\doxysubsubsection{\texorpdfstring{velocity\_exact\_result()}{velocity\_exact\_result()}}
+{\footnotesize\ttfamily void velocity\+\_\+exact\+\_\+result (\begin{DoxyParamCaption}\item[{Vector \&}]{value1,  }\item[{unsigned int}]{Nx,  }\item[{double}]{L }\end{DoxyParamCaption})}
 
 Function that saves the exact velocity values at the nodes point in a csv file 
 \begin{DoxyParams}{Parameters}

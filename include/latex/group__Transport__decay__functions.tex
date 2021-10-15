@@ -1,0 +1,56 @@
+\hypertarget{group__Transport__decay__functions}{}\doxysection{Transport\+\_\+decay\+\_\+functions}
+\label{group__Transport__decay__functions}\index{Transport\_decay\_functions@{Transport\_decay\_functions}}
+
+
+Functions that implement and solve the transport and decay system.  
+
+
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{group__Transport__decay__functions_gadd7751eff4fe87337ebc33a3c928a582}{Transport\+\_\+system\+\_\+explicit}} (Eigen\+::\+Matrix\+Xd \&Ca, Eigen\+::\+Vector\+Xd \&vel, \mbox{\hyperlink{classData__Transport}{Data\+\_\+\+Transport}} \&data\+\_\+transport, \mbox{\hyperlink{classData__linear__decay}{Data\+\_\+linear\+\_\+decay}} \&data\+\_\+linear\+\_\+decay)
+\item 
+void \mbox{\hyperlink{group__Transport__decay__functions_ga4ef0b67d6646b076f7fe5b21b0aa3c83}{Transport\+\_\+system\+\_\+implicit}} (Eigen\+::\+Matrix\+Xd \&Ca, Eigen\+::\+Vector\+Xd \&velocity, \mbox{\hyperlink{classData__Transport}{Data\+\_\+\+Transport}} \&data\+\_\+transport, \mbox{\hyperlink{classData__linear__decay}{Data\+\_\+linear\+\_\+decay}} \&data\+\_\+linear\+\_\+decay)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Functions that implement and solve the transport and decay system. 
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{group__Transport__decay__functions_gadd7751eff4fe87337ebc33a3c928a582}\label{group__Transport__decay__functions_gadd7751eff4fe87337ebc33a3c928a582}} 
+\index{Transport\_decay\_functions@{Transport\_decay\_functions}!Transport\_system\_explicit@{Transport\_system\_explicit}}
+\index{Transport\_system\_explicit@{Transport\_system\_explicit}!Transport\_decay\_functions@{Transport\_decay\_functions}}
+\doxysubsubsection{\texorpdfstring{Transport\_system\_explicit()}{Transport\_system\_explicit()}}
+{\footnotesize\ttfamily void Transport\+\_\+system\+\_\+explicit (\begin{DoxyParamCaption}\item[{Eigen\+::\+Matrix\+Xd \&}]{Ca,  }\item[{Eigen\+::\+Vector\+Xd \&}]{vel,  }\item[{\mbox{\hyperlink{classData__Transport}{Data\+\_\+\+Transport}} \&}]{data\+\_\+transport,  }\item[{\mbox{\hyperlink{classData__linear__decay}{Data\+\_\+linear\+\_\+decay}} \&}]{data\+\_\+linear\+\_\+decay }\end{DoxyParamCaption})}
+
+Function that implements and solves the explicit transport and decay system (decay part is treated explicitly) 
+\begin{DoxyParams}{Parameters}
+{\em Ca} & is the matrix solution where we store our solution at each istant\+: each row represent a spatial position, each column represent a time istant. \\
+\hline
+{\em vel} & is the velocity vector which can be computed by the Darcy problem \\
+\hline
+{\em data\+\_\+transport} & stores the data related to the transport part \\
+\hline
+{\em data\+\_\+linear\+\_\+decay} & stores the data related to the linear decay part \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{group__Transport__decay__functions_ga4ef0b67d6646b076f7fe5b21b0aa3c83}\label{group__Transport__decay__functions_ga4ef0b67d6646b076f7fe5b21b0aa3c83}} 
+\index{Transport\_decay\_functions@{Transport\_decay\_functions}!Transport\_system\_implicit@{Transport\_system\_implicit}}
+\index{Transport\_system\_implicit@{Transport\_system\_implicit}!Transport\_decay\_functions@{Transport\_decay\_functions}}
+\doxysubsubsection{\texorpdfstring{Transport\_system\_implicit()}{Transport\_system\_implicit()}}
+{\footnotesize\ttfamily void Transport\+\_\+system\+\_\+implicit (\begin{DoxyParamCaption}\item[{Eigen\+::\+Matrix\+Xd \&}]{Ca,  }\item[{Eigen\+::\+Vector\+Xd \&}]{velocity,  }\item[{\mbox{\hyperlink{classData__Transport}{Data\+\_\+\+Transport}} \&}]{data\+\_\+transport,  }\item[{\mbox{\hyperlink{classData__linear__decay}{Data\+\_\+linear\+\_\+decay}} \&}]{data\+\_\+linear\+\_\+decay }\end{DoxyParamCaption})}
+
+Function that implements and solves the implicit transport and decay system (decay part is treated explicitly) 
+\begin{DoxyParams}{Parameters}
+{\em Ca} & is the matrix solution where we store our solution at each istant\+: each row represent a spatial position, each column represent a time istant. \\
+\hline
+{\em vel} & is the velocity vector which can be computed by the Darcy problem \\
+\hline
+{\em data\+\_\+transport} & stores the data related to the transport part \\
+\hline
+{\em data\+\_\+linear\+\_\+decay} & stores the data related to the linear decay part \\
+\hline
+\end{DoxyParams}

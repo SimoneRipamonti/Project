@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['transport_5fand_5freaction',['transport_and_reaction',['../classConcentration.html#a138eaad56f3cf6182dca4fe614b2e203',1,'Concentration']]],
-  ['triplets_5fwith_5fshift',['triplets_with_shift',['../group__Darcy__Functions.html#gafc7f845f0586c4a17350967bd9058834',1,'darcy.hpp']]]
+  ['velocity_5fexact_5fresult_151',['velocity_exact_result',['../group__Darcy__Output.html#gafe8b24f3222c086b58a2b186746fca3a',1,'output_darcy.hpp']]]
 ];

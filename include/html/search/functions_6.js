@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['muparser_5ffun',['muparser_fun',['../group__MuParser.html#ga17c98796657ea4da75ca6e273f0b6965',1,'muparser_fun::muparser_fun()=default'],['../group__MuParser.html#ga106b21c0b17eb9fbc347fd510f617efb',1,'muparser_fun::muparser_fun(const muparser_fun &amp;m)']]]
+  ['pressure_5fexact_5fresult_137',['pressure_exact_result',['../group__Darcy__Output.html#gaeb74871fbdeb0825e65dab0da0e3eed6',1,'output_darcy.hpp']]],
+  ['print_5fm_138',['print_m',['../classAbstractMatrix.html#a68df381d8ccd85e8cdd74302a4baa21b',1,'AbstractMatrix']]]
 ];

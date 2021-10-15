@@ -1,12 +1,17 @@
 digraph "matrix.hpp"
 {
+ // LATEX_PDF_SIZE
   edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
   node [fontname="Helvetica",fontsize="10",shape=record];
-  Node7 [label="matrix.hpp",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black"];
-  Node7 -> Node8 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node8 [label="darcy.hpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$darcy_8hpp_source.html"];
-  Node7 -> Node9 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node9 [label="output.hpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$output_8hpp_source.html"];
-  Node7 -> Node10 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node10 [label="output_darcy.hpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$output__darcy_8hpp_source.html"];
+  Node1 [label="matrix.hpp",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="matrices representing the algebraic operators obtained from the discretization of differential equati..."];
+  Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="darcy.hpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$darcy_8hpp_source.html",tooltip=" "];
+  Node1 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="functions.hpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$functions_8hpp_source.html",tooltip=" "];
+  Node1 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="output.hpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$output_8hpp_source.html",tooltip=" "];
+  Node1 -> Node5 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 [label="output_darcy.hpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$output__darcy_8hpp_source.html",tooltip=" "];
+  Node1 -> Node6 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node6 [label="transport_decay.hpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$transport__decay_8hpp_source.html",tooltip=" "];
 }

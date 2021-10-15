@@ -52,7 +52,7 @@ int main(int argc, char **argv)
         Vector rhs(data.Nx+data.Nx+1);//Initialization of the rhs of Darcy
         set_Darcy_system(data,M,rhs,h);//Definition of the Darcy system Mx=rhs
 
-        Solver solver;
+        Solver solver; //solver for the linear system
         set_solver(M,solver);
 
         sol= solver.solve(rhs);//The Darcy system is solved and the solution is stored in the sol vector

@@ -1,0 +1,50 @@
+\hypertarget{group__Functions}{}\doxysection{Functions}
+\label{group__Functions}\index{Functions@{Functions}}
+
+
+Auxiliar Functions used in the code.  
+
+
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{group__Functions_ga9a218e452a74b63f434c674f5a7711c5}{set\+\_\+solver}} (Matrix \&M, Solver \&solver)
+\item 
+void \mbox{\hyperlink{group__Functions_ga1a956eed7d74d8991f643c62e9104730}{Transport\+\_\+exp}} (Eigen\+::\+Matrix\+Xd \&Ca, Eigen\+::\+Vector\+Xd \&vel, \mbox{\hyperlink{classData__Transport}{Data\+\_\+\+Transport}} \&data\+\_\+transport, \mbox{\hyperlink{classData__linear__decay}{Data\+\_\+linear\+\_\+decay}} \&initial\+\_\+cond, Matrix \&M, Matrix \&rhs1, Vector \&rhs2)
+\item 
+void \mbox{\hyperlink{group__Functions_ga6f165df0a929817012d3cb74795ca9e4}{Transport\+\_\+imp}} (Eigen\+::\+Matrix\+Xd \&Ca, Eigen\+::\+Vector\+Xd \&vel, \mbox{\hyperlink{classData__Transport}{Data\+\_\+\+Transport}} \&data\+\_\+transport, \mbox{\hyperlink{classData__linear__decay}{Data\+\_\+linear\+\_\+decay}} \&initial\+\_\+cond, Matrix \&M, Matrix \&rhs1, Vector \&rhs2)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Auxiliar Functions used in the code. 
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{group__Functions_ga9a218e452a74b63f434c674f5a7711c5}\label{group__Functions_ga9a218e452a74b63f434c674f5a7711c5}} 
+\index{Functions@{Functions}!set\_solver@{set\_solver}}
+\index{set\_solver@{set\_solver}!Functions@{Functions}}
+\doxysubsubsection{\texorpdfstring{set\_solver()}{set\_solver()}}
+{\footnotesize\ttfamily void set\+\_\+solver (\begin{DoxyParamCaption}\item[{Matrix \&}]{M,  }\item[{Solver \&}]{solver }\end{DoxyParamCaption})}
+
+Function that sets the solver for the solution of the linear system denoted by the matrix M 
+\begin{DoxyParams}{Parameters}
+{\em M} & is the sparse matrix representing the linear system that has to be solved \\
+\hline
+{\em solver} & solver for the linear systems that uses the LU factorization \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{group__Functions_ga1a956eed7d74d8991f643c62e9104730}\label{group__Functions_ga1a956eed7d74d8991f643c62e9104730}} 
+\index{Functions@{Functions}!Transport\_exp@{Transport\_exp}}
+\index{Transport\_exp@{Transport\_exp}!Functions@{Functions}}
+\doxysubsubsection{\texorpdfstring{Transport\_exp()}{Transport\_exp()}}
+{\footnotesize\ttfamily void Transport\+\_\+exp (\begin{DoxyParamCaption}\item[{Eigen\+::\+Matrix\+Xd \&}]{Ca,  }\item[{Eigen\+::\+Vector\+Xd \&}]{vel,  }\item[{\mbox{\hyperlink{classData__Transport}{Data\+\_\+\+Transport}} \&}]{data\+\_\+transport,  }\item[{\mbox{\hyperlink{classData__linear__decay}{Data\+\_\+linear\+\_\+decay}} \&}]{initial\+\_\+cond,  }\item[{Matrix \&}]{M,  }\item[{Matrix \&}]{rhs1,  }\item[{Vector \&}]{rhs2 }\end{DoxyParamCaption})}
+
+Function that sets the explicit transport system \mbox{\Hypertarget{group__Functions_ga6f165df0a929817012d3cb74795ca9e4}\label{group__Functions_ga6f165df0a929817012d3cb74795ca9e4}} 
+\index{Functions@{Functions}!Transport\_imp@{Transport\_imp}}
+\index{Transport\_imp@{Transport\_imp}!Functions@{Functions}}
+\doxysubsubsection{\texorpdfstring{Transport\_imp()}{Transport\_imp()}}
+{\footnotesize\ttfamily void Transport\+\_\+imp (\begin{DoxyParamCaption}\item[{Eigen\+::\+Matrix\+Xd \&}]{Ca,  }\item[{Eigen\+::\+Vector\+Xd \&}]{vel,  }\item[{\mbox{\hyperlink{classData__Transport}{Data\+\_\+\+Transport}} \&}]{data\+\_\+transport,  }\item[{\mbox{\hyperlink{classData__linear__decay}{Data\+\_\+linear\+\_\+decay}} \&}]{initial\+\_\+cond,  }\item[{Matrix \&}]{M,  }\item[{Matrix \&}]{rhs1,  }\item[{Vector \&}]{rhs2 }\end{DoxyParamCaption})}
+
+Function that sets the implicit transport system 

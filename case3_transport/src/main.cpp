@@ -25,7 +25,7 @@ int main(int argc, char **argv)
 
     //We choose between the Esplicit or Implicit scheme
     if(data_transport.method=="Esplicit")
-        Transport_system_esplicit(Ca,vel,data_transport,initial_cond);
+        Transport_system_explicit(Ca,vel,data_transport,initial_cond);
     else if(data_transport.method=="Implicit")
         Transport_system_implicit(Ca,vel,data_transport,initial_cond);
     else throw std::invalid_argument("Invalid argument: wrong input method, choose  or implicit or esplicit");

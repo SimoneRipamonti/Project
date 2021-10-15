@@ -1,5 +1,8 @@
 var searchData=
 [
-  ['q_5fin',['Q_in',['../classMatrix__A.html#a7be771744ff633dfda78bce1b68cc5b2',1,'Matrix_A::Q_in()'],['../classData__Darcy.html#a0b571112f2b3767a50d6c9ee5d9b64f2',1,'Data_Darcy::Q_in()']]],
-  ['q_5fout',['Q_out',['../classMatrix__A.html#a79f4a0f55c11a99d755ecd2a4dd1bc29',1,'Matrix_A::Q_out()'],['../classData__Darcy.html#a904d9b426d753e4a8b61599c2aac0afd',1,'Data_Darcy::Q_out()']]]
+  ['r_192',['R',['../classData__Reaction.html#a3cf13b7fd059ce3d14dc6a08cc1e4550',1,'Data_Reaction']]],
+  ['rate_5fconst_193',['Rate_const',['../classData__Reaction.html#affb4be693adaa72df68fe22f0f96e2de',1,'Data_Reaction']]],
+  ['react_5fconst_194',['react_const',['../classMatrix__R.html#af2872298a4ebd9ac7493a1f55e3fa586',1,'Matrix_R']]],
+  ['rhs_195',['rhs',['../classAbstractMatrix.html#aea741c7f214930a54a17113abf00d979',1,'AbstractMatrix']]],
+  ['row_196',['row',['../classAbstractMatrix.html#a27fb46bf2853d4927d92a81b8b7773fb',1,'AbstractMatrix']]]
 ];

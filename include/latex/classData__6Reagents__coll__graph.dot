@@ -1,8 +1,9 @@
 digraph "Data_6Reagents"
 {
+ // LATEX_PDF_SIZE
   edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
   node [fontname="Helvetica",fontsize="10",shape=record];
-  Node1 [label="Data_6Reagents",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black"];
-  Node2 -> Node1 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" Ca_0\nH_piu_0\nHCO3_meno_0\nCO2_0\nCaSiO3_0\nSiO2_0" ];
-  Node2 [label="muparser_fun",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classmuparser__fun.html",tooltip="Class for creating and set muparser_fun. "];
+  Node1 [label="Data_6Reagents",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="Data for 6 reagents case."];
+  Node2 -> Node1 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" CO2_0\nCaSiO3_0\nCa_0\nHCO3_meno_0\nH_piu_0\nSiO2_0" ];
+  Node2 [label="muparser_fun",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classmuparser__fun.html",tooltip="Class for creating and set muparser_fun."];
 }

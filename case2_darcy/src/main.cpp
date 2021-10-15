@@ -26,7 +26,7 @@ int main(int argc, char **argv)
     set_Darcy_system(data,M,rhs,h);//Definition of the Darcy system Mx=rhs
 
 
-    Solver solver; //Initialization of the Solver for the sparse system
+    Solver solver; //Initialization of the solver for the sparse system
     set_solver(M,solver);
     
     sol= solver.solve(rhs);//The Darcy system is solved and the solution is stored in the sol vector
