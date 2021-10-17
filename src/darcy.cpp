@@ -1,4 +1,5 @@
 #include "darcy.hpp"
+#include "functions.hpp"
 #include <iostream>
 #include <vector>
 #include <utility>
@@ -68,18 +69,16 @@ void Darcy_velocity(const Data_Darcy &data, Vector &vel)
   
     double h =static_cast<double>(data.L)/data.Nx; //space step
 
-    Eigen::VectorXd sol(data.Nx+data.Nx+1); //solution vectors are resized
+    Vector sol(data.Nx+data.Nx+1); //solution vectors are resized
 
-    Eigen::SparseMatrix<double> M_d(data.Nx+data.Nx+1,data.Nx+data.Nx+1);//Initialization of the big matrix for the Darcy system
-    Eigen::VectorXd rhs_d(data.Nx+data.Nx+1);//Initialization of the rhs of Darcy
+    Matrix M_d(data.Nx+data.Nx+1,data.Nx+data.Nx+1);//Initialization of the big matrix for the Darcy system
+    Vector rhs_d(data.Nx+data.Nx+1);//Initialization of the rhs of Darcy
     set_Darcy_system(data,M_d,rhs_d,h);//Definition of the Darcy system Mx=rhs
 
 
-    Eigen::SparseLU<Eigen::SparseMatrix<double>, Eigen::COLAMDOrdering<int> >   solver_d; //Initialization of the Solver for the sparse system
+    Solver  solver_d; //Initialization of the Solver for the sparse system
 
-    solver_d.analyzePattern(M_d); // Compute the ordering permutation vector from the structural pattern of A
-
-    solver_d.factorize(M_d); // Compute the numerical factorization
+    set_solver(M_d,solver_d);
 
     sol= solver_d.solve(rhs_d);//The Darcy system is solved and the solution is stored in the sol vector
 

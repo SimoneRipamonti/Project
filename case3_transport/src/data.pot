@@ -53,7 +53,7 @@
     bc_trac=In
 
    #Numerical scheme
-   method=Implicit #Implicit
+   method=Implicit #Explicit
  
    #Initial Condition
    #C_0=1.0*(x<0.5)

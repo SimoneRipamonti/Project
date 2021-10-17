@@ -8,12 +8,12 @@
 
 Concentration::Concentration(const std::string &filename):data_transp(filename), data_reagents(filename), data_reaction(filename), data_CO2(filename)
 {
-    Ca=Eigen::MatrixXd::Zero(data_transp.Nx,data_transp.Nt+1);
-    H_piu=Eigen::MatrixXd::Zero(data_transp.Nx,data_transp.Nt+1);
-    HCO3_meno=Eigen::MatrixXd::Zero(data_transp.Nx,data_transp.Nt+1);
-    CO2=Eigen::MatrixXd::Zero(data_transp.Nx,data_transp.Nt+1);
-    CaSiO3=Eigen::MatrixXd::Zero(data_transp.Nx,data_transp.Nt+1);
-    SiO2=Eigen::MatrixXd::Zero(data_transp.Nx,data_transp.Nt+1);
+    Ca=Matrix_full::Zero(data_transp.Nx,data_transp.Nt+1);
+    H_piu=Matrix_full::Zero(data_transp.Nx,data_transp.Nt+1);
+    HCO3_meno=Matrix_full::Zero(data_transp.Nx,data_transp.Nt+1);
+    CO2=Matrix_full::Zero(data_transp.Nx,data_transp.Nt+1);
+    CaSiO3=Matrix_full::Zero(data_transp.Nx,data_transp.Nt+1);
+    SiO2=Matrix_full::Zero(data_transp.Nx,data_transp.Nt+1);
 
     if(data_reagents.method==1)
         method=EsplicitEuler;
@@ -350,7 +350,7 @@ void Concentration::Euler_Esplicit(Vector& psi1, Vector& psi2, Vector& psi3, Vec
 
 void Concentration::transport_and_reaction(Vector& psi, const Matrix& M_rhs, const Vector& rhs, const Vector& rd, Solver &solver) const
 {   
-    const Eigen::VectorXd temp=M_rhs*psi+rhs+rd*h;
+    const Vector temp{M_rhs*psi+rhs+rd*h};
     psi=solver.solve(temp);
 }
 
@@ -374,7 +374,7 @@ void Concentration::compute_concentration(unsigned int step, const Vector& psi1,
     //Initial guess::value at previous step
     Vector old_it(6);
     Vector rhs(6);
-    Eigen::MatrixXd Jacob{Eigen::MatrixXd::Zero(6,6)};
+    Matrix_full Jacob{Matrix_full::Zero(6,6)};
     Jacob(0,0)=1.0;
     Jacob(1,1)=1.0;
     Jacob(1,2)=-1.0;
@@ -437,7 +437,7 @@ void Concentration::compute_rhs(Vector& rhs, const Vector& old_it, double psi1, 
     rhs<<Ca-psi1,H_piu-HCO3_meno-psi2,CO2+HCO3_meno-psi3,CaSiO3-psi4,SiO2-psi5,H_piu*HCO3_meno-data_reagents.K_eq*CO2;
 }
 
-void Concentration::compute_Jacob(Eigen::MatrixXd& J,const Eigen::VectorXd& old_it) const
+void Concentration::compute_Jacob(Matrix_full& J,const Vector& old_it) const
 {
     double HCO3_meno{old_it(2)},H_piu{old_it(1)};
     J(5,1)=HCO3_meno;
@@ -449,7 +449,7 @@ void Concentration::output_results_fixed_time(const std::string& name) const
 {
 
     std::string filename;
-    Eigen::MatrixXd value1(data_transp.Nx,data_transp.Nt);
+    Matrix_full value1(data_transp.Nx,data_transp.Nt);
     if(name=="Ca")
     {
         filename="Ca_fixed_time.csv";
@@ -492,7 +492,7 @@ void Concentration::output_results_fixed_time(const std::string& name) const
         file1<<"t="+std::to_string(i*dt)+"s, ";
     file1<<std::endl;
 
-    const Vector x(Eigen::VectorXd::LinSpaced(data_transp.Nx,h/2,data_transp.L-h/2));//Definition of the space vector (Concnetration values are stored in the middle of the cell)
+    const Vector x(Vector::LinSpaced(data_transp.Nx,h/2,data_transp.L-h/2));//Definition of the space vector (Concnetration values are stored in the middle of the cell)
 
     for (unsigned int i = 0; i<data_transp.Nx; ++i) //Loop to save the matrix by column in the CSV file
     {
@@ -516,7 +516,7 @@ void Concentration::output_results_fixed_space(const std::string& name) const
 {
 
     std::string filename;
-    Eigen::MatrixXd value1(data_transp.Nx,data_transp.Nt);
+    Matrix_full value1(data_transp.Nx,data_transp.Nt);
     if(name=="Ca")
     {
         filename="Ca_fixed_space.csv";
@@ -558,7 +558,7 @@ void Concentration::output_results_fixed_space(const std::string& name) const
     file1<<"x="+std::to_string(data_transp.L-h/2)+"m, ";
     file1<<std::endl;
 
-    const Vector t(Eigen::VectorXd::LinSpaced(data_transp.Nt+1,0.0,data_transp.T));//Definition of the space vector (Concnetration values are stored in the middle of the cell)
+    const Vector t(Vector::LinSpaced(data_transp.Nt+1,0.0,data_transp.T));//Definition of the space vector (Concnetration values are stored in the middle of the cell)
 
     for (unsigned int i = 0; i<data_transp.Nt+1; ++i) //Loop to save the matrix by column in the CSV file
     {
@@ -583,7 +583,7 @@ void Concentration::output_all_reagents(unsigned int pos) const
     std::ofstream file1("all.csv", std::ofstream::out);
     file1<< "time, Ca, H+, HCO3-, CO2, CaSiO3, SiO2" << std::endl;
 
-    const Vector t(Eigen::VectorXd::LinSpaced(data_transp.Nt+1,0.0,data_transp.T));//Definition of the space vector (Concnetration values are stored in the middle of the cell)
+    const Vector t(Vector::LinSpaced(data_transp.Nt+1,0.0,data_transp.T));//Definition of the space vector (Concnetration values are stored in the middle of the cell)
 
     for (unsigned int i = 0; i<data_transp.Nt+1; ++i) //Loop to save the matrix by column in the CSV file
     {

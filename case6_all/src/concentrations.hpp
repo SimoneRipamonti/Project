@@ -129,7 +129,7 @@ public:
  *\param J reference to the Jacobian Matrix (that is a 6x6 matrix since it is specific for a single spatial node)
  *\param old_it reference to the old iterate
 */  
-   void compute_Jacob(Eigen::MatrixXd& J,const Vector& old_it) const; 
+   void compute_Jacob(Matrix_full& J,const Vector& old_it) const; 
 
 /*!
  *Function that saves the solution for a specific reagent in a .csv file in the following way: each row is a spatial position, each column is a time instant 
@@ -151,12 +151,12 @@ public:
 
 
 private:
-   Eigen::MatrixXd Ca;/*!<Matrix that stores the [Ca+] in time and space*/
-   Eigen::MatrixXd H_piu;/*!<Matrix that stores the [H+] in time and space*/
-   Eigen::MatrixXd HCO3_meno;/*!<Matrix that stores the [HCO_3-] in time and space*/
-   Eigen::MatrixXd CO2;/*!<Matrix that stores the [CO_2] in time and space*/
-   Eigen::MatrixXd CaSiO3;/*!<Matrix that stores the [CaSiO_3] in time and space*/
-   Eigen::MatrixXd SiO2;/*!<Matrix that stores the [SiO_2] in time and space*/
+   Matrix_full Ca;/*!<Matrix that stores the [Ca+] in time and space*/
+   Matrix_full H_piu;/*!<Matrix that stores the [H+] in time and space*/
+   Matrix_full HCO3_meno;/*!<Matrix that stores the [HCO_3-] in time and space*/
+   Matrix_full CO2;/*!<Matrix that stores the [CO_2] in time and space*/
+   Matrix_full CaSiO3;/*!<Matrix that stores the [CaSiO_3] in time and space*/
+   Matrix_full SiO2;/*!<Matrix that stores the [SiO_2] in time and space*/
 
    Data_Transport data_transp;/*!<Data for the transport part*/
    Data_6Reagents data_reagents;/*!<Data for the 6 reagents*/

@@ -19,7 +19,7 @@
 *\param T is the temporal domain
 *\param Nt is the number of temporal steps
 */
-void output_results_fixed_time(const std::string& title, const Eigen::MatrixXd &value1, double L, unsigned int Nx, double T,unsigned int Nt);
+void output_results_fixed_time(const std::string& title, const Matrix_full &value1, double L, unsigned int Nx, double T,unsigned int Nt);
 
 
 /*!
@@ -31,7 +31,7 @@ void output_results_fixed_time(const std::string& title, const Eigen::MatrixXd &
 *\param T is the temporal domain
 *\param Nt is the number of temporal steps
 */
-void output_results_fixed_space(const std::string& title, const Eigen::MatrixXd &value1, double L, unsigned int Nx, double T,unsigned int Nt);
+void output_results_fixed_space(const std::string& title, const Matrix_full &value1, double L, unsigned int Nx, double T,unsigned int Nt);
 
 /** @}*/
 

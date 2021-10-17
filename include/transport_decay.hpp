@@ -17,7 +17,7 @@
  *\param data_transport stores the data related to the transport part
  *\param data_linear_decay stores the data related to the linear decay part
 */
-void Transport_system_explicit(Eigen::MatrixXd &Ca, Eigen::VectorXd &vel, Data_Transport &data_transport, Data_linear_decay &data_linear_decay);
+void Transport_system_explicit(Matrix_full &Ca, Vector &vel, Data_Transport &data_transport, Data_linear_decay &data_linear_decay);
 
 /*!
  *Function that implements and solves the implicit transport and decay system (decay part is treated explicitly)
@@ -26,7 +26,7 @@ void Transport_system_explicit(Eigen::MatrixXd &Ca, Eigen::VectorXd &vel, Data_T
  *\param data_transport stores the data related to the transport part
  *\param data_linear_decay stores the data related to the linear decay part
 */
-void Transport_system_implicit(Eigen::MatrixXd &Ca, Eigen::VectorXd &velocity,Data_Transport &data_transport, Data_linear_decay &data_linear_decay);
+void Transport_system_implicit(Matrix_full &Ca, Vector &velocity,Data_Transport &data_transport, Data_linear_decay &data_linear_decay);
 
 /** @}*/
 #endif

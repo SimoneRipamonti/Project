@@ -7,7 +7,7 @@
 
 
 //Concentration value results to CSV file.
-void output_results_fixed_time_2_reagents(Eigen::MatrixXd &value1, Eigen::MatrixXd &value2, double L, unsigned int Nx, double T,unsigned int Nt)
+void output_results_fixed_time_2_reagents(Matrix_full &value1, Matrix_full &value2, double L, unsigned int Nx, double T,unsigned int Nt)
 {
     
     std::ofstream file1("Ca_fixed_time.csv", std::ofstream::out);
@@ -27,7 +27,7 @@ void output_results_fixed_time_2_reagents(Eigen::MatrixXd &value1, Eigen::Matrix
     file1<<std::endl;
     file2<<std::endl;
 
-    const Eigen::VectorXd x(Eigen::VectorXd::LinSpaced(Nx,h/2,L-h/2));//Definition of the space vector (Concnetration values are stored in the middle of the cell)
+    const Vector x(Vector::LinSpaced(Nx,h/2,L-h/2));//Definition of the space vector (Concnetration values are stored in the middle of the cell)
 
     for (unsigned int i = 0; i<Nx; ++i) //Loop to save the matrix by column in the CSV file
     {
@@ -49,7 +49,7 @@ void output_results_fixed_time_2_reagents(Eigen::MatrixXd &value1, Eigen::Matrix
 
 
 //Concentration value results to CSV file.
-void output_results_fixed_space_2_reagents(Eigen::MatrixXd &value1, Eigen::MatrixXd &value2,double L, unsigned int Nx, double T,unsigned int Nt)
+void output_results_fixed_space_2_reagents(Matrix_full &value1, Matrix_full &value2,double L, unsigned int Nx, double T,unsigned int Nt)
 {
    
     std::ofstream file1("Ca_fixed_space.csv", std::ofstream::out);
@@ -72,7 +72,7 @@ void output_results_fixed_space_2_reagents(Eigen::MatrixXd &value1, Eigen::Matri
     file2<<std::endl;
 
  
-    const Eigen::VectorXd t(Eigen::VectorXd::LinSpaced(Nt+1,0.0,T));//Definition of the space vector (Concnetration values are stored in the middle of the cell)
+    const Vector t(Vector::LinSpaced(Nt+1,0.0,T));//Definition of the space vector (Concnetration values are stored in the middle of the cell)
 
     for (unsigned int i = 0; i<Nt+1; ++i) //Loop to save the matrix by column in the CSV file
     {

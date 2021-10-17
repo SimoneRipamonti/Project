@@ -13,6 +13,7 @@
 #include "parameters.hpp"
 #include "matrix.hpp"
 #include "concentrations.hpp"
+#include "functions.hpp"
 
 #include <Eigen/LU>
 #include <Eigen/IterativeLinearSolvers>

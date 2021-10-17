@@ -8,14 +8,11 @@
 #ifndef MATRIX_HH
 #define MATRIX_HH
 #include "muparser_fun.hpp"
+#include "types.hpp"
 #include <string>
 #include <Eigen/Dense>
 #include <Eigen/Sparse>
 
-
-typedef Eigen::SparseMatrix<double> Matrix;
-typedef Eigen::VectorXd Vector;
-typedef Eigen::SparseLU<Matrix, Eigen::COLAMDOrdering<int> > Solver;
 
 /** \addtogroup Matrices
  *\brief classes that identify matrices representing the algebraic operators obtained from the discretization of differential equations 

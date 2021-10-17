@@ -19,12 +19,12 @@ void set_solver(Matrix& M, Solver& solver);
 /*!
  *Function that sets the explicit transport system 
  */
-void Transport_exp(Eigen::MatrixXd &Ca, Eigen::VectorXd &vel, Data_Transport &data_transport, Data_linear_decay &initial_cond, Matrix &M, Matrix &rhs1, Vector &rhs2);
+void Transport_exp(Matrix_full &Ca, Vector &vel, Data_Transport &data_transport, Data_linear_decay &initial_cond, Matrix &M, Matrix &rhs1, Vector &rhs2);
 
 /*!
  *Function that sets the implicit transport system
  */
-void Transport_imp(Eigen::MatrixXd &Ca, Eigen::VectorXd &vel, Data_Transport &data_transport, Data_linear_decay &initial_cond, Matrix &M, Matrix &rhs1, Vector &rhs2);
+void Transport_imp(Matrix_full &Ca, Vector &vel, Data_Transport &data_transport, Data_linear_decay &initial_cond, Matrix &M, Matrix &rhs1, Vector &rhs2);
 
 /** @}*/
 

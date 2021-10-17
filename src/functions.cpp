@@ -8,7 +8,7 @@ void set_solver(Matrix& M, Solver& solver)
   solver.factorize(M); // Compute the numerical factorization
 }
 
-void Transport_exp(Eigen::MatrixXd &Ca, Vector &vel, Data_Transport &data_transport, Data_linear_decay &initial_cond, Matrix &M, Matrix &rhs1, Vector &rhs2)
+void Transport_exp(Matrix_full &Ca, Vector &vel, Data_Transport &data_transport, Data_linear_decay &initial_cond, Matrix &M, Matrix &rhs1, Vector &rhs2)
 {
 //All the data that are needed to define the Transport System are extracted from the data structure
     auto &[L,phi,Nx,Nt,T,C_in,C_out,bc_cond,method]=data_transport;
@@ -44,7 +44,7 @@ void Transport_exp(Eigen::MatrixXd &Ca, Vector &vel, Data_Transport &data_transp
     C.assemble_matrix(phi,h);
     
     //Defintion of the Reaction Matrix (which in the linear decay matrix is just an Identity matrix)
-    Eigen::MatrixXd Reaction{h*Eigen::MatrixXd::Identity(Nx,Nx)};
+    Matrix_full Reaction{h*Eigen::MatrixXd::Identity(Nx,Nx)};
     
     //Definition of the linear system explicit matrix
     M=1/dt*C.get_matrix();
@@ -55,7 +55,7 @@ void Transport_exp(Eigen::MatrixXd &Ca, Vector &vel, Data_Transport &data_transp
 }
 
 
-void Transport_imp(Eigen::MatrixXd &Ca, Vector &vel, Data_Transport &data_transport, Data_linear_decay &initial_cond, Matrix &M, Matrix &rhs1, Vector &rhs2)
+void Transport_imp(Matrix_full &Ca, Vector &vel, Data_Transport &data_transport, Data_linear_decay &initial_cond, Matrix &M, Matrix &rhs1, Vector &rhs2)
 {
 
 //All the data that are needed to define the Transport System are extracted from the data structure

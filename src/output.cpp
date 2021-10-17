@@ -6,7 +6,7 @@
 
 
 
-void output_results_fixed_time(const std::string& title, const Eigen::MatrixXd &value1, double L, unsigned int Nx, double T,unsigned int Nt)
+void output_results_fixed_time(const std::string& title, const Matrix_full &value1, double L, unsigned int Nx, double T,unsigned int Nt)
 {
     //Concentration value results to CSV file.
     std::ofstream file1( title+"_fixed_time.csv", std::ofstream::out);
@@ -20,7 +20,7 @@ void output_results_fixed_time(const std::string& title, const Eigen::MatrixXd &
     file1<<std::endl;
 
     
-    const Eigen::VectorXd x(Eigen::VectorXd::LinSpaced(Nx,h/2,L-h/2));//Definition of the space vector (Concnetration values are stored in the middle of the cell)
+    const Vector x(Vector::LinSpaced(Nx,h/2,L-h/2));//Definition of the space vector (Concnetration values are stored in the middle of the cell)
   
     for (unsigned int i = 0; i<Nx; ++i) //Loop to save the matrix by column in the CSV file
     {
@@ -39,7 +39,7 @@ void output_results_fixed_time(const std::string& title, const Eigen::MatrixXd &
 }
 
 
-void output_results_fixed_space(const std::string& title, const Eigen::MatrixXd &value1, double L, unsigned int Nx, double T,unsigned int Nt)
+void output_results_fixed_space(const std::string& title, const Matrix_full &value1, double L, unsigned int Nx, double T,unsigned int Nt)
 {
     //Concentration value results to CSV file.
     std::ofstream file1(title+"_fixed_space.csv", std::ofstream::out);
@@ -54,7 +54,7 @@ void output_results_fixed_space(const std::string& title, const Eigen::MatrixXd 
     file1<<std::endl;
 
     
-    const Eigen::VectorXd t(Eigen::VectorXd::LinSpaced(Nt+1,0.0,T));//Definition of the space vector (Concnetration values are stored in the middle of the cell)
+    const Vector t(Vector::LinSpaced(Nt+1,0.0,T));//Definition of the space vector (Concnetration values are stored in the middle of the cell)
 
     for (unsigned int i = 0; i<Nt+1; ++i) //Loop to save the matrix by column in the CSV file
     {
