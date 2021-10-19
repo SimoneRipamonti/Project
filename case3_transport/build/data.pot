@@ -53,7 +53,7 @@
     bc_trac=In
 
    #Numerical scheme
-   method=Esplicit #Implicit
+   method=Explicit #Implicit
  
    #Initial Condition
    #C_0=1.0*(x<0.5)
@@ -86,6 +86,7 @@
 
      #Lambda for linear decay
      lambda=0
+     
     
     [../]
 
