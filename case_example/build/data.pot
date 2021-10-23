@@ -1,0 +1,22 @@
+[domain]
+  #Domain is [0,domain_length]
+   domain_length=1.
+  
+   [../]
+
+[Source]
+   f=2.0+0.0*x
+   
+   [../]
+
+[Discretization]
+    #Cell number
+   Nx=100
+
+   [../]
+
+
+
+
+
+  

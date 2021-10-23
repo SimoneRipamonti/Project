@@ -39,7 +39,7 @@ void velocity_exact_result(Vector &value1, unsigned int Nx, double L);
  *\param value1 is a refence to the vector which contains the values that we want to store
  *\param Nx is a reference to the vector which contains all the spatial steps used for the convergence analyses  
 */
-void output_error(Vector &value1, Eigen::VectorXi &Nx);
+void output_error(Vector &value1, Eigen::VectorXi &Nx, const std::string &name);
 
 /** @}*/
 

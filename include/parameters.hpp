@@ -155,6 +155,25 @@ public:
 
 };
 
+/*!
+  *\brief Data for the example
+  *
+  *This class is specific for the Poisson problem used solved as example
+*/
+class Data_example
+{
+
+public:
+     explicit Data_example(const std::string &filename);/*!<Constructor*/
+
+    double L;
+    unsigned int Nx;
+    muparser_fun f;
+
+};
+
+
+
 /** @}*/
 
 

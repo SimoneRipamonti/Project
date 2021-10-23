@@ -19,7 +19,7 @@
   #phi0=0.0*x
   [../]
 
-[BC]
+[BC_vel]
 
    #In-flow
    Q_in=0.0

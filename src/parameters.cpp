@@ -14,13 +14,13 @@ Data_Darcy::Data_Darcy(const std::string &filename)
     mu=file("physical_parameters/mu",1.0e-3);
     Q_in=file("BC_vel/Q_in",0.);
     Q_out=file("BC_vel/Q_out",1.0e-1);
-    p_in=file("BC/p_in",1.0e6);
-    p_out=file("BC/p_out",0.);
+    p_in=file("BC_vel/p_in",1.0e6);
+    p_out=file("BC_vel/p_out",0.);
     const std::string stringa3=file("Source/f","1.0e-1*x");
     f.set_value(stringa3);
     Nx=file("Discretization/Nx",100);
-    BC_in=file("BC/in","Pressure");
-    BC_out=file("BC/out","Flow");
+    BC_in=file("BC_vel/in","Pressure");
+    BC_out=file("BC_vel/out","Flow");
 
 }
 
@@ -120,6 +120,19 @@ Data_CO2::Data_CO2(const std::string &filename)
 
     bc_cond=file("BC_trac/bc_trac","In");
 
+}
+
+Data_example::Data_example(const std::string &filename)
+{
+
+    GetPot file(filename.c_str());
+
+    L=file("domain/domain_length",1.);
+    Nx=file("Discretization/Nx",100);
+    
+    const std::string stringa=file("Source/f","1.0+0.0*x");
+    f.set_value(stringa);
+    
 }
 
 

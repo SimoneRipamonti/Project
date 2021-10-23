@@ -82,11 +82,11 @@ void velocity_exact_result(Vector &value1, unsigned int Nx, double L)
 }
 
 
-void output_error(Vector &value1, Eigen::VectorXi &Nx)
+void output_error(Vector &value1, Eigen::VectorXi &Nx, const std::string &name)
 {
     //Concentration value results to CSV file.
-    std::ofstream file1("error.csv", std::ofstream::out);
-    file1<< "Nx, Error, order1 " << std::endl;
+    std::ofstream file1("error_"+name+".csv", std::ofstream::out);
+    file1<< "Nx, Error "+name+", p = 1, p = 1.5" << std::endl;
 
 
     for (unsigned int i = 0; i<value1.size(); ++i) //Loop to save the matrix by column in the CSV file
@@ -95,10 +95,11 @@ void output_error(Vector &value1, Eigen::VectorXi &Nx)
 
 
         file1<<value1(i)<<", ";
-
+        
         file1<<1./Nx(i)<<", ";
 
-
+        file1<<1./(std::pow(Nx(i),1.5))<<", ";
+      
         file1<<std::endl;
 
     }

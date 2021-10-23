@@ -327,6 +327,56 @@ void Matrix_R::update(const Eigen::VectorXd &past_sol)
 
 }
 
+//Matrix_A constructor
+A_example::A_example(unsigned int row_,unsigned int col_):AbstractMatrix(row_,col_) {}
+
+//set_data gives to the matrix object the physical and geometrical parameters which it needs to assemble the matrix
+void A_example::set_data(const muparser_fun &source_, unsigned Nx, double L)
+{
+   source=source_;
+   h=L/Nx;
+}
+
+//Definition of the mass matrix A considering P1 Finite element for the Velocity and P0 for the pressure (They are stable for the 1D case)
+void A_example::define_matrix()
+{
+    m.insert(0,0)=1.;
+    m.insert(0,1)=0.;
+    for(unsigned int i=1; i<row-1; ++i)
+    {
+        m.insert(i,i-1)=-1./std::pow(h,2);
+        m.insert(i,i)=2./std::pow(h,2);
+        m.insert(i,i+1)=-1./std::pow(h,2);
+    }
+    m.coeffRef(row-1,col-2)=0.;
+    m.coeffRef(row-1,col-1)=1.;
+}
+
+//set_BC() function change the first/last row of the matrix A considering what kind of BC are set
+void A_example::set_BC()
+{   
+    rhs(0)=0.;
+    rhs(row-1)=0.;
+}
+
+//There is not any source term in the first equation of the Darcy system for the assumptions made
+void A_example::set_rhs()
+{{
+    for(unsigned i=0; i<col; ++i)
+        rhs(i)=source(i*h);
+}
+}
+
+
+void A_example::assemble_matrix(const muparser_fun &source_, unsigned Nx, double L)
+{
+    set_data(source_, Nx, L);
+    define_matrix();
+    set_BC();
+    set_rhs();
+}
+
+
 
 
 

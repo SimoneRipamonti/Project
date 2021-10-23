@@ -74,3 +74,25 @@ void output_results_fixed_space(const std::string& title, const Matrix_full &val
 }
 
 
+void output_example(const Vector &sol, unsigned int Nx, double L)
+{
+//Concentration value results to CSV file.
+    std::ofstream file1("output.csv", std::ofstream::out);
+    file1<< "space, solution" << std::endl;
+
+    const Vector x(Vector::LinSpaced(Nx,0.,L));//Definition of the space vector (Concnetration values are stored in the middle of the cell)
+
+    for (unsigned int i = 0; i<Nx; ++i) //Loop to save the matrix by column in the CSV file
+    {
+        file1<< x[i] <<", ";
+
+
+        file1<<sol(i)<<", ";
+
+
+        file1<<std::endl;
+
+    }
+    file1.close();
+}
+

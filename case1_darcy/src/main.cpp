@@ -81,7 +81,8 @@ int main(int argc, char **argv)
     Darcy_output_results(sol,data.Nx,data.L);
     pressure_exact_result(exact,data.Nx,data.L);
     velocity_exact_result(exact_vel,data.Nx,data.L);
-    output_error(errp,a);
+    output_error(errp,a,"pressure");
+    output_error(errvel,a,"velocity");
 
 
 

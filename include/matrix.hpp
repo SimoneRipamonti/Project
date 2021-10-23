@@ -288,6 +288,31 @@ private:
     muparser_fun phi;/*!<Soil porosity*/
 };
 
+
+
+class A_example:public AbstractMatrix
+{
+public:
+    A_example(unsigned int row, unsigned int col);
+    
+    void set_data(const muparser_fun &source_, unsigned Nx, double L);
+
+    void define_matrix() override;
+
+    void set_BC() override;
+
+    void set_rhs() override;
+   
+    void assemble_matrix(const muparser_fun &source_, unsigned Nx, double L);
+
+    ~A_example() {};
+
+private:
+    muparser_fun source;
+    double h;
+};
+
+
 /** @}*/
 
 
