@@ -21,7 +21,7 @@ Concentration::Concentration(const std::string &filename):data_transp(filename),
         method=PredictorCorrector;
     else
         method=Heun;
- 
+
     h=static_cast<double>(data_transp.L/data_transp.Nx);
     dt=static_cast<double>(data_transp.T/data_transp.Nt);
 }
@@ -55,21 +55,21 @@ void Concentration::set_initial_cond()
 
 }
 
-void Concentration::define_transport_solver(Solver& solver, Solver& solver1, Matrix& M_rhs, Vector& rhs_psi2, Vector& rhs_psi3, const Vector& vel, unsigned int Nx) 
+void Concentration::define_transport_solver(Solver& solver, Solver& solver1, Matrix& M_rhs, Vector& rhs_psi2, Vector& rhs_psi3, const Vector& vel, unsigned int Nx)
 {
 
     Matrix M(Nx,Nx);
     assemble_transport(M,M_rhs,vel);//function that assembles the transport part
-    
+
     //Setting for the BC for the CO2 transport equation
     auto &[C_in,C_out,bc_cond]=data_CO2;
     assemble_rhs(rhs_psi2,rhs_psi3,vel,C_in,C_out,bc_cond);
 
-    //Setting for the solid ODE equation    
+    //Setting for the solid ODE equation
     Matrix M_solid(Nx,Nx);//Mass matrix for solid (CaSiO3)
     Matrix rhs_solid(Nx,Nx);//rhs for the solid part
     assemble_transport(M_solid,rhs_solid,Vector::Zero(Nx+1));//function that assemble the mass matrix for the solid reagent
-    
+
     set_solver(M,solver);
     set_solver(M_solid,solver1);
 }
@@ -89,10 +89,10 @@ void Concentration::assemble_transport(Matrix& M, Matrix& M_rhs, const Vector& v
     Matrix_F_meno F_m(data_transp.Nx,data_transp.Nx);
     F_m.set_data("In",0.0,vel);
     F_m.define_matrix();
- 
+
 
     M=1/dt*C.get_matrix()+F_p.get_matrix()-F_m.get_matrix();
- 
+
     M_rhs=1/dt*C.get_matrix();
 
 }
@@ -107,22 +107,21 @@ void Concentration::assemble_rhs(Vector& rhs_psi2, Vector& rhs_psi3, const Vecto
     Matrix_F_meno F_m_CO2(data_transp.Nx,data_transp.Nx);
     F_m_CO2.set_data(bc,C_out,vel);
     F_m_CO2.set_rhs();
-    
+
     if(bc=="In")
       CO2(0,0)=C_in;
     else
       CO2(data_transp.Nx-1,data_transp.Nt-1)=C_out;
-    
+
     double C_in_HCO3_meno=data_reagents.K_eq*C_in/H_piu(0,0);
     double C_out_HCO3_meno=data_reagents.K_eq*C_out/H_piu(data_transp.Nx-1,0);
-    
+
     std::cout<<"C_in="<<C_in<<std::endl;
     std::cout<<"C_out="<<C_out<<std::endl;
-    
+
     std::cout<<"C_in_HCO3="<<C_in_HCO3_meno<<std::endl;
     std::cout<<"C_out_HCO3="<<C_out_HCO3_meno<<std::endl;
-   
-    
+
     Matrix_F_piu F_p_HCO3_meno(data_transp.Nx,data_transp.Nx);
     F_p_HCO3_meno.set_data(bc,C_in_HCO3_meno,vel);
     F_p_HCO3_meno.set_rhs();
@@ -130,14 +129,22 @@ void Concentration::assemble_rhs(Vector& rhs_psi2, Vector& rhs_psi3, const Vecto
     Matrix_F_meno F_m_HCO3_meno(data_transp.Nx,data_transp.Nx);
     F_m_HCO3_meno.set_data(bc,C_out_HCO3_meno,vel);
     F_m_HCO3_meno.set_rhs();
-    
+
+    Matrix_F_piu F_p_H_piu(data_transp.Nx,data_transp.Nx);
+    F_p_H_piu.set_data(bc, H_piu(0,0),vel);
+    F_p_H_piu.set_rhs();
+
+    Matrix_F_meno F_m_H_piu(data_transp.Nx,data_transp.Nx);
+    F_m_H_piu.set_data(bc, H_piu(data_transp.Nx-1,0),vel);
+    F_m_H_piu.set_rhs();
+
     if(bc=="In")
       HCO3_meno(0,0)=C_in_HCO3_meno;
     else
       HCO3_meno(data_transp.Nx-1,data_transp.Nt-1)=C_out_HCO3_meno;
-    
+
     rhs_psi3=F_p_CO2.get_rhs()-F_m_CO2.get_rhs()+F_p_HCO3_meno.get_rhs()-F_m_HCO3_meno.get_rhs();
-    rhs_psi2=F_m_HCO3_meno.get_rhs()-F_p_HCO3_meno.get_rhs();
+    rhs_psi2=F_m_HCO3_meno.get_rhs()-F_p_HCO3_meno.get_rhs() + F_p_H_piu.get_rhs() - F_m_H_piu.get_rhs();
     //std::cout<<"rhs_psi2="<<rhs_psi2<<std::endl;
     //std::cout<<"rhs_psi3="<<rhs_psi3<<std::endl;
 
@@ -156,7 +163,7 @@ void Concentration::compute_psi(unsigned int step, Vector& psi1, Vector& psi2, V
     psi4=CaSiO3.col(step);
     psi5=SiO2.col(step);*/
 
-    
+
     psi1=Ca.col(step);
     psi2=H_piu.col(step)-HCO3_meno.col(step);
     psi3=CO2.col(step)+HCO3_meno.col(step);
@@ -179,10 +186,10 @@ void Concentration::compute_rd(unsigned int step, Vector& rd) const
     {
         temp=const_r*std::pow(H_piu(i,step),data_reagents.n);
 
-      
+
         /*if(H_piu(i,step)!=0.)
         {omega=Ca(i,step)*SiO2(i,step)/(H_piu(i,step)*H_piu(i,step));//nel codice di Anna c'è anche un Hpiu al quadrato
-        
+
 
         omega/=data_reagents.K_sol;
         if(step==0 && i==3)
@@ -202,7 +209,7 @@ void Concentration::compute_rd(unsigned int step, Vector& rd) const
         rd(i)=phi(h/2+i*h)*temp*std::max((1-omega),0.);
 
     }
-    
+
     /*if(step==0)
     {unsigned int a=data_transp.Nx/10;
     std::cout<<"rd="<<std::endl;
@@ -225,8 +232,8 @@ void Concentration::compute_rd_kp(unsigned int step, Vector& rd) const
         omega=Ca(i,step)*SiO2(i,step)/(H_piu(i,step)*H_piu(i,step));//nel codice di Anna c'è anche un Hpiu al quadrato
         omega/=data_reagents.K_sol;
 
-        rd(i)=phi(h/2+i*h)*const_r*std::max((1-omega),0.)*CaSiO3(i,step);
-        
+        rd(i)=phi(h/2+i*h)*const_r*std::max((1-omega),0.)*CaSiO3(i,step)*std::pow(H_piu(i, step), 0.3);
+
     }
 
 
@@ -240,7 +247,7 @@ void Concentration::one_step_transport_reaction(Vector& psi1, Vector& psi2, Vect
 {
 
  /*if(step==1)
-    {  
+    {
        //std::cout<<rhs<<std::endl;
        const Eigen::VectorXd temp1=rhs*psi1;//+rd*h;
        unsigned int a=data_transp.Nx/10;
@@ -249,7 +256,7 @@ void Concentration::one_step_transport_reaction(Vector& psi1, Vector& psi2, Vect
              {std::cout<<temp1(j)<<std::endl;}
 
         const Eigen::VectorXd temp2=rhs*psi2;
-       
+
        std::cout<<"temp2="<<std::endl;
        for(unsigned int j=0;j<data_transp.Nx;j+=a)
              {std::cout<<temp2(j)<<std::endl;}
@@ -259,24 +266,24 @@ void Concentration::one_step_transport_reaction(Vector& psi1, Vector& psi2, Vect
        std::cout<<"dt="<<dt<<std::endl;
 
          const Eigen::VectorXd temp3=rhs*psi3;
-       
+
        std::cout<<"temp3="<<std::endl;
        for(unsigned int j=0;j<data_transp.Nx;j+=a)
              {std::cout<<temp3(j)<<std::endl;}
 
          const Eigen::VectorXd temp4=rhs*psi4-rd*h;
-       
+
        std::cout<<"temp4="<<std::endl;
        for(unsigned int j=0;j<data_transp.Nx;j+=a)
              {std::cout<<temp4(j)<<std::endl;}
 
          const Eigen::VectorXd temp5=rhs*psi5+rd*h;
-       
+
        std::cout<<"temp5="<<std::endl;
        for(unsigned int j=0;j<data_transp.Nx;j+=a)
              {std::cout<<temp5(j)<<std::endl;}
 
-     
+
 
 
     }*/
@@ -284,7 +291,7 @@ void Concentration::one_step_transport_reaction(Vector& psi1, Vector& psi2, Vect
 
 
 
-    
+
     switch(method)
     {
     case EsplicitEuler: //Euler Esplicit
@@ -303,7 +310,7 @@ void Concentration::one_step_transport_reaction(Vector& psi1, Vector& psi2, Vect
         Vector psi3_{psi3};
         Vector psi4_{psi4};
         Vector psi5_{psi5};
-     
+
         Euler_Esplicit(psi1_,psi2_,psi3_,psi4_,psi5_,rd,M_rhs,rhs_psi2,rhs_psi3,solver,solver1);
         compute_concentration(step,psi1_,psi2_,psi3_,psi4_,psi5_);
         compute_rd(step,rd);//calcolo il nuovo rd
@@ -340,7 +347,7 @@ void Concentration::one_step_transport_reaction(Vector& psi1, Vector& psi2, Vect
 
 void Concentration::Euler_Esplicit(Vector& psi1, Vector& psi2, Vector& psi3, Vector& psi4, Vector& psi5, const Vector& rd, const Matrix&  M_rhs, const Vector& rhs_psi2, const Vector& rhs_psi3, Solver &solver, Solver &solver1) const
 {
-    transport_and_reaction(psi1,M_rhs,Vector::Zero(psi1.size()),rd,solver);//reaction but not input bc (rhs=0) 
+    transport_and_reaction(psi1,M_rhs,Vector::Zero(psi1.size()),rd,solver);//reaction but not input bc (rhs=0)
     transport_and_reaction(psi2,M_rhs,rhs_psi2,-2*rd,solver);//reaction with input bc (rhs=0)
     transport_and_reaction(psi3,M_rhs,rhs_psi3,Vector::Zero(psi3.size()),solver);//not reaction but input boundary (rd=0)
     transport_and_reaction(psi4,M_rhs,Vector::Zero(psi4.size()),-rd,solver1);//reaction but not input bc (rhs=0) (different solver because solid is not moving)
@@ -349,7 +356,7 @@ void Concentration::Euler_Esplicit(Vector& psi1, Vector& psi2, Vector& psi3, Vec
 
 
 void Concentration::transport_and_reaction(Vector& psi, const Matrix& M_rhs, const Vector& rhs, const Vector& rd, Solver &solver) const
-{   
+{
     const Vector temp{M_rhs*psi+rhs+rd*h};
     psi=solver.solve(temp);
 }
@@ -387,14 +394,14 @@ void Concentration::compute_concentration(unsigned int step, const Vector& psi1,
     for(unsigned int i=0; i<Ca.rows(); ++i)
     {
         old_it<<Ca(i,step-1),H_piu(i,step-1),HCO3_meno(i,step-1),CO2(i,step-1),CaSiO3(i,step-1),SiO2(i,step-1);  //guess iniziale
-        
+
         /*if (step==1 && i==3)
            {std::cout<<"old_it="<<old_it<<std::endl;}*/
         unsigned int max_iter=500;
         double tol=1.0e-15;
         double err=1;
         Vector dx(6);
-        
+
         for(unsigned int iter=0; iter<max_iter and err>tol; ++iter)
         {
             compute_rhs(rhs, old_it, psi1(i), psi2(i), psi3(i), psi4(i), psi5(i));///Calcolo F(x_k);
@@ -403,10 +410,10 @@ void Concentration::compute_concentration(unsigned int step, const Vector& psi1,
             dx=Jac.solve(-rhs);//Calcolo dx;
             err=dx.norm()/old_it.norm();//Valuto errore
             old_it+=dx;//x_k+1
-            
+
             if( (step==10 or step==100 or step==400 or step==700) and i==0)
             {std::cout<<"step="<<step<<",iter="<<iter<<",err="<<err<<",res="<<rhs.norm()<<std::endl;}
-            
+
         }
         Ca(i,step)=old_it(0);
         H_piu(i,step)=old_it(1);
@@ -415,7 +422,7 @@ void Concentration::compute_concentration(unsigned int step, const Vector& psi1,
         CaSiO3(i,step)=old_it(4);
         SiO2(i,step)=old_it(5);
 
-        
+
         /*if(step==6)
          {std::cout<<"Ca="<<Ca.col(step)<<std::endl;
           std::cout<<"H_piu="<<H_piu.col(step)<<std::endl;
@@ -484,8 +491,8 @@ void Concentration::output_results_fixed_time(const std::string& name) const
     std::ofstream file1(filename, std::ofstream::out);
 
     const unsigned int a=data_transp.Nt/10; //we print the result on the file each "a" seconds
-    //const unsigned int a=1; 
-     
+    //const unsigned int a=1;
+
     file1<<"space, ";
     for (unsigned int i=0.; i<data_transp.Nt+1; i+=a)
     //for (unsigned int i=0.; i<100; i+=10)
@@ -547,7 +554,7 @@ void Concentration::output_results_fixed_space(const std::string& name) const
         filename="SiO2_fixed_space.csv";
         value1=SiO2;
     }
- 
+
     std::ofstream file1(filename, std::ofstream::out);
 
     const unsigned int a=data_transp.Nx/10;//we print the result on the file each "a" meters
