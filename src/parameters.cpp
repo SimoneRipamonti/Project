@@ -122,6 +122,48 @@ Data_CO2::Data_CO2(const std::string &filename)
 
 }
 
+
+Data_BD::Data_BD(const std::string &filename)
+{
+
+    GetPot file(filename.c_str());
+    C_in.resize(5,0.);
+    C_out.resize(5,0.);
+    
+    // Ca H+ CO2 SiO2 HCO3-
+
+    C_in[0]=file("BC_trac/Ca/C_in",0.0);
+    C_out[0]=file("BC_trac/Ca/C_out",0.0);
+    
+    C_in[1]=file("BC_trac/Hpiu/C_in",0.0);
+    C_out[1]=file("BC_trac/Hpiu/C_out",0.0);
+    
+    C_in[2]=file("BC_trac/CO2/C_in",0.0);
+    C_out[2]=file("BC_trac/CO2/C_out",0.0);
+    
+    C_in[3]=file("BC_trac/SiO2/C_in",0.0);
+    C_out[3]=file("BC_trac/SiO2/C_out",0.0);
+
+    C_in[4]=0;
+    C_out[4]=0;
+
+    bc_cond=file("BC_trac/bc_trac","In");
+    
+   
+
+}
+
+ double Data_BD::getBC(const std::string species,const std::string inout ){
+ 
+ 	if (inout=="in")
+ 		return C_in[s_mapStringValues[species]];
+	else
+		return C_out[s_mapStringValues[species]];
+ 		
+ }
+
+
+
 Data_example::Data_example(const std::string &filename)
 {
 

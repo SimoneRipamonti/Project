@@ -155,6 +155,30 @@ public:
 
 };
 
+class Data_BD
+{
+
+public:
+      explicit Data_BD(const std::string &filename);/*!<Constructor*/
+      
+      std::vector<double> C_in;
+      std::vector<double> C_out;
+      std::string bc_cond;   
+
+
+      // Map to associate the strings with the enum values
+      std::map<std::string, int> s_mapStringValues {
+        {"Ca",0},
+        {"H_piu",1},
+        {"CO2",2},
+        {"SiO2",3},
+        {"HCO3_meno",4}
+      };
+
+	
+      double getBC(const std::string species,const std::string inout );
+};
+
 /*!
   *\brief Data for the example
   *
