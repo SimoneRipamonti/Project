@@ -7,18 +7,18 @@
 AbstractMatrix::AbstractMatrix(unsigned int row_,unsigned int col_):row(row_),col(col_)
 {
     m.resize(row_,col_);
-    rhs=Eigen::VectorXd::Zero(col_);
+    rhs=Vector::Zero(col_);
 }
 
 /**
  *Getters
  */
-Eigen::SparseMatrix<double>& AbstractMatrix::get_matrix() 
+Matrix& AbstractMatrix::get_matrix() 
 {
     return m;
 }
 
-Eigen::VectorXd& AbstractMatrix::get_rhs() 
+Vector& AbstractMatrix::get_rhs() 
 {
     return rhs;
 }
@@ -318,7 +318,7 @@ void Matrix_R::assemble_matrix(double area, double rate_const, double temperatur
 
 
 //Here the reaction matrix is update with the past_solution having in mind a particular square reaction rate
-void Matrix_R::update(const Eigen::VectorXd &past_sol)
+void Matrix_R::update(const Vector &past_sol)
 {
 
     const Eigen::VectorXd p=past_sol.array().pow(2)/(const_eq*std::pow(10,-2*ph));

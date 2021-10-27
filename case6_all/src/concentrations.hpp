@@ -48,7 +48,7 @@ public:
    *\param rhs_CO2 reference to the sparse matrix which will be multiplied by the past past solution vector to form the rhs of the transport problem
    *\param vel constant reference to the fluid velocity
 */
-   void  assemble_rhs(Vector& rhs_psi2, Vector& rhs_psi3, const Vector& vel, double C_in, double C_out, const std::string& bc); 
+   void  assemble_rhs(Vector& rhs_psi2, Vector& rhs_psi3, const Vector& vel, double CO2_in, double CO2_out, const std::string& CO2_bc, double H_piu_in, double H_piu_out, const std::string& H_piu_bc); 
 
 
 /*!
@@ -70,7 +70,7 @@ public:
  *  \param rd reference to the equation reaction term
  *  \param step is an unsigned int that tells us at what time instant we are t=step*dt
 */
-   void compute_rd_kp(unsigned int step, Vector& rd) const;
+   void compute_rd_kd(unsigned int step, Vector& rd) const;
 
 /*!
  * Function that computes one temporal step for the transport-reaction equation
@@ -161,7 +161,7 @@ private:
    Data_Transport data_transp;/*!<Data for the transport part*/
    Data_6Reagents data_reagents;/*!<Data for the 6 reagents*/
    Data_Reaction data_reaction;/*!<Physical data for the reaction setting*/
-   Data_CO2 data_CO2;/*!<Input CO2 data (It's the only reagent with a constant inflow*/ 
+   Data_inflow data_CO2;/*!<Input CO2 data (It's the only reagent with a constant inflow*/ 
    
    double h;/*!<Spatial step*/
    double dt;/*!<Temporal step*/

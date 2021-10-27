@@ -45,6 +45,7 @@ void Concentration::set_initial_cond()
         Ca(i,0)=data_reagents.Ca_0(h+h*i);
         H_piu(i,0)=data_reagents.H_piu_0(h+h*i);
         HCO3_meno(i,0)=data_reagents.K_eq*data_reagents.CO2_0(h+h*i)/data_reagents.H_piu_0(h+h*i);
+        
         //std::cout<<HCO3_meno(i,0)<<std::endl;
         //HCO3_meno(i,0)=H_piu(i,0);
         CO2(i,0)=data_reagents.CO2_0(h+h*i);
@@ -62,8 +63,8 @@ void Concentration::define_transport_solver(Solver& solver, Solver& solver1, Mat
     assemble_transport(M,M_rhs,vel);//function that assembles the transport part
     
     //Setting for the BC for the CO2 transport equation
-    auto &[C_in,C_out,bc_cond]=data_CO2;
-    assemble_rhs(rhs_psi2,rhs_psi3,vel,C_in,C_out,bc_cond);
+    auto &[CO2_in,CO2_out,CO2_bc_cond,H_piu_in,H_piu_out,H_piu_bc_cond]=data_CO2;
+    assemble_rhs(rhs_psi2,rhs_psi3,vel,CO2_in,CO2_out,CO2_bc_cond,H_piu_in,H_piu_out,H_piu_bc_cond);
 
     //Setting for the solid ODE equation    
     Matrix M_solid(Nx,Nx);//Mass matrix for solid (CaSiO3)
@@ -98,48 +99,70 @@ void Concentration::assemble_transport(Matrix& M, Matrix& M_rhs, const Vector& v
 }
 
 
-void Concentration::assemble_rhs(Vector& rhs_psi2, Vector& rhs_psi3, const Vector& vel, double C_in, double C_out, const std::string& bc)
+void Concentration::assemble_rhs(Vector& rhs_psi2, Vector& rhs_psi3, const Vector& vel, double CO2_in, double CO2_out, const std::string& CO2_bc, double H_piu_in, double H_piu_out, const std::string& H_piu_bc)
 {
     Matrix_F_piu F_p_CO2(data_transp.Nx,data_transp.Nx);
-    F_p_CO2.set_data(bc,C_in,vel);
+    F_p_CO2.set_data(CO2_bc,CO2_in,vel);
     F_p_CO2.set_rhs();
 
     Matrix_F_meno F_m_CO2(data_transp.Nx,data_transp.Nx);
-    F_m_CO2.set_data(bc,C_out,vel);
+    F_m_CO2.set_data(CO2_bc,CO2_out,vel);
     F_m_CO2.set_rhs();
     
-    if(bc=="In")
-      CO2(0,0)=C_in;
+    if(CO2_bc=="In")
+      CO2(0,0)=CO2_in;
     else
-      CO2(data_transp.Nx-1,data_transp.Nt-1)=C_out;
+      CO2(data_transp.Nx-1,data_transp.Nt-1)=CO2_out;
+      
+    Matrix_F_piu F_p_H_piu(data_transp.Nx,data_transp.Nx);
+    F_p_H_piu.set_data(H_piu_bc,H_piu_in,vel);
+    F_p_H_piu.set_rhs();
+
+    Matrix_F_meno F_m_H_piu(data_transp.Nx,data_transp.Nx);
+    F_m_H_piu.set_data(H_piu_bc,H_piu_out,vel);
+    F_m_H_piu.set_rhs();  
     
-    double C_in_HCO3_meno=data_reagents.K_eq*C_in/H_piu(0,0);
-    double C_out_HCO3_meno=data_reagents.K_eq*C_out/H_piu(data_transp.Nx-1,0);
+    if(H_piu_bc=="In")
+      H_piu(0,0)=H_piu_in;
+    else
+      H_piu(data_transp.Nx-1,0)=H_piu_out;
     
-    std::cout<<"C_in="<<C_in<<std::endl;
+    
+      
+    double C_in_HCO3_meno=data_reagents.K_eq*CO2_in/H_piu_in;
+    double C_out_HCO3_meno=data_reagents.K_eq*CO2_out/H_piu_out;
+    //double C_in_HCO3_meno=0.0;
+    //double C_out_HCO3_meno=0.0;
+    
+    
+    /*std::cout<<"C_in="<<C_in<<std::endl;
     std::cout<<"C_out="<<C_out<<std::endl;
     
     std::cout<<"C_in_HCO3="<<C_in_HCO3_meno<<std::endl;
-    std::cout<<"C_out_HCO3="<<C_out_HCO3_meno<<std::endl;
-   
+    std::cout<<"C_out_HCO3="<<C_out_HCO3_meno<<std::endl;*/
     
     Matrix_F_piu F_p_HCO3_meno(data_transp.Nx,data_transp.Nx);
-    F_p_HCO3_meno.set_data(bc,C_in_HCO3_meno,vel);
+    F_p_HCO3_meno.set_data(CO2_bc,C_in_HCO3_meno,vel);
     F_p_HCO3_meno.set_rhs();
 
     Matrix_F_meno F_m_HCO3_meno(data_transp.Nx,data_transp.Nx);
-    F_m_HCO3_meno.set_data(bc,C_out_HCO3_meno,vel);
+    F_m_HCO3_meno.set_data(CO2_bc,C_out_HCO3_meno,vel);
     F_m_HCO3_meno.set_rhs();
     
-    if(bc=="In")
+    if(CO2_bc=="In")
       HCO3_meno(0,0)=C_in_HCO3_meno;
     else
-      HCO3_meno(data_transp.Nx-1,data_transp.Nt-1)=C_out_HCO3_meno;
+      HCO3_meno(data_transp.Nx-1,0)=C_out_HCO3_meno;
     
+    
+    //rhs_psi3=F_p_CO2.get_rhs()-F_m_CO2.get_rhs();
     rhs_psi3=F_p_CO2.get_rhs()-F_m_CO2.get_rhs()+F_p_HCO3_meno.get_rhs()-F_m_HCO3_meno.get_rhs();
-    rhs_psi2=F_m_HCO3_meno.get_rhs()-F_p_HCO3_meno.get_rhs();
-    //std::cout<<"rhs_psi2="<<rhs_psi2<<std::endl;
-    //std::cout<<"rhs_psi3="<<rhs_psi3<<std::endl;
+    rhs_psi2=F_m_HCO3_meno.get_rhs()-F_p_HCO3_meno.get_rhs()+F_p_H_piu.get_rhs()-F_m_H_piu.get_rhs();
+    
+    //std::cout<<"F_p="<<F_p_HCO3_meno.get_rhs()<<std::endl;
+    //rhs_psi2=F_m_HCO3_meno.get_rhs()-F_p_HCO3_meno.get_rhs();
+    std::cout<<"rhs_psi2="<<rhs_psi2<<std::endl;
+    std::cout<<"rhs_psi3="<<rhs_psi3<<std::endl;
 
 }
 
@@ -169,7 +192,7 @@ void Concentration::compute_rd(unsigned int step, Vector& rd) const
 
     double temp;
     double omega=0.0;
-    auto [A, Rate_const, E, R, Temperature]=data_reaction;
+    auto &[A, Rate_const, E, R, Temperature]=data_reaction;
     const double const_r= A*Rate_const*(std::exp(-E/(R*Temperature)));
     /*if(step==0)
       {std::cout<<"const_r="<<const_r<<std::endl;}*/
@@ -198,6 +221,7 @@ void Concentration::compute_rd(unsigned int step, Vector& rd) const
 
 
         omega=Ca(i,step)*SiO2(i,step)/(H_piu(i,step)*H_piu(i,step));
+        //omega=0.0;
         omega/=data_reagents.K_sol;
         rd(i)=phi(h/2+i*h)*temp*std::max((1-omega),0.);
 
@@ -212,17 +236,18 @@ void Concentration::compute_rd(unsigned int step, Vector& rd) const
 
 }
 
-void Concentration::compute_rd_kp(unsigned int step, Vector& rd) const
+void Concentration::compute_rd_kd(unsigned int step, Vector& rd) const
 {
 
     double omega;
     //const double const_r= data_reaction.A*data_reagents.kp_i;
-    const double const_r=data_reagents.kp_i;
+    const double const_r=data_reagents.kd_i;
     muparser_fun phi=data_transp.phi;
 
     for (unsigned int i=0; i<Ca.rows(); ++i)
     {
         omega=Ca(i,step)*SiO2(i,step)/(H_piu(i,step)*H_piu(i,step));//nel codice di Anna c'è anche un Hpiu al quadrato
+        //omega=0.0;
         omega/=data_reagents.K_sol;
 
         rd(i)=phi(h/2+i*h)*const_r*std::max((1-omega),0.)*CaSiO3(i,step);
@@ -306,7 +331,7 @@ void Concentration::one_step_transport_reaction(Vector& psi1, Vector& psi2, Vect
      
         Euler_Esplicit(psi1_,psi2_,psi3_,psi4_,psi5_,rd,M_rhs,rhs_psi2,rhs_psi3,solver,solver1);
         compute_concentration(step,psi1_,psi2_,psi3_,psi4_,psi5_);
-        compute_rd(step,rd);//calcolo il nuovo rd
+        compute_rd_kd(step,rd);//calcolo il nuovo rd
 
 
         //P_C(phi1,phi2,phi3,phi4,phi5,rd,rhs,solver);
@@ -325,8 +350,8 @@ void Concentration::one_step_transport_reaction(Vector& psi1, Vector& psi2, Vect
         Euler_Esplicit(psi1_,psi2_,psi3_,psi4_,psi5_,rd,M_rhs,rhs_psi2,rhs_psi3,solver,solver1);
         compute_concentration(step,psi1_,psi2_,psi3_,psi4_,psi5_);
 
-        Vector rd_{Eigen::VectorXd::Zero(data_transp.Nx)};
-        compute_rd(step,rd_);
+        Vector rd_{Vector::Zero(data_transp.Nx)};
+        compute_rd_kd(step,rd_);
 
         rd=0.5*rd+0.5*rd_;//ottengo il nuovo rd complessivo
 

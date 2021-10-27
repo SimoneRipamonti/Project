@@ -3,7 +3,7 @@ set output "solutions/H_piu.png"
 
 set datafile separator ','
 
-set title 'H+'
+set title 'H^+'
 set key autotitle columnhead # use the first line as title
 set key font ",12"
 set ylabel "[H^+] [mol/L]" # label for the Y axis

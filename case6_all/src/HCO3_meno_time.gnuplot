@@ -3,7 +3,7 @@ set output "solutions/HCO3.png"
 
 set datafile separator ','
 
-set title 'HCO3-'
+set title 'HCO_3^-'
 set key autotitle columnhead # use the first line as title
 set key font ",12"
 set ylabel "[HCO_3^-] [mol/L]" # label for the Y axis

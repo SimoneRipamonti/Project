@@ -104,21 +104,24 @@ Data_6Reagents::Data_6Reagents(const std::string &filename)
     K_eq=file("Reaction/K_eq",1.);
     K_sol=file("Reaction/K_sol",1.);
     n=file("Reaction/n",1.);
-    kp_i=file("Reaction/kp_i",3.98e-13);
+    kd_i=file("Reaction/kd_i",3.98e-13);
     method=file("Reaction/method",1);
 
 }
 
 
-Data_CO2::Data_CO2(const std::string &filename)
+Data_inflow::Data_inflow(const std::string &filename)
 {
 
     GetPot file(filename.c_str());
 
-    C_in=file("BC_trac/C_in",0.0);
-    C_out=file("BC_trac/C_out",0.0);
-
-    bc_cond=file("BC_trac/bc_trac","In");
+    CO2_in=file("inflow/CO2_in",0.0);
+    CO2_out=file("inflow/CO2_out",0.0);
+    CO2_bc_cond=file("inflow/CO2_bc","In");
+    
+    H_piu_in=file("inflow/H_piu_in",0.0);
+    H_piu_out=file("inflow/H_piu_out",0.0);
+    H_piu_bc_cond=file("inflow/H_piu_bc","In");
 
 }
 

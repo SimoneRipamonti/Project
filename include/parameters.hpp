@@ -131,7 +131,7 @@ public:
     double K_sol;/*!<Equilibrium constant for the dissolution reaction  CaSiO3 + 2H+ <--> Ca2+ + SiO2 + H2O*/
     double n;/*!<Exponent for [H]+ in the reaction rate computation*/
 
-    double kp_i;/*!<Precipitation rate constant for the reaction rate computation*/
+    double kd_i;/*!<Precipitation rate constant for the reaction rate computation*/
 
     int method;/*!<Numerical scheme adopted for the reaction term (Explicit, Heun, Predictor-Corrector*/
 
@@ -143,15 +143,19 @@ public:
   *
   *This class is specific for the particular test case analyzed: we need specific information for the  CO2 constant inflow
 */
-class Data_CO2
+class Data_inflow
 {
 
 public:
-     explicit Data_CO2(const std::string &filename);/*!<Constructor*/
+     explicit Data_inflow(const std::string &filename);/*!<Constructor*/
 
-     double C_in;/*!<CO2 inflow condition*/
-     double C_out;/*!<CO2 outflow condition*/
-     std::string bc_cond;/*!<Type of boundary condition (Inflow or outflow bc)*/
+     double CO2_in;/*!<CO2 inflow condition*/
+     double CO2_out;/*!<CO2 outflow condition*/
+     std::string CO2_bc_cond;/*!<Type of boundary condition (Inflow or outflow bc)*/
+     
+     double H_piu_in;
+     double H_piu_out;
+     std::string H_piu_bc_cond;
 
 };
 

@@ -194,7 +194,7 @@ public:
 *\param vel transport fluid velocity
 */ 
 
-    void set_data(const std::string &bc, double c_bc, const Eigen::VectorXd& vel);
+    void set_data(const std::string &bc, double c_bc, const Vector& vel);
 
     void define_matrix() override;
 
@@ -202,7 +202,7 @@ public:
    
     void set_rhs() override;
 
-    void assemble_matrix(const std::string &bc, double c_bc, const Eigen::VectorXd& vel);/*!<Function that calls the above functions define_matrix(),set_BC(), set_rhs() in order to assemble all the matrix F_piu*/
+    void assemble_matrix(const std::string &bc, double c_bc, const Vector& vel);/*!<Function that calls the above functions define_matrix(),set_BC(), set_rhs() in order to assemble all the matrix F_piu*/
 
     
     ~Matrix_F_piu() {};
@@ -227,7 +227,7 @@ public:
 *\param c_bc tracer bc value
 *\param vel transport fluid velocity
 */ 
-    void set_data(const std::string &bc, double c_bc, const Eigen::VectorXd &vel);
+    void set_data(const std::string &bc, double c_bc, const Vector &vel);
  
     void define_matrix() override;
 
@@ -235,7 +235,7 @@ public:
 
     void set_rhs() override;
 
-    void assemble_matrix(const std::string &bc, double c_bc, const Eigen::VectorXd &vel);/*!<Function that calls the above functions define_matrix(),set_BC(), set_rhs() in order to assemble all the matrix F_meno*/
+    void assemble_matrix(const std::string &bc, double c_bc, const Vector &vel);/*!<Function that calls the above functions define_matrix(),set_BC(), set_rhs() in order to assemble all the matrix F_meno*/
 
     ~Matrix_F_meno() {};
 

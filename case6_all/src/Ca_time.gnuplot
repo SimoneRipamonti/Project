@@ -3,7 +3,7 @@ set output "solutions/Ca.png"
 
 set datafile separator ','
 
-set title 'Ca'
+set title 'Ca^{2+}'
 set key autotitle columnhead # use the first line as title
 set key font ",12"
 set ylabel "[Ca^{2+}] [mol/L]" # label for the Y axis
