@@ -65,12 +65,6 @@ public:
 */
    void compute_rd(unsigned int step, Vector& rd) const;
 
-/*!
- * Function that computes the reaction term of the equation using the precipitation constant k_p 
- *  \param rd reference to the equation reaction term
- *  \param step is an unsigned int that tells us at what time instant we are t=step*dt
-*/
-   void compute_rd_kp(unsigned int step, Vector& rd) const;
 
 /*!
  * Function that computes one temporal step for the transport-reaction equation

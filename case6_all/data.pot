@@ -140,7 +140,7 @@
 
      #Reaction_area
      #A=1.38e4 #1.38*10e-7
-     A=2.76e-9
+     A=1.38e-3
      #A=1.38e-3
      #A=0.0
      #A=1.9e-2
@@ -176,6 +176,7 @@
      #kp_i=1.810492e-10
      #kp_i=0.0
      kp_i=1.83e-6
+     reaction_rate_model=ling   #"constant"  #"ling"  
   
      #temporal scheme
      method=1

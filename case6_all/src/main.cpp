@@ -69,7 +69,7 @@ int main()
      {
         concentration.compute_psi(i-1,psi1,psi2,psi3,psi4,psi5); // phi 
 
-        concentration.compute_rd_kp(i-1,rd);//Calcolo i termini di reazione
+        concentration.compute_rd(i-1,rd);//Calcolo i termini di reazione
        
         concentration.one_step_transport_reaction(psi1,psi2,psi3,psi4,psi5,rd,M_rhs,rhs_psi1,rhs_psi2,rhs_psi3,rhs_psi5,i,solver,solver1);
  

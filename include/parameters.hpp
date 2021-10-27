@@ -86,7 +86,14 @@ public:
     double E;/*!<Activation energy*/
     double R;/*!<Universal gas constant*/
     double Temperature;/*!<Temperature*/
- 
+    double K_eq;/*!<Equilibrium constant for the faster reaction H2CO3<-->H+ + HCO3-*/
+    double K_sol;/*!<Equilibrium constant for the dissolution reaction  CaSiO3 + 2H+ <--> Ca2+ + SiO2 + H2O*/
+    double n;/*!<Exponent for [H]+ in the reaction rate computation*/
+    double kp_i;/*!<Precipitation rate constant for the reaction rate computation*/
+
+    int method;/*!<Numerical scheme adopted for the reaction term (Explicit, Heun, Predictor-Corrector*/
+    
+    std::string reaction_rate_model;
 
 };
 
@@ -127,13 +134,7 @@ public:
     muparser_fun CaSiO3_0;/*!<Initial condition for the Wollastonite*/
     muparser_fun SiO2_0;/*!<Initial condition for SiO2*/
 
-    double K_eq;/*!<Equilibrium constant for the faster reaction H2CO3<-->H+ + HCO3-*/
-    double K_sol;/*!<Equilibrium constant for the dissolution reaction  CaSiO3 + 2H+ <--> Ca2+ + SiO2 + H2O*/
-    double n;/*!<Exponent for [H]+ in the reaction rate computation*/
 
-    double kp_i;/*!<Precipitation rate constant for the reaction rate computation*/
-
-    int method;/*!<Numerical scheme adopted for the reaction term (Explicit, Heun, Predictor-Corrector*/
 
 };
 

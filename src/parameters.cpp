@@ -62,6 +62,12 @@ Data_Reaction::Data_Reaction(const std::string &filename)
     E=file("Reaction/E",1.);
     R=file("Reaction/R",1.);
     Temperature=file("Reaction/Temp",1.);
+    K_eq=file("Reaction/K_eq",1.);
+    K_sol=file("Reaction/K_sol",1.);
+    n=file("Reaction/n",1.);
+    kp_i=file("Reaction/kp_i",3.98e-13);
+    reaction_rate_model=file("Reaction/reaction_rate_model","constant");
+    method=file("Reaction/method",1);
 }
 
 
@@ -100,12 +106,6 @@ Data_6Reagents::Data_6Reagents(const std::string &filename)
     CaSiO3_0.set_value(stringa5);
     const std::string stringa6=file("Reaction/SiO2_0","1.0+0.0*x");
     SiO2_0.set_value(stringa6);
-
-    K_eq=file("Reaction/K_eq",1.);
-    K_sol=file("Reaction/K_sol",1.);
-    n=file("Reaction/n",1.);
-    kp_i=file("Reaction/kp_i",3.98e-13);
-    method=file("Reaction/method",1);
 
 }
 
