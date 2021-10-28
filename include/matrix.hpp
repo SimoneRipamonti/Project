@@ -312,6 +312,40 @@ private:
     double h;
 };
 
+/*!
+  *\brief Matrix D is the Diffusion matrix.
+*/
+class Matrix_D:public AbstractMatrix
+{
+public:
+    Matrix_D(unsigned int row, unsigned int col);
+
+     /*!
+*Function that takes as input and sets the specific data necessary for assemblying matrix D
+*\param D is the diffusion coefficient
+*\param h is the spatial step
+*\param phi is the soil porosity
+*/ 
+
+    void set_data(double D, double h, const muparser_fun phi);
+
+    void define_matrix() override;
+
+    void set_BC() override;
+
+    void set_rhs() override;
+   
+    void assemble_matrix(double D, double h, const muparser_fun phi);/*!<Function that calls the above functions define_matrix(),set_BC(), set_rhs() in order to assemble all the matrix */
+
+    ~Matrix_D() {};
+
+private:
+   
+    double D;
+    double h;/*!<Spatial step*/
+    muparser_fun phi;/*!<Soil porosity*/
+};
+
 
 /** @}*/
 

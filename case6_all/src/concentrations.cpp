@@ -24,6 +24,7 @@ Concentration::Concentration(const std::string &filename):data_transp(filename),
 
     h=static_cast<double>(data_transp.L/data_transp.Nx);
     dt=static_cast<double>(data_transp.T/data_transp.Nt);
+    data_BD.update(data_reaction);
 }
 
 unsigned int Concentration::get_Nx() const
@@ -68,37 +69,55 @@ void Concentration::define_transport_solver(Solver& solver, Solver& solver1, Mat
     //Setting for the solid ODE equation
     Matrix M_solid(Nx,Nx);//Mass matrix for solid (CaSiO3)
     Matrix rhs_solid(Nx,Nx);//rhs for the solid part
-    assemble_transport(M_solid,rhs_solid,Vector::Zero(Nx+1));//function that assemble the mass matrix for the solid reagent
+    assemble_transport(M_solid,rhs_solid,Vector::Zero(Nx+1),true);//function that assemble the mass matrix for the solid reagent
+    
+    
+    if (data_transp.diff>0)
+    {
+    	M.coeffRef(0,0)=1;
+    	M.coeffRef(0,1)=0;
+     	M.coeffRef(Nx-1,Nx-1)=1;
+    	M.coeffRef(Nx-1,Nx-2)=0;
+    }
 
     set_solver(M,solver);
     set_solver(M_solid,solver1);
 }
 
 
-void Concentration::assemble_transport(Matrix& M, Matrix& M_rhs, const Vector& vel) const
+void Concentration::assemble_transport(Matrix& M, Matrix& M_rhs, const Vector& vel, bool immobile) const
 {
 
     Matrix_C C(data_transp.Nx,data_transp.Nx);
     C.assemble_matrix(data_transp.phi,h);
+    
+    Matrix_D D(data_transp.Nx,data_transp.Nx);
+    if (!immobile)
+    D.assemble_matrix(data_transp.diff, h, data_transp.phi);
 
-
+   
     Matrix_F_piu F_p(data_transp.Nx,data_transp.Nx);
+    if (!immobile)
+    {  
     F_p.set_data("In",0.0,vel);
     F_p.define_matrix();
-
+    }
+    
     Matrix_F_meno F_m(data_transp.Nx,data_transp.Nx);
+    if (!immobile)
+    {
     F_m.set_data("In",0.0,vel);
     F_m.define_matrix();
+    }
 
-
-    M=1/dt*C.get_matrix()+F_p.get_matrix()-F_m.get_matrix();
+    M=1/dt*C.get_matrix()+ D.get_matrix() + F_p.get_matrix()-F_m.get_matrix();
 
     M_rhs=1/dt*C.get_matrix();
 
 }
 
 
-void Concentration::assemble_rhs(Vector& rhs_psi1, Vector& rhs_psi2, Vector& rhs_psi3, Vector& rhs_psi5, const Vector& vel, double C_in, double C_out, const std::string& bc)
+void Concentration::assemble_rhs(Vector& rhs_psi1, Vector& rhs_psi2, Vector& rhs_psi3, Vector& rhs_psi5, const Vector& vel, double C_in, double C_out, const std::string& bc) 
 {
 
     if(bc=="In")					/*Ca*/
@@ -118,9 +137,7 @@ void Concentration::assemble_rhs(Vector& rhs_psi1, Vector& rhs_psi2, Vector& rhs
       H_piu(0,0)=data_BD.getBC("H_piu","in");
     else
       H_piu(data_transp.Nx-1,0)=data_BD.getBC("H_piu","out");
-      
-      std::cout << "---------------"<<   H_piu(0,0)<<std::endl;
-       
+          
     Matrix_F_piu F_p_H_piu(data_transp.Nx,data_transp.Nx);
     F_p_H_piu.set_data(bc, H_piu(0,0),vel);
     F_p_H_piu.set_rhs();
@@ -298,18 +315,50 @@ void Concentration::one_step_transport_reaction(Vector& psi1, Vector& psi2, Vect
 
 void Concentration::Euler_Esplicit(Vector& psi1, Vector& psi2, Vector& psi3, Vector& psi4, Vector& psi5, const Vector& rd, const Matrix&  M_rhs, const Vector& rhs_psi1, const Vector& rhs_psi2, const Vector& rhs_psi3,const Vector& rhs_psi5, Solver &solver, Solver &solver1) const
 {
-    transport_and_reaction(psi1,M_rhs,rhs_psi1,rd,solver);//reaction but not input bc (rhs=0)
-    transport_and_reaction(psi2,M_rhs,rhs_psi2,-2*rd,solver);//reaction with input bc (rhs=0)
-    transport_and_reaction(psi3,M_rhs,rhs_psi3,Vector::Zero(psi3.size()),solver);//not reaction but input boundary (rd=0)
-    transport_and_reaction(psi4,M_rhs,Vector::Zero(psi4.size()),-rd,solver1);//reaction but not input bc (rhs=0) (different solver because solid is not moving)
-    transport_and_reaction(psi5,M_rhs,rhs_psi5,rd,solver);//reaction but not input bc    (rhs=0)
+    transport_and_reaction(psi1,M_rhs,rhs_psi1,rd,solver, 0);//reaction but not input bc (rhs=0)
+    transport_and_reaction(psi2,M_rhs,rhs_psi2,-2*rd,solver,1);//reaction with input bc (rhs=0)
+    transport_and_reaction(psi3,M_rhs,rhs_psi3,Vector::Zero(psi3.size()),solver,2);//not reaction but input boundary (rd=0)
+    transport_and_reaction(psi4,M_rhs,Vector::Zero(psi4.size()),-rd,solver1,3);//reaction but not input bc (rhs=0) (different solver because solid is not moving)
+    transport_and_reaction(psi5,M_rhs,rhs_psi5,rd,solver,4);//reaction but not input bc    (rhs=0)
 }
 
 
-void Concentration::transport_and_reaction(Vector& psi, const Matrix& M_rhs, const Vector& rhs, const Vector& rd, Solver &solver) const
+void Concentration::transport_and_reaction(Vector& psi, const Matrix& M_rhs, const Vector& rhs, const Vector& rd, Solver &solver, int which) const
 {
-    const Vector temp{M_rhs*psi+rhs+rd*h};
+    Vector temp{M_rhs*psi+rhs+rd*h};
+    
+    double c_in=0;
+    double c_out=0;
+    
+    switch (which)
+    {
+    	case 0: 
+    		c_in=data_BD.getBC("Ca", "in");
+    		c_out=data_BD.getBC("Ca", "out");
+    		break;
+    	case 1: 
+    		c_in=data_BD.getBC("H_piu", "in")-data_BD.getBC("HCO3_meno", "in");
+    		c_out=data_BD.getBC("H_piu", "out")-data_BD.getBC("HCO3_meno", "out");
+    		break;
+    	case 2: 
+    		c_in=data_BD.getBC("CO2", "in")+data_BD.getBC("HCO3_meno", "in");
+    		c_out=data_BD.getBC("CO2", "out")+data_BD.getBC("HCO3_meno", "out");
+    		break;
+    	case 4: 
+    		c_in=data_BD.getBC("SiO2", "in");
+    		c_out=data_BD.getBC("SiO2", "out");
+    		break;
+    
+    }
+    
+    if (data_transp.diff>0 && which!=3)
+    {
+    	temp[0]=c_in;
+    	temp[data_transp.Nx-1]=c_out;	
+    }
+    
     psi=solver.solve(temp);
+
 }
 
 

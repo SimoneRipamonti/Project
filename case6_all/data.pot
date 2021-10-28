@@ -11,6 +11,7 @@
   #K_distr=1.0e-10+0*x
   #K_distr=1.0e-9*(x<0.5)+1.0e-10*(x>=0.5) # for testing code with different permeability
   K_distr=2e-13
+  Diff=1.0e-11;
   #Water Viscosity
   #mu=1.0e-3
   mu=0.2e-3
@@ -73,7 +74,7 @@
    [../]
    [./CO2]
    	C_in=0.4
-   	C_out=0
+   	C_out=1.0e-5
    [../]
    [./SiO2]
    	C_in=0.2
@@ -81,7 +82,7 @@
    [../]
    [./Hpiu]
    	C_in=1.e-5
-   	C_out=0
+   	C_out=1.0e-7
    [../]
    
     [../]

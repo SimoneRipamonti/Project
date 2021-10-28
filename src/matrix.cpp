@@ -378,6 +378,46 @@ void A_example::assemble_matrix(const muparser_fun &source_, unsigned Nx, double
 
 
 
+//Matrix_D
+Matrix_D::Matrix_D(unsigned int row_,unsigned int col_):AbstractMatrix(row_,col_) {}
+
+//set_data gives to the matrix object the physical and geometrical parameters which it needs to assemble the matrix
+void Matrix_D::set_data(double D_, double h_, const muparser_fun phi_)
+{
+    D=D_;
+    h=h_;
+    phi=phi_;
+}
+
+void Matrix_D::set_rhs() {}
+
+void Matrix_D::set_BC() {}
+
+void Matrix_D::assemble_matrix(double D, double h, const muparser_fun phi)
+{
+    set_data(D,h,phi);
+    define_matrix();
+    set_BC();
+    set_rhs();
+}
+
+void Matrix_D::define_matrix()
+{
+    m.insert(0,0)= D/h;
+    m.insert(0,1)= -D/h;
+    for(unsigned int i=1; i<row-1; ++i)
+    {
+        m.insert(i,i-1)=-D/h;
+        m.insert(i,i)=2*D/h;
+        m.insert(i,i+1)=-D/h;
+    }
+    m.insert(row-1,row-1)= D/h;
+    m.insert(row-1,row-2)= -D/h;
+}
+
+
+
+
 
 
 

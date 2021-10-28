@@ -37,7 +37,7 @@ public:
    *\param vel constant reference to the fluid velocity
 */
   
-  void assemble_transport(Matrix& M, Matrix& rhs, const Vector& vel) const;
+  void assemble_transport(Matrix& M, Matrix& rhs, const Vector& vel, bool immobile=false) const;
 
 
   void define_transport_solver(Solver& solver, Solver& solver1, Matrix& M_rhs, Vector& rhs_psi1, Vector& rhs_psi2, Vector& rhs_psi3, Vector& rhs_psi5,  const Vector& vel, unsigned int Nx);
@@ -100,7 +100,7 @@ public:
  *\param solver reference to the solver for the transport problem
   
 */ 
-  void transport_and_reaction(Vector& psi, const Matrix& M_rhs, const Vector& rhs_CO2, const Vector& rd, Solver &solver) const;
+  void transport_and_reaction(Vector& psi, const Matrix& M_rhs, const Vector& rhs_CO2, const Vector& rd, Solver &solver, int which) const;
 
 /*!
  * Functions that solves the non linear system with the Newthon method, in order to compute the real concentrations

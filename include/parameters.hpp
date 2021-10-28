@@ -50,6 +50,8 @@ public:
     double T;/*!<Time interval*/
     double C_in;/*!<In-section data of the tracer*/
     double C_out;/*!<Out-section data of the tracer*/
+    
+    double diff;
     std::string bc_cond;/*!<Type of boundary condition*/
     std::string method;/*!<Type of temporal numerical scheme chosen (Esplicit/Implicit)*/
 };
@@ -168,16 +170,18 @@ public:
 
 
       // Map to associate the strings with the enum values
-      std::map<std::string, int> s_mapStringValues {
+      /*const std::map<std::string, int> s_mapStringValues {
         {"Ca",0},
         {"H_piu",1},
         {"CO2",2},
         {"SiO2",3},
         {"HCO3_meno",4}
-      };
+      };*/
 
 	
-      double getBC(const std::string species,const std::string inout );
+      double getBC(const std::string species, const std::string inout ) const;
+      
+      void update(Data_Reaction data);
 };
 
 /*!

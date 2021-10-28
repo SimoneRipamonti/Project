@@ -38,6 +38,7 @@ Data_Transport::Data_Transport(const std::string &filename)
     T=file("Time/T",2.0);
     C_in=file("BC_trac/C_in",1.0);
     C_out=file("BC_trac/C_out",1.0);
+    diff=file("physical_parameters/Diff", 1.0e-10);
     bc_cond=file("BC_trac/bc_trac","In");
     method=file("BC_trac/method","Esplicit");
 }
@@ -153,13 +154,31 @@ Data_BD::Data_BD(const std::string &filename)
 
 }
 
- double Data_BD::getBC(const std::string species,const std::string inout ){
+ double Data_BD::getBC(const std::string species,const std::string inout ) const {
  
+ 	int ii;
+ 	if (species=="Ca")
+ 		ii=0;
+ 	if (species=="H_piu")
+ 		ii=1;
+ 	if (species=="CO2")
+ 		ii=2;
+ 	if (species=="SiO2")
+ 		ii=3;
+ 	if (species=="HCO3_meno")
+ 		ii=4;
+
  	if (inout=="in")
- 		return C_in[s_mapStringValues[species]];
+ 		return C_in[ii];
 	else
-		return C_out[s_mapStringValues[species]];
+	       return C_out[ii];
  		
+ }
+
+ void Data_BD::update(Data_Reaction data){
+        C_in[4]=data.K_eq*C_in[2]/C_in[1];
+	C_out[4]=data.K_eq*C_out[2]/C_out[1];
+ 
  }
 
 

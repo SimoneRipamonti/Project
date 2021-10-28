@@ -11,7 +11,7 @@ void set_solver(Matrix& M, Solver& solver)
 void Transport_exp(Matrix_full &Ca, Vector &vel, Data_Transport &data_transport, Data_linear_decay &initial_cond, Matrix &M, Matrix &rhs1, Vector &rhs2)
 {
 //All the data that are needed to define the Transport System are extracted from the data structure
-    auto &[L,phi,Nx,Nt,T,C_in,C_out,bc_cond,method]=data_transport;
+    auto &[L,phi,Nx,Nt,T,C_in,C_out,diff,bc_cond,method]=data_transport;
 
     auto &[C_0,lambda]=initial_cond;    
  
@@ -59,7 +59,7 @@ void Transport_imp(Matrix_full &Ca, Vector &vel, Data_Transport &data_transport,
 {
 
 //All the data that are needed to define the Transport System are extracted from the data structure
-    auto &[L,phi,Nx,Nt,T,C_in,C_out,bc_cond,meth]=data_transport;
+    auto &[L,phi,Nx,Nt,T,C_in,C_out,diff,bc_cond,meth]=data_transport;
     //muparser_fun C_0{initial_cond.C_0};
     auto &[C_0,lambda]=initial_cond; 
 
