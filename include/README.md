@@ -51,7 +51,7 @@ This class permit us to read and use functions which are given as handle functio
 # Functions
 It contains 3 different functions:
 
--the first one is related to the setting of the solver
+-the first one is specific for setting the solver to a linear system
 -the second and the third ones are used in the transport_decay.cpp file in order to set the linear system for the transport and decay problem
 
 #Transport and decay functions
