@@ -34,5 +34,6 @@ clean:
 distclean: clean
 	$(RM) $(EXEC)
 	$(RM) *.csv *.out *.bak *~
+	$(RM) ../../src/*.o
 
 

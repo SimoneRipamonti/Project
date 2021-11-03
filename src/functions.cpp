@@ -43,14 +43,11 @@ void Transport_exp(Matrix_full &Ca, Vector &vel, Data_Transport &data_transport,
     Matrix_C C(Nx,Nx);
     C.assemble_matrix(phi,h);
     
-    //Defintion of the Reaction Matrix (which in the linear decay matrix is just an Identity matrix)
-    Matrix_full Reaction{h*Eigen::MatrixXd::Identity(Nx,Nx)};
-    
     //Definition of the linear system explicit matrix
     M=1/dt*C.get_matrix();
-    
+   
     //Definition of the right hand side parts 
-    rhs1=1/dt*C.get_matrix()-F_p.get_matrix()+F_m.get_matrix()-lambda*Reaction;
+    rhs1=1/dt*C.get_matrix()-F_p.get_matrix()+F_m.get_matrix()-lambda*C.get_matrix();
     rhs2=F_p.get_rhs()-F_m.get_rhs()+C.get_rhs();
 }
 
@@ -85,19 +82,16 @@ void Transport_imp(Matrix_full &Ca, Vector &vel, Data_Transport &data_transport,
 
     Matrix_F_meno F_m(Nx,Nx);
     F_m.assemble_matrix(bc_cond,C_out,vel);
-
+    
     //Definition of the Mass Matrix for the transport
     Matrix_C C(Nx,Nx);
     C.assemble_matrix(phi,h);
     
-    //Defintion of the Reaction Matrix (which in the linear decay matrix is just an Identity matrix)
-    Eigen::MatrixXd Reaction{h*Eigen::MatrixXd::Identity(Nx,Nx)};
-
     //Definition of the linear system implicit matrix
     M=1/dt*C.get_matrix()+F_p.get_matrix()-F_m.get_matrix();
 
     //Definition of the right hand side parts 
-    rhs1=1/dt*C.get_matrix()-lambda*Reaction;
+    rhs1=1/dt*C.get_matrix()-lambda*C.get_matrix();
     rhs2=F_p.get_rhs()-F_m.get_rhs()+C.get_rhs();
 
 }
