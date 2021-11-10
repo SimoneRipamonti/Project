@@ -70,14 +70,14 @@ void Concentration::define_transport_solver(Solver& solver, Solver& solver1, Mat
     Matrix M_solid(Nx,Nx);//Mass matrix for solid (CaSiO3)
     Matrix rhs_solid(Nx,Nx);//rhs for the solid part
     assemble_transport(M_solid,rhs_solid,Vector::Zero(Nx+1),true);//function that assemble the mass matrix for the solid reagent
-    
-    
+
+
     if (data_transp.diff>0)
     {
-    	M.coeffRef(0,0)=1;
-    	M.coeffRef(0,1)=0;
-     	M.coeffRef(Nx-1,Nx-1)=1;
-    	M.coeffRef(Nx-1,Nx-2)=0;
+        M.coeffRef(0,0)=1;
+        M.coeffRef(0,1)=0;
+        M.coeffRef(Nx-1,Nx-1)=1;
+        M.coeffRef(Nx-1,Nx-2)=0;
     }
 
     set_solver(M,solver);
@@ -90,19 +90,19 @@ void Concentration::assemble_transport(Matrix& M, Matrix& M_rhs, const Vector& v
 
     Matrix_C C(data_transp.Nx,data_transp.Nx);
     C.assemble_matrix(data_transp.phi,h);
-    
+
     Matrix_D D(data_transp.Nx,data_transp.Nx);
     if (!immobile)
     D.assemble_matrix(data_transp.diff, h, data_transp.phi);
 
-   
+
     Matrix_F_piu F_p(data_transp.Nx,data_transp.Nx);
     if (!immobile)
-    {  
+    {
     F_p.set_data("In",0.0,vel);
     F_p.define_matrix();
     }
-    
+
     Matrix_F_meno F_m(data_transp.Nx,data_transp.Nx);
     if (!immobile)
     {
@@ -117,14 +117,14 @@ void Concentration::assemble_transport(Matrix& M, Matrix& M_rhs, const Vector& v
 }
 
 
-void Concentration::assemble_rhs(Vector& rhs_psi1, Vector& rhs_psi2, Vector& rhs_psi3, Vector& rhs_psi5, const Vector& vel, double C_in, double C_out, const std::string& bc) 
+void Concentration::assemble_rhs(Vector& rhs_psi1, Vector& rhs_psi2, Vector& rhs_psi3, Vector& rhs_psi5, const Vector& vel, double C_in, double C_out, const std::string& bc)
 {
 
-    if(bc=="In")					/*Ca*/
+    if(bc=="In")                    /*Ca*/
       Ca(0,0)=data_BD.getBC("Ca","in");
     else
       Ca(data_transp.Nx-1,0)=data_BD.getBC("Ca","out");
-       
+
     Matrix_F_piu F_p_Ca(data_transp.Nx,data_transp.Nx);
     F_p_Ca.set_data(bc,Ca(0,0),vel);
     F_p_Ca.set_rhs();
@@ -132,12 +132,12 @@ void Concentration::assemble_rhs(Vector& rhs_psi1, Vector& rhs_psi2, Vector& rhs
     Matrix_F_meno F_m_Ca(data_transp.Nx,data_transp.Nx);
     F_m_Ca.set_data(bc,Ca(data_transp.Nx-1,0),vel);
     F_m_Ca.set_rhs();
-    
-     if(bc=="In")					/*H_piu*/
+
+     if(bc=="In")                   /*H_piu*/
       H_piu(0,0)=data_BD.getBC("H_piu","in");
     else
       H_piu(data_transp.Nx-1,0)=data_BD.getBC("H_piu","out");
-          
+
     Matrix_F_piu F_p_H_piu(data_transp.Nx,data_transp.Nx);
     F_p_H_piu.set_data(bc, H_piu(0,0),vel);
     F_p_H_piu.set_rhs();
@@ -145,13 +145,13 @@ void Concentration::assemble_rhs(Vector& rhs_psi1, Vector& rhs_psi2, Vector& rhs
     Matrix_F_meno F_m_H_piu(data_transp.Nx,data_transp.Nx);
     F_m_H_piu.set_data(bc, H_piu(data_transp.Nx-1,0),vel);
     F_m_H_piu.set_rhs();
-    
-    
-    if(bc=="In")					/*CO2*/
+
+
+    if(bc=="In")                    /*CO2*/
       CO2(0,0)=data_BD.getBC("CO2","in");
     else
       CO2(data_transp.Nx-1,0)=data_BD.getBC("CO2","out");
-       
+
     Matrix_F_piu F_p_CO2(data_transp.Nx,data_transp.Nx);
     F_p_CO2.set_data(bc,CO2(0,0),vel);
     F_p_CO2.set_rhs();
@@ -160,15 +160,15 @@ void Concentration::assemble_rhs(Vector& rhs_psi1, Vector& rhs_psi2, Vector& rhs
     F_m_CO2.set_data(bc,CO2(data_transp.Nx-1,0),vel);
     F_m_CO2.set_rhs();
 
-        
-    double C_in_HCO3_meno=data_reaction.K_eq*C_in/H_piu(0,0);			/*HCO3_meno*/
+
+    double C_in_HCO3_meno=data_reaction.K_eq*C_in/H_piu(0,0);           /*HCO3_meno*/
     double C_out_HCO3_meno=data_reaction.K_eq*C_out/H_piu(data_transp.Nx-1,0);
-     
+
     if(bc=="In")
       HCO3_meno(0,0)=C_in_HCO3_meno;
     else
       HCO3_meno(data_transp.Nx-1,0)=C_out_HCO3_meno;
-  
+
     Matrix_F_piu F_p_HCO3_meno(data_transp.Nx,data_transp.Nx);
     F_p_HCO3_meno.set_data(bc,HCO3_meno(0,0),vel);
     F_p_HCO3_meno.set_rhs();
@@ -177,11 +177,11 @@ void Concentration::assemble_rhs(Vector& rhs_psi1, Vector& rhs_psi2, Vector& rhs
     F_m_HCO3_meno.set_data(bc, HCO3_meno(data_transp.Nx-1,0),vel);
     F_m_HCO3_meno.set_rhs();
 
-    if(bc=="In")					/*SiO2*/
+    if(bc=="In")                    /*SiO2*/
       SiO2(0,0)=data_BD.getBC("SiO2","in");
     else
       SiO2(data_transp.Nx-1,0)=data_BD.getBC("SiO2","out");
-       
+
     Matrix_F_piu F_p_SiO2(data_transp.Nx,data_transp.Nx);
     F_p_SiO2.set_data(bc,SiO2(0,0),vel);
     F_p_SiO2.set_rhs();
@@ -189,9 +189,9 @@ void Concentration::assemble_rhs(Vector& rhs_psi1, Vector& rhs_psi2, Vector& rhs
     Matrix_F_meno F_m_SiO2(data_transp.Nx,data_transp.Nx);
     F_m_SiO2.set_data(bc,SiO2(data_transp.Nx-1,0),vel);
     F_m_SiO2.set_rhs();
-    
+
     rhs_psi1=F_p_Ca.get_rhs() - F_m_Ca.get_rhs();
-    rhs_psi2=F_m_HCO3_meno.get_rhs()-F_p_HCO3_meno.get_rhs() + F_p_H_piu.get_rhs() - F_m_H_piu.get_rhs();  
+    rhs_psi2=F_m_HCO3_meno.get_rhs()-F_p_HCO3_meno.get_rhs() + F_p_H_piu.get_rhs() - F_m_H_piu.get_rhs();
     rhs_psi3=F_p_CO2.get_rhs()-F_m_CO2.get_rhs()+F_p_HCO3_meno.get_rhs()-F_m_HCO3_meno.get_rhs();
     rhs_psi5=F_p_SiO2.get_rhs() - F_m_SiO2.get_rhs();
 
@@ -230,7 +230,7 @@ void Concentration::compute_rd(unsigned int step, Vector& rd) const
     {
 
     const double const_r= Rate_const*(std::exp(-E/(R*Temperature)));  //controllare la dipendenza da CaSiO3
-  
+
     for (unsigned int i=0; i<Ca.rows(); ++i)
     {
         double A_tot=A*CaSiO3(i, step);
@@ -253,8 +253,8 @@ void Concentration::compute_rd(unsigned int step, Vector& rd) const
         rd(i)=phi(h/2+i*h)*const_r*std::max((1-omega),0.)*CaSiO3(i,step)*std::pow(H_piu(i, step), data_reaction.n);
 
     }
-    
-    }	
+
+    }
 
 }
 
@@ -326,37 +326,37 @@ void Concentration::Euler_Esplicit(Vector& psi1, Vector& psi2, Vector& psi3, Vec
 void Concentration::transport_and_reaction(Vector& psi, const Matrix& M_rhs, const Vector& rhs, const Vector& rd, Solver &solver, int which) const
 {
     Vector temp{M_rhs*psi+rhs+rd*h};
-    
+
     double c_in=0;
     double c_out=0;
-    
+
     switch (which)
     {
-    	case 0: 
-    		c_in=data_BD.getBC("Ca", "in");
-    		c_out=data_BD.getBC("Ca", "out");
-    		break;
-    	case 1: 
-    		c_in=data_BD.getBC("H_piu", "in")-data_BD.getBC("HCO3_meno", "in");
-    		c_out=data_BD.getBC("H_piu", "out")-data_BD.getBC("HCO3_meno", "out");
-    		break;
-    	case 2: 
-    		c_in=data_BD.getBC("CO2", "in")+data_BD.getBC("HCO3_meno", "in");
-    		c_out=data_BD.getBC("CO2", "out")+data_BD.getBC("HCO3_meno", "out");
-    		break;
-    	case 4: 
-    		c_in=data_BD.getBC("SiO2", "in");
-    		c_out=data_BD.getBC("SiO2", "out");
-    		break;
-    
+        case 0:
+            c_in=data_BD.getBC("Ca", "in");
+            c_out=data_BD.getBC("Ca", "out");
+            break;
+        case 1:
+            c_in=data_BD.getBC("H_piu", "in")-data_BD.getBC("HCO3_meno", "in");
+            c_out=data_BD.getBC("H_piu", "out")-data_BD.getBC("HCO3_meno", "out");
+            break;
+        case 2:
+            c_in=data_BD.getBC("CO2", "in")+data_BD.getBC("HCO3_meno", "in");
+            c_out=data_BD.getBC("CO2", "out")+data_BD.getBC("HCO3_meno", "out");
+            break;
+        case 4:
+            c_in=data_BD.getBC("SiO2", "in");
+            c_out=data_BD.getBC("SiO2", "out");
+            break;
+
     }
-    
+
     if (data_transp.diff>0 && which!=3)
     {
-    	temp[0]=c_in;
-    	temp[data_transp.Nx-1]=c_out;	
+        temp[0]=c_in;
+        temp[data_transp.Nx-1]=c_out;
     }
-    
+
     psi=solver.solve(temp);
 
 }
@@ -411,8 +411,8 @@ void Concentration::compute_concentration(unsigned int step, const Vector& psi1,
             err=dx.norm()/old_it.norm();//Valuto errore
             old_it+=dx;//x_k+1
 
-            if( (step==10 or step==100 or step==400 or step==700) and i==0)
-            {std::cout<<"step="<<step<<",iter="<<iter<<",err="<<err<<",res="<<rhs.norm()<<std::endl;}
+            //if( (step==10 or step==100 or step==400 or step==700) and i==0)
+            //{std::cout<<"step="<<step<<",iter="<<iter<<",err="<<err<<",res="<<rhs.norm()<<std::endl;}
 
         }
         Ca(i,step)=old_it(0);

@@ -26,37 +26,37 @@ public:
    Concentration(const std::string &filename);/*!<Constructor*/
 
    unsigned int get_Nx() const;/*!<Getter for Nx*/
-  
+
    unsigned int get_Nt() const;/*!<Getter for Nt*/
 
    void set_initial_cond();/*!<Function that sets initial condition for the reagents*/
   /*!
    *Function that sets the matrices for the transport part equation
-   *\param M reference to the sparse matrix that solves the transport problem 
+   *\param M reference to the sparse matrix that solves the transport problem
    *\param rhs reference to the sparse matrix which will be multiplied by the past past solution vector to form the rhs of the transport problem
    *\param vel constant reference to the fluid velocity
 */
-  
+
   void assemble_transport(Matrix& M, Matrix& rhs, const Vector& vel, bool immobile=false) const;
 
 
   void define_transport_solver(Solver& solver, Solver& solver1, Matrix& M_rhs, Vector& rhs_psi1, Vector& rhs_psi2, Vector& rhs_psi3, Vector& rhs_psi5,  const Vector& vel, unsigned int Nx);
-  
+
 /*!
-   *Function that sets the rhs for the CO_2 transport part, since it's the only reagent with a costant input bc 
-   *\param M_CO_2 reference to the sparse matrix that solves the transport problem 
+   *Function that sets the rhs for the CO_2 transport part, since it's the only reagent with a costant input bc
+   *\param M_CO_2 reference to the sparse matrix that solves the transport problem
    *\param rhs_CO2 reference to the sparse matrix which will be multiplied by the past past solution vector to form the rhs of the transport problem
    *\param vel constant reference to the fluid velocity
 */
-   void  assemble_rhs(Vector& rhs_psi1, Vector& rhs_psi2, Vector& rhs_psi3, Vector& rhs_psi5, const Vector& vel, double C_in, double C_out, const std::string& bc); 
+   void  assemble_rhs(Vector& rhs_psi1, Vector& rhs_psi2, Vector& rhs_psi3, Vector& rhs_psi5, const Vector& vel, double C_in, double C_out, const std::string& bc);
 
 
 /*!
    *Function that computes the total concentrations from the reagents
-   *\param psi_i reference to the i-total concentration at instant equal to t=step*dt 
+   *\param psi_i reference to the i-total concentration at instant equal to t=step*dt
    *\param step is an unsigned int that tells us at what time instant we are t=step*dt
 */
-   void compute_psi(unsigned int step, Vector& psi1, Vector& psi2, Vector& psi3, Vector& psi4, Vector& psi5) const; 
+   void compute_psi(unsigned int step, Vector& psi1, Vector& psi2, Vector& psi3, Vector& psi4, Vector& psi5) const;
 
 /*!
    *Function that computes the reaction term of the equation in the classical standard way with all the reagent parameters (Activation Energy, Area,Temperature, constant reaction term)
@@ -68,38 +68,38 @@ public:
 
 /*!
  * Function that computes one temporal step for the transport-reaction equation
- *\param psi_i reference to the i-total concentration 
- *\param rd is reference to rhe reaction term of the equation  
+ *\param psi_i reference to the i-total concentration
+ *\param rd is reference to rhe reaction term of the equation
  *\param step is an unsigned int that tells us at what time instant we are t=step*dt
  *\param rhs reference to the right-hand matrix for the transport equation
  *\param rhs_CO_2 referencto to the right-hand matrix for the CO_2 transport equation
  *\param solver reference to the solver for the transport problem
  *\param solver2 reference to the solver for the CO_2 transport problem
 */
-   void one_step_transport_reaction(Vector& psi1, Vector& psi2, Vector& psi3, Vector& psi4, Vector& psi5, Vector& rd, const Matrix& rhs, const Vector& rhs_psi1, const Vector& rhs_psi2, const Vector& rhs_psi3, const Vector& rhs_psi5, unsigned int step, Solver &solver, Solver &solver1); 
+   void one_step_transport_reaction(Vector& psi1, Vector& psi2, Vector& psi3, Vector& psi4, Vector& psi5, Vector& rd, const Matrix& rhs, const Vector& rhs_psi1, const Vector& rhs_psi2, const Vector& rhs_psi3, const Vector& rhs_psi5, unsigned int step, Solver &solver, Solver &solver1);
 
 
 /*!
  * Function that solves the reaction part with an Esplicit Euler
- *\param psi_i reference to the i-total concentration 
- *\param rd is reference to rhe reaction term of the equation  
+ *\param psi_i reference to the i-total concentration
+ *\param rd is reference to rhe reaction term of the equation
  *\param step is an unsigned int that tells us at what time instant we are t=step*dt
  *\param rhs reference to the right-hand matrix for the transport equation
  *\param rhs_CO_2 referencto to the right-hand matrix for the CO_2 transport equation
  *\param solver reference to the solver for the transport problem
  *\param solver2 reference to the solver for the CO_2 transport problem
 */
-   void Euler_Esplicit(Vector& psi1, Vector& psi2, Vector& psi3, Vector& psi4, Vector& psi5, const Vector& rd, const Matrix&  rhs, const Vector& rhs_psi1, const Vector& rhs_psi2, const Vector& rhs_psi5, const Vector& rhs_psi3, Solver &solver, Solver &solver1) const; 
+   void Euler_Esplicit(Vector& psi1, Vector& psi2, Vector& psi3, Vector& psi4, Vector& psi5, const Vector& rd, const Matrix&  rhs, const Vector& rhs_psi1, const Vector& rhs_psi2, const Vector& rhs_psi5, const Vector& rhs_psi3, Solver &solver, Solver &solver1) const;
 
 /*!
  * Function that solves the equation for one psi
- *\param psi reference to the total concentration  
- *\param M_rhs reference to the right-hand matrix for the transport equation  
+ *\param psi reference to the total concentration
+ *\param M_rhs reference to the right-hand matrix for the transport equation
  *\param rhs_CO2 reference to the vector that identify the rhs for the CO2 transport problem due to the in boundary condition
  *\param rd reference to rhe reaction term of the equation
  *\param solver reference to the solver for the transport problem
-  
-*/ 
+
+*/
   void transport_and_reaction(Vector& psi, const Matrix& M_rhs, const Vector& rhs_CO2, const Vector& rd, Solver &solver, int which) const;
 
 /*!
@@ -107,7 +107,7 @@ public:
  *\param step is an unsigned int that tells us at what time instant we are t=step*dt
  *\param psi_i reference to the i-total concentration
 */
-   
+
    void compute_concentration(unsigned int step, const Vector& psi1, const Vector& psi2, const Vector& psi3, const Vector& psi4, const Vector& psi5);
 
 /*!
@@ -115,21 +115,21 @@ public:
  *\param rhs reference to rhe right-hand side to be computed
  *\param old_it reference to the old iterate
  *\param psi_i reference to the i-total concentration
-*/  
- void compute_rhs(Vector& rhs, const Vector& old_it, double psi1, double psi2, double psi3, double psi4, double psi5) const; 
+*/
+ void compute_rhs(Vector& rhs, const Vector& old_it, double psi1, double psi2, double psi3, double psi4, double psi5) const;
 
 /*!
  * Functions that computes Jacobian last row
  *\param J reference to the Jacobian Matrix (that is a 6x6 matrix since it is specific for a single spatial node)
  *\param old_it reference to the old iterate
-*/  
-   void compute_Jacob(Matrix_full& J,const Vector& old_it) const; 
+*/
+   void compute_Jacob(Matrix_full& J,const Vector& old_it) const;
 
 /*!
- *Function that saves the solution for a specific reagent in a .csv file in the following way: each row is a spatial position, each column is a time instant 
+ *Function that saves the solution for a specific reagent in a .csv file in the following way: each row is a spatial position, each column is a time instant
  *\param name string which tells us the reagent
  */
-   void output_results_fixed_time(const std::string& name) const; 
+   void output_results_fixed_time(const std::string& name) const;
 
 /*!
  *Function that saves the solution for a specific reagent in a .csv file in the following way: each row is a time instant, each column is a spatial position
@@ -143,8 +143,19 @@ public:
  */
    void output_all_reagents(unsigned int pos) const;
 
+ // balance the concentrations
+ void balance()
+ {
+    data_BD.update(data_reaction);
+ }
 
 private:
+   double h;/*!<Spatial step*/
+   double dt;/*!<Temporal step*/
+
+   Method method;/*!<Numerical method that solves the reaction part*/
+
+public:
    Matrix_full Ca;/*!<Matrix that stores the [Ca+] in time and space*/
    Matrix_full H_piu;/*!<Matrix that stores the [H+] in time and space*/
    Matrix_full HCO3_meno;/*!<Matrix that stores the [HCO_3-] in time and space*/
@@ -155,14 +166,8 @@ private:
    Data_Transport data_transp;/*!<Data for the transport part*/
    Data_6Reagents data_reagents;/*!<Data for the 6 reagents*/
    Data_Reaction data_reaction;/*!<Physical data for the reaction setting*/
-   Data_CO2 data_CO2;/*!<Input CO2 data (It's the only reagent with a constant inflow*/ 
-   Data_BD data_BD;/*!<Inflow concentration data*/ 
-
-   
-   double h;/*!<Spatial step*/
-   double dt;/*!<Temporal step*/
-
-   Method method;/*!<Numerical method that solves the reaction part*/
+   Data_CO2 data_CO2;/*!<Input CO2 data (It's the only reagent with a constant inflow*/
+   Data_BD data_BD;/*!<Inflow concentration data*/
 };
 
 
