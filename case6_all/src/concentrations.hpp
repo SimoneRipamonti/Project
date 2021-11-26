@@ -148,6 +148,8 @@ public:
 *\param pos is the spatial position where we want to know all the 6 reagents evolution in time
  */
    void output_all_reagents(unsigned int pos) const;
+   
+   void column(unsigned int i);
 
 
 private:

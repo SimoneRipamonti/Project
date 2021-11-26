@@ -24,7 +24,11 @@ int main(int argc, char **argv)
 
     //We treat implicitly the transport part and explicitly the reactive one
     Transport_system_implicit_2_reagents(Ca,CaSiO3,vel,data_transport,data_reaction,data_2reagents);
-
+    
+    for(unsigned int i=0;i<11;++i){
+    	std::cout<<"Ca="<<Ca.col(i)<<std::endl;
+    	std::cout<<"CaSiO3="<<CaSiO3.col(i)<<std::endl;
+    	}
     //Output results in csv files
     output_results_fixed_time_2_reagents(Ca,CaSiO3,data_transport.L,data_transport.Nx,data_transport.T,data_transport.Nt);
 

@@ -174,7 +174,10 @@ void Matrix_C::set_data(const muparser_fun phi_,double h_)
 //Definition of Matrix_C considering that we use P1 element
 void Matrix_C::define_matrix()
 {
-    for(unsigned int i=0; i<row; ++i)
+    //m.insert(0,0)=phi(0.5*h)*h/2;
+    
+    //for(unsigned int i=1; i<row; ++i)
+    for(unsigned int i=0;i<row; ++i)
         m.insert(i,i)=phi(0.5*h+i*h)*h;//we include in the mass matrix of the transport equation (Matrix_C) already the product with the spatial step h and the porosity
 
 }
@@ -221,6 +224,8 @@ void Matrix_F_piu::define_matrix()
         m.insert(row-1,col-1)=velocity(row);
 }
 
+
+
 void Matrix_F_piu::set_BC() {}
 
 //Here we treat the BC of the transport problem working on the rhs of the matrix
@@ -228,7 +233,10 @@ void Matrix_F_piu::set_rhs()
 {
 
     if(bc_cond=="In")
-        rhs(0)+=velocity(1)*c_bc;
+    	rhs(0)+=velocity(1)*c_bc;
+    	//rhs(0)+=velocity(1)*c_bc;
+    	
+        
 
 }
 
@@ -317,11 +325,11 @@ void Matrix_R::assemble_matrix(double area, double rate_const, double temperatur
 }
 
 
-//Here the reaction matrix is update with the past_solution having in mind a particular square reaction rate
+//Here the reaction matrix is update with the past_solution having in mind a square reaction rate
 void Matrix_R::update(const Vector &past_sol)
 {
 
-    const Eigen::VectorXd p=past_sol.array().pow(2)/(const_eq*std::pow(10,-2*ph));
+    const Vector p=past_sol.array().pow(2)/(const_eq*std::pow(10,-2*ph));
     for(unsigned int i=0; i<rhs.size(); ++i)
         rhs(i)=h*phi(h/2+i*h)*std::max(react_const*(1.0-p(i)),0.0);
 

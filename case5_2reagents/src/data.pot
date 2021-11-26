@@ -12,8 +12,8 @@
   mu=1.0e-3
   
   #Porosity
-  phi0=0.3+0*x
-  #phi0=1.0+0.0*x
+  #phi0=0.3+0*x
+  phi0=1.0+0.0*x
   #phi0=0.0*x
   [../]
 
@@ -89,6 +89,7 @@
 
      #Initical conentration CaSiO3
      CaSiO3_0=16.7504+0.0*x
+     #CaSiO3_0=1.0+0.0*x
 
      #Reaction_area
      #A=1.38

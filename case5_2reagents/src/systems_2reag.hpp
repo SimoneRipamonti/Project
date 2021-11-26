@@ -4,6 +4,7 @@
 #include <Eigen/Dense>
 #include "matrix.hpp"
 #include "parameters.hpp"
+#include "functions.hpp"
 
 //Definition of the Darcy Syste
 //void set_Darcy_system(Data_Darcy &data, Eigen::MatrixXd &Matrix,Eigen::VectorXd &rhs);

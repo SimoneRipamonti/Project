@@ -24,13 +24,14 @@ int main(int argc, char **argv)
     Matrix M(data.Nx+data.Nx+1,data.Nx+data.Nx+1);//Initialization of the big matrix for the Darcy system
     Vector rhs(data.Nx+data.Nx+1);//Initialization of the rhs of Darcy
     set_Darcy_system(data,M,rhs,h);//Definition of the Darcy system Mx=rhs
-
-
+    
     Solver solver; //Initialization of the solver for the sparse system
     set_solver(M,solver);
     
     sol= solver.solve(rhs);//The Darcy system is solved and the solution is stored in the sol vector
-
+    
+    std::cout<<"M="<<std::endl;
+    std::cout<<M<<std::endl;
  
     Darcy_output_results(sol,data.Nx,data.L);//Store the output result in csv files
 

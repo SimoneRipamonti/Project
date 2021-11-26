@@ -28,6 +28,7 @@ void Transport_exp(Matrix_full &Ca, Vector &vel, Data_Transport &data_transport,
     //We need to have compatibility between the bc and temproal ones for the first concentration degree of freedom
     if(bc_cond=="In")
        Ca(0,0)=C_in;
+       //Ca(0,0)/=(1+2*dt*vel/(phi(h/2)*h))
     else
        Ca(Nx-1,Nt-1)=C_out;
 
@@ -45,6 +46,16 @@ void Transport_exp(Matrix_full &Ca, Vector &vel, Data_Transport &data_transport,
     
     //Definition of the linear system explicit matrix
     M=1/dt*C.get_matrix();
+    
+    std::cout<<"M="<<M<<std::endl;
+    
+    std::cout<<"F_piu="<<F_p.get_matrix()<<std::endl;
+    
+    std::cout<<"F_piu_rhs="<<F_p.get_rhs()<<std::endl;
+    
+    std::cout<<"F_meno="<<F_m.get_matrix()<<std::endl;
+    
+    std::cout<<"F_meno_rhs="<<F_m.get_rhs()<<std::endl;
    
     //Definition of the right hand side parts 
     rhs1=1/dt*C.get_matrix()-F_p.get_matrix()+F_m.get_matrix()-lambda*C.get_matrix();
@@ -89,6 +100,17 @@ void Transport_imp(Matrix_full &Ca, Vector &vel, Data_Transport &data_transport,
     
     //Definition of the linear system implicit matrix
     M=1/dt*C.get_matrix()+F_p.get_matrix()-F_m.get_matrix();
+    
+    std::cout<<"M="<<M<<std::endl;
+    
+    std::cout<<"F_piu="<<F_p.get_matrix()<<std::endl;
+    
+    std::cout<<"F_piu_rhs="<<F_p.get_rhs()<<std::endl;
+    
+    std::cout<<"F_meno="<<F_m.get_matrix()<<std::endl;
+    
+    std::cout<<"F_meno_rhs="<<F_m.get_rhs()<<std::endl;
+   
 
     //Definition of the right hand side parts 
     rhs1=1/dt*C.get_matrix()-lambda*C.get_matrix();

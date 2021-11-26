@@ -3,7 +3,7 @@
 #include <vector>
 
 //Explicit transport upwind and esplicit reaction
-void Transport_system_esplicit_2_reagents(Eigen::MatrixXd &Ca,Eigen::MatrixXd &CaSiO3, Eigen::VectorXd &vel,Data_Transport &data_transport,Data_Reaction &data_reaction, Data_2Reagents &data_2reagents) //As input there is the matrix solution where we store our solution at each istant,
+void Transport_system_esplicit_2_reagents(Matrix_full &Ca, Matrix_full &CaSiO3, Vector &vel,Data_Transport &data_transport, Data_Reaction &data_reaction, Data_2Reagents &data_2reagents) //As input there is the matrix solution where we store our solution at each istant,
 //each row represent a spatial position, each column represent a time istant.
 //In the vector vel there is the velocity evaluated at each node cell.
 {
@@ -41,15 +41,13 @@ void Transport_system_esplicit_2_reagents(Eigen::MatrixXd &Ca,Eigen::MatrixXd &C
     Matrix_R React(Nx,Nx);
     React.assemble_matrix(Area,rate_const,Temperature,R,E,ph,K_sol,h,phi);
 
-    const Eigen::SparseMatrix<double> M{1/dt*C.get_matrix()};//matrix of the transport linear system
+    Matrix M{1/dt*C.get_matrix()};//matrix of the transport linear system
 
-    Eigen::SparseLU<Eigen::SparseMatrix<double>, Eigen::COLAMDOrdering<int> >   solver; //solver used to solve the sparse linear system
+    Solver  solver; //solver used to solve the sparse linear system
+ 
+    set_solver(M,solver);
 
-    solver.analyzePattern(M); // Compute the ordering permutation vector from the structural pattern of A
-
-    solver.factorize(M);
-
-    Eigen::VectorXd rhs(Nx);//rhs of the transport linear system
+    Vector rhs(Nx);//rhs of the transport linear system
 
     //Temporal loop
     for(unsigned int i=1; i<Nt+1; i++)
@@ -70,7 +68,7 @@ void Transport_system_esplicit_2_reagents(Eigen::MatrixXd &Ca,Eigen::MatrixXd &C
 
 
 //Implicit transport upwind and esplicit reaction
-void Transport_system_implicit_2_reagents(Eigen::MatrixXd &Ca,Eigen::MatrixXd &CaSiO3, Eigen::VectorXd &vel,Data_Transport &data_transport,Data_Reaction &data_reaction, Data_2Reagents &data_2reagents) //As input there is the matrix solution where we store our solution at each istant,
+void Transport_system_implicit_2_reagents(Matrix_full &Ca, Matrix_full &CaSiO3, Vector &vel,Data_Transport &data_transport,Data_Reaction &data_reaction, Data_2Reagents &data_2reagents) //As input there is the matrix solution where we store our solution at each istant,
 //each row represent a spatial position, each column represent a time istant.
 //In the vector vel there is the velocity evaluated at each node cell.
 {
@@ -108,15 +106,13 @@ void Transport_system_implicit_2_reagents(Eigen::MatrixXd &Ca,Eigen::MatrixXd &C
     React.assemble_matrix(Area,rate_const,Temperature,R,E,ph,K_sol,h,phi);
 
 
-    const Eigen::SparseMatrix<double> M{1/dt*C.get_matrix()+F_p.get_matrix()-F_m.get_matrix()};//matrix of the transport linear system
+    Matrix M{1/dt*C.get_matrix()+F_p.get_matrix()-F_m.get_matrix()};//matrix of the transport linear system
 
-    Eigen::SparseLU<Eigen::SparseMatrix<double>, Eigen::COLAMDOrdering<int> >   solver; //solver used to solve the sparse linear system
+    Solver   solver; //solver used to solve the sparse linear system
 
-    solver.analyzePattern(M); // Compute the ordering permutation vector from the structural pattern of A
-
-    solver.factorize(M);
-
-    Eigen::VectorXd rhs(Nx);//rhs of the transport linear system
+    set_solver(M, solver);
+    
+    Vector rhs(Nx);//rhs of the transport linear system
 
     //Temporal loop
     for(unsigned int i=1; i<Nt+1; i++)

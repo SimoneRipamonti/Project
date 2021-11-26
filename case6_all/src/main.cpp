@@ -31,6 +31,8 @@ int main()
 
     Darcy_velocity(data,vel);
     
+    //std::cout<<"vel="<<vel<<std::endl;
+    
     //vel=Eigen::VectorXd::Zero(data.Nx+1);
 
     Concentration concentration("data.pot");
@@ -60,20 +62,48 @@ int main()
     //Reaction term
     Vector rd{Vector::Zero(Nx)};
 
-
+    concentration.compute_psi(0,psi1,psi2,psi3,psi4,psi5);
+    
+    /*std::cout<<"psi1="<<std::endl;
+        
+    std::cout<<psi1<<std::endl;
+    
+    std::cout<<"psi2="<<std::endl;
+        
+    std::cout<<psi2<<std::endl;*/
+    
+    std::cout<<"psi3="<<std::endl;
+        
+    std::cout<<psi3<<std::endl;
+    
+    /*std::cout<<"psi4="<<std::endl;
+        
+    std::cout<<psi4<<std::endl;
+    
+    std::cout<<"psi5="<<std::endl;
+        
+    std::cout<<psi5<<std::endl;*/
+       
 //Loop Temporale
 
     for(unsigned int i=1; i<Nt+1; i++)
+    // for(unsigned int i=1; i<500; i++)
      {
         concentration.compute_psi(i-1,psi1,psi2,psi3,psi4,psi5); // phi 
 
         concentration.compute_rd_kd(i-1,rd);//Calcolo i termini di reazione
+        
+        //std::cout<<"rd="<<std::endl;
+        
+        //std::cout<<rd<<std::endl;
        
         concentration.one_step_transport_reaction(psi1,psi2,psi3,psi4,psi5,rd,M_rhs,rhs_psi2,rhs_psi3,i,solver,solver1);
  
         concentration.compute_concentration(i,psi1,psi2,psi3,psi4,psi5); //Calcolo le Concentrazioni effettive
+        
       }
-
+    
+    concentration.column(499);
 
     concentration.output_results_fixed_time("Ca");
     concentration.output_results_fixed_time("H_piu");
