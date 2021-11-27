@@ -1,7 +1,7 @@
-#set term png
-#set output "solutions/fixed_space.png"
+set term png
+set output "solutions/fixed_space.png"
 
-#set datafile separator ','
+set datafile separator ','
 
 set title 'FIXED SPACE'
 set title font ",12"

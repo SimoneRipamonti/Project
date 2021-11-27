@@ -103,7 +103,7 @@ int main()
         
       }
     
-    concentration.column(499);
+    //concentration.column(499);
 
     concentration.output_results_fixed_time("Ca");
     concentration.output_results_fixed_time("H_piu");

@@ -1,7 +1,7 @@
-#set term png
-#set output "solutions/fixed_time.png"
+set term png
+set output "solutions/fixed_time.png"
 
-#set datafile separator ','
+set datafile separator ','
 
 set title 'FIXED TIME'
 set title font ",12"
