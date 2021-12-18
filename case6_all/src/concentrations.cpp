@@ -65,7 +65,7 @@ void Concentration::define_transport_solver(Solver& solver, Solver& solver1, Mat
     //Setting for the solid ODE equation    
     Matrix M_solid(Nx,Nx);//Mass matrix for solid (CaSiO3)
     Matrix rhs_solid(Nx,Nx);//rhs for the solid part
-    assemble_transport(M_solid,rhs_solid,Vector::Zero(Nx+1));//function that assemble the mass matrix for the solid reagent
+    assemble_transport(M_solid,rhs_solid,Vector::Zero(Nx+1));//function that assembles the mass matrix for the solid reagent
     
     set_solver(M,solver);
     
@@ -182,20 +182,16 @@ void Concentration::compute_rd(unsigned int step, Vector& rd) const
 
 void Concentration::compute_rd_kd(unsigned int step, Vector& rd) const
 {
-
     double omega;
     const double const_r=data_reagents.kd_i;
     muparser_fun phi=data_transp.phi;
 
     for (unsigned int i=0; i<Ca.rows(); ++i)
     {
-        omega=Ca(i,step)*SiO2(i,step)/(H_piu(i,step)*H_piu(i,step));//nel codice di Anna c'è anche un Hpiu al quadrato
+        omega=Ca(i,step)*SiO2(i,step)/(H_piu(i,step)*H_piu(i,step));
         omega/=data_reagents.K_sol;
         rd(i)=phi(h/2+i*h)*const_r*std::max((1-omega),0.)*CaSiO3(i,step);
-        
     }
-
-
 }
 
 
@@ -212,7 +208,7 @@ void Concentration::one_step_transport_reaction(Vector& psi1, Vector& psi2, Vect
 
     case PredictorCorrector: //Predictor Corrector
     {
-        Vector psi1_{psi1}; //Mi servono perché devo conservare le phi al passo n
+        Vector psi1_{psi1}; //We need it because we need to store the temporary solution
         Vector psi2_{psi2};
         Vector psi3_{psi3};
         Vector psi4_{psi4};
@@ -220,8 +216,8 @@ void Concentration::one_step_transport_reaction(Vector& psi1, Vector& psi2, Vect
      
         Euler_Explicit(psi1_,psi2_,psi3_,psi4_,psi5_,rd,M_rhs,rhs_psi2,rhs_psi3,solver,solver1);
         compute_concentration(step,psi1_,psi2_,psi3_,psi4_,psi5_);
-        compute_rd_kd(step,rd);//calcolo il nuovo rd
-        
+        compute_rd_kd(step,rd);//new rd computation
+  
         Euler_Explicit(psi1,psi2,psi3,psi4,psi5,rd,M_rhs,rhs_psi2,rhs_psi3,solver,solver1);
     }
     break;
@@ -240,7 +236,7 @@ void Concentration::one_step_transport_reaction(Vector& psi1, Vector& psi2, Vect
         Vector rd_{Vector::Zero(data_transp.Nx)};
         compute_rd_kd(step,rd_);
 
-        rd=0.5*rd+0.5*rd_;//ottengo il nuovo rd complessivo
+        rd=0.5*rd+0.5*rd_;//new rd computation
 
         Euler_Explicit(psi1,psi2,psi3,psi4,psi5,rd,M_rhs,rhs_psi2,rhs_psi3,solver,solver1);
     }
@@ -253,10 +249,10 @@ void Concentration::one_step_transport_reaction(Vector& psi1, Vector& psi2, Vect
 void Concentration::Euler_Explicit(Vector& psi1, Vector& psi2, Vector& psi3, Vector& psi4, Vector& psi5, const Vector& rd, const Matrix&  M_rhs, const Vector& rhs_psi2, const Vector& rhs_psi3, Solver &solver, Solver &solver1) const
 {
     transport_and_reaction(psi1,M_rhs,Vector::Zero(psi1.size()),rd,solver);//reaction but not input bc (rhs=0) 
-    transport_and_reaction(psi2,M_rhs,rhs_psi2,-2*rd,solver);//reaction with input bc (rhs=0)
+    transport_and_reaction(psi2,M_rhs,rhs_psi2,-2*rd,solver);//reaction with input bc
     transport_and_reaction(psi3,M_rhs,rhs_psi3,Vector::Zero(psi3.size()),solver);//not reaction but input boundary (rd=0)
     transport_and_reaction(psi4,M_rhs,Vector::Zero(psi4.size()),-rd,solver1);//reaction but not input bc (rhs=0) (different solver because solid is not moving)
-    transport_and_reaction(psi5,M_rhs,Vector::Zero(psi5.size()),rd,solver);//reaction but not input bc    (rhs=0)
+    transport_and_reaction(psi5,M_rhs,Vector::Zero(psi5.size()),rd,solver);//reaction but not input bc (rhs=0)
 }
 
 
@@ -270,9 +266,7 @@ void Concentration::transport_and_reaction(Vector& psi, const Matrix& M_rhs, con
 
 void Concentration::compute_concentration(unsigned int step, const Vector& psi1, const Vector& psi2, const Vector& psi3, const Vector& psi4, const Vector& psi5)
 {
-//RISOLVO IL SISTEMA NON LINEARE CON NEWTON
-    //Initial guess::value at previous step
-    Vector old_it(6);
+    Vector old_it(6);//Initial guess::value at previous step
     Vector rhs(6);
     Matrix_full Jacob{Matrix_full::Zero(6,6)};
     Jacob(0,0)=1.0;
@@ -289,18 +283,18 @@ void Concentration::compute_concentration(unsigned int step, const Vector& psi1,
 
     for(unsigned int i=0; i<Ca.rows(); ++i)
     {
-        old_it<<Ca(i,step-1),H_piu(i,step-1),HCO3_meno(i,step-1),CO2(i,step-1),CaSiO3(i,step-1),SiO2(i,step-1);  //guess iniziale
+        old_it<<Ca(i,step-1),H_piu(i,step-1),HCO3_meno(i,step-1),CO2(i,step-1),CaSiO3(i,step-1),SiO2(i,step-1);  //initial guess
         
         double err=1;
         Vector dx(6);
         
         for(unsigned int iter=0; iter<max_iter and err>tol; ++iter)
         {
-            compute_rhs(rhs, old_it, psi1(i), psi2(i), psi3(i), psi4(i), psi5(i));///Calcolo F(x_k);
-            compute_Jacob(Jacob, old_it);//Calcolo Jacob
+            compute_rhs(rhs, old_it, psi1(i), psi2(i), psi3(i), psi4(i), psi5(i));//F(x_k) computation;
+            compute_Jacob(Jacob, old_it);//Jacobian computation
             const auto Jac=Jacob.fullPivLu();
-            dx=Jac.solve(-rhs);//Calcolo dx;
-            err=dx.norm()/old_it.norm();//Valuto errore
+            dx=Jac.solve(-rhs);//dx computation
+            err=dx.norm()/old_it.norm();//error valutation
             old_it+=dx;//x_k+1           
         }
         Ca(i,step)=old_it(0);
@@ -367,8 +361,7 @@ void Concentration::output_results_fixed_time(const std::string& name) const
     std::ofstream file1(filename, std::ofstream::out);
 
     const unsigned int a=data_transp.Nt/10; //we print the result on the file each "a" seconds
-    //const unsigned int a=1; 
-     
+      
     file1<<"space, ";
     for (unsigned int i=0.; i<data_transp.Nt+1; i+=a)
         file1<<"t="+std::to_string(i*dt)+"s, ";

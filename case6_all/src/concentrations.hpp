@@ -43,10 +43,16 @@ public:
   void define_transport_solver(Solver& solver, Solver& solver1, Matrix& M_rhs, Vector& rhs_psi2, Vector& rhs_psi3, const Vector& vel, unsigned int Nx);
   
 /*!
-   *Function that sets the rhs for the CO_2 transport part, since it's the only reagent with a costant input bc 
-   *\param M_CO_2 reference to the sparse matrix that solves the transport problem 
-   *\param rhs_CO2 reference to the sparse matrix which will be multiplied by the past past solution vector to form the rhs of the transport problem
+   *Function that sets the rhs for the total concentrations which have a constant input bc
+   *\param rhs_psi2 reference to rhs of the psi_2 total concentration
+   *\param rhs_psi3 reference to rhs of the psi_3 total concentration
    *\param vel constant reference to the fluid velocity
+   *\param CO2_in input boundary condition for CO2
+   *\param CO2_out output boundary condition for CO2
+   *\param CO2_bc type of bc
+   *\param H_piu_in input boundary condition for H_piu
+   *\param H_piu_out output boundary condition for H_piu
+   *\param H_piu_bc boundary condition type
 */
    void  assemble_rhs(Vector& rhs_psi2, Vector& rhs_psi3, const Vector& vel, double CO2_in, double CO2_out, const std::string& CO2_bc, double H_piu_in, double H_piu_out, const std::string& H_piu_bc); 
 
@@ -86,7 +92,7 @@ public:
 
 
 /*!
- * Function that solves the reaction part with an Esplicit Euler
+ * Function that solves the reaction part with an Explicit Euler
  *\param psi_i reference to the i-total concentration 
  *\param rd is reference to rhe reaction term of the equation  
  *\param step is an unsigned int that tells us at what time instant we are t=step*dt
