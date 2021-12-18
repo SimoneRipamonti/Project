@@ -7,14 +7,14 @@
 
 [physical_parameters]  
   #Permeability
-  K_distr=1.0e-10+0*x
-  #K_distr=1.0e-9*(x<0.5)+1.0e-10*(x>=0.5) # for testing code with different permeability
+  #K_distr=1.0e-10+0*x
+  K_distr=1.0e-9*(x<0.5)+1.0e-10*(x>=0.5) # for testing code with different permeability
   ###K_distr=2e-13
   #Water Viscosity
   mu=1.0e-3
   ###mu=0.2e-3
   #Porosity
-  ###phi0=0.3+0*x
+  #phi0=0.2+0*x
   phi0=1+0.0*x
   #phi0=0.0*x
   [../]
@@ -56,7 +56,7 @@
 
 [Discretization]
     #Cell number
-    Nx=10
+    Nx=100
 
     [../]
 

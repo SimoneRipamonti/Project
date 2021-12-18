@@ -234,10 +234,6 @@ void Matrix_F_piu::set_rhs()
 
     if(bc_cond=="In")
     	rhs(0)+=velocity(1)*c_bc;
-    	//rhs(0)+=velocity(1)*c_bc;
-    	
-        
-
 }
 
 void Matrix_F_piu::assemble_matrix(const std::string &bc_, double c_bc_, const Vector& vel_)

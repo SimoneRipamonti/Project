@@ -39,7 +39,7 @@
    
    #Outflow cond
    #out=Flow #or Pressure 
-   out=Pressure
+   out=Flow
   [../]
 
 

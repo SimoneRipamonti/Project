@@ -10,8 +10,7 @@ set ylabel font ",12"
 set xlabel 'Space [m]' # label for the X axis
 set xlabel font ",12"
 
-
-plot "output.csv" using 1:2 with lines,
+plot "output.csv" using 1:2 with lines lw 2,
 
 
 

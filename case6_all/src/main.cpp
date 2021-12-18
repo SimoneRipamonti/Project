@@ -1,8 +1,3 @@
-//Loop:
-//1) Calcolo dei vari rd.
-//2) Funzione che mi risolve uno step temporale dei problemi di trasporto e reazione.
-//3) Funzione che mi risolve il sistemino non lineare per trovare le concentrazioni effettive.
-
 #include <Eigen/Dense>
 #include <cmath>
 #include <string>
@@ -38,15 +33,12 @@ int main()
 
     unsigned int Nx{concentration.get_Nx()};
     unsigned int Nt{concentration.get_Nt()};
-    
-    //Eigen::VectorXd vel{6.67e-9*Eigen::VectorXd::Ones(Nx+1)};
 
     Solver  solver, solver1;
     Matrix M_rhs(Nx,Nx);
     Vector rhs_psi2(Nx);
     Vector rhs_psi3(Nx);
     concentration.define_transport_solver(solver, solver1, M_rhs, rhs_psi2, rhs_psi3, vel, Nx);
-
 
     //Total concentration initialization
     Vector psi1{Vector::Zero(Nx)};

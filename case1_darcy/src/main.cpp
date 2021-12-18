@@ -72,8 +72,7 @@ int main(int argc, char **argv)
     }
 
     std::cout<<"Order of convergence for pressure:"<<std::log(errp(3)/errp(4))/std::log(2.0)<<std::endl;
-
-
+    
     std::cout<<"Order of convergence for velocity:"<<std::log(errvel(3)/errvel(4))/std::log(2.0)<<std::endl;
 
 

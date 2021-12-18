@@ -25,8 +25,7 @@ int main(int argc, char **argv)
     Solver solver; //Initialization of the solver for the sparse system
     set_solver(A.get_matrix(),solver);
     
-    Vector sol(Nx);
-    sol= solver.solve(A.get_rhs());//The Darcy system is solved and the solution is stored in the sol vector
+    Vector sol{solver.solve(A.get_rhs())};//The Darcy system is solved and the solution is stored in the sol vector
 
     output_example(sol,Nx,L);//Store the output result in csv files
     

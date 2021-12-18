@@ -14,7 +14,7 @@ set xlabel font ",12"
 
 set yrange [0:1.5]                     # intervallo x in questo caso 0-5
   
-plot "Ca_fixed_time.csv" using 1:2 with lines,'' using 1:4 with lines,'' using 1:6 with lines,'' using 1:8 with lines,'' using 1:10 with lines,'' using 1:12 with lines,
+plot "Ca_fixed_time.csv" using 1:2 with lines lw 2,'' using 1:4 with lines lw 2,'' using 1:6 with lines lw 2,'' using 1:8 with lines lw 2,'' using 1:10 with lines lw 2,'' using 1:12 with lines lw 2,
 
 
 

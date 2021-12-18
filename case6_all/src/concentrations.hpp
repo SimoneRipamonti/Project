@@ -13,7 +13,7 @@
 #include <string>
 
 
-enum Method{EsplicitEuler,PredictorCorrector,Heun};//Numerical scheme for solving the reaction part
+enum Method{ExplicitEuler,PredictorCorrector,Heun};//Numerical scheme for solving the reaction part
 
 /*!
 *\brief Class for the 6 reagents case.
@@ -95,7 +95,7 @@ public:
  *\param solver reference to the solver for the transport problem
  *\param solver2 reference to the solver for the CO_2 transport problem
 */
-   void Euler_Esplicit(Vector& psi1, Vector& psi2, Vector& psi3, Vector& psi4, Vector& psi5, const Vector& rd, const Matrix&  rhs, const Vector& rhs_psi2, const Vector& rhs_psi3, Solver &solver, Solver &solver1) const; 
+   void Euler_Explicit(Vector& psi1, Vector& psi2, Vector& psi3, Vector& psi4, Vector& psi5, const Vector& rd, const Matrix&  rhs, const Vector& rhs_psi2, const Vector& rhs_psi3, Solver &solver, Solver &solver1) const; 
 
 /*!
  * Function that solves the equation for one psi

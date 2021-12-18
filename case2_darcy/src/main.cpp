@@ -29,9 +29,6 @@ int main(int argc, char **argv)
     set_solver(M,solver);
     
     sol= solver.solve(rhs);//The Darcy system is solved and the solution is stored in the sol vector
-    
-    std::cout<<"M="<<std::endl;
-    std::cout<<M<<std::endl;
  
     Darcy_output_results(sol,data.Nx,data.L);//Store the output result in csv files
 

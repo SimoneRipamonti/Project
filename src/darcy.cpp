@@ -36,18 +36,21 @@ void set_Darcy_system(const Data_Darcy &data, Matrix &M, Vector &rhs, double h)
 
 }
 
-
+//We build the big block matrix of the Darcy system having in mind the 
+//structure adopted by the Eigen library to store sparse matrices.
+//In particular we proceed filling a vector of Triplet (row,column,value)
+//that rapresents a non-zero element, and then we build the matrix with setFromTriplets()
 Matrix block_matrix(const Matrix& A, const Matrix& B)
 {
     std::vector<Triplet> t;
     t.reserve(A.nonZeros() + B.nonZeros());
 
-    triplets_with_shift(t, A, 0, 0);
-    triplets_with_shift(t, B, 0, A.cols());
-    triplets_with_shift(t, -B.transpose(), A.rows(), 0);
+    triplets_with_shift(t, A, 0, 0);//Storage the A matrix non-zero elements 
+    triplets_with_shift(t, B, 0, A.cols());//Storage the B matrix non-zero elements 
+    triplets_with_shift(t, -B.transpose(), A.rows(), 0);//Storage the -B^T non-zero elements
 
     Matrix M(A.rows() + B.cols(), A.cols() + B.cols());
-    M.setFromTriplets(std::begin(t), std::end(t));
+    M.setFromTriplets(std::begin(t), std::end(t));//Matrix construction
     M.makeCompressed();
 
     return M;
@@ -56,8 +59,8 @@ Matrix block_matrix(const Matrix& A, const Matrix& B)
 
 void triplets_with_shift(std::vector<Triplet>& t, const Matrix& A, int shift_row, int shift_col)
 {
-    for (int k(0); k < A.outerSize(); ++k)
-        for (Matrix::InnerIterator it(A,k); it; ++it)
+    for (int k(0); k < A.outerSize(); ++k)//Iteration on the OuterStarts array of the Sparse Eigen format
+        for (Matrix::InnerIterator it(A,k); it; ++it)//Iteration on the InnerIndices array of the Sparse Eigen format
             t.push_back(Triplet(it.row() + shift_row, it.col() + shift_col, it.value()));
 }
 
@@ -69,18 +72,15 @@ void Darcy_velocity(const Data_Darcy &data, Vector &vel)
   
     double h =static_cast<double>(data.L)/data.Nx; //space step
 
-    Vector sol(data.Nx+data.Nx+1); //solution vectors are resized
-
     Matrix M_d(data.Nx+data.Nx+1,data.Nx+data.Nx+1);//Initialization of the big matrix for the Darcy system
     Vector rhs_d(data.Nx+data.Nx+1);//Initialization of the rhs of Darcy
     set_Darcy_system(data,M_d,rhs_d,h);//Definition of the Darcy system Mx=rhs
-
 
     Solver  solver_d; //Initialization of the Solver for the sparse system
 
     set_solver(M_d,solver_d);
 
-    sol= solver_d.solve(rhs_d);//The Darcy system is solved and the solution is stored in the sol vector
+    Vector sol{solver_d.solve(rhs_d)};//The Darcy system is solved and the solution is stored in the sol vector
 
     vel=sol.head(data.Nx+1);
 

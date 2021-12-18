@@ -16,7 +16,7 @@ Concentration::Concentration(const std::string &filename):data_transp(filename),
     SiO2=Matrix_full::Zero(data_transp.Nx,data_transp.Nt+1);
 
     if(data_reagents.method==1)
-        method=EsplicitEuler;
+        method=ExplicitEuler;
     else if(data_reagents.method==2)
         method=PredictorCorrector;
     else
@@ -206,8 +206,8 @@ void Concentration::one_step_transport_reaction(Vector& psi1, Vector& psi2, Vect
 {
   switch(method)
     {
-    case EsplicitEuler: //Euler Esplicit
-         Euler_Esplicit(psi1,psi2,psi3,psi4,psi5,rd,M_rhs,rhs_psi2,rhs_psi3,solver,solver1);
+    case ExplicitEuler: //Explicit Euler
+         Euler_Explicit(psi1,psi2,psi3,psi4,psi5,rd,M_rhs,rhs_psi2,rhs_psi3,solver,solver1);
       break;
 
     case PredictorCorrector: //Predictor Corrector
@@ -218,11 +218,11 @@ void Concentration::one_step_transport_reaction(Vector& psi1, Vector& psi2, Vect
         Vector psi4_{psi4};
         Vector psi5_{psi5};
      
-        Euler_Esplicit(psi1_,psi2_,psi3_,psi4_,psi5_,rd,M_rhs,rhs_psi2,rhs_psi3,solver,solver1);
+        Euler_Explicit(psi1_,psi2_,psi3_,psi4_,psi5_,rd,M_rhs,rhs_psi2,rhs_psi3,solver,solver1);
         compute_concentration(step,psi1_,psi2_,psi3_,psi4_,psi5_);
         compute_rd_kd(step,rd);//calcolo il nuovo rd
         
-        Euler_Esplicit(psi1,psi2,psi3,psi4,psi5,rd,M_rhs,rhs_psi2,rhs_psi3,solver,solver1);
+        Euler_Explicit(psi1,psi2,psi3,psi4,psi5,rd,M_rhs,rhs_psi2,rhs_psi3,solver,solver1);
     }
     break;
 
@@ -234,7 +234,7 @@ void Concentration::one_step_transport_reaction(Vector& psi1, Vector& psi2, Vect
         Vector psi4_{psi4};
         Vector psi5_{psi5};
 
-        Euler_Esplicit(psi1_,psi2_,psi3_,psi4_,psi5_,rd,M_rhs,rhs_psi2,rhs_psi3,solver,solver1);
+        Euler_Explicit(psi1_,psi2_,psi3_,psi4_,psi5_,rd,M_rhs,rhs_psi2,rhs_psi3,solver,solver1);
         compute_concentration(step,psi1_,psi2_,psi3_,psi4_,psi5_);
 
         Vector rd_{Vector::Zero(data_transp.Nx)};
@@ -242,7 +242,7 @@ void Concentration::one_step_transport_reaction(Vector& psi1, Vector& psi2, Vect
 
         rd=0.5*rd+0.5*rd_;//ottengo il nuovo rd complessivo
 
-        Euler_Esplicit(psi1,psi2,psi3,psi4,psi5,rd,M_rhs,rhs_psi2,rhs_psi3,solver,solver1);
+        Euler_Explicit(psi1,psi2,psi3,psi4,psi5,rd,M_rhs,rhs_psi2,rhs_psi3,solver,solver1);
     }
 
     break;
@@ -250,7 +250,7 @@ void Concentration::one_step_transport_reaction(Vector& psi1, Vector& psi2, Vect
 
 }
 
-void Concentration::Euler_Esplicit(Vector& psi1, Vector& psi2, Vector& psi3, Vector& psi4, Vector& psi5, const Vector& rd, const Matrix&  M_rhs, const Vector& rhs_psi2, const Vector& rhs_psi3, Solver &solver, Solver &solver1) const
+void Concentration::Euler_Explicit(Vector& psi1, Vector& psi2, Vector& psi3, Vector& psi4, Vector& psi5, const Vector& rd, const Matrix&  M_rhs, const Vector& rhs_psi2, const Vector& rhs_psi3, Solver &solver, Solver &solver1) const
 {
     transport_and_reaction(psi1,M_rhs,Vector::Zero(psi1.size()),rd,solver);//reaction but not input bc (rhs=0) 
     transport_and_reaction(psi2,M_rhs,rhs_psi2,-2*rd,solver);//reaction with input bc (rhs=0)
