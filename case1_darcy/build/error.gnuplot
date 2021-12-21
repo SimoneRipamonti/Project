@@ -10,5 +10,5 @@ set xlabel 'Nx' # label for the X axis
 set logscale x
 set logscale y
 
-plot "error.csv" using 1:2 with lines, "error.csv" using 1:3 with lines,
+plot "error_pressure.csv" using 1:2 with lines lw 2, "error_pressure.csv" using 1:3 with lines lw 2, "error_pressure.csv" using 1:4 with lines lw 2, "error_velocity.csv" using 1:2 with lines lw 2,
 

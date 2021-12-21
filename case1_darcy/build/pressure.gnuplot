@@ -13,7 +13,7 @@ set xlabel font ",12"
 
 
 
-plot "exact_pressure.csv" using 1:2 with lines, "pressure10.csv" using 1:2 with lines, "pressure20.csv" using 1:2 with lines, "pressure40.csv" using 1:2 with lines, "pressure80.csv" using 1:2 with lines, "pressure160.csv" using 1:2 with lines
+plot "exact_pressure.csv" using 1:2 with lines lw 2, "pressure10.csv" using 1:2 with lines lw 2, "pressure20.csv" using 1:2 with lines lw 2, "pressure40.csv" using 1:2 with lines lw 2, "pressure80.csv" using 1:2 with lines lw 2, "pressure160.csv" using 1:2 with lines lw 2
 
 #plot "exact.csv" using 1:2 with lines, 
 
