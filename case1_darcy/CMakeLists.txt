@@ -21,8 +21,3 @@ target_include_directories(main PUBLIC src)
 
 target_link_libraries(main ${Boost_LIBRARIES} ${CMAKE_CURRENT_SOURCE_DIR}/../external/lib/libmuparser.so)
 
-
-
-
-
-

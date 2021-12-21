@@ -5,3 +5,4 @@
 mkdir -p solutions
 gnuplot -p output.gnuplot 
 
+

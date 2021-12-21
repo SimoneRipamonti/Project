@@ -17,6 +17,3 @@ set xlabel font ",12"
 #plot "exact_velocity.csv" using 1:2 with lines, 
 plot "velocity100.csv" using 1:2 with lines lw 2, 
 
-
-
-

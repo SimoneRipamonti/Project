@@ -11,4 +11,3 @@ set logscale x
 set logscale y
 
 plot "error_pressure.csv" using 1:2 with lines lw 2, "error_pressure.csv" using 1:3 with lines lw 2, "error_pressure.csv" using 1:4 with lines lw 2, "error_velocity.csv" using 1:2 with lines lw 2,
-

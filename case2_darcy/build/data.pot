@@ -14,7 +14,7 @@
   mu=1.0e-3
   ###mu=0.2e-3
   #Porosity
-  ###phi0=0.3+0*x
+  #phi0=0.2+0*x
   phi0=1+0.0*x
   #phi0=0.0*x
   [../]
@@ -34,14 +34,14 @@
    ###p_in=0.3
    
    #Pression on the righ
-   p_out=0.0
-   ###p_out=500000
+   ###p_out=0.0
+   p_out=500000
    #Inflow cond
    in=Pressure #or Flow
    
    #Outflow cond
-   out=Flow #or Pressure 
-   
+   ###out=Pressure #or Pressure 
+   out=Pressure
   [../]
 
 
@@ -68,8 +68,3 @@
     Nt=100
     
     [../]
-
-
-
-
-  

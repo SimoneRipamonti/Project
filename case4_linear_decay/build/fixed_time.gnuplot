@@ -18,6 +18,3 @@ plot "Ca_fixed_time.csv" using 1:2 with lines lw 2,'' using 1:4 with lines lw 2,
 
 
 
-
-
-

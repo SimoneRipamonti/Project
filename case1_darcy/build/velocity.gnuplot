@@ -18,7 +18,3 @@ plot "exact_velocity.csv" using 1:2 with lines lw 2, "velocity10.csv" using 1:2 
 
 #plot "exact_velocity.csv" using 1:2 with lines, 
 #plot "velocity.csv" using 1:2 with lines, 
-
-
-
-

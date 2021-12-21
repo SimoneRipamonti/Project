@@ -37,5 +37,3 @@ distclean: clean
 	$(RM) *.csv *.out *.bak *~
 	$(RM) -r solutions
 	$(RM) ../../src/*.o
-
-

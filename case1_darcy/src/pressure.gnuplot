@@ -21,4 +21,3 @@ plot "exact_pressure.csv" using 1:2 with lines lw 2, "pressure10.csv" using 1:2 
 
 #plot "exact.csv" using 1:2 with lines, "pressure100.csv" using 1:2 with lines, "pressure1600.csv" using 1:2 with lines
 
-
