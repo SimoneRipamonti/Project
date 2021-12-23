@@ -19,8 +19,7 @@ int main(int argc, char **argv)
     Data_linear_decay initial_cond("data.pot");//We get also the linear decay data because inside its definition there is the initial condition of our tracer
 
     Vector vel{Vector::Ones(data_transport.Nx+1)};//transport velocity, we take for semplicity velocity equal to 1[m/s]
-    
-    //vel*=6.67e-9;
+
 
     Matrix_full Ca(data_transport.Nx,data_transport.Nt+1);//matrix where we store our solution for the tracer (the rows are the spatial steps and the columns are the temporal ones) 
 

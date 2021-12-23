@@ -23,7 +23,7 @@ Collaboration diagram for Matrix\+\_\+\+F\+\_\+piu\+:
 \mbox{\Hypertarget{classMatrix__F__piu_a14c048fcc94a2b153d19f2ac017b7d08}\label{classMatrix__F__piu_a14c048fcc94a2b153d19f2ac017b7d08}} 
 {\bfseries Matrix\+\_\+\+F\+\_\+piu} (unsigned int \mbox{\hyperlink{classAbstractMatrix_a27fb46bf2853d4927d92a81b8b7773fb}{row}}, unsigned int \mbox{\hyperlink{classAbstractMatrix_af3ad3551ce094979488cef5df0e4fc1d}{col}})
 \item 
-void \mbox{\hyperlink{classMatrix__F__piu_a4b631309cacec285bddcb02f5058459a}{set\+\_\+data}} (const std\+::string \&bc, double \mbox{\hyperlink{classMatrix__F__piu_ae3b52ffd1775204d798f71cb2a764418}{c\+\_\+bc}}, const Eigen\+::\+Vector\+Xd \&vel)
+void \mbox{\hyperlink{classMatrix__F__piu_a71a12e1aa154f7ef246abc8cd21b3ecc}{set\+\_\+data}} (const std\+::string \&bc, double \mbox{\hyperlink{classMatrix__F__piu_ae3b52ffd1775204d798f71cb2a764418}{c\+\_\+bc}}, const Vector \&vel)
 \item 
 void \mbox{\hyperlink{classMatrix__F__piu_a137056684d91ecfac671f22518780d47}{define\+\_\+matrix}} () override
 \item 
@@ -31,7 +31,7 @@ void \mbox{\hyperlink{classMatrix__F__piu_afa51e1c04b403a491178bbeda322ce9d}{set
 \item 
 void \mbox{\hyperlink{classMatrix__F__piu_a174bfb860e79ad913fef24202d3ce96d}{set\+\_\+rhs}} () override
 \item 
-void \mbox{\hyperlink{classMatrix__F__piu_a1c640185a5b427345d92e76c82b78f70}{assemble\+\_\+matrix}} (const std\+::string \&bc, double \mbox{\hyperlink{classMatrix__F__piu_ae3b52ffd1775204d798f71cb2a764418}{c\+\_\+bc}}, const Eigen\+::\+Vector\+Xd \&vel)
+void \mbox{\hyperlink{classMatrix__F__piu_a5a54afa3afe6791beb1fe8b693a8ca70}{assemble\+\_\+matrix}} (const std\+::string \&bc, double \mbox{\hyperlink{classMatrix__F__piu_ae3b52ffd1775204d798f71cb2a764418}{c\+\_\+bc}}, const Vector \&vel)
 \end{DoxyCompactItemize}
 \doxysubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
@@ -49,11 +49,11 @@ double \mbox{\hyperlink{classMatrix__F__piu_ae3b52ffd1775204d798f71cb2a764418}{c
 Matrix F\+\_\+piu is the part of the Upwind Matrix which treats the left node of the cells. 
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{classMatrix__F__piu_a1c640185a5b427345d92e76c82b78f70}\label{classMatrix__F__piu_a1c640185a5b427345d92e76c82b78f70}} 
+\mbox{\Hypertarget{classMatrix__F__piu_a5a54afa3afe6791beb1fe8b693a8ca70}\label{classMatrix__F__piu_a5a54afa3afe6791beb1fe8b693a8ca70}} 
 \index{Matrix\_F\_piu@{Matrix\_F\_piu}!assemble\_matrix@{assemble\_matrix}}
 \index{assemble\_matrix@{assemble\_matrix}!Matrix\_F\_piu@{Matrix\_F\_piu}}
 \doxysubsubsection{\texorpdfstring{assemble\_matrix()}{assemble\_matrix()}}
-{\footnotesize\ttfamily void Matrix\+\_\+\+F\+\_\+piu\+::assemble\+\_\+matrix (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{bc,  }\item[{double}]{c\+\_\+bc,  }\item[{const Eigen\+::\+Vector\+Xd \&}]{vel }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void Matrix\+\_\+\+F\+\_\+piu\+::assemble\+\_\+matrix (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{bc,  }\item[{double}]{c\+\_\+bc,  }\item[{const Vector \&}]{vel }\end{DoxyParamCaption})}
 
 Function that calls the above functions \mbox{\hyperlink{classMatrix__F__piu_a137056684d91ecfac671f22518780d47}{define\+\_\+matrix()}},\mbox{\hyperlink{classMatrix__F__piu_afa51e1c04b403a491178bbeda322ce9d}{set\+\_\+\+BC()}}, \mbox{\hyperlink{classMatrix__F__piu_a174bfb860e79ad913fef24202d3ce96d}{set\+\_\+rhs()}} in order to assemble all the matrix F\+\_\+piu \mbox{\Hypertarget{classMatrix__F__piu_a137056684d91ecfac671f22518780d47}\label{classMatrix__F__piu_a137056684d91ecfac671f22518780d47}} 
 \index{Matrix\_F\_piu@{Matrix\_F\_piu}!define\_matrix@{define\_matrix}}
@@ -75,11 +75,11 @@ Function that imposes the BC on the matrix
 
 Implements \mbox{\hyperlink{classAbstractMatrix_aa0a17dacbeede4180531b115d4a9f3eb}{Abstract\+Matrix}}.
 
-\mbox{\Hypertarget{classMatrix__F__piu_a4b631309cacec285bddcb02f5058459a}\label{classMatrix__F__piu_a4b631309cacec285bddcb02f5058459a}} 
+\mbox{\Hypertarget{classMatrix__F__piu_a71a12e1aa154f7ef246abc8cd21b3ecc}\label{classMatrix__F__piu_a71a12e1aa154f7ef246abc8cd21b3ecc}} 
 \index{Matrix\_F\_piu@{Matrix\_F\_piu}!set\_data@{set\_data}}
 \index{set\_data@{set\_data}!Matrix\_F\_piu@{Matrix\_F\_piu}}
 \doxysubsubsection{\texorpdfstring{set\_data()}{set\_data()}}
-{\footnotesize\ttfamily void Matrix\+\_\+\+F\+\_\+piu\+::set\+\_\+data (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{bc,  }\item[{double}]{c\+\_\+bc,  }\item[{const Eigen\+::\+Vector\+Xd \&}]{vel }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void Matrix\+\_\+\+F\+\_\+piu\+::set\+\_\+data (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{bc,  }\item[{double}]{c\+\_\+bc,  }\item[{const Vector \&}]{vel }\end{DoxyParamCaption})}
 
 Function that takes as input and sets the specific data necessary for assemblying matrix F\+\_\+piu 
 \begin{DoxyParams}{Parameters}

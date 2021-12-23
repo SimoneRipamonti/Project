@@ -23,7 +23,7 @@ Collaboration diagram for Matrix\+\_\+\+F\+\_\+meno\+:
 \mbox{\Hypertarget{classMatrix__F__meno_a7f6fd26f5d527f93dc562eb4c3e61990}\label{classMatrix__F__meno_a7f6fd26f5d527f93dc562eb4c3e61990}} 
 {\bfseries Matrix\+\_\+\+F\+\_\+meno} (unsigned int \mbox{\hyperlink{classAbstractMatrix_a27fb46bf2853d4927d92a81b8b7773fb}{row}}, unsigned \mbox{\hyperlink{classAbstractMatrix_af3ad3551ce094979488cef5df0e4fc1d}{col}})
 \item 
-void \mbox{\hyperlink{classMatrix__F__meno_aab592defd0ec60e5a6acb19e02717dea}{set\+\_\+data}} (const std\+::string \&bc, double \mbox{\hyperlink{classMatrix__F__meno_ac51bf5308b52c9ce9a726cafd0485928}{c\+\_\+bc}}, const Eigen\+::\+Vector\+Xd \&vel)
+void \mbox{\hyperlink{classMatrix__F__meno_ac1414432a0b4c7c8b786f8e795c0e9a5}{set\+\_\+data}} (const std\+::string \&bc, double \mbox{\hyperlink{classMatrix__F__meno_ac51bf5308b52c9ce9a726cafd0485928}{c\+\_\+bc}}, const Vector \&vel)
 \item 
 void \mbox{\hyperlink{classMatrix__F__meno_a3b660526da87f63e6091cf4422385d94}{define\+\_\+matrix}} () override
 \item 
@@ -31,7 +31,7 @@ void \mbox{\hyperlink{classMatrix__F__meno_ac8ae0448eb45d2c2996d5cfdb2a587f9}{se
 \item 
 void \mbox{\hyperlink{classMatrix__F__meno_adbe40c5bd77fc92b0db81233797276ca}{set\+\_\+rhs}} () override
 \item 
-void \mbox{\hyperlink{classMatrix__F__meno_a5e4149e92a5c917a79f542859dc0cb7c}{assemble\+\_\+matrix}} (const std\+::string \&bc, double \mbox{\hyperlink{classMatrix__F__meno_ac51bf5308b52c9ce9a726cafd0485928}{c\+\_\+bc}}, const Eigen\+::\+Vector\+Xd \&vel)
+void \mbox{\hyperlink{classMatrix__F__meno_aa7fa5443594b7ae07bad6f7355d2019b}{assemble\+\_\+matrix}} (const std\+::string \&bc, double \mbox{\hyperlink{classMatrix__F__meno_ac51bf5308b52c9ce9a726cafd0485928}{c\+\_\+bc}}, const Vector \&vel)
 \end{DoxyCompactItemize}
 \doxysubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
@@ -49,11 +49,11 @@ double \mbox{\hyperlink{classMatrix__F__meno_ac51bf5308b52c9ce9a726cafd0485928}{
 Matrix F\+\_\+meno is the part of the Upwind Matrix which treats the right node of the cells. 
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{classMatrix__F__meno_a5e4149e92a5c917a79f542859dc0cb7c}\label{classMatrix__F__meno_a5e4149e92a5c917a79f542859dc0cb7c}} 
+\mbox{\Hypertarget{classMatrix__F__meno_aa7fa5443594b7ae07bad6f7355d2019b}\label{classMatrix__F__meno_aa7fa5443594b7ae07bad6f7355d2019b}} 
 \index{Matrix\_F\_meno@{Matrix\_F\_meno}!assemble\_matrix@{assemble\_matrix}}
 \index{assemble\_matrix@{assemble\_matrix}!Matrix\_F\_meno@{Matrix\_F\_meno}}
 \doxysubsubsection{\texorpdfstring{assemble\_matrix()}{assemble\_matrix()}}
-{\footnotesize\ttfamily void Matrix\+\_\+\+F\+\_\+meno\+::assemble\+\_\+matrix (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{bc,  }\item[{double}]{c\+\_\+bc,  }\item[{const Eigen\+::\+Vector\+Xd \&}]{vel }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void Matrix\+\_\+\+F\+\_\+meno\+::assemble\+\_\+matrix (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{bc,  }\item[{double}]{c\+\_\+bc,  }\item[{const Vector \&}]{vel }\end{DoxyParamCaption})}
 
 Function that calls the above functions \mbox{\hyperlink{classMatrix__F__meno_a3b660526da87f63e6091cf4422385d94}{define\+\_\+matrix()}},\mbox{\hyperlink{classMatrix__F__meno_ac8ae0448eb45d2c2996d5cfdb2a587f9}{set\+\_\+\+BC()}}, \mbox{\hyperlink{classMatrix__F__meno_adbe40c5bd77fc92b0db81233797276ca}{set\+\_\+rhs()}} in order to assemble all the matrix F\+\_\+meno \mbox{\Hypertarget{classMatrix__F__meno_a3b660526da87f63e6091cf4422385d94}\label{classMatrix__F__meno_a3b660526da87f63e6091cf4422385d94}} 
 \index{Matrix\_F\_meno@{Matrix\_F\_meno}!define\_matrix@{define\_matrix}}
@@ -75,11 +75,11 @@ Function that imposes the BC on the matrix
 
 Implements \mbox{\hyperlink{classAbstractMatrix_aa0a17dacbeede4180531b115d4a9f3eb}{Abstract\+Matrix}}.
 
-\mbox{\Hypertarget{classMatrix__F__meno_aab592defd0ec60e5a6acb19e02717dea}\label{classMatrix__F__meno_aab592defd0ec60e5a6acb19e02717dea}} 
+\mbox{\Hypertarget{classMatrix__F__meno_ac1414432a0b4c7c8b786f8e795c0e9a5}\label{classMatrix__F__meno_ac1414432a0b4c7c8b786f8e795c0e9a5}} 
 \index{Matrix\_F\_meno@{Matrix\_F\_meno}!set\_data@{set\_data}}
 \index{set\_data@{set\_data}!Matrix\_F\_meno@{Matrix\_F\_meno}}
 \doxysubsubsection{\texorpdfstring{set\_data()}{set\_data()}}
-{\footnotesize\ttfamily void Matrix\+\_\+\+F\+\_\+meno\+::set\+\_\+data (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{bc,  }\item[{double}]{c\+\_\+bc,  }\item[{const Eigen\+::\+Vector\+Xd \&}]{vel }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void Matrix\+\_\+\+F\+\_\+meno\+::set\+\_\+data (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{bc,  }\item[{double}]{c\+\_\+bc,  }\item[{const Vector \&}]{vel }\end{DoxyParamCaption})}
 
 Function that takes as input and sets the specific data necessary for assemblying matrix F\+\_\+meno 
 \begin{DoxyParams}{Parameters}

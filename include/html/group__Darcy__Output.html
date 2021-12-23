@@ -80,8 +80,8 @@ Functions</h2></td></tr>
 <tr class="separator:gaeb74871fbdeb0825e65dab0da0e3eed6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gafe8b24f3222c086b58a2b186746fca3a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__Darcy__Output.html#gafe8b24f3222c086b58a2b186746fca3a">velocity_exact_result</a> (Vector &amp;value1, unsigned int Nx, double L)</td></tr>
 <tr class="separator:gafe8b24f3222c086b58a2b186746fca3a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaafc5969f4e00be02e337a961b15df4bf"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__Darcy__Output.html#gaafc5969f4e00be02e337a961b15df4bf">output_error</a> (Vector &amp;value1, Eigen::VectorXi &amp;Nx)</td></tr>
-<tr class="separator:gaafc5969f4e00be02e337a961b15df4bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gab1c9d2b8e8a776c17ebfde05798bd158"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__Darcy__Output.html#gab1c9d2b8e8a776c17ebfde05798bd158">output_error</a> (Vector &amp;value1, Eigen::VectorXi &amp;Nx, const std::string &amp;name)</td></tr>
+<tr class="separator:gab1c9d2b8e8a776c17ebfde05798bd158"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <p>Functions that print on a csv file the solutions of Darcy problem. </p>
@@ -128,8 +128,8 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="gaafc5969f4e00be02e337a961b15df4bf"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gaafc5969f4e00be02e337a961b15df4bf">&#9670;&nbsp;</a></span>output_error()</h2>
+<a id="gab1c9d2b8e8a776c17ebfde05798bd158"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gab1c9d2b8e8a776c17ebfde05798bd158">&#9670;&nbsp;</a></span>output_error()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -144,7 +144,13 @@ Functions</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">Eigen::VectorXi &amp;&#160;</td>
-          <td class="paramname"><em>Nx</em>&#160;</td>
+          <td class="paramname"><em>Nx</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>name</em>&#160;</td>
         </tr>
         <tr>
           <td></td>

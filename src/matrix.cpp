@@ -331,7 +331,7 @@ void Matrix_R::update(const Vector &past_sol)
 
 }
 
-//Matrix_A constructor
+//Matrix_A_example constructor
 A_example::A_example(unsigned int row_,unsigned int col_):AbstractMatrix(row_,col_) {}
 
 //set_data gives to the matrix object the physical and geometrical parameters which it needs to assemble the matrix
@@ -341,7 +341,7 @@ void A_example::set_data(const muparser_fun &source_, unsigned Nx, double L)
    h=L/Nx;
 }
 
-//Definition of the mass matrix A considering P1 Finite element for the Velocity and P0 for the pressure (They are stable for the 1D case)
+//Definition of the stiffness matrix A considering P1 Finite element for the Poisson Problem
 void A_example::define_matrix()
 {
     m.insert(0,0)=1.;
@@ -356,14 +356,14 @@ void A_example::define_matrix()
     m.coeffRef(row-1,col-1)=1.;
 }
 
-//set_BC() function change the first/last row of the matrix A considering what kind of BC are set
+//set_BC() function change the first/last row of the matrix A considering the BC
 void A_example::set_BC()
 {   
     rhs(0)=0.;
     rhs(row-1)=0.;
 }
 
-//There is not any source term in the first equation of the Darcy system for the assumptions made
+//Setting of the rhs for the example problem
 void A_example::set_rhs()
 {{
     for(unsigned i=0; i<col; ++i)

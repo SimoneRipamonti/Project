@@ -31,10 +31,6 @@ int main(int argc, char **argv)
     sol= solver.solve(rhs);//The Darcy system is solved and the solution is stored in the sol vector
  
     Darcy_output_results(sol,data.Nx,data.L);//Store the output result in csv files
-
-
-
-
-
+    
     return 0;
 }

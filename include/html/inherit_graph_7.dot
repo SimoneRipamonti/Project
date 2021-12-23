@@ -4,5 +4,5 @@ digraph "Graphical Class Hierarchy"
   edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
   node [fontname="Helvetica",fontsize="10",shape=record];
   rankdir="LR";
-  Node0 [label="Data_Transport",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classData__Transport.html",tooltip="Data for the Transport equation."];
+  Node0 [label="Data_Reaction",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classData__Reaction.html",tooltip="Data for the reaction setting ."];
 }

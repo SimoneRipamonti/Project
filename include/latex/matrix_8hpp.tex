@@ -6,6 +6,7 @@ matrices representing the algebraic operators obtained from the discretization o
 
 
 {\ttfamily \#include \char`\"{}muparser\+\_\+fun.\+hpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}types.\+hpp\char`\"{}}\newline
 {\ttfamily \#include $<$string$>$}\newline
 {\ttfamily \#include $<$Eigen/\+Dense$>$}\newline
 {\ttfamily \#include $<$Eigen/\+Sparse$>$}\newline
@@ -29,18 +30,8 @@ class \mbox{\hyperlink{classMatrix__F__piu}{Matrix\+\_\+\+F\+\_\+piu}}
 class \mbox{\hyperlink{classMatrix__F__meno}{Matrix\+\_\+\+F\+\_\+meno}}
 \begin{DoxyCompactList}\small\item\em Matrix F\+\_\+meno is the part of the Upwind Matrix which treats the right node of the cells. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classMatrix__R}{Matrix\+\_\+R}}
-\begin{DoxyCompactList}\small\item\em Matrix R is the Reaction matrix. \end{DoxyCompactList}\end{DoxyCompactItemize}
-\doxysubsection*{Typedefs}
-\begin{DoxyCompactItemize}
-\item 
-\mbox{\Hypertarget{matrix_8hpp_ab4228ea9e0a63ea667c7fe391347dd9e}\label{matrix_8hpp_ab4228ea9e0a63ea667c7fe391347dd9e}} 
-typedef Eigen\+::\+Sparse\+Matrix$<$ double $>$ {\bfseries Matrix}
-\item 
-\mbox{\Hypertarget{matrix_8hpp_a467058aaad9b15e09ee331f21e2b2e56}\label{matrix_8hpp_a467058aaad9b15e09ee331f21e2b2e56}} 
-typedef Eigen\+::\+Vector\+Xd {\bfseries Vector}
-\item 
-\mbox{\Hypertarget{matrix_8hpp_a6add006e93b7e5ccc2b51f37ed492afd}\label{matrix_8hpp_a6add006e93b7e5ccc2b51f37ed492afd}} 
-typedef Eigen\+::\+Sparse\+LU$<$ Matrix, Eigen\+::\+COLAMDOrdering$<$ int $>$ $>$ {\bfseries Solver}
+\begin{DoxyCompactList}\small\item\em Matrix R is the Reaction matrix. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classA__example}{A\+\_\+example}}
 \end{DoxyCompactItemize}
 
 

@@ -76,10 +76,10 @@ $(function() {
 Functions</h2></td></tr>
 <tr class="memitem:ga9a218e452a74b63f434c674f5a7711c5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__Functions.html#ga9a218e452a74b63f434c674f5a7711c5">set_solver</a> (Matrix &amp;M, Solver &amp;solver)</td></tr>
 <tr class="separator:ga9a218e452a74b63f434c674f5a7711c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga1a956eed7d74d8991f643c62e9104730"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__Functions.html#ga1a956eed7d74d8991f643c62e9104730">Transport_exp</a> (Eigen::MatrixXd &amp;Ca, Eigen::VectorXd &amp;vel, <a class="el" href="classData__Transport.html">Data_Transport</a> &amp;data_transport, <a class="el" href="classData__linear__decay.html">Data_linear_decay</a> &amp;initial_cond, Matrix &amp;M, Matrix &amp;rhs1, Vector &amp;rhs2)</td></tr>
-<tr class="separator:ga1a956eed7d74d8991f643c62e9104730"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga6f165df0a929817012d3cb74795ca9e4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__Functions.html#ga6f165df0a929817012d3cb74795ca9e4">Transport_imp</a> (Eigen::MatrixXd &amp;Ca, Eigen::VectorXd &amp;vel, <a class="el" href="classData__Transport.html">Data_Transport</a> &amp;data_transport, <a class="el" href="classData__linear__decay.html">Data_linear_decay</a> &amp;initial_cond, Matrix &amp;M, Matrix &amp;rhs1, Vector &amp;rhs2)</td></tr>
-<tr class="separator:ga6f165df0a929817012d3cb74795ca9e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga71de585d9167b6b7860c2f9a0cac8c55"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__Functions.html#ga71de585d9167b6b7860c2f9a0cac8c55">Transport_exp</a> (Matrix_full &amp;Ca, Vector &amp;vel, <a class="el" href="classData__Transport.html">Data_Transport</a> &amp;data_transport, <a class="el" href="classData__linear__decay.html">Data_linear_decay</a> &amp;initial_cond, Matrix &amp;M, Matrix &amp;rhs1, Vector &amp;rhs2)</td></tr>
+<tr class="separator:ga71de585d9167b6b7860c2f9a0cac8c55"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga614137a2125f5fdd8cab33b3b35da018"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__Functions.html#ga614137a2125f5fdd8cab33b3b35da018">Transport_imp</a> (Matrix_full &amp;Ca, Vector &amp;vel, <a class="el" href="classData__Transport.html">Data_Transport</a> &amp;data_transport, <a class="el" href="classData__linear__decay.html">Data_linear_decay</a> &amp;initial_cond, Matrix &amp;M, Matrix &amp;rhs1, Vector &amp;rhs2)</td></tr>
+<tr class="separator:ga614137a2125f5fdd8cab33b3b35da018"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <p>Auxiliar Functions used in the code. </p>
@@ -119,8 +119,8 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="ga1a956eed7d74d8991f643c62e9104730"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga1a956eed7d74d8991f643c62e9104730">&#9670;&nbsp;</a></span>Transport_exp()</h2>
+<a id="ga71de585d9167b6b7860c2f9a0cac8c55"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga71de585d9167b6b7860c2f9a0cac8c55">&#9670;&nbsp;</a></span>Transport_exp()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -128,13 +128,13 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname">void Transport_exp </td>
           <td>(</td>
-          <td class="paramtype">Eigen::MatrixXd &amp;&#160;</td>
+          <td class="paramtype">Matrix_full &amp;&#160;</td>
           <td class="paramname"><em>Ca</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">Eigen::VectorXd &amp;&#160;</td>
+          <td class="paramtype">Vector &amp;&#160;</td>
           <td class="paramname"><em>vel</em>, </td>
         </tr>
         <tr>
@@ -178,8 +178,8 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="ga6f165df0a929817012d3cb74795ca9e4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga6f165df0a929817012d3cb74795ca9e4">&#9670;&nbsp;</a></span>Transport_imp()</h2>
+<a id="ga614137a2125f5fdd8cab33b3b35da018"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga614137a2125f5fdd8cab33b3b35da018">&#9670;&nbsp;</a></span>Transport_imp()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -187,13 +187,13 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname">void Transport_imp </td>
           <td>(</td>
-          <td class="paramtype">Eigen::MatrixXd &amp;&#160;</td>
+          <td class="paramtype">Matrix_full &amp;&#160;</td>
           <td class="paramname"><em>Ca</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">Eigen::VectorXd &amp;&#160;</td>
+          <td class="paramtype">Vector &amp;&#160;</td>
           <td class="paramname"><em>vel</em>, </td>
         </tr>
         <tr>

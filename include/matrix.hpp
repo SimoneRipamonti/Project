@@ -289,7 +289,9 @@ private:
 };
 
 
-
+/*!
+  *\brief Matrix A is the stiffness matrix fort the Poisson problem
+*/
 class A_example:public AbstractMatrix
 {
 public:
