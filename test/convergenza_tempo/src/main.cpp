@@ -1,7 +1,7 @@
 
 #include <cmath>
 #include <string>
-#include "functions.hpp"
+#include "function.hpp"
 
 #include <iostream>
 

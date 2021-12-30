@@ -1,4 +1,5 @@
 #include "functions.hpp"
+#include "types.hpp"
 #include <iostream>
 #include <vector>
 

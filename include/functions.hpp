@@ -3,6 +3,7 @@
 
 #include <Eigen/Dense>
 #include "matrix.hpp"
+#include "types.hpp"
 #include "parameters.hpp"
 
 /** \addtogroup Functions
