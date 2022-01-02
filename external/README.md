@@ -1,4 +1,4 @@
-In this folder we have.
+In this folder we have:
 
 #lib folder
 This folder contains the external library imported for the project which is the MuParser one.

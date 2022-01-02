@@ -7,7 +7,7 @@
 [physical_parameters]  
   #Permeability
   K_distr=1.0e-10+0*x
-  #K_distr=1.0e-9*(x<0.5)+1.0e-10*(x>=0.5) # for testing code with different permeability
+ 
   #Water Viscosity
   mu=1.0e-3
   
@@ -62,8 +62,7 @@
 
 [Source]
     #External Source
-    #f=1.0e-1*(x>0.4)*(x<0.6) #da cambiare
-    f=1.0e-1 #for testing code with different permeability
+    f=1.0e-1 
    [../]
 
 [Discretization]

@@ -7,14 +7,12 @@
 [physical_parameters]  
   #Permeability
   K_distr=1.0e-10+0*x
-  #K_distr=1.0e-9*(x<0.5)+1.0e-10*(x>=0.5) # for testing code with different permeability
+  
   #Water Viscosity
   mu=1.0e-3
   
   #Porosity
-  #phi0=0.2+0*x
   phi0=1+0.0*x
-  #phi0=0.0*x
   [../]
 
 [BC_vel]
@@ -24,8 +22,6 @@
    
    #Out-flow
    Q_out=1.0e-1
-   #Q_out=0.0
-   #Q_out=2.1e-1 #for testing code with different permeability
 
    #Pression on the left
    p_in=1.0e6
@@ -34,6 +30,7 @@
    #Pression on the righ
    #p_out=0.0
    p_out=-800000.0
+   
    #Inflow cond
    in=Pressure #or Flow
    
@@ -45,11 +42,7 @@
 
 [Source]
     #External Source
-    #f=1.0e-1*(x>0.4)*(x<0.6) #da cambiare
-    #f=1.0e-1 #for testing code with different permeability
-    #f=0.0
     f=sin(4*_pi*x)
-    #f=4*_pi*_pi*10^(-7)*sin(2*_pi*x)
    [../]
 
 [Discretization]

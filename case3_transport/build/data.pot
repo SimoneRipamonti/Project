@@ -8,15 +8,12 @@
 [physical_parameters]  
   #Permeability
   K_distr=1.0e-10+0*x
-  #K_distr=1.0e-9*(x<0.5)+1.0e-10*(x>=0.5) # for testing code with different permeability
   #Water Viscosity
   mu=1.0e-3
   
   #Porosity
-  #phi0=0.2+0*x
   phi0=1+0.0*x
-  #phi0=0.3+0.0*x
-  #phi0=0.0*x
+
   [../]
 
 [BC_vel]
@@ -56,19 +53,15 @@
     bc_trac=In
 
    #Numerical scheme
-   method=Explicit #Explicit
+   method=Implicit #Explicit
  
    #Initial Condition
    #C_0=1.0*(x>0.5)
    C_0=1.0*(x>0.05)*(x<0.2)
-   #C_0=1.0*(x>0.2)*(x<0.3)
-   #C_0=0.0+0.0*x
-   #C_0=0.00545
     [../]
 
 [Source]
     #External Source
-    #f=1.0e-1*(x>0.4)*(x<0.6) #da cambiare
     f=1.0e-1 #for testing code with different permeability
    [../]
 
@@ -81,10 +74,10 @@
 [Time]
     #Final T
     T=1
-    #T=345600
+
     #Time step
     Nt=100
-    #Nt=1000
+
     [../]
 
 [Linear_dec]

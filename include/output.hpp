@@ -7,7 +7,7 @@
 
 
 /** \addtogroup Output_Function
- *\brief Functions that print on a csv file the solutions of spatial-temporal problems (the trasnport and reaction ones)
+ *\brief Functions that print on a csv file the solutions of spatial-temporal problems (the transport and reaction ones)
  *  @{
 */
 /*!

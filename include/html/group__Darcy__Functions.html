@@ -115,7 +115,7 @@ Functions</h2></td></tr>
   <table class="params">
     <tr><td class="paramname">A</td><td>is the A matrix of the Darcy system </td></tr>
     <tr><td class="paramname">B</td><td>is the B matrix of the Darcy system </td></tr>
-    <tr><td class="paramname">Matrix</td><td>is the output darcy system matrix </td></tr>
+    <tr><td class="paramname">Matrix</td><td>is the output Darcy system matrix </td></tr>
   </table>
   </dd>
 </dl>
@@ -243,7 +243,15 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Auxiliar function for the definiton of the big block matrix </p>
+<p>Auxiliar function for the definiton of the big block matrix </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">t</td><td>is a reference to the vector of triplets that we want to fill </td></tr>
+    <tr><td class="paramname">A</td><td>is a reference to the block matrix that we want to add to the big Darcy system matrix </td></tr>
+    <tr><td class="paramname">shift_row</td><td>is an unsigned int that tells where we want to collocate the block matrix in the big Darcy system matrix for what concerns the rows </td></tr>
+    <tr><td class="paramname">shift_col</td><td>is an unsigned int that tells where we want to collocate the block matrix in the big Darcy system matrix for what concerns the columns </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>

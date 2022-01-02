@@ -15,7 +15,7 @@ Matrix B is the saddle point matrix of the Darcy system;
 
 Matrix C is the mass matrix obtained in the transport equation with the finite volume method; 
 
-Matrix F_piu and F_meno are the ones that define the upwind scheme;
+Matrix F_piu_ and F_meno are the ones that define the upwind scheme;
 
 Matrix R is the reactive matrix used in the case5_2reagents for defining the reactive part of the equation.
 
@@ -44,19 +44,19 @@ It groups all the function in the output.hpp file.
 These functions print on csv files the solution of temporal and spatial problems such as transport and reaction ones. 
 
 # MuParser
-It contains the muparser_fun class which is defined in the muparser_fun.hpp file.
+It contains the muparser_fun_ class which is defined in the muparser_fun.hpp file.
 
 This class permit us to read and use functions which are given as handle function in the data.pot file. 
 
 # Functions
 It contains 3 different functions:
 
--the first one is specific for setting the solver to a linear system
+1. the first one is specific for setting the solver to a linear system
 
--the second and the third ones are used in the transport_decay.cpp file in order to set the linear system for the transport and decay problem
+2. the second and the third ones are used in the transport_decay.cpp file in order to set the linear system for the transport and decay problem
 
 # Transport and decay functions
-It contains the funcitons which define and solve the transport and decay problem
+It contains the funcitons which define and solve the transport and decay problem.
 
 
 

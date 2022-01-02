@@ -2,6 +2,15 @@
 \label{classA__example}\index{A\_example@{A\_example}}
 
 
+Matrix A is the stiffness matrix fort the Poisson problem.  
+
+
+
+
+{\ttfamily \#include $<$matrix.\+hpp$>$}
+
+
+
 Inheritance diagram for A\+\_\+example\+:
 % FIG 0
 
@@ -37,6 +46,9 @@ double {\bfseries h}
 \end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
 
+
+\doxysubsection{Detailed Description}
+Matrix A is the stiffness matrix fort the Poisson problem. 
 
 \doxysubsection{Member Function Documentation}
 \mbox{\Hypertarget{classA__example_aadd7f826fb3eae8f0b7cbb57aaf7292e}\label{classA__example_aadd7f826fb3eae8f0b7cbb57aaf7292e}} 

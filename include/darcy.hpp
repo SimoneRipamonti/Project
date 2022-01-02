@@ -28,13 +28,17 @@ void set_Darcy_system(const Data_Darcy &data, Matrix &Matrix, Vector &rhs, doubl
  *Function for the definition of the big sparse block matrix
 *\param A is the A matrix of the Darcy system
 *\param B is the B matrix of the Darcy system
-*\param Matrix is the output darcy system matrix
+*\param Matrix is the output Darcy system matrix
 */
 Matrix block_matrix(const Matrix& A, const Matrix& B);
 
 
 /*!
  *Auxiliar function for the definiton of the big block matrix
+ \param t is a reference to the vector of triplets that we want to fill
+ \param A is a reference to the block matrix that we want to add to the big Darcy system matrix
+ \param shift_row is an unsigned int that tells where we want to collocate the block matrix in the big Darcy system matrix for what concerns the rows
+ \param shift_col is an unsigned int that tells where we want to collocate the block matrix in the big Darcy system matrix for what concerns the columns
 */
 void triplets_with_shift(std::vector<Triplet>& t, const Matrix& A, int shift_row, int shift_col);
 

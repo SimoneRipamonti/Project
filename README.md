@@ -12,10 +12,10 @@ This test case implements a convergence analysis for the Darcy system code.
 This test case implements and solves the Darcy system with the permability parameter K which is not continous in space.
  
 #case3_transport
-This test case implements and solves the transport problem of a single tracer giving the chance to choose between an implicit or esplicit scheme.
+This test case implements and solves the transport problem of a single tracer giving the chance to choose between an implicit or explicit scheme.
  
 #case4_linear_decay
-This test case implements and solves the transport and linear decay problem. Tranpsort is treated in an implicit way, instead the linear decay is treated esplicitely.
+This test case implements and solves the transport and linear decay problem. Tranpsort is treated in an implicit way, instead the linear decay is treated explicitely.
  
 #case5_2reagents
 This test case implements and solves two coupled transport and reaction PDE. The coupling is due to the reaction term. In particular, it treats the $CaSiO_3$ dissolution with the consequent generation of $Ca^{2+}$ ions.
@@ -33,10 +33,6 @@ This folder contains all the source files that define the functions declared in 
 
 #external
 This folder contains all the material used that has not be written by the author of this project but comes from external sources.
-
-
-
-
 
 
 

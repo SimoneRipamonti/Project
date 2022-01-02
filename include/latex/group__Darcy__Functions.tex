@@ -36,7 +36,7 @@ Function for the definition of the big sparse block matrix
 \hline
 {\em B} & is the B matrix of the Darcy system \\
 \hline
-{\em Matrix} & is the output darcy system matrix \\
+{\em Matrix} & is the output Darcy system matrix \\
 \hline
 \end{DoxyParams}
 \mbox{\Hypertarget{group__Darcy__Functions_gad093c970af8f658b6d5bdc8a74bb6046}\label{group__Darcy__Functions_gad093c970af8f658b6d5bdc8a74bb6046}} 
@@ -76,3 +76,13 @@ Function for definition of the Darcy System
 {\footnotesize\ttfamily void triplets\+\_\+with\+\_\+shift (\begin{DoxyParamCaption}\item[{std\+::vector$<$ Triplet $>$ \&}]{t,  }\item[{const Matrix \&}]{A,  }\item[{int}]{shift\+\_\+row,  }\item[{int}]{shift\+\_\+col }\end{DoxyParamCaption})}
 
 Auxiliar function for the definiton of the big block matrix 
+\begin{DoxyParams}{Parameters}
+{\em t} & is a reference to the vector of triplets that we want to fill \\
+\hline
+{\em A} & is a reference to the block matrix that we want to add to the big Darcy system matrix \\
+\hline
+{\em shift\+\_\+row} & is an unsigned int that tells where we want to collocate the block matrix in the big Darcy system matrix for what concerns the rows \\
+\hline
+{\em shift\+\_\+col} & is an unsigned int that tells where we want to collocate the block matrix in the big Darcy system matrix for what concerns the columns \\
+\hline
+\end{DoxyParams}

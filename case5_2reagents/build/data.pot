@@ -7,14 +7,12 @@
 [physical_parameters]  
   #Permeability
   K_distr=1.0e-10+0*x
-  #K_distr=1.0e-9*(x<0.5)+1.0e-10*(x>=0.5) # for testing code with different permeability
+
   #Water Viscosity
   mu=1.0e-3
   
   #Porosity
-  phi0=0.3+0*x
-  #phi0=1.0+0.0*x
-  #phi0=0.0*x
+  phi0=1.0+0.0*x
   [../]
 
 [BC_vel]
@@ -24,8 +22,7 @@
    
    #Out-flow
    Q_out=1.0e-1
-   #Q_out=2.1e-1 #for testing code with different permeability
-
+ 
    #Pression on the left
    p_in=1.0e6
    
@@ -63,7 +60,6 @@
 
 [Source]
     #External Source
-    #f=1.0e-1*(x>0.4)*(x<0.6) #da cambiare
     f=1.0e-1 #for testing code with different permeability
    [../]
 
@@ -89,33 +85,23 @@
 
      #Initical conentration CaSiO3
      CaSiO3_0=16.7504+0.0*x
-
+     
      #Reaction_area
-     #A=1.38
-     #A=1.38
      A=1.9e-2
      
      #Constant_reaction
-     #Rate_const=10e{-1.3}
-     #Rate_const=0.05011872336
      Rate_const=0.004466   #ho moltiplicato il valore sopra per [H+]^(n)
-     #Rate_const=0.001
      
      #Energy_activation
-     #E=47000
      E=4700
      
      #R constant
      R=8.314
-     #R=1
    
      #Temperature
-     #Temp=373.0
      Temp=423.0
    
      #K_sol
-     #K_sol=10e9
-     #K_sol=1e3
      K_sol=10e9
      
      #Ph

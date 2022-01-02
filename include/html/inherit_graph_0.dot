@@ -6,7 +6,7 @@ digraph "Graphical Class Hierarchy"
   rankdir="LR";
   Node0 [label="AbstractMatrix",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classAbstractMatrix.html",tooltip="Definition of an Abstract class for the matrices of the Darcy and Transport System."];
   Node0 -> Node1 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node1 [label="A_example",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classA__example.html",tooltip=" "];
+  Node1 [label="A_example",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classA__example.html",tooltip="Matrix A is the stiffness matrix fort the Poisson problem."];
   Node0 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node2 [label="Matrix_A",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classMatrix__A.html",tooltip="Matrix A is the mass velocity matrix of the Darcy problem."];
   Node0 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];

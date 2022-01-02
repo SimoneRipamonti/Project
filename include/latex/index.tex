@@ -18,7 +18,7 @@ Matrix B is the saddle point matrix of the Darcy system;
 
 Matrix C is the mass matrix obtained in the transport equation with the finite volume method;
 
-Matrix F\+\_\+piu and F\+\_\+meno are the ones that define the upwind scheme;
+Matrix F\+\_\+piu\+\_\+ and F\+\_\+meno are the ones that define the upwind scheme;
 
 Matrix R is the reactive matrix used in the case5\+\_\+2reagents for defining the reactive part of the equation.
 
@@ -52,7 +52,7 @@ These functions print on csv files the solution of temporal and spatial problems
 
 \doxysection*{Mu\+Parser}
 
-It contains the \mbox{\hyperlink{classmuparser__fun}{muparser\+\_\+fun}} class which is defined in the \mbox{\hyperlink{muparser__fun_8hpp_source}{muparser\+\_\+fun.\+hpp}} file.
+It contains the muparser\+\_\+fun\+\_\+ class which is defined in the \mbox{\hyperlink{muparser__fun_8hpp_source}{muparser\+\_\+fun.\+hpp}} file.
 
 This class permit us to read and use functions which are given as handle function in the data.\+pot file.
 
@@ -60,10 +60,12 @@ This class permit us to read and use functions which are given as handle functio
 
 It contains 3 different functions\+:
 
--\/the first one is specific for setting the solver to a linear system
 
--\/the second and the third ones are used in the transport\+\_\+decay.\+cpp file in order to set the linear system for the transport and decay problem
+\begin{DoxyEnumerate}
+\item the first one is specific for setting the solver to a linear system
+\item the second and the third ones are used in the transport\+\_\+decay.\+cpp file in order to set the linear system for the transport and decay problem
+\end{DoxyEnumerate}
 
 \doxysection*{Transport and decay functions}
 
-It contains the funcitons which define and solve the transport and decay problem 
+It contains the funcitons which define and solve the transport and decay problem. 

@@ -75,7 +75,7 @@ $(function() {
 <p>Matrix A is the mass velocity matrix for the Darcy system;</p>
 <p>Matrix B is the saddle point matrix of the Darcy system;</p>
 <p>Matrix C is the mass matrix obtained in the transport equation with the finite volume method;</p>
-<p>Matrix F_piu and F_meno are the ones that define the upwind scheme;</p>
+<p>Matrix F_piu_ and F_meno are the ones that define the upwind scheme;</p>
 <p>Matrix R is the reactive matrix used in the case5_2reagents for defining the reactive part of the equation.</p>
 <h1>Parameters</h1>
 <p>It groups all the classes defined in the <a class="el" href="parameters_8hpp_source.html">parameters.hpp</a> file.</p>
@@ -92,14 +92,16 @@ $(function() {
 <p>It groups all the function in the <a class="el" href="output_8hpp_source.html">output.hpp</a> file.</p>
 <p>These functions print on csv files the solution of temporal and spatial problems such as transport and reaction ones.</p>
 <h1>MuParser</h1>
-<p>It contains the <a class="el" href="classmuparser__fun.html" title="Class for creating and set muparser_fun.">muparser_fun</a> class which is defined in the <a class="el" href="muparser__fun_8hpp_source.html">muparser_fun.hpp</a> file.</p>
+<p>It contains the muparser_fun_ class which is defined in the <a class="el" href="muparser__fun_8hpp_source.html">muparser_fun.hpp</a> file.</p>
 <p>This class permit us to read and use functions which are given as handle function in the data.pot file.</p>
 <h1>Functions</h1>
 <p>It contains 3 different functions:</p>
-<p>-the first one is specific for setting the solver to a linear system</p>
-<p>-the second and the third ones are used in the transport_decay.cpp file in order to set the linear system for the transport and decay problem</p>
+<ol type="1">
+<li>the first one is specific for setting the solver to a linear system</li>
+<li>the second and the third ones are used in the transport_decay.cpp file in order to set the linear system for the transport and decay problem</li>
+</ol>
 <h1>Transport and decay functions</h1>
-<p>It contains the funcitons which define and solve the transport and decay problem </p>
+<p>It contains the funcitons which define and solve the transport and decay problem. </p>
 </div></div><!-- PageDoc -->
 </div><!-- contents -->
 <!-- start footer part -->
