@@ -17,9 +17,9 @@ int main(int argc, char **argv)
 {
     Data_Darcy data("data.pot");//We get the data from a file
 
-    double h =static_cast<double>(data.L)/data.Nx; //space step
+    double h =static_cast<double>(data.L)/data.Nx; //Space step
 
-    Vector sol(data.Nx+data.Nx+1); //solution vectors are resized
+    Vector sol(data.Nx+data.Nx+1); //Solution vectors are resized
 
     Matrix M(data.Nx+data.Nx+1,data.Nx+data.Nx+1);//Initialization of the big matrix for the Darcy system
     Vector rhs(data.Nx+data.Nx+1);//Initialization of the rhs of Darcy

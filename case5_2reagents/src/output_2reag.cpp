@@ -72,7 +72,7 @@ void output_results_fixed_space_2_reagents(Matrix_full &value1, Matrix_full &val
     file2<<std::endl;
 
  
-    const Vector t(Vector::LinSpaced(Nt+1,0.0,T));//Definition of the space vector (Concnetration values are stored in the middle of the cell)
+    const Vector t(Vector::LinSpaced(Nt+1,0.0,T));//Definition of the space vector (Concentration values are stored in the middle of the cell)
 
     for (unsigned int i = 0; i<Nt+1; ++i) //Loop to save the matrix by column in the CSV file
     {

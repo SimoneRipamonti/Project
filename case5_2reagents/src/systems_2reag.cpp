@@ -2,7 +2,7 @@
 #include <iostream>
 #include <vector>
 
-//Explicit transport upwind and esplicit reaction
+//Explicit transport upwind and explicit reaction
 void Transport_system_esplicit_2_reagents(Matrix_full &Ca, Matrix_full &CaSiO3, Vector &vel,Data_Transport &data_transport, Data_Reaction &data_reaction, Data_2Reagents &data_2reagents) //As input there is the matrix solution where we store our solution at each istant,
 //each row represent a spatial position, each column represent a time istant.
 //In the vector vel there is the velocity evaluated at each node cell.
@@ -67,7 +67,7 @@ void Transport_system_esplicit_2_reagents(Matrix_full &Ca, Matrix_full &CaSiO3, 
 
 
 
-//Implicit transport upwind and esplicit reaction
+//Implicit transport upwind and explicit reaction
 void Transport_system_implicit_2_reagents(Matrix_full &Ca, Matrix_full &CaSiO3, Vector &vel,Data_Transport &data_transport,Data_Reaction &data_reaction, Data_2Reagents &data_2reagents) //As input there is the matrix solution where we store our solution at each istant,
 //each row represent a spatial position, each column represent a time istant.
 //In the vector vel there is the velocity evaluated at each node cell.

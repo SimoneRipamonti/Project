@@ -11,17 +11,17 @@
 #include <Eigen/Sparse>
 #include <Eigen/SparseLU>
 
-//main that simulates a linear decay problem with transport
+
 int main(int argc, char **argv)
 {
 
-    Data_Transport data_transport("data.pot");//we get the data we need for transport
-    Data_linear_decay data_linear_decay("data.pot");//linear decay data
+    Data_Transport data_transport("data.pot");//We get the data we need for transport
+    Data_linear_decay data_linear_decay("data.pot");//Linear decay data
 
-    Vector vel{Vector::Ones(data_transport.Nx+1)};//transport velocity, we take for semplicity velocity equal to 1[m/s]
-    Matrix_full Ca(data_transport.Nx,data_transport.Nt+1);//matrix where we store our solution for the tracer (the rows are the spatial steps and the columns are the temporal ones)
+    Vector vel{Vector::Ones(data_transport.Nx+1)};//Transport velocity, we take for semplicity velocity equal to 1[m/s]
+    Matrix_full Ca(data_transport.Nx,data_transport.Nt+1);//Matrix where we store our solution for the tracer (the rows are the spatial steps and the columns are the temporal ones)
 
-    //we choose between the Esplicit or Implicit scheme
+    //We choose between the Explicit or Implicit scheme
     if(data_transport.method=="Explicit")
         Transport_system_explicit(Ca,vel,data_transport,data_linear_decay);
     else if(data_transport.method=="Implicit")

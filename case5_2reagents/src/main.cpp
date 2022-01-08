@@ -6,7 +6,6 @@
 #include "systems_2reag.hpp"
 #include <fstream>
 
-//main that show that simulates the CaSiO3 dissoution reaction
 int main(int argc, char **argv)
 {
 
