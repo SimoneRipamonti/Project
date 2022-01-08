@@ -12,9 +12,5 @@ set xlabel font ",12"
 
 set yrange [0:0.35]   
 
-
-
 plot "exact_velocity.csv" using 1:2 with lines lw 2, "velocity10.csv" using 1:2 with lines lw 2, "velocity20.csv" using 1:2 with lines lw 2, "velocity40.csv" using 1:2 with lines lw 2, "velocity80.csv" using 1:2 with lines lw 2, "velocity160.csv" using 1:2 with lines lw 2,  
 
-#plot "exact_velocity.csv" using 1:2 with lines, 
-#plot "velocity.csv" using 1:2 with lines, 

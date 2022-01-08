@@ -6,8 +6,6 @@
 #include "parameters.hpp"
 #include "functions.hpp"
 
-//Definition of the Darcy Syste
-//void set_Darcy_system(Data_Darcy &data, Eigen::MatrixXd &Matrix,Eigen::VectorXd &rhs);
 
 /*!
  *Definition of the Tranport-Reaction equation for 2 reagents solved with the following schemse: explicit for both transport and reaction

@@ -52,8 +52,8 @@ int main()
 
     concentration.compute_psi(0,psi1,psi2,psi3,psi4,psi5);
     
-//Loop Temporale
 
+    //Temporal loop
     for(unsigned int i=1; i<Nt+1; i++)
      {
         concentration.compute_psi(i-1,psi1,psi2,psi3,psi4,psi5); // phi 

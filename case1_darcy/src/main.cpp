@@ -12,17 +12,16 @@
 #include <cmath>
 
 
-//With this main we make a convergence analysis for the Darcy system discretized with P1-P0 element in 1D
 
 int main(int argc, char **argv)
 {
     Data_Darcy data("data.pot");
 
-    Eigen::VectorXi a(5); //vector that contains the numbers of spatial steps 
+    Eigen::VectorXi a(5); //vector that contains the steps number
     Vector errp(5);//vector pressure error
     Vector errvel(5);//vector velocity error
 
-    a<<10,20,40,80,160;//Spatial steps
+    a<<10,20,40,80,160;
 
 
     muparser_fun sol_ex; //muparser_fun that contains the exact solution for pressure

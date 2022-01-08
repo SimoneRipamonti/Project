@@ -11,15 +11,11 @@
 #include <Eigen/SparseLU>
 #include <cmath>
 
-
-//This main shows the behaviour of the Darcy code with a permeability that is not continous 
 int main(int argc, char **argv)
 {
     Data_Darcy data("data.pot");//We get the data from a file
 
-    double h =static_cast<double>(data.L)/data.Nx; //Space step
-
-    Vector sol(data.Nx+data.Nx+1); //Solution vectors are resized
+    double h {static_cast<double>(data.L)/data.Nx}; //Space step
 
     Matrix M(data.Nx+data.Nx+1,data.Nx+data.Nx+1);//Initialization of the big matrix for the Darcy system
     Vector rhs(data.Nx+data.Nx+1);//Initialization of the rhs of Darcy
@@ -28,7 +24,7 @@ int main(int argc, char **argv)
     Solver solver; //Initialization of the solver for the sparse system
     set_solver(M,solver);
     
-    sol= solver.solve(rhs);//The Darcy system is solved and the solution is stored in the sol vector
+    Vector sol{solver.solve(rhs)};//The Darcy system is solved and the solution is stored in the sol vector
  
     Darcy_output_results(sol,data.Nx,data.L);//Store the output result in csv files
     

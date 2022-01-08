@@ -10,8 +10,6 @@
 #include <Eigen/Sparse>
 #include <Eigen/SparseLU>
 
-
-//Main that simulates only the transport part of the problem
 int main(int argc, char **argv)
 {
 

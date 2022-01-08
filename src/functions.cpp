@@ -17,8 +17,8 @@ void Transport_exp(Matrix_full &Ca, Vector &vel, Data_Transport &data_transport,
     auto &[C_0,lambda]=initial_cond;    
  
     //Computation of the spatial and temporal step from the data
-    const double h =static_cast<double>(L)/Nx;
-    const double dt=static_cast<double>(T)/Nt;
+    const double h {static_cast<double>(L)/Nx};
+    const double dt{static_cast<double>(T)/Nt};
 
     //The Initial Condition are saved in an Eigen Vector. We recall that the value of the chemical species is saved in the middle of the cell (as the pressure in the Darcy System)
 

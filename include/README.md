@@ -1,11 +1,11 @@
 This folder contains the header files of functions and classes which are used in the different case folders.
 
-We define 6 modules (groups) in order to document better (with doxygen) the content of these files
+We define 6 modules (groups) in order to document better (with doxygen) the content of these files.
 
 # Matrices
 It groups all the classes defined in the matrix.hpp file. The matrices that we are talking about are the ones obtained by the discretization of the equations.
 
-First of all a virtual class (the Abstract Matrix class) it's declared which is the prototype for all the derived class whcich inherit from it. 
+First of all abstract class (the Abstract Matrix class) it's declared which is the prototype for all the derived class whcich inherit from it. 
 
 The derived classes are:
 
@@ -56,7 +56,7 @@ It contains 3 different functions:
 2. the second and the third ones are used in the transport_decay.cpp file in order to set the linear system for the transport and decay problem
 
 # Transport and decay functions
-It contains the funcitons which define and solve the transport and decay problem.
+It contains the functions which define and solve the transport and decay problem.
 
 
 

@@ -11,7 +11,7 @@
 #include <fstream>
 #include <string>
 
-//This main shows the resolution of a Poisson problem, taken as example
+
 int main(int argc, char **argv)
 {
     Data_example data("data.pot");
@@ -27,7 +27,7 @@ int main(int argc, char **argv)
     
     Vector sol{solver.solve(A.get_rhs())};//The Poisson system is solved and the solution is stored in the sol vector
 
-    output_example(sol,Nx,L);//Store the output result in csv files
+    output_example(sol,Nx,L);//Store the output result in a csv file
     
     return 0;
 }

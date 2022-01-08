@@ -13,8 +13,8 @@ void Transport_system_esplicit_2_reagents(Matrix_full &Ca, Matrix_full &CaSiO3, 
     auto &[Area,rate_const,E,R,Temperature]=data_reaction;
 
     //Computation of the spatial and temporal step from the data
-    const double h =static_cast<double>(L)/Nx;
-    const double dt=static_cast<double>(T)/Nt;
+    const double h {static_cast<double>(L)/Nx};
+    const double dt{static_cast<double>(T)/Nt};
 
 
     //The Initial Condition are saved in an Eigen Vector. We recall that the value of the chemical species is saved in the middle of the cell (as the pressure in the Darcy System)
@@ -22,7 +22,6 @@ void Transport_system_esplicit_2_reagents(Matrix_full &Ca, Matrix_full &CaSiO3, 
     for (unsigned int i=0; i<Nx; ++i)
         Ca(i,0)=Ca_0(h/2+i*h);
 
-    //Ca(0,0)=1.0;
     for (unsigned int i=0; i<Nx; ++i)
         CaSiO3(i,0)=CaSiO3_0(h/2+i*h);
 
