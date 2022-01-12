@@ -41,7 +41,7 @@ public:
     /*!
        *Function that sets the solvers for the transport problems:
        *\param solver reference to the solver used to solve the transport problems for moving reagents (Ca,SiO2,HCO3,H+,CO2)
-       *\param solver reference to the solver used to solve the transport problem for the immobile solid reagent (CaSiO3)
+       *\param solver1 reference to the solver used to solve the transport problem for the immobile solid reagent (CaSiO3)
        *\param M_rhs reference to the sparse mass matrix that will be multiplied by the past past solution vector to form the rhs of the transport problem
        *\param rhs_i reference to the rhs vectors of the i-transport problem
        *\param vel constant reference to the fluid velocity
@@ -90,10 +90,11 @@ public:
      *\param psi_i reference to the i-total concentration
      *\param rd is reference to rhe reaction term of the equation
      *\param step is an unsigned int that tells us at what time instant we are t=step*dt
-     *\param rhs reference to the right-hand matrix for the transport equation
-     *\param rhs_CO_2 referencto to the right-hand matrix for the CO_2 transport equation
+     *\param rhs reference to the right-hand  mass matrix for the transport equation
+     *\param rhs_psi_i reference to to the right-hand vector for the i-
+     transport equation
      *\param solver reference to the solver for the transport problem
-     *\param solver2 reference to the solver for the CO_2 transport problem
+     *\param solver1 reference to the solver for the CaSiO3, that has not the transport part
     */
     void one_step_transport_reaction(Vector& psi1, Vector& psi2, Vector& psi3, Vector& psi4, Vector& psi5, Vector& rd, const Matrix& rhs, const Vector& rhs_psi2, const Vector& rhs_psi3, unsigned int step, Solver &solver, Solver &solver1);
 
@@ -102,12 +103,11 @@ public:
      * Function that solves the reaction part with an Explicit Euler
      *\param psi_i reference to the i-total concentration
      *\param rd is reference to rhe reaction term of the equation
-     *\param step is an unsigned int that tells us at what time instant we are t=step*dt
      *\param rhs reference to the right-hand  mass matrix for the transport equation
      *\param rhs_psi_i reference to to the right-hand vector for the i-
      transport equation
-     *\param solver reference to the solver for the transport problem
-     *\param solver2 reference to the solver for the CO_2 transport problem
+     *\param solver reference to the solver for the reagents transport problem 
+     *\param solver1 reference to the solver for the CaSiO3, that has not the transport part
     */
     void Euler_Explicit(Vector& psi1, Vector& psi2, Vector& psi3, Vector& psi4, Vector& psi5, const Vector& rd, const Matrix&  rhs, const Vector& rhs_psi2, const Vector& rhs_psi3, Solver &solver, Solver &solver1) const;
 

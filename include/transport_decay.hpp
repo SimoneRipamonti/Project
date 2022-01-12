@@ -22,11 +22,11 @@ void Transport_system_explicit(Matrix_full &Ca, Vector &vel, Data_Transport &dat
 /*!
  *Function that implements and solves the implicit transport and decay system (decay part is treated explicitly)
  *\param Ca is the matrix solution where we store our solution at each istant: each row represent a spatial position, each column represent a time istant.
- *\param vel is the velocity vector which can be computed by the Darcy problem
+ *\param velocity is the velocity vector which can be computed by the Darcy problem
  *\param data_transport stores the data related to the transport part
  *\param data_linear_decay stores the data related to the linear decay part
 */
-void Transport_system_implicit(Matrix_full &Ca, Vector &velocity,Data_Transport &data_transport, Data_linear_decay &data_linear_decay);
+void Transport_system_implicit(Matrix_full &Ca, Vector &velocity, Data_Transport &data_transport, Data_linear_decay &data_linear_decay);
 
 /** @}*/
 #endif

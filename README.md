@@ -1,20 +1,26 @@
 #Installation istruction
 
-In order to make the code portable a docker virtual machine has been used.
+In order to make the code portable a docker virtual machine has been set thanks to the Dockerfile.
 
-1. So the first thing to do is checking if docker is installed. 
-2. Clone the repo.
-2. Run the **run.sh** file.
+Things to do in order to install the project are:
+
+1. Checking if docker is installed. 
+2. Clone the git repo.
+2. Run the **run.sh** file found in the git repo.
 
 Running **run.sh** file, these things are done:
 
-1. The Dockerfile is executed and so all the project is compiled, run and saved in a docker image. 
-2. The solutions folders of all the test-cases are exported from the docker container to the local computer in order to give the chance to open the **.png** image files that show the test-case graph solutions. This step is done thanks to a cycle that loops over all the case folders. 
-3. The docker image can be access through a suitable container typing:
-         
+1. The doxygen documentation is generated inside the appropriate folders;
+2. The Dockerfile is executed and so all the project is compiled, run and saved in a docker image. By launching the Dockerfile, the different test-cases are already compiled and executed, inside the docker container, with the default data; 
+3. The solutions folders of all the test-cases are exported from the docker container to the local computer in order to give the chance to open the .png images, that show the test-case graph solutions for the default data. In particular they are saved in folders named **case\_name_solutions**.
+4. The docker image can be access through a suitable container typing:
          docker container run -it pacs_project /bin/bash
- 
+
+In order to see how to work with the program check the suitable section in the report.
+
 In order to see how the Dockerfile has been run check the appendix at the end of the report. 
+
+
 
 #Content of the git repo 
 

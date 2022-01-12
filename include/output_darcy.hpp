@@ -38,6 +38,7 @@ void velocity_exact_result(Vector &value1, unsigned int Nx, double L);
  *Function that saves the error values in a csv file
  *\param value1 is a refence to the vector which contains the values that we want to store
  *\param Nx is a reference to the vector which contains all the spatial steps used for the convergence analyses  
+ *\param name specify for which variable we are plotting the error
 */
 void output_error(Vector &value1, Eigen::VectorXi &Nx, const std::string &name);
 

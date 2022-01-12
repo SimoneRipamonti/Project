@@ -28,7 +28,7 @@ void set_Darcy_system(const Data_Darcy &data, Matrix &Matrix, Vector &rhs, doubl
  *Function for the definition of the big sparse block matrix
 *\param A is the A matrix of the Darcy system
 *\param B is the B matrix of the Darcy system
-*\param Matrix is the output Darcy system matrix
+*\return Matrix is the output Darcy system matrix
 */
 Matrix block_matrix(const Matrix& A, const Matrix& B);
 

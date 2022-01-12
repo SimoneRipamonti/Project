@@ -310,8 +310,8 @@ public:
     ~A_example() {};
 
 private:
-    muparser_fun source;
-    double h;
+    muparser_fun source;/*!<External source f*/
+    double h;/*!<Spatial step*/
 };
 
 

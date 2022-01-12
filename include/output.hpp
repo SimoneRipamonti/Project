@@ -33,6 +33,13 @@ void output_results_fixed_time(const std::string& title, const Matrix_full &valu
 */
 void output_results_fixed_space(const std::string& title, const Matrix_full &value1, double L, unsigned int Nx, double T,unsigned int Nt);
 
+
+/*!
+ *Function that saves the solution in a .csv file for the example case
+*\param sol is the solution vector
+*\param L is the domain length
+*\param Nx is the number of spatial steps
+*/
 void output_example(const Vector &sol,unsigned int Nx, double L);
 /** @}*/
 
